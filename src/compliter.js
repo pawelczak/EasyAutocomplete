@@ -209,8 +209,14 @@ function Compliter($field, options) {
 	function prepareField() {
 
 			
+		if ($field.parent().hasClass(consts.getValue("WRAPPER_CSS_CLASS"))) {
+			removeContainer();
+			removeWrapper();
+		} 
+		
+
 		createWrapper();
-		createContainer();
+		createContainer();	
 
 
 		$container = $("#" + getListId()).find("ul");
@@ -233,6 +239,10 @@ function Compliter($field, options) {
 			$field.wrap($wrapper);
 		}
 
+		function removeWrapper() {
+			$field.unwrap();
+		}
+
 		function createContainer() {
 			var $elements_container = $("<div class='" + consts.getValue("CONTAINER_CLASS") + "' ></div>");
 
@@ -241,6 +251,10 @@ function Compliter($field, options) {
 				.prepend("<ul></ul>");
 
 			$field.after($elements_container);
+		}
+
+		function removeContainer() {
+			$field.next("." + consts.getValue("CONTAINER_CLASS")).remove();
 		}
 
 	}
