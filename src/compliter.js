@@ -393,6 +393,8 @@ function Compliter($field, options) {
 		}
 	}
 
+	//------------------------ LOGGER --------------------------
+
 	function Logger() {
 		var logger = {};
 
