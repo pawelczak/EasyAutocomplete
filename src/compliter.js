@@ -271,10 +271,12 @@ function Compliter($field, options) {
 	
 
 	this.getConfiguration = function() {
-
 		return config;
 	}
 
+	this.getConstants = function() {
+		return consts;
+	}
 
 	//-----------------------------------------------------------------
 	//------------------------ CONFIGURATION --------------------------
