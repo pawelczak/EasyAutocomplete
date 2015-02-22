@@ -1,4 +1,41 @@
 
+/*
+ * @author Łukasz Pawełczak
+ */
+
+
+function assertValue (value, objectOne, objectTwo) {
+	//TODO
+	assert = assertValue._assertMethod;
+
+	if(!assertValue._expected) {
+		assertValue._expected = {};	
+	} 
+
+	if(!assertValue._actual) {
+		assertValue._actual = {};	
+	} 
+
+	var length = arguments.length;
+
+	switch(length) {
+		case 1:
+			assert.ok(assertValue._expected[value] === assertValue._actual.get(value) , "Passed - " + value );
+		break;
+
+		case 2:
+			assert.ok(assertValue._expected[objectOne][value] === assertValue._actual.get(objectOne)[value] , "Passed - " + objectOne + " " + value );
+		break;
+
+		case 3:
+			assert.ok(assertValue._expected[objectTwo][objectOne][value] === assertValue._actual.get(objectTwo)[objectOne][value] , "Passed - " + objectTwo + " " + objectOne + " " + value );
+		break;
+
+		default:
+		break;
+	}
+}
+
 
 QUnit.test( "Configuration Default values", function( assert ) {
 
@@ -57,7 +94,10 @@ QUnit.test( "Configuration Default values", function( assert ) {
 
 
 	//assert
-	
+	assertValue._assertMethod = assert;
+	assertValue._expected = expectedOptions;
+	assertValue._actual = actualOptions;
+
 	assertValue("message");
 	assertValue("autocompleteOff");
 	assertValue("url");
@@ -72,28 +112,6 @@ QUnit.test( "Configuration Default values", function( assert ) {
 
 	assertValue("enabled", "matching", "list");
 	//assertValue("method", "matching", "list");
-	
-	
-	function assertValue (value, objectOne, objectTwo) {
-		var length = arguments.length;
-
-		switch(length) {
-			case 1:
-				assert.ok(expectedOptions[value] === actualOptions[value] , "Passed - " + value );
-			break;
-
-			case 2:
-				assert.ok(expectedOptions[objectOne][value] === actualOptions[objectOne][value] , "Passed - " + objectOne + " " + value );
-			break;
-
-			case 3:
-				assert.ok(expectedOptions[objectTwo][objectOne][value] === actualOptions[objectTwo][objectOne][value] , "Passed - " + objectTwo + " " + objectOne + " " + value );
-			break;
-
-			default:
-			break;
-		}
-	}
 
 });
 
@@ -142,6 +160,9 @@ QUnit.test( "Configuration simple", function( assert ) {
 	var actualOptions = new Compliter(null, options).getConfiguration();
 
 	//assert
+	assertValue._assertMethod = assert;
+	assertValue._expected = options;
+	assertValue._actual = actualOptions;
 
 	assertValue("message");
 	assertValue("autocompleteOff");
@@ -158,27 +179,6 @@ QUnit.test( "Configuration simple", function( assert ) {
 	assertValue("enabled", "matching", "list");
 	assertValue("method", "matching", "list");
 
-
-	function assertValue (value, objectOne, objectTwo) {
-		var length = arguments.length;
-
-		switch(length) {
-			case 1:
-				assert.ok(options[value] === actualOptions[value] , "Passed - " + value );
-			break;
-
-			case 2:
-				assert.ok(options[objectOne][value] === actualOptions[objectOne][value] , "Passed - " + objectOne + " " + value );
-			break;
-
-			case 3:
-				assert.ok(options[objectTwo][objectOne][value] === actualOptions[objectTwo][objectOne][value] , "Passed - " + objectTwo + " " + objectOne + " " + value );
-			break;
-
-			default:
-			break;
-		}
-	}
 });
 
 QUnit.test( "Configuration mixed", function( assert ) {
@@ -259,64 +259,27 @@ QUnit.test( "Configuration mixed", function( assert ) {
 	var actualOptions = new Compliter(null, options).getConfiguration();
 
 	//assert
+	assertValue._assertMethod = assert;
+	assertValue._expected = options;
+	assertValue._actual = actualOptions;
 
-	assertOptionsValue("url");
-	assertOptionsValue("getValue");
+	assertValue("url");
+	assertValue("getValue");
 
-	assertOptionsValue("enabled", "sort", "list");
-	assertOptionsValue("method", "matching", "list");
+	assertValue("enabled", "sort", "list");
+	assertValue("method", "matching", "list");
 
+	assertValue._expected = defaultOptions;
 
-	assertDefaultValue("message");
-	assertDefaultValue("autocompleteOff");
-	assertDefaultValue("placeholder");
-	assertDefaultValue("highlightPhrase");
-	assertDefaultValue("maxNumberOfElements", "list");
+	assertValue("message");
+	assertValue("autocompleteOff");
+	assertValue("placeholder");
+	assertValue("highlightPhrase");
+	assertValue("maxNumberOfElements", "list");
 	//assertDefaultValue("method", "sort", "list");
-	assertDefaultValue("enabled", "matching", "list");
+	assertValue("enabled", "matching", "list");
 
 
-	function assertOptionsValue (value, objectOne, objectTwo) {
-		var length = arguments.length;
-
-		switch(length) {
-			case 1:
-				assert.ok(options[value] === actualOptions[value] , "Passed - " + value );
-			break;
-
-			case 2:
-				assert.ok(options[objectOne][value] === actualOptions[objectOne][value] , "Passed - " + objectOne + " " + value );
-			break;
-
-			case 3:
-				assert.ok(options[objectTwo][objectOne][value] === actualOptions[objectTwo][objectOne][value] , "Passed - " + objectTwo + " " + objectOne + " " + value );
-			break;
-
-			default:
-			break;
-		}
-	}
-
-	function assertDefaultValue (value, objectOne, objectTwo) {
-		var length = arguments.length;
-
-		switch(length) {
-			case 1:
-				assert.ok(defaultOptions[value] === actualOptions[value] , "Passed - " + value );
-			break;
-
-			case 2:
-				assert.ok(defaultOptions[objectOne][value] === actualOptions[objectOne][value] , "Passed - " + objectOne + " " + value );
-			break;
-
-			case 3:
-				assert.ok(defaultOptions[objectTwo][objectOne][value] === actualOptions[objectTwo][objectOne][value] , "Passed - " + objectTwo + " " + objectOne + " " + value );
-			break;
-
-			default:
-			break;
-		}
-	}
 });
 
 QUnit.test( "Configuration required fields", function( assert ) {
@@ -328,5 +291,5 @@ QUnit.test( "Configuration required fields", function( assert ) {
 	var actualOptions = new Compliter(null, options).getConfiguration();
 
 	//assert
-	assert.ok("required" == actualOptions.url , "Passed - url equals required" );
+	assert.ok("required" == actualOptions.get("url") , "Passed - url equals required" );
 });

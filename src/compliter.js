@@ -1,13 +1,16 @@
 
+/*
+ * @author Łukasz Pawełczak
+ */
 function Compliter($field, options) {
 				
 	var module = {
 			name: "Compliter"
 		};
 
-	var constants = Constans(),
+	var consts = new Constans(),
 		logger = Logger(),
-		config = Configuration(options),
+		config = new Configuration(options),
 		checkParam = config.equals,
 
 		$field = $field, //$(element), //TODO change to input ?? you can only use input here anyway
@@ -46,6 +49,13 @@ function Compliter($field, options) {
 
 	//------------------------ PUBLIC METHODS ENDS --------------------------	
 
+
+
+	//---------------------------------------------------------------------------
+	//------------------------ EVENTS HANDLING ----------------------------------
+	//---------------------------------------------------------------------------
+
+
 	//Binds event handlers
 	function bindEvents() {
 
@@ -66,8 +76,9 @@ function Compliter($field, options) {
 			bindBlur();
 		}
 
-
+		//---------------------------------------------------------------------------
 		//------------------------ SPECIFIC EVENTS BINDIND --------------------------
+		//---------------------------------------------------------------------------
 
 		function bindKeyup() {
 			$field
@@ -77,7 +88,7 @@ function Compliter($field, options) {
 				
 				
 
-				$.ajax(config.url) 
+				$.ajax(config.get("url")) 
 					.done(function(data) {
 						var length = data.length;
 
@@ -110,13 +121,18 @@ function Compliter($field, options) {
 
 
 						//SORT
-						if (config.list.sort.enabled) {
-							data.sort(config.list.sort.method);
+						if (config.get("list").sort.enabled) {
+
+							//console.log(config.getValue("list").sort.method);
+
+							data.sort(config.get("list").sort.method);
+
+
 						}
 
 						//MAX NUMBER OF ELEMENTS
-						if (length > config.list.maxNumberOfElements) {
-							data = data.slice(0, config.list.maxNumberOfElements);
+						if (length > config.get("list").maxNumberOfElements) {
+							data = data.slice(0, config.get("list").maxNumberOfElements);
 							length = data.length;
 						}
 
@@ -127,7 +143,7 @@ function Compliter($field, options) {
 						for(var i = 0; i < length; i += 1) {
 
 							//TODO 
-							$container.append($("<li>" + config.getValue(data[i]) + "</li>"));
+							$container.append($("<li>" + config.get("getValue")(data[i]) + "</li>"));
 
 
 
@@ -184,34 +200,20 @@ function Compliter($field, options) {
 
 
 
-
+	//---------------------------------------------------------------------
 	//------------------------ FIELD PREPARATION --------------------------
+	//---------------------------------------------------------------------
 
 
 	//TODO Rebuild this function
 	function prepareField() {
 
-		
-		var $wrapper = $("<div class='compliter' ></div>");
+			
+		createWrapper();
+		createContainer();
 
-		var fieldWidth = $field.outerWidth();
-		$wrapper.css("width", fieldWidth);
-
-		$field.wrap($wrapper);
-
-		$container = $("<div class='compliter-container' ></div>");
-
-		$container
-			.attr("id", getListId())
-			.prepend("<ul></ul>");
-
-
-
-		$field.after($container);
 
 		$container = $("#" + getListId()).find("ul");
-
-
 
 
 		//Set placeholder for element
@@ -219,6 +221,27 @@ function Compliter($field, options) {
 			$field.attr("placeholder", config.placeholder);
 		}
 
+
+		function createWrapper() {
+			var $wrapper = $("<div class='" + consts.getValue("WRAPPER_CSS_CLASS") + "' ></div>"),
+			fieldWidth = $field.outerWidth();
+
+
+			$wrapper.css("width", fieldWidth);
+
+			//wrapp field with main div wrapper
+			$field.wrap($wrapper);
+		}
+
+		function createContainer() {
+			var $elements_container = $("<div class='" + consts.getValue("CONTAINER_CLASS") + "' ></div>");
+
+			$elements_container
+				.attr("id", getListId())
+				.prepend("<ul></ul>");
+
+			$field.after($elements_container);
+		}
 
 	}
 
@@ -241,7 +264,7 @@ function Compliter($field, options) {
 		}
 
 		//TODO CONST
-		return constants.CONTAINER_ID + elementId;
+		return consts.getValue("CONTAINER_ID") + elementId;
 	}
 
 
@@ -253,13 +276,15 @@ function Compliter($field, options) {
 	}
 
 
+	//-----------------------------------------------------------------
 	//------------------------ CONFIGURATION --------------------------
+	//-----------------------------------------------------------------
 
 	/*
 	Loads Configuration for Compliter
 	*/
 	function Configuration(options) {
-		var config = {
+		var defaults = {
 			message: "default message",
 			autocompleteOff: true,
 
@@ -306,9 +331,13 @@ function Compliter($field, options) {
 
 		mergeOptions();
 
-		config.equals = function(name, value) {
-			if (config.isAssigned(name)) {
-				if (config[name] === value) {
+		this.get = function(propertyName) {
+			return defaults[propertyName];
+		}
+
+		this.equals = function(name, value) {
+			if (isAssigned(name)) {
+				if (defaults[name] === value) {
 					return true;
 				}
 			} 
@@ -316,18 +345,10 @@ function Compliter($field, options) {
 			return false;
 		}
 
-		config.isAssigned = function(name) {
-			if (config[name] !== undefined && config[name] !== null) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-
 		//TODO think about better mechanism
-		config.checkRequiredProperties = function() {
-			for (var propertyName in config) {
-				if (config[propertyName] === "required") {
+		this.checkRequiredProperties = function() {
+			for (var propertyName in defaults) {
+				if (defaults[propertyName] === "required") {
 					logger.error("Option " + propertyName + " must be defined");
 					return false;
 				}
@@ -335,7 +356,6 @@ function Compliter($field, options) {
 			return true;
 		}
 
-		return config;
 
 
 		//------------------------ LOAD config --------------------------
@@ -343,7 +363,7 @@ function Compliter($field, options) {
 		//TODO iterate by objects properties: go deeper than one level
 		function mergeOptions() {
 
-			config = mergeObjects(config, options);
+			defaults = mergeObjects(defaults, options);
 
 			function mergeObjects(source, target) {
 				var mergedObject = source || {};
@@ -367,7 +387,15 @@ function Compliter($field, options) {
 		//check (param.name, value)
 		//return boolean
 		function assign(name) {
-			if (config[name] !== undefined && config[name] !== null) {
+			if (defaults[name] !== undefined && defaults[name] !== null) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		function isAssigned(name) {
+			if (defaults[name] !== undefined && defaults[name] !== null) {
 				return true;
 			} else {
 				return false;
@@ -375,17 +403,25 @@ function Compliter($field, options) {
 		}
 	}
 
-	//------------------------ CONSTANS --------------------------
+
+	//---------------------------------------------------------------------
+	//------------------------ CONSTANS -----------------------------------
+	//---------------------------------------------------------------------
+
 
 	//Load different Constans based on starting options
 	
 	function Constans() {
 		var constants = {
+			CONTAINER_CLASS: "compliter-container",
 			CONTAINER_ID: "CONTAINER-ID",
 
+			WRAPPER_CSS_CLASS: "compliter"
 		};
 
-		return constants;
+		this.getValue = function(propertyName) {
+			return constants[propertyName];
+		}
 
 		function LIST_ID() {
 
@@ -393,7 +429,11 @@ function Compliter($field, options) {
 		}
 	}
 
-	//------------------------ LOGGER --------------------------
+
+
+	//---------------------------------------------------------------------
+	//------------------------ LOGGER -------------------------------------
+	//---------------------------------------------------------------------
 
 	function Logger() {
 		var logger = {};
