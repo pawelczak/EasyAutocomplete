@@ -15,13 +15,10 @@ function Compliter($field, options) {
 
 		$field = $field, //$(element), //TODO change to input ?? you can only use input here anyway
 		$container = "",
-		elementsList = [];
+		elementsList = [],
+		selectedElement = -1;
 		
 
-
-	//init();
-
-	//return this;
 
 	//Main method
 	function init() {
@@ -83,12 +80,69 @@ function Compliter($field, options) {
 		function bindKeyup() {
 			$field
 			.off("keyup")
-			.keyup(function() {
-				
-				
+			.keyup(function(event) {
+
+
+
+				switch(event.keyCode) {
+
+					case 27:
+
+						//Esc
+
+						hideContainer();
+						loseFieldFocus();
+					break;
+
+
+					case 38:
+
+						//arrow up
+
+						if(elementsList.length > 0 && selectedElement > 0) {
+
+							selectedElement -= 1
+
+							$field.val(elementsList[selectedElement]);
+							
+							selectElement(selectedElement);
+
+						}						
+					break;
+
+					case 40:
+
+						//arrow down
+
+						if(elementsList.length > 0 && selectedElement < elementsList.length - 1) {
+
+							selectedElement += 1
+
+							//TODO move to event handler
+							$field.val(elementsList[selectedElement]);
+
+							selectElement(selectedElement);
+							
+						}
+
+					break;
+
+					default:
+						if($field.val().length === 0) {
+							return;
+						}
+
+						loadData();
+
+					break;
+
+
+				}
 				
 
-				$.ajax(config.get("url")) 
+
+				function loadData() {
+					$.ajax(config.get("url")) 
 					.done(function(data) {
 						var length = data.length;
 
@@ -96,62 +150,12 @@ function Compliter($field, options) {
 							return;
 						}
 
-						elementsList = data;
-
-						//Prepare data to display:
-						//- sort 
-						//- decrease number to specific number
-						//- show only matching data
-
-
-						//MATCHING
-						//TODO ADD inputPhrase
-						//Change it to build new array maybe
-						/*
-						if (config.list.matching.enabled) {
-							for(var i = 0; i < length; i += 1) {
-								if (data[i].search(inputPhrase) === -1) {
-									data.join(data.slice(0, i - 1), data.slice(i + 1, data.length -1));
-									length = data.length;
-									i--;
-								}
-							}
-						}
-						*/
-
-
-						//SORT
-						if (config.get("list").sort.enabled) {
-
-							//console.log(config.getValue("list").sort.method);
-
-							data.sort(config.get("list").sort.method);
-
-
-						}
-
-						//MAX NUMBER OF ELEMENTS
-						if (length > config.get("list").maxNumberOfElements) {
-							data = data.slice(0, config.get("list").maxNumberOfElements);
-							length = data.length;
-						}
-
 						
-						//TODO change this method
-						$container.empty();
+						elementsList = prepareData(data);
 
-						for(var i = 0; i < length; i += 1) {
+						loadElements(elementsList);
 
-							//TODO 
-							$container.append($("<li>" + config.get("getValue")(data[i]) + "</li>"));
-
-
-
-
-
-						}
-
-						$container.show();
+						showContainer();
 
 					})
 					.fail(function() {
@@ -161,8 +165,8 @@ function Compliter($field, options) {
 
 					});
 
-
-
+				}
+				
 
 			});
 		}
@@ -183,22 +187,112 @@ function Compliter($field, options) {
 
 		function bindFocus() {
 			$field.focus(function() {
-				
+				hideContainer();
 			});
 		}
 
 		function bindBlur() {
 			$field.blur(function() {
-				
+				hideContainer();
 			});
 		}
 
 		function removeAutocomplete() {
 			$field.attr("autocomplete","off");
 		}
+
+
+
+
+
 	}
 
+	//---------------------------------------------------------------------
+	//------------------------ DATA PREPARATION ---------------------------
+	//---------------------------------------------------------------------
 
+	function prepareData(list) {
+
+		var length = list.length;
+
+		//Prepare list to display:
+		//- sort 
+		//- decrease number to specific number
+		//- show only matching list
+
+
+		//MATCHING
+		//TODO ADD inputPhrase
+		//Change it to build new array maybe
+		/*
+		if (config.list.matching.enabled) {
+			for(var i = 0; i < length; i += 1) {
+				if (list[i].search(inputPhrase) === -1) {
+					list.join(list.slice(0, i - 1), list.slice(i + 1, list.length -1));
+					length = list.length;
+					i--;
+				}
+			}
+		}
+		*/
+
+
+		//SORT
+		if (config.get("list").sort.enabled) {
+
+			//console.log(config.getValue("list").sort.method);
+
+			list.sort(config.get("list").sort.method);
+
+
+		}
+
+		//MAX NUMBER OF ELEMENTS
+		if (length > config.get("list").maxNumberOfElements) {
+			list = list.slice(0, config.get("list").maxNumberOfElements);
+			length = list.length;
+		}
+
+
+
+		return list;
+	}	
+
+	//---------------------------------------------------------------------
+	//------------------------ EVENTS -------------------------------------
+	//---------------------------------------------------------------------
+
+	// All html modifications should be made by events
+
+	function showContainer() {
+		$container.trigger("show");
+		selectElement(selectedElement);
+	}
+
+	function hideContainer() {
+		$container.trigger("hide");
+	}
+
+	function loseFieldFocus() {
+		$field.trigger("blur");
+	}
+
+	function selectElement(index) {
+		$container.trigger("selectElement", index);
+	}
+
+	function loadElements(list) {
+		var length = list.length;
+
+		//TODO change this method to event clear
+		$container.find("ul").empty();
+
+		for(var i = 0; i < length; i += 1) {
+
+			//TODO 
+			$container.find("ul").append($("<li>" + config.get("getValue")(list[i]) + "</li>"));
+		}
+	}
 
 	//---------------------------------------------------------------------
 	//------------------------ FIELD PREPARATION --------------------------
@@ -219,7 +313,7 @@ function Compliter($field, options) {
 		createContainer();	
 
 
-		$container = $("#" + getListId()).find("ul");
+		$container = $("#" + getListId());//.find("ul");
 
 
 		//Set placeholder for element
@@ -247,18 +341,26 @@ function Compliter($field, options) {
 			var $elements_container = $("<div class='" + consts.getValue("CONTAINER_CLASS") + "' ></div>");
 
 			$elements_container
-				.attr("id", getListId())
-				.prepend("<ul></ul>")
-				.on("show", function() {
+					.attr("id", getListId())
+					.prepend("<ul></ul>");
 
+			(function() {
 
-				})
-				.on("hide", function() {
+				$elements_container
+					.on("show", function() {
+						$elements_container.find("ul").show();
+					})
+					.on("hide", function() {
+						$elements_container.find("ul").hide();
+					})
+					.on("selectElement", function(event, selected) {
+						$elements_container.find("ul li").removeClass("selected");
+						$elements_container.find("ul li:nth-child(" + (selectedElement + 1) + ")").addClass("selected");
+					});
 
+			})();
 
-					
-				});
-
+			
 
 
 
