@@ -16,6 +16,8 @@ QUnit.test( "Build tests", function( assert ) {
 		container = field.nextSibling;
 
 	//assert
+	assert.equal("off", field.getAttribute("autocomplete"), "Field autocomplete off");
+
 	assert.equal("DIV", parent.nodeName, "Parent tag type");
 	assert.equal(Consts.getValue("WRAPPER_CSS_CLASS"), parent.className, "Parent class");
 
@@ -39,6 +41,8 @@ QUnit.test( "Build compliter twice on same element", function( assert ) {
 		container = field.nextSibling;
 
 	//assert
+	assert.equal("off", field.getAttribute("autocomplete"), "Field autocomplete off");
+
 	assert.equal("DIV", parent.nodeName, "Parent tag type");
 	assert.equal(Consts.getValue("WRAPPER_CSS_CLASS"), parent.className, "Parent class");
 	assert.ok(Consts.getValue("WRAPPER_CSS_CLASS") != parent.parentNode.className, "Parent's parent class not known");

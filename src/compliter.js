@@ -248,7 +248,20 @@ function Compliter($field, options) {
 
 			$elements_container
 				.attr("id", getListId())
-				.prepend("<ul></ul>");
+				.prepend("<ul></ul>")
+				.on("show", function() {
+
+
+				})
+				.on("hide", function() {
+
+
+					
+				});
+
+
+
+
 
 			$field.after($elements_container);
 		}
