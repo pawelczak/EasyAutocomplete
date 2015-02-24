@@ -102,7 +102,6 @@ function Compliter($field, options) {
 
 							//TODO ellements list by getValue
 							$field.val(elementsList[selectedElement]);
-							
 
 							//TODO change name
 							selectElement(selectedElement);
@@ -118,7 +117,7 @@ function Compliter($field, options) {
 
 							selectedElement += 1
 
-							//TODO move to event handler
+							//TODO ellements list by getValue
 							$field.val(elementsList[selectedElement]);
 
 							selectElement(selectedElement);
@@ -190,7 +189,11 @@ function Compliter($field, options) {
 
 		function bindBlur() {
 			$field.blur(function() {
-				hideContainer();
+
+				//TODO
+				setTimeout(function() { 
+					hideContainer();
+				}, 250);
 			});
 		}
 
@@ -286,6 +289,7 @@ function Compliter($field, options) {
 	}
 
 	function selectElement(index) {
+		
 		$container.trigger("selectElement", index);
 	}
 
@@ -409,10 +413,22 @@ function Compliter($field, options) {
 						$list.empty();
 
 						for(var i = 0; i < length; i += 1) {
-							$item = $("<li></li>");
+							$item = $("<li><span></span></li>");
 							
-							$item
-								.text(config.get("getValue")(list[i]));
+
+							(function() {
+								var j = i;
+
+								$item.find("span")
+									.on("click", function() {
+
+										//TODO
+										$field.val(config.get("getValue")(list[j]));
+										selectElement(j);
+									})
+									.text(config.get("getValue")(list[i]));
+
+							})();
 
 							$list.append($item);
 						}

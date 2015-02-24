@@ -32,8 +32,12 @@
     border-width: 0 1px;
     display: block;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: normal;
     padding: 4px 12px;
+}
+
+.compliter-container ul li:hover {
+    background: #ebebeb;
 }
 
 .compliter-container ul li span {
