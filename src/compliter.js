@@ -13,7 +13,7 @@ function Compliter($field, options) {
 		config = new Configuration(options),
 		checkParam = config.equals,
 
-		$field = $field, //$(element), //TODO change to input ?? you can only use input here anyway
+		$field = $field, 
 		$container = "",
 		elementsList = [],
 		selectedElement = -1;
@@ -82,8 +82,6 @@ function Compliter($field, options) {
 			.off("keyup")
 			.keyup(function(event) {
 
-
-
 				switch(event.keyCode) {
 
 					case 27:
@@ -93,7 +91,6 @@ function Compliter($field, options) {
 						hideContainer();
 						loseFieldFocus();
 					break;
-
 
 					case 38:
 
@@ -138,11 +135,8 @@ function Compliter($field, options) {
 						loadData();
 
 					break;
-
-
 				}
-				
-
+			
 
 				function loadData() {
 					$.ajax(config.get("url")) 
@@ -204,69 +198,76 @@ function Compliter($field, options) {
 			$field.attr("autocomplete","off");
 		}
 
-
-
-
-
 	}
 
 	//---------------------------------------------------------------------
 	//------------------------ DATA PREPARATION ---------------------------
 	//---------------------------------------------------------------------
 
+
+	//Prepare list to display:
+	//- sort 
+	//- decrease number to specific number
+	//- show only matching list
 	function prepareData(list) {
 
-		var length = list.length;
-
-		//Prepare list to display:
-		//- sort 
-		//- decrease number to specific number
-		//- show only matching list
-
-
-		//MATCHING
-		//TODO ADD inputPhrase
-		//Change it to build new array maybe
-		
 		var inputPhrase = $field.val();
-
-		var preparedList = [];
-
-		if (config.get("list").matching.enabled) {
-			for(var i = 0; i < length; i += 1) {
-
-				var val = config.get("getValue")(list[i]);
-				
-				if (!config.get("list").matching.caseSensitive) {
-					val = val.toLowerCase();
-					inputPhrase = inputPhrase.toLowerCase();
-				}
-
-				if (val.search(inputPhrase) > -1) {
-					preparedList.push(list[i]);
-				}
-				
-			}
-		}
 		
-		list = preparedList;
-		length = list.length;
-
-		//SORT
-		if (config.get("list").sort.enabled) {
-
-			list.sort(config.get("list").sort.method);
-
-		}
-
-		//MAX NUMBER OF ELEMENTS
-		if (length > config.get("list").maxNumberOfElements) {
-			list = list.slice(0, config.get("list").maxNumberOfElements);
-		}
-
-
+		list = findMatching(list, inputPhrase);
+		list = reduceElementsInList(list);
+		list = sort(list);
 
 		return list;
+
+		function findMatching(list, phrase) {
+			var length = list.length,
+				preparedList = [],
+				value = "";
+
+			if (config.get("list").matching.enabled) {
+
+				for(var i = 0; i < length; i += 1) {
+
+					value = config.get("getValue")(list[i]);
+					
+					if (!config.get("list").matching.caseSensitive) {
+						value = value.toLowerCase();
+						phrase = phrase.toLowerCase();
+					}
+
+					if (value.search(phrase) > -1) {
+						preparedList.push(list[i]);
+					}
+					
+				}
+
+			} else {
+				preparedList = list;
+			}
+
+			return preparedList;
+		}
+
+		function reduceElementsInList(list) {
+
+			//MAX NUMBER OF ELEMENTS
+			if (list.length > config.get("list").maxNumberOfElements) {
+				list = list.slice(0, config.get("list").maxNumberOfElements);
+			}
+
+			return list;
+		}
+
+		function sort(list) {
+
+			//SORT
+			if (config.get("list").sort.enabled) {
+				list.sort(config.get("list").sort.method);
+			}
+
+			return list;
+		}
+
 	}	
 
 	//---------------------------------------------------------------------
@@ -284,25 +285,16 @@ function Compliter($field, options) {
 		$container.trigger("hide");
 	}
 
-	function loseFieldFocus() {
-		$field.trigger("blur");
-	}
-
 	function selectElement(index) {
 		$container.trigger("selectElement", index);
 	}
 
 	function loadElements(list) {
-		var length = list.length;
+		$container.trigger("loadElements", [list]);
+	}
 
-		//TODO change this method to event clear
-		$container.find("ul").empty();
-
-		for(var i = 0; i < length; i += 1) {
-
-			//TODO 
-			$container.find("ul").append($("<li>" + config.get("getValue")(list[i]) + "</li>"));
-		}
+	function loseFieldFocus() {
+		$field.trigger("blur");
 	}
 
 	//---------------------------------------------------------------------
@@ -319,10 +311,8 @@ function Compliter($field, options) {
 			removeWrapper();
 		} 
 		
-
 		createWrapper();
 		createContainer();	
-
 
 		$container = $("#" + getListId());//.find("ul");
 
@@ -335,8 +325,7 @@ function Compliter($field, options) {
 
 		function createWrapper() {
 			var $wrapper = $("<div class='" + consts.getValue("WRAPPER_CSS_CLASS") + "' ></div>"),
-			fieldWidth = $field.outerWidth();
-
+				fieldWidth = $field.outerWidth();
 
 			$wrapper.css("width", fieldWidth);
 
@@ -355,6 +344,7 @@ function Compliter($field, options) {
 					.attr("id", getListId())
 					.prepend("<ul></ul>");
 
+
 			(function() {
 
 				$elements_container
@@ -367,14 +357,27 @@ function Compliter($field, options) {
 					.on("selectElement", function(event, selected) {
 						$elements_container.find("ul li").removeClass("selected");
 						$elements_container.find("ul li:nth-child(" + (selectedElement + 1) + ")").addClass("selected");
+					})
+					.on("loadElements", function(event, list) {
+
+						var length = list.length,
+							$item = "",
+							$list = $elements_container.find("ul");
+
+						$list.empty();
+
+						for(var i = 0; i < length; i += 1) {
+							$item = $("<li></li>");
+							
+							$item
+								.text(config.get("getValue")(list[i]));
+
+							$list.append($item);
+						}
+
 					});
 
 			})();
-
-			
-
-
-
 
 			$field.after($elements_container);
 		}
@@ -393,22 +396,21 @@ function Compliter($field, options) {
 
 	//Generate unique element id
 	function getListId() {
+		
 		var elementId = $field.attr("id");
 
-		//TODO has attr
 		if (elementId === undefined || elementId === null) {
-			elementId = Math.rand(1000000);
+			
+			do {
+				elementId = consts.getValue("CONTAINER_ID") + Math.rand(10000);	
+			} while($("#" + elementId).length == 0);
 
-			//if element exist $(elementId) reroll
-			//if ()
+		} else {
+			elementId = consts.getValue("CONTAINER_ID") + elementId;
 		}
 
-		//TODO CONST
-		return consts.getValue("CONTAINER_ID") + elementId;
+		return elementId;
 	}
-
-
-	
 
 	this.getConfiguration = function() {
 		return config;
