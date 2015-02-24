@@ -103,8 +103,11 @@ function Compliter($field, options) {
 
 							selectedElement -= 1
 
+							//TODO ellements list by getValue
 							$field.val(elementsList[selectedElement]);
 							
+
+							//TODO change name
 							selectElement(selectedElement);
 
 						}						
@@ -224,33 +227,41 @@ function Compliter($field, options) {
 		//MATCHING
 		//TODO ADD inputPhrase
 		//Change it to build new array maybe
-		/*
-		if (config.list.matching.enabled) {
+		
+		var inputPhrase = $field.val();
+
+		var preparedList = [];
+
+		if (config.get("list").matching.enabled) {
 			for(var i = 0; i < length; i += 1) {
-				if (list[i].search(inputPhrase) === -1) {
-					list.join(list.slice(0, i - 1), list.slice(i + 1, list.length -1));
-					length = list.length;
-					i--;
+
+				var val = config.get("getValue")(list[i]);
+				
+				if (!config.get("list").matching.caseSensitive) {
+					val = val.toLowerCase();
+					inputPhrase = inputPhrase.toLowerCase();
 				}
+
+				if (val.search(inputPhrase) > -1) {
+					preparedList.push(list[i]);
+				}
+				
 			}
 		}
-		*/
-
+		
+		list = preparedList;
+		length = list.length;
 
 		//SORT
 		if (config.get("list").sort.enabled) {
 
-			//console.log(config.getValue("list").sort.method);
-
 			list.sort(config.get("list").sort.method);
-
 
 		}
 
 		//MAX NUMBER OF ELEMENTS
 		if (length > config.get("list").maxNumberOfElements) {
 			list = list.slice(0, config.get("list").maxNumberOfElements);
-			length = list.length;
 		}
 
 
@@ -446,6 +457,7 @@ function Compliter($field, options) {
 
 				matching: {
 					enabled: false,
+					caseSensitive: false,
 					method: function(a, b) {
 						if (a === b){
 							return true	
