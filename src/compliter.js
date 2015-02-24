@@ -278,7 +278,7 @@ function Compliter($field, options) {
 
 	function showContainer() {
 		$container.trigger("show");
-		selectElement(selectedElement);
+		selectElement(selectedElement);//TODO
 	}
 
 	function hideContainer() {
@@ -349,10 +349,52 @@ function Compliter($field, options) {
 
 				$elements_container
 					.on("show", function() {
-						$elements_container.find("ul").show();
+
+						switch(config.get("list").showAnimation.type) {
+
+							case "slide":
+								//TODO better handle time
+								var time = config.get("list").showAnimation.time,
+									callback = config.get("list").showAnimation.callback;
+
+								$elements_container.find("ul").slideDown(time, callback);
+							break;
+
+							case "fade":
+								var time = config.get("list").showAnimation.time,
+									callback = config.get("list").showAnimation.callback;
+
+								$elements_container.find("ul").fadeIn(time), callback;
+							break;
+
+							default:
+								$elements_container.find("ul").show();
+							break;
+						}
+						
 					})
 					.on("hide", function() {
-						$elements_container.find("ul").hide();
+
+						switch(config.get("list").hideAnimation.type) {
+
+							case "slide":
+								var time = config.get("list").hideAnimation.time,
+									callback = config.get("list").hideAnimation.callback;
+
+								$elements_container.find("ul").slideUp(time, callback);
+							break;
+
+							case "fade":
+								var time = config.get("list").hideAnimation.time,
+									callback = config.get("list").hideAnimation.callback;
+
+								$elements_container.find("ul").fadeOut(time, callback);
+							break;
+
+							default:
+								$elements_container.find("ul").hide();
+							break;
+						}
 					})
 					.on("selectElement", function(event, selected) {
 						$elements_container.find("ul li").removeClass("selected");
@@ -466,6 +508,18 @@ function Compliter($field, options) {
 						}  
 						return false;
 					}
+				},
+
+				showAnimation: {
+					type: "normal", //normal|slide|fade
+					time: 400,
+					callback: function() {}
+				},
+
+				hideAnimation: {
+					type: "normal",
+					time: 400,
+					callback: function() {}
 				},
 
 			},
