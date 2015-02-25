@@ -127,6 +127,7 @@ function Compliter($field, options) {
 					break;
 
 					default:
+
 						if($field.val().length === 0) {
 							return;
 						}
@@ -405,7 +406,7 @@ function Compliter($field, options) {
 						$elements_container.find("ul li:nth-child(" + (selectedElement + 1) + ")").addClass("selected");
 					})
 					.on("loadElements", function(event, list) {
-
+		
 						var length = list.length,
 							$item = "",
 							$list = $elements_container.find("ul");
@@ -476,6 +477,10 @@ function Compliter($field, options) {
 
 	this.getConstants = function() {
 		return consts;
+	}
+
+	this.getContainer = function() {
+		return $container;
 	}
 
 	//-----------------------------------------------------------------
