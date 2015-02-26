@@ -3,13 +3,13 @@
 QUnit.test( "Build tests", function( assert ) {
 
 	//given
-	var compliter = new Compliter($("#inputOne"), {url: "test.json"});
+	var completer = new Completer($("#inputOne"), {url: "test.json"});
 
-	var Consts = compliter.getConstants();
+	var Consts = completer.getConstants();
 
 
 	//execute
-	compliter.init();
+	completer.init();
 	var field = document.getElementById("inputOne"),
 		parent = field.parentNode,
 		container = field.nextSibling;
@@ -25,16 +25,16 @@ QUnit.test( "Build tests", function( assert ) {
 	assert.equal("UL", container.childNodes[0].nodeName, "Container list tag type");
 });
 
-QUnit.test( "Build compliter twice on same element", function( assert ) {
+QUnit.test( "Build completer twice on same element", function( assert ) {
 
 	//given
-	var compliter = new Compliter($("#inputOne"), {url: "test.json"});
-	var compliter = new Compliter($("#inputOne"), {url: "test2.json"});
+	var completer = new Completer($("#inputOne"), {url: "test.json"});
+	var completer = new Completer($("#inputOne"), {url: "test2.json"});
 
-	var Consts = compliter.getConstants();
+	var Consts = completer.getConstants();
 
 	//execute
-	compliter.init();
+	completer.init();
 	var field = document.getElementById("inputOne"),
 		parent = field.parentNode,
 		container = field.nextSibling;
@@ -52,18 +52,18 @@ QUnit.test( "Build compliter twice on same element", function( assert ) {
 	assert.ok(Consts.getValue("CONTAINER_CLASS") != parent.nextSibling.className, "Parent's parent class not known");
 });
 
-QUnit.test( "Build compliter twice on different element", function( assert ) {
+QUnit.test( "Build completer twice on different element", function( assert ) {
 
 	
 	//given
-	var compliterOne = new Compliter($("#inputOne"), {url: "colors2.json"});
-	var compliterTwo = new Compliter($("#inputTwo"), {url: "colors2.json", autocompleteOff: false});
+	var completerOne = new Completer($("#inputOne"), {url: "colors2.json"});
+	var completerTwo = new Completer($("#inputTwo"), {url: "colors2.json", autocompleteOff: false});
 
-	var Consts = compliterOne.getConstants();
+	var Consts = completerOne.getConstants();
 
 	//execute
-	compliterOne.init();
-	compliterTwo.init();
+	completerOne.init();
+	completerTwo.init();
 
 	var fields = [],
 		parents = [],

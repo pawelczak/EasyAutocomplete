@@ -2,10 +2,10 @@
 /*
  * @author Łukasz Pawełczak
  */
-function Compliter($field, options) {
+function Completer($field, options) {
 				
 	var module = {
-			name: "Compliter"
+			name: "Completer"
 		};
 
 	var consts = new Constans(),
@@ -96,12 +96,14 @@ function Compliter($field, options) {
 
 						//arrow up
 
+						event.preventDefault();
+
 						if(elementsList.length > 0 && selectedElement > 0) {
 
 							selectedElement -= 1
 
 							//TODO ellements list by getValue
-							$field.val(elementsList[selectedElement]);
+							$field.val(config.get("getValue")(elementsList[selectedElement]));
 
 							//TODO change name
 							selectElement(selectedElement);
@@ -115,10 +117,12 @@ function Compliter($field, options) {
 
 						if(elementsList.length > 0 && selectedElement < elementsList.length - 1) {
 
+							event.preventDefault();
+
 							selectedElement += 1
 
 							//TODO ellements list by getValue
-							$field.val(elementsList[selectedElement]);
+							$field.val(config.get("getValue")(elementsList[selectedElement]));
 
 							selectElement(selectedElement);
 							
@@ -418,16 +422,17 @@ function Compliter($field, options) {
 							
 
 							(function() {
-								var j = i;
+								var j = i,
+									elementsValue = config.get("getValue")(list[j]);
 
 								$item.find("span")
 									.on("click", function() {
 
 										//TODO
-										$field.val(config.get("getValue")(list[j]));
+										$field.val(elementsValue);
 										selectElement(j);
 									})
-									.text(config.get("getValue")(list[i]));
+									.text(elementsValue);
 
 							})();
 
@@ -488,7 +493,7 @@ function Compliter($field, options) {
 	//-----------------------------------------------------------------
 
 	/*
-	Loads Configuration for Compliter
+	Loads Configuration 
 	*/
 	function Configuration(options) {
 		var defaults = {
@@ -633,10 +638,10 @@ function Compliter($field, options) {
 	
 	function Constans() {
 		var constants = {
-			CONTAINER_CLASS: "compliter-container",
+			CONTAINER_CLASS: "completer-container",
 			CONTAINER_ID: "CONTAINER-ID",
 
-			WRAPPER_CSS_CLASS: "compliter"
+			WRAPPER_CSS_CLASS: "completer"
 		};
 
 		this.getValue = function(propertyName) {
@@ -672,6 +677,6 @@ function Compliter($field, options) {
 }
 
 
-$.fn.compliter = function(options) {
-	new Compliter(this, options).init();
+$.fn.completer = function(options) {
+	new Completer(this, options).init();
 }
