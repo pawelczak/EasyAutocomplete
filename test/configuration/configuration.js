@@ -28,7 +28,7 @@ function assertValue (value, objectOne, objectTwo) {
 		break;
 
 		case 3:
-			assert.ok(assertValue._expected[objectTwo][objectOne][value] === assertValue._actual.get(objectTwo)[objectOne][value] , "Passed - " + objectTwo + " " + objectOne + " " + value );
+			assert.ok(assertValue._expected[objectTwo][objectOne][value] === assertValue._actual.get(objectTwo)[objectOne][value] , "Passed - " + objectTwo + " " + objectOne + " " + value );	
 		break;
 
 		default:
@@ -43,7 +43,6 @@ QUnit.test( "Configuration Default values", function( assert ) {
 	var options = {};
 	var expectedOptions = {
 
-			message: "default message",
 			autocompleteOff: true,
 
 			url: "required",
@@ -58,7 +57,7 @@ QUnit.test( "Configuration Default values", function( assert ) {
 				sort: {
 					enabled: false,
 					method: function(a, b) {
-						//Alphabeticall sort
+						
 						if (a < b) {
 							return -1;
 						}
@@ -71,7 +70,6 @@ QUnit.test( "Configuration Default values", function( assert ) {
 
 				maxNumberOfElements: 6,
 
-				//TODO can be used different matching e.g. when 3 out of 4 in word letters are matched
 				matching: {
 					enabled: false,
 					method: function(a, b) {
@@ -98,7 +96,6 @@ QUnit.test( "Configuration Default values", function( assert ) {
 	assertValue._expected = expectedOptions;
 	assertValue._actual = actualOptions;
 
-	assertValue("message");
 	assertValue("autocompleteOff");
 	assertValue("url");
 	assertValue("placeholder");
@@ -121,7 +118,6 @@ QUnit.test( "Configuration simple", function( assert ) {
 
 	var options = {
 
-			message: "test message",
 			autocompleteOff: false,
 
 			url: "test url",
@@ -164,7 +160,6 @@ QUnit.test( "Configuration simple", function( assert ) {
 	assertValue._expected = options;
 	assertValue._actual = actualOptions;
 
-	assertValue("message");
 	assertValue("autocompleteOff");
 	assertValue("url");
 	assertValue("placeholder");
@@ -186,7 +181,6 @@ QUnit.test( "Configuration mixed", function( assert ) {
 	//given
 	var defaultOptions = {
 
-			message: "default message",
 			autocompleteOff: true,
 
 			url: "required",
@@ -271,7 +265,6 @@ QUnit.test( "Configuration mixed", function( assert ) {
 
 	assertValue._expected = defaultOptions;
 
-	assertValue("message");
 	assertValue("autocompleteOff");
 	assertValue("placeholder");
 	assertValue("highlightPhrase");

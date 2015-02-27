@@ -159,6 +159,8 @@ function Completer($field, options) {
 
 						showContainer();
 
+						config.get("ajaxCallback")();
+
 					})
 					.fail(function() {
 						logger.warning("Fail to load response data");
@@ -226,18 +228,16 @@ function Completer($field, options) {
 		list = findMatching(list, inputPhrase);
 		list = reduceElementsInList(list);
 		list = sort(list);
-		//list = highlight(list, inputPhrase);
 
 		return list;
 
 		function findMatching(list, phrase) {
-			var length = list.length,
-				preparedList = [],
+			var preparedList = [],
 				value = "";
 
 			if (config.get("list").matching.enabled) {
 
-				for(var i = 0; i < length; i += 1) {
+				for(var i = 0, length = list.length; i < length; i += 1) {
 
 					value = config.get("getValue")(list[i]);
 					
@@ -337,7 +337,7 @@ function Completer($field, options) {
 
 
 		function createWrapper() {
-			var $wrapper = $("<div class='" + consts.getValue("WRAPPER_CSS_CLASS") + "' ></div>"),
+			var $wrapper = $("<div>").addClass(consts.getValue("WRAPPER_CSS_CLASS")),
 				fieldWidth = $field.outerWidth();
 
 			$wrapper.css("width", fieldWidth);
@@ -351,11 +351,11 @@ function Completer($field, options) {
 		}
 
 		function createContainer() {
-			var $elements_container = $("<div class='" + consts.getValue("CONTAINER_CLASS") + "' ></div>");
+			var $elements_container = $("<div>").addClass(consts.getValue("CONTAINER_CLASS"));
 
 			$elements_container
 					.attr("id", getListId())
-					.prepend("<ul></ul>");
+					.prepend($("<ul>"));
 
 
 			(function() {
@@ -415,13 +415,13 @@ function Completer($field, options) {
 					})
 					.on("loadElements", function(event, list, phrase) {
 		
-						var length = list.length,
-							$item = "",
-							$list = $elements_container.find("ul");
+						var $item = "",
+							$list = $("<ul>"),
+							$listContainer = $elements_container.find("ul");
 
-						$list.empty();
+						$listContainer.empty();
 
-						for(var i = 0; i < length; i += 1) {
+						for(var i = 0, length = list.length; i < length; i += 1) {
 							$item = $("<li><span></span></li>");
 							
 
@@ -437,11 +437,12 @@ function Completer($field, options) {
 										selectElement(j);
 									})
 									.html(highlightPhrase(elementsValue, phrase));
-									console.log(phrase);
 							})();
 
-							$list.append($item);
+							$listContainer.append($item);
 						}
+
+						//$listContainer.replaceWith($list.find("li"));
 
 					});
 
@@ -455,20 +456,17 @@ function Completer($field, options) {
 		}
 
 		function highlight(list, phrase) {
-			var length = list.length;
 
-			for(var i = 0; i < length; i += 1) {
+			for(var i = 0, length = list.length; i < length; i += 1) {
 
 				list[i] = highlightPhrase(config.get("getValue")(list[i]), phrase);
 			}
 
 			return list;
-
-			
 		}
 
 		function highlightPhrase(string, phrase) {
-			return (string + "").replace(new RegExp("(" + phrase + ")", "gi") , "<b>" + phrase + "</b>");
+			return (string + "").replace(new RegExp("(" + phrase + ")", "gi") , "<b>$1</b>");
 		}
 
 	}
@@ -518,16 +516,16 @@ function Completer($field, options) {
 	*/
 	function Configuration(options) {
 		var defaults = {
-			message: "default message",
-			autocompleteOff: true,
-
 			url: "required",
+			autocompleteOff: true,
 
 			getValue: function(element) {
 				return element;
 			},
 
 			placeholder: false,
+
+			ajaxCallback: function() {},
 
 			list: {
 				sort: {

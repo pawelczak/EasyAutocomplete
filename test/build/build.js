@@ -1,5 +1,4 @@
 
-
 QUnit.test( "Build tests", function( assert ) {
 
 	//given
@@ -56,8 +55,8 @@ QUnit.test( "Build completer twice on different element", function( assert ) {
 
 	
 	//given
-	var completerOne = new Completer($("#inputOne"), {url: "colors2.json"});
-	var completerTwo = new Completer($("#inputTwo"), {url: "colors2.json", autocompleteOff: false});
+	var completerOne = new Completer($("#inputOne"), {url: "test.json"});
+	var completerTwo = new Completer($("#inputTwo"), {url: "test2.json", autocompleteOff: false});
 
 	var Consts = completerOne.getConstants();
 
