@@ -151,10 +151,11 @@ function Completer($field, options) {
 							return;
 						}
 
-						
+						var inputPhrase = $field.val();
+
 						elementsList = prepareData(data);
 
-						loadElements(elementsList);
+						loadElements(elementsList, inputPhrase);
 
 						showContainer();
 
@@ -217,6 +218,7 @@ function Completer($field, options) {
 	//- sort 
 	//- decrease number to specific number
 	//- show only matching list
+	//- highlight
 	function prepareData(list) {
 
 		var inputPhrase = $field.val();
@@ -224,6 +226,7 @@ function Completer($field, options) {
 		list = findMatching(list, inputPhrase);
 		list = reduceElementsInList(list);
 		list = sort(list);
+		//list = highlight(list, inputPhrase);
 
 		return list;
 
@@ -243,6 +246,7 @@ function Completer($field, options) {
 						phrase = phrase.toLowerCase();
 					}
 
+					//TODO Regex
 					if (value.search(phrase) > -1) {
 						preparedList.push(list[i]);
 					}
@@ -298,8 +302,8 @@ function Completer($field, options) {
 		$container.trigger("selectElement", index);
 	}
 
-	function loadElements(list) {
-		$container.trigger("loadElements", [list]);
+	function loadElements(list, phrase) {
+		$container.trigger("loadElements", [list, phrase]);
 	}
 
 	function loseFieldFocus() {
@@ -409,7 +413,7 @@ function Completer($field, options) {
 						$elements_container.find("ul li").removeClass("selected");
 						$elements_container.find("ul li:nth-child(" + (selectedElement + 1) + ")").addClass("selected");
 					})
-					.on("loadElements", function(event, list) {
+					.on("loadElements", function(event, list, phrase) {
 		
 						var length = list.length,
 							$item = "",
@@ -432,8 +436,8 @@ function Completer($field, options) {
 										$field.val(elementsValue);
 										selectElement(j);
 									})
-									.text(elementsValue);
-
+									.html(highlightPhrase(elementsValue, phrase));
+									console.log(phrase);
 							})();
 
 							$list.append($item);
@@ -448,6 +452,23 @@ function Completer($field, options) {
 
 		function removeContainer() {
 			$field.next("." + consts.getValue("CONTAINER_CLASS")).remove();
+		}
+
+		function highlight(list, phrase) {
+			var length = list.length;
+
+			for(var i = 0; i < length; i += 1) {
+
+				list[i] = highlightPhrase(config.get("getValue")(list[i]), phrase);
+			}
+
+			return list;
+
+			
+		}
+
+		function highlightPhrase(string, phrase) {
+			return (string + "").replace(new RegExp("(" + phrase + ")", "gi") , "<b>" + phrase + "</b>");
 		}
 
 	}
