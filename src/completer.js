@@ -132,10 +132,6 @@ function Completer($field, options) {
 
 					default:
 
-						if($field.val().length === 0) {
-							return;
-						}
-
 						loadData();
 
 					break;
@@ -436,7 +432,7 @@ function Completer($field, options) {
 										$field.val(elementsValue);
 										selectElement(j);
 									})
-									.html(highlightPhrase(elementsValue, phrase));
+									.html(highlight(elementsValue, phrase));
 							})();
 
 							$listContainer.append($item);
@@ -455,14 +451,14 @@ function Completer($field, options) {
 			$field.next("." + consts.getValue("CONTAINER_CLASS")).remove();
 		}
 
-		function highlight(list, phrase) {
+		function highlight(string, phrase) {
 
-			for(var i = 0, length = list.length; i < length; i += 1) {
-
-				list[i] = highlightPhrase(config.get("getValue")(list[i]), phrase);
+			if(config.get("highlightPhrase")) {
+				return highlightPhrase(string, phrase);	
+			} else {
+				return string;
 			}
-
-			return list;
+			
 		}
 
 		function highlightPhrase(string, phrase) {
