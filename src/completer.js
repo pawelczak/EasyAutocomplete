@@ -28,6 +28,7 @@ function Completer($field, options) {
 			return;
 		}
 
+
 		prepareField();
 		bindEvents();	
 
@@ -149,7 +150,7 @@ function Completer($field, options) {
 
 						var inputPhrase = $field.val();
 
-						elementsList = prepareData(data);
+						elementsList = processResponseData(data);
 
 						loadElements(elementsList, inputPhrase);
 
@@ -208,24 +209,38 @@ function Completer($field, options) {
 	}
 
 	//---------------------------------------------------------------------
-	//------------------------ DATA PREPARATION ---------------------------
+	//------------------------ DATA PROCESS -------------------------------
 	//---------------------------------------------------------------------
 
 
-	//Prepare list to display:
+	//Process list to display:
 	//- sort 
 	//- decrease number to specific number
 	//- show only matching list
 	//- highlight
-	function prepareData(list) {
+	function processResponseData(list) {
 
 		var inputPhrase = $field.val();
 		
+		if(config.get("dataType") === "xml") {
+			list = convertXmlToSimpleList(list);			
+		}
+
 		list = findMatching(list, inputPhrase);
 		list = reduceElementsInList(list);
 		list = sort(list);
 
 		return list;
+
+		function convertXmlToSimpleList(list) {
+			var simpleList = [];
+
+			$(list).find(config.get("xmlElementName")).each(function() {
+				simpleList.push(this);
+			});
+
+			return simpleList;
+		}
 
 		function findMatching(list, phrase) {
 			var preparedList = [],
@@ -235,10 +250,16 @@ function Completer($field, options) {
 
 				for(var i = 0, length = list.length; i < length; i += 1) {
 
+					//console.log(config.get("getValue")(list[i]));
+
 					value = config.get("getValue")(list[i]);
 					
 					if (!config.get("list").matching.caseSensitive) {
-						value = value.toLowerCase();
+
+						if (typeof value === "string") {
+							value = value.toLowerCase();	
+						}
+						
 						phrase = phrase.toLowerCase();
 					}
 
@@ -453,7 +474,7 @@ function Completer($field, options) {
 
 		function highlight(string, phrase) {
 
-			if(config.get("highlightPhrase")) {
+			if(config.get("highlightPhrase") && phrase !== "") {
 				return highlightPhrase(string, phrase);	
 			} else {
 				return string;
@@ -523,6 +544,10 @@ function Completer($field, options) {
 
 			ajaxCallback: function() {},
 
+			dataType: "json",
+
+			xmlElementName: "",
+
 			list: {
 				sort: {
 					enabled: false,
@@ -569,6 +594,8 @@ function Completer($field, options) {
 
 		};
 
+		prepareDefaults();
+
 		mergeOptions();
 
 		this.get = function(propertyName) {
@@ -597,10 +624,67 @@ function Completer($field, options) {
 		}
 
 
+		//------------------------ Prepare defaults --------------------------
+
+		//TODO
+		//different defaults are required for xml than json
+		function prepareDefaults() {
+
+			if (options.dataType == "xml") {
+				
+				if (!options.getValue) {
+
+					options.getValue = function(element) {
+						//console.log($(element).text());
+						return $(element).text();
+					}
+				}
+
+				
+				if (!options.list) {
+
+					options.list = {};
+				} 
+
+				if (!options.list.sort) {
+					options.list.sort = {}
+				}
+
+
+				options.list.sort.method = function(a, b) {
+					a = options.getValue(a);
+					b = options.getValue(b);
+					
+					//Alphabeticall sort
+					if (a < b) {
+						return -1;
+					}
+					if (a > b) {
+						return 1;
+					}
+					return 0;
+				}
+
+				if (!options.list.matching) {
+					options.list.matching = {};
+				}
+
+				options.list.matching.method = function(a, b) {
+					a = options.getValue(a);
+					b = options.getValue(b);
+
+					if (a === b){
+						return true	
+					}  
+					return false;
+				}
+
+			}
+		}
+
 
 		//------------------------ LOAD config --------------------------
 
-		//TODO iterate by objects properties: go deeper than one level
 		function mergeOptions() {
 
 			defaults = mergeObjects(defaults, options);
