@@ -140,7 +140,7 @@ function Completer($field, options) {
 			
 
 				function loadData() {
-					$.ajax(config.get("url")) 
+					$.ajax({url: config.get("url"), dataType: config.get("dataType")}) 
 					.done(function(data) {
 						var length = data.length;
 
