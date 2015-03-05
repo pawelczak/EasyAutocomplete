@@ -150,7 +150,7 @@ QUnit.test("XML - Simple object", function( assert ) {
 	expect(5);
 	
 	//given
-	var completerOne = new Completer($("#inputOne"), {url: "../data/colorObjects.xml",
+	var completerOne = new Completer($("#inputOne"), {url: "../data/colors_object.xml",
 
 		dataType: "xml",
 		xmlElementName: "color",

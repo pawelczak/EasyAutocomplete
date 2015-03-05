@@ -6,11 +6,11 @@
 //------------------------------------------------------------
 //------------------------------------------------------------
 
-QUnit.test("JSON - Simple response", function( assert ) {
+QUnit.test("JSON - Simple list response", function( assert ) {
 	expect(4);
 	
 	//given
-	var completerOne = new Completer($("#inputOne"), {url: "../data/colors2.json", ajaxCallback: function() {
+	var completerOne = new Completer($("#inputOne"), {url: "../data/colors_string.json", ajaxCallback: function() {
 
 			//assert
 			
@@ -43,13 +43,54 @@ QUnit.test("JSON - Simple response", function( assert ) {
 	}
 });
 
+QUnit.test("JSON - Simple object", function( assert ) {
+	expect(4);
+	
+	//given
+	var completerOne = new Completer($("#inputOne"), {
+		
+		getValue: function(element) {
+			return element.name;
+		},
 
+		url: "../data/colors_object.json", ajaxCallback: function() {
+
+			//assert
+			
+			assertList();
+		}
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	$("#inputOne").val("c").trigger("keyup");
+
+
+	QUnit.stop();
+
+
+	//assert
+
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul li");
+
+			assert.equal(3, elements.length, "Response size");
+			assert.equal("red", elements.eq(0).find("span").text(), "First element value");
+			assert.equal("yellow", elements.eq(1).find("span").text(), "Second element value");
+			assert.equal("brown", elements.eq(2).find("span").text(), "Third element value");
+			
+			QUnit.start();	
+	}
+});
 
 QUnit.test("JSON - Sorted list", function( assert ) {
 	expect(4);
 	
 	//given
-	var completerOne = new Completer($("#inputOne"), {url: "../data/colors2.json", list: {sort: {enabled: true}}, ajaxCallback: function() {
+	var completerOne = new Completer($("#inputOne"), {url: "../data/colors_string.json", list: {sort: {enabled: true}}, ajaxCallback: function() {
 
 			//assert
 			
@@ -86,7 +127,7 @@ QUnit.test("JSON - Reverse sorted list", function( assert ) {
 	expect(4);
 	
 	//given
-	var completerOne = new Completer($("#inputOne"), {url: "../data/colors2.json",
+	var completerOne = new Completer($("#inputOne"), {url: "../data/colors_string.json",
 
 		 list: {
 		 		sort: {
@@ -142,7 +183,7 @@ QUnit.test("JSON - Max elements number list", function( assert ) {
 	expect(2);
 	
 	//given
-	var completerOne = new Completer($("#inputOne"), {url: "../data/colors2.json",
+	var completerOne = new Completer($("#inputOne"), {url: "../data/colors_string.json",
 
 		list: {
 			maxNumberOfElements: 1
@@ -280,7 +321,7 @@ QUnit.test("JSON - Highlight phrase", function( assert ) {
 	expect(2);
 	
 	//given
-	var completerOne = new Completer($("#inputOne"), {url: "../data/colors2.json",
+	var completerOne = new Completer($("#inputOne"), {url: "../data/colors_string.json",
 
 
 		highlightPhrase: true,
@@ -320,7 +361,7 @@ QUnit.test("JSON - Dont highlight phrase", function( assert ) {
 	expect(2);
 	
 	//given
-	var completerOne = new Completer($("#inputOne"), {url: "../data/colors2.json",
+	var completerOne = new Completer($("#inputOne"), {url: "../data/colors_string.json",
 
 		highlightPhrase: false,
 
