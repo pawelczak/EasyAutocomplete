@@ -141,30 +141,30 @@ function Completer($field, options) {
 
 				function loadData() {
 					$.ajax({url: config.get("url"), dataType: config.get("dataType")}) 
-					.done(function(data) {
-						var length = data.length;
+						.done(function(data) {
+							var length = data.length;
 
-						if (length === 0) {
-							return;
-						}
+							if (length === 0) {
+								return;
+							}
 
-						var inputPhrase = $field.val();
+							var inputPhrase = $field.val();
 
-						elementsList = processResponseData(data);
+							elementsList = processResponseData(data);
 
-						loadElements(elementsList, inputPhrase);
+							loadElements(elementsList, inputPhrase);
 
-						showContainer();
+							showContainer();
 
-						config.get("ajaxCallback")();
+							config.get("ajaxCallback")();
 
-					})
-					.fail(function() {
-						logger.warning("Fail to load response data");
-					})
-					.always(function() {
+						})
+						.fail(function() {
+							logger.warning("Fail to load response data");
+						})
+						.always(function() {
 
-					});
+						});
 
 				}
 				
@@ -217,7 +217,6 @@ function Completer($field, options) {
 	//- sort 
 	//- decrease number to specific number
 	//- show only matching list
-	//- highlight
 	function processResponseData(list) {
 
 		var inputPhrase = $field.val();
@@ -296,6 +295,7 @@ function Completer($field, options) {
 
 			return list;
 		}
+		
 
 	}	
 
@@ -479,12 +479,14 @@ function Completer($field, options) {
 			} else {
 				return string;
 			}
-			
+				
 		}
 
 		function highlightPhrase(string, phrase) {
 			return (string + "").replace(new RegExp("(" + phrase + ")", "gi") , "<b>$1</b>");
 		}
+
+
 
 	}
 

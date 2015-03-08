@@ -220,6 +220,50 @@ QUnit.test("JSON - Max elements number list", function( assert ) {
 	}
 });
 
+QUnit.test("JSON - Matching - string list phrase 're'", function( assert ) {
+	expect(3);
+	
+	//given
+	var completerOne = new Completer($("#inputOne"), {url: "../data/colors_string.json",
+
+		list: {
+			matching: {
+				enabled: true
+			},
+		},
+
+		ajaxCallback: function() {
+
+			//assert
+			
+			assertList();
+		}
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	$("#inputOne").val("r").trigger("keyup");
+
+
+	QUnit.stop();
+
+
+	//assert
+
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul li");
+
+			assert.equal(2, elements.length, "Response size");
+			assert.equal("red", elements.eq(0).find("span").text(), "Red element value");
+			assert.equal("brown", elements.eq(1).find("span").text(), "Brown element value");
+			
+			QUnit.start();	
+	}
+});
+
 QUnit.test("JSON - Match all elements from list", function( assert ) {
 	expect(3);
 	
@@ -317,46 +361,6 @@ QUnit.test("JSON - Simple matching list phrase 'ok'", function( assert ) {
 	}
 });
 
-QUnit.test("JSON - Highlight phrase", function( assert ) {
-	expect(2);
-	
-	//given
-	var completerOne = new Completer($("#inputOne"), {url: "../data/colors_string.json",
-
-
-		highlightPhrase: true,
-
-		ajaxCallback: function() {
-
-			//assert
-			
-			assertList();
-		}
-	});
-
-
-	//execute
-	
-	completerOne.init();
-
-	$("#inputOne").val("r").trigger("keyup");
-
-
-	QUnit.stop();
-
-
-	//assert
-
-	function assertList() {
-		var elements = $("#inputOne").next().find("ul li");
-
-			assert.equal("<b>r</b>ed", elements.eq(0).find("span").html(), "red element value");
-			assert.equal("b<b>r</b>own", elements.eq(2).find("span").html(), "brown element value");
-			
-			QUnit.start();	
-	}
-});
-
 QUnit.test("JSON - Dont highlight phrase", function( assert ) {
 	expect(2);
 	
@@ -397,3 +401,86 @@ QUnit.test("JSON - Dont highlight phrase", function( assert ) {
 	}
 });
 
+
+QUnit.test("JSON - Highlight - string list ", function( assert ) {
+	expect(2);
+	
+	//given
+	var completerOne = new Completer($("#inputOne"), {url: "../data/colors_string.json",
+
+
+		highlightPhrase: true,
+
+		ajaxCallback: function() {
+
+			//assert
+			
+			assertList();
+		}
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	$("#inputOne").val("r").trigger("keyup");
+
+
+	QUnit.stop();
+
+
+	//assert
+
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul li");
+
+			assert.equal("<b>r</b>ed", elements.eq(0).find("span").html(), "red element value");
+			assert.equal("b<b>r</b>own", elements.eq(2).find("span").html(), "brown element value");
+			
+			QUnit.start();	
+	}
+});
+
+QUnit.test("JSON - Highlight - object list", function( assert ) {
+	expect(2);
+	
+	//given
+	var completerOne = new Completer($("#inputOne"), {url: "../data/colors_object.json",
+
+		getValue: function(element) {
+			return element.name;
+		},
+
+		highlightPhrase: true,
+
+		ajaxCallback: function() {
+
+			//assert
+			
+			assertList();
+		}
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	$("#inputOne").val("r").trigger("keyup");
+
+
+	QUnit.stop();
+
+
+	//assert
+
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul li");
+
+			assert.equal("<b>r</b>ed", elements.eq(0).find("span").html(), "red element value");
+			assert.equal("b<b>r</b>own", elements.eq(2).find("span").html(), "brown element value");
+			
+			QUnit.start();	
+	}
+});

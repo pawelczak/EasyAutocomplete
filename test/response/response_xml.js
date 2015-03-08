@@ -193,7 +193,7 @@ QUnit.test("XML - Simple object", function( assert ) {
 	}
 });
 
-QUnit.test("XML - Simple matching list phrase 're'", function( assert ) {
+QUnit.test("XML - Matching simple list - phrase 're'", function( assert ) {
 	expect(3);
 	
 	//given
@@ -201,10 +201,6 @@ QUnit.test("XML - Simple matching list phrase 're'", function( assert ) {
 
 		dataType: "xml",
 		xmlElementName: "color",
-
-		getValue: function(element) {
-			return element.name;
-		},
 
 		list: {
 			matching: {
@@ -244,7 +240,56 @@ QUnit.test("XML - Simple matching list phrase 're'", function( assert ) {
 	}
 });
 
+QUnit.test("XML - Matching advance object phrase 're'", function( assert ) {
+	expect(3);
+	
+	//given
+	var completerOne = new Completer($("#inputOne"), {url: "../data/colors_object.xml",
 
+		dataType: "xml",
+		xmlElementName: "color",
+
+		getValue: function(element) {
+			return $(element).find("name").text();
+		},
+
+		list: {
+			matching: {
+				enabled: true
+			},
+		},
+
+		ajaxCallback: function() {
+
+			//assert
+			
+			assertList();
+		}
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	$("#inputOne").val("re").trigger("keyup");
+
+
+	QUnit.stop();
+
+
+	//assert
+
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul li");
+
+			assert.equal(2, elements.length, "Response size");
+			assert.equal("red", elements.eq(0).find("span").text(), "Red element value");
+			assert.equal("green", elements.eq(1).find("span").text(), "Green element value");
+			
+			QUnit.start();	
+	}
+});
 
 QUnit.test("XML - Highlight phrase", function( assert ) {
 	expect(5);
