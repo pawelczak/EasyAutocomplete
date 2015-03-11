@@ -1,1 +1,2 @@
-JQuery Completer
+JQuest plugin easy autocomplete
+
