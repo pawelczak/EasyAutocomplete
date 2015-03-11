@@ -88,7 +88,7 @@ QUnit.test( "Configuration Default values", function( assert ) {
 
  
 	//execute
-	var actualOptions = new Completer(null, options).getConfiguration();
+	var actualOptions = new EasyAutocomplete(null, options).getConfiguration();
 
 
 	//assert
@@ -153,7 +153,7 @@ QUnit.test( "Configuration simple", function( assert ) {
 
 
 	//execute
-	var actualOptions = new Completer(null, options).getConfiguration();
+	var actualOptions = new EasyAutocomplete(null, options).getConfiguration();
 
 	//assert
 	assertValue._assertMethod = assert;
@@ -250,7 +250,7 @@ QUnit.test( "Configuration mixed", function( assert ) {
 
 
 	//execute
-	var actualOptions = new Completer(null, options).getConfiguration();
+	var actualOptions = new EasyAutocomplete(null, options).getConfiguration();
 
 	//assert
 	assertValue._assertMethod = assert;
@@ -281,7 +281,7 @@ QUnit.test( "Configuration required fields", function( assert ) {
 	var options = {};
 
 	//execute
-	var actualOptions = new Completer(null, options).getConfiguration();
+	var actualOptions = new EasyAutocomplete(null, options).getConfiguration();
 
 	//assert
 	assert.ok("list-required" == actualOptions.get("url") , "Passed - url equals list-required" );

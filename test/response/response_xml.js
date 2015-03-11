@@ -12,7 +12,7 @@ QUnit.test("XML - Simple response", function( assert ) {
 	expect(5);
 	
 	//given
-	var completerOne = new Completer($("#inputOne"), {url: "../data/colors.xml",
+	var completerOne = new EasyAutocomplete($("#inputOne"), {url: "../data/colors.xml",
 
 
 		dataType: "xml",
@@ -57,7 +57,7 @@ QUnit.test("XML - Sorted list", function( assert ) {
 	expect(5);
 	
 	//given
-	var completerOne = new Completer($("#inputOne"), 
+	var completerOne = new EasyAutocomplete($("#inputOne"), 
 			{
 				url: "../data/colors.xml",
 
@@ -106,7 +106,7 @@ QUnit.test("XML - Max elements number list", function( assert ) {
 	expect(2);
 	
 	//given
-	var completerOne = new Completer($("#inputOne"), {url: "../data/colors.xml",
+	var completerOne = new EasyAutocomplete($("#inputOne"), {url: "../data/colors.xml",
 
 		dataType: "xml",
 		xmlElementName: "color",
@@ -150,7 +150,7 @@ QUnit.test("XML - Simple object", function( assert ) {
 	expect(5);
 	
 	//given
-	var completerOne = new Completer($("#inputOne"), {url: "../data/colors_object.xml",
+	var completerOne = new EasyAutocomplete($("#inputOne"), {url: "../data/colors_object.xml",
 
 		dataType: "xml",
 		xmlElementName: "color",
@@ -197,7 +197,7 @@ QUnit.test("XML - Matching simple list - phrase 're'", function( assert ) {
 	expect(3);
 	
 	//given
-	var completerOne = new Completer($("#inputOne"), {url: "../data/colors.xml",
+	var completerOne = new EasyAutocomplete($("#inputOne"), {url: "../data/colors.xml",
 
 		dataType: "xml",
 		xmlElementName: "color",
@@ -244,7 +244,7 @@ QUnit.test("XML - Matching advance object phrase 're'", function( assert ) {
 	expect(3);
 	
 	//given
-	var completerOne = new Completer($("#inputOne"), {url: "../data/colors_object.xml",
+	var completerOne = new EasyAutocomplete($("#inputOne"), {url: "../data/colors_object.xml",
 
 		dataType: "xml",
 		xmlElementName: "color",
@@ -295,7 +295,7 @@ QUnit.test("XML - Highlight phrase", function( assert ) {
 	expect(5);
 	
 	//given
-	var completerOne = new Completer($("#inputOne"), {url: "../data/colors.xml",
+	var completerOne = new EasyAutocomplete($("#inputOne"), {url: "../data/colors.xml",
 
 		dataType: "xml",
 		xmlElementName: "color",
@@ -340,7 +340,7 @@ QUnit.test("XML - Dont highlight phrase", function( assert ) {
 	expect(5);
 	
 	//given
-	var completerOne = new Completer($("#inputOne"), {url: "../data/colors.xml",
+	var completerOne = new EasyAutocomplete($("#inputOne"), {url: "../data/colors.xml",
 
 		dataType: "xml",
 		xmlElementName: "color",

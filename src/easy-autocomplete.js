@@ -343,7 +343,7 @@ function EasyAutocomplete($field, options) {
 
 				function loadData() {
 
-					if (config.get("data") !== "required") {
+					if (config.get("data") !== "list-required") {
 						var inputPhrase = $field.val();
 
 						elementsList = processResponseData(config.get("data"));
@@ -354,7 +354,7 @@ function EasyAutocomplete($field, options) {
 
 					}
 
-					if (config.get("url") !== "required") {
+					if (config.get("url") !== "list-required") {
 
 						$.ajax({url: config.get("url"), dataType: config.get("dataType")}) 
 							.done(function(data) {
