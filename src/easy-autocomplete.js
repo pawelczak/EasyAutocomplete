@@ -1,16 +1,18 @@
 
 /*
+ * Easy autocomplete - jQuery plugin for autocompletion
+ *
  * @author Łukasz Pawełczak
  */
-function Completer($field, options) {
+function EasyAutocomplete($field, options) {
 				
 	var module = {
-			name: "Completer"
+			name: "easy autocomplete"
 		};
 
 	var consts = new Constans(),
-		logger = Logger(),
 		config = new Configuration(options),
+		logger = new Logger(),
 		checkParam = config.equals,
 
 		$field = $field, 
@@ -20,20 +22,19 @@ function Completer($field, options) {
 		
 
 
-	//Main method
-	function init() {
+	//------------------------ GETTERS --------------------------
 
-		if (!config.checkRequiredProperties()) {
-			logger.error("Will not work without mentioned properties");
-			return;
-		}
-
-
-		prepareField();
-		bindEvents();	
-
+	this.getConfiguration = function() {
+		return config;
 	}
 
+	this.getConstants = function() {
+		return consts;
+	}
+
+	this.getContainer = function() {
+		return $container;
+	}
 
 	//------------------------ PUBLIC METHODS STARTS --------------------------	
 
@@ -48,6 +49,207 @@ function Completer($field, options) {
 	//------------------------ PUBLIC METHODS ENDS --------------------------	
 
 
+	//Main method
+	function init() {
+
+
+		if (!config.checkDataUrlProperties()) {
+			logger.error("One of options variables 'data' or 'url' must be defined.");
+			return;
+		}
+
+		if (!config.checkRequiredProperties()) {
+			logger.error("Will not work without mentioned properties.");
+			return;
+		}
+
+
+		prepareField();
+		bindEvents();	
+
+	}
+
+
+	//---------------------------------------------------------------------
+	//------------------------ FIELD PREPARATION --------------------------
+	//---------------------------------------------------------------------
+
+
+	//TODO Rebuild this function
+	function prepareField() {
+
+			
+		if ($field.parent().hasClass(consts.getValue("WRAPPER_CSS_CLASS"))) {
+			removeContainer();
+			removeWrapper();
+		} 
+		
+		createWrapper();
+		createContainer();	
+
+		$container = $("#" + getContainerId());//.find("ul");
+
+
+		//Set placeholder for element
+		if (config.placeholder !== false) {
+			$field.attr("placeholder", config.placeholder);
+		}
+
+
+		function createWrapper() {
+			var $wrapper = $("<div>").addClass(consts.getValue("WRAPPER_CSS_CLASS")),
+				fieldWidth = $field.outerWidth();
+
+			$wrapper.css("width", fieldWidth);
+
+			//wrapp field with main div wrapper
+			$field.wrap($wrapper);
+		}
+
+		function removeWrapper() {
+			$field.unwrap();
+		}
+
+		function createContainer() {
+			var $elements_container = $("<div>").addClass(consts.getValue("CONTAINER_CLASS"));
+
+			$elements_container
+					.attr("id", getContainerId())
+					.prepend($("<ul>"));
+
+
+			(function() {
+
+				$elements_container
+					/* List show animation */
+					.on("show", function() {
+
+						switch(config.get("list").showAnimation.type) {
+
+							case "slide":
+								//TODO better handle time
+								var time = config.get("list").showAnimation.time,
+									callback = config.get("list").showAnimation.callback;
+
+								$elements_container.find("ul").slideDown(time, callback);
+							break;
+
+							case "fade":
+								var time = config.get("list").showAnimation.time,
+									callback = config.get("list").showAnimation.callback;
+
+								$elements_container.find("ul").fadeIn(time), callback;
+							break;
+
+							default:
+								$elements_container.find("ul").show();
+							break;
+						}
+						
+					})
+					/* List hide animation */
+					.on("hide", function() {
+
+						switch(config.get("list").hideAnimation.type) {
+
+							case "slide":
+								var time = config.get("list").hideAnimation.time,
+									callback = config.get("list").hideAnimation.callback;
+
+								$elements_container.find("ul").slideUp(time, callback);
+							break;
+
+							case "fade":
+								var time = config.get("list").hideAnimation.time,
+									callback = config.get("list").hideAnimation.callback;
+
+								$elements_container.find("ul").fadeOut(time, callback);
+							break;
+
+							default:
+								$elements_container.find("ul").hide();
+							break;
+						}
+					})
+					.on("selectElement", function(event, selected) {
+						$elements_container.find("ul li").removeClass("selected");
+						$elements_container.find("ul li:nth-child(" + (selectedElement + 1) + ")").addClass("selected");
+					})
+					.on("loadElements", function(event, list, phrase) {
+		
+						var $item = "",
+							$list = $("<ul>"),
+							$listContainer = $elements_container.find("ul");
+
+						$listContainer.empty();
+
+						for(var i = 0, length = list.length; i < length; i += 1) {
+							$item = $("<li><span></span></li>");
+							
+
+							(function() {
+								var j = i,
+									elementsValue = config.get("getValue")(list[j]);
+
+								$item.find("span")
+									.on("click", function() {
+
+										//TODO
+										$field.val(elementsValue);
+										selectElement(j);
+									})
+									.html(highlight(elementsValue, phrase));
+							})();
+
+							$listContainer.append($item);
+						}
+
+					});
+
+			})();
+
+			$field.after($elements_container);
+		}
+
+		function removeContainer() {
+			$field.next("." + consts.getValue("CONTAINER_CLASS")).remove();
+		}
+
+		function highlight(string, phrase) {
+
+			if(config.get("highlightPhrase") && phrase !== "") {
+				return highlightPhrase(string, phrase);	
+			} else {
+				return string;
+			}
+				
+		}
+
+		function highlightPhrase(string, phrase) {
+			return (string + "").replace(new RegExp("(" + phrase + ")", "gi") , "<b>$1</b>");
+		}
+
+
+
+	}
+
+	//Generate unique element id
+	function getContainerId() {
+		
+		var elementId = $field.attr("id");
+
+		if (elementId === undefined || elementId === null) {
+			
+			do {
+				elementId = consts.getValue("CONTAINER_ID") + Math.rand(10000);	
+			} while($("#" + elementId).length == 0);
+
+		} else {
+			elementId = consts.getValue("CONTAINER_ID") + elementId;
+		}
+
+		return elementId;
+	}
 
 	//---------------------------------------------------------------------------
 	//------------------------ EVENTS HANDLING ----------------------------------
@@ -140,31 +342,46 @@ function Completer($field, options) {
 			
 
 				function loadData() {
-					$.ajax({url: config.get("url"), dataType: config.get("dataType")}) 
-						.done(function(data) {
-							var length = data.length;
 
-							if (length === 0) {
-								return;
-							}
+					if (config.get("data") !== "required") {
+						var inputPhrase = $field.val();
 
-							var inputPhrase = $field.val();
+						elementsList = processResponseData(config.get("data"));
 
-							elementsList = processResponseData(data);
+						loadElements(elementsList, inputPhrase);
 
-							loadElements(elementsList, inputPhrase);
+						showContainer();
 
-							showContainer();
+					}
 
-							config.get("ajaxCallback")();
+					if (config.get("url") !== "required") {
 
-						})
-						.fail(function() {
-							logger.warning("Fail to load response data");
-						})
-						.always(function() {
+						$.ajax({url: config.get("url"), dataType: config.get("dataType")}) 
+							.done(function(data) {
+								var length = data.length;
 
-						});
+								if (length === 0) {
+									return;
+								}
+
+								var inputPhrase = $field.val();
+
+								elementsList = processResponseData(data);
+
+								loadElements(elementsList, inputPhrase);
+
+								showContainer();
+
+								config.get("ajaxCallback")();
+
+							})
+							.fail(function() {
+								logger.warning("Fail to load response data");
+							})
+							.always(function() {
+
+							});
+					}
 
 				}
 				
@@ -327,228 +544,32 @@ function Completer($field, options) {
 		$field.trigger("blur");
 	}
 
-	//---------------------------------------------------------------------
-	//------------------------ FIELD PREPARATION --------------------------
-	//---------------------------------------------------------------------
 
-
-	//TODO Rebuild this function
-	function prepareField() {
-
-			
-		if ($field.parent().hasClass(consts.getValue("WRAPPER_CSS_CLASS"))) {
-			removeContainer();
-			removeWrapper();
-		} 
-		
-		createWrapper();
-		createContainer();	
-
-		$container = $("#" + getListId());//.find("ul");
-
-
-		//Set placeholder for element
-		if (config.placeholder !== false) {
-			$field.attr("placeholder", config.placeholder);
-		}
-
-
-		function createWrapper() {
-			var $wrapper = $("<div>").addClass(consts.getValue("WRAPPER_CSS_CLASS")),
-				fieldWidth = $field.outerWidth();
-
-			$wrapper.css("width", fieldWidth);
-
-			//wrapp field with main div wrapper
-			$field.wrap($wrapper);
-		}
-
-		function removeWrapper() {
-			$field.unwrap();
-		}
-
-		function createContainer() {
-			var $elements_container = $("<div>").addClass(consts.getValue("CONTAINER_CLASS"));
-
-			$elements_container
-					.attr("id", getListId())
-					.prepend($("<ul>"));
-
-
-			(function() {
-
-				$elements_container
-					.on("show", function() {
-
-						switch(config.get("list").showAnimation.type) {
-
-							case "slide":
-								//TODO better handle time
-								var time = config.get("list").showAnimation.time,
-									callback = config.get("list").showAnimation.callback;
-
-								$elements_container.find("ul").slideDown(time, callback);
-							break;
-
-							case "fade":
-								var time = config.get("list").showAnimation.time,
-									callback = config.get("list").showAnimation.callback;
-
-								$elements_container.find("ul").fadeIn(time), callback;
-							break;
-
-							default:
-								$elements_container.find("ul").show();
-							break;
-						}
-						
-					})
-					.on("hide", function() {
-
-						switch(config.get("list").hideAnimation.type) {
-
-							case "slide":
-								var time = config.get("list").hideAnimation.time,
-									callback = config.get("list").hideAnimation.callback;
-
-								$elements_container.find("ul").slideUp(time, callback);
-							break;
-
-							case "fade":
-								var time = config.get("list").hideAnimation.time,
-									callback = config.get("list").hideAnimation.callback;
-
-								$elements_container.find("ul").fadeOut(time, callback);
-							break;
-
-							default:
-								$elements_container.find("ul").hide();
-							break;
-						}
-					})
-					.on("selectElement", function(event, selected) {
-						$elements_container.find("ul li").removeClass("selected");
-						$elements_container.find("ul li:nth-child(" + (selectedElement + 1) + ")").addClass("selected");
-					})
-					.on("loadElements", function(event, list, phrase) {
-		
-						var $item = "",
-							$list = $("<ul>"),
-							$listContainer = $elements_container.find("ul");
-
-						$listContainer.empty();
-
-						for(var i = 0, length = list.length; i < length; i += 1) {
-							$item = $("<li><span></span></li>");
-							
-
-							(function() {
-								var j = i,
-									elementsValue = config.get("getValue")(list[j]);
-
-								$item.find("span")
-									.on("click", function() {
-
-										//TODO
-										$field.val(elementsValue);
-										selectElement(j);
-									})
-									.html(highlight(elementsValue, phrase));
-							})();
-
-							$listContainer.append($item);
-						}
-
-						//$listContainer.replaceWith($list.find("li"));
-
-					});
-
-			})();
-
-			$field.after($elements_container);
-		}
-
-		function removeContainer() {
-			$field.next("." + consts.getValue("CONTAINER_CLASS")).remove();
-		}
-
-		function highlight(string, phrase) {
-
-			if(config.get("highlightPhrase") && phrase !== "") {
-				return highlightPhrase(string, phrase);	
-			} else {
-				return string;
-			}
-				
-		}
-
-		function highlightPhrase(string, phrase) {
-			return (string + "").replace(new RegExp("(" + phrase + ")", "gi") , "<b>$1</b>");
-		}
-
-
-
-	}
-
-	//TODO
-	function clearPreparedFields() {}
-
-
-	//------------------------ GETTERS --------------------------
-
-	//Generate unique element id
-	function getListId() {
-		
-		var elementId = $field.attr("id");
-
-		if (elementId === undefined || elementId === null) {
-			
-			do {
-				elementId = consts.getValue("CONTAINER_ID") + Math.rand(10000);	
-			} while($("#" + elementId).length == 0);
-
-		} else {
-			elementId = consts.getValue("CONTAINER_ID") + elementId;
-		}
-
-		return elementId;
-	}
-
-	this.getConfiguration = function() {
-		return config;
-	}
-
-	this.getConstants = function() {
-		return consts;
-	}
-
-	this.getContainer = function() {
-		return $container;
-	}
 
 	//-----------------------------------------------------------------
 	//------------------------ CONFIGURATION --------------------------
 	//-----------------------------------------------------------------
 
 	/*
-	Loads Configuration 
-	*/
+	 * Loads Configuration 
+	 */
 	function Configuration(options) {
 		var defaults = {
-			url: "required",
-			autocompleteOff: true,
+			data: "list-required",
+			url: "list-required",
+			dataType: "json",
+
+			xmlElementName: "",
 
 			getValue: function(element) {
 				return element;
 			},
 
+			autocompleteOff: true,
+
 			placeholder: false,
 
 			ajaxCallback: function() {},
-
-			dataType: "json",
-
-			xmlElementName: "",
 
 			list: {
 				sort: {
@@ -614,6 +635,13 @@ function Completer($field, options) {
 			return false;
 		}
 
+		this.checkDataUrlProperties = function() {
+			if (defaults.url === "list-required" && defaults.data === "list-required") {
+				return false;
+			}
+			return true;
+		}
+
 		//TODO think about better mechanism
 		this.checkRequiredProperties = function() {
 			for (var propertyName in defaults) {
@@ -637,7 +665,6 @@ function Completer($field, options) {
 				if (!options.getValue) {
 
 					options.getValue = function(element) {
-						//console.log($(element).text());
 						return $(element).text();
 					}
 				}
@@ -730,6 +757,7 @@ function Completer($field, options) {
 	}
 
 
+
 	//---------------------------------------------------------------------
 	//------------------------ CONSTANS -----------------------------------
 	//---------------------------------------------------------------------
@@ -739,10 +767,10 @@ function Completer($field, options) {
 	
 	function Constans() {
 		var constants = {
-			CONTAINER_CLASS: "completer-container",
+			CONTAINER_CLASS: "easy-autocomplete-container",
 			CONTAINER_ID: "CONTAINER-ID",
 
-			WRAPPER_CSS_CLASS: "completer"
+			WRAPPER_CSS_CLASS: "easy-autocomplete"
 		};
 
 		this.getValue = function(propertyName) {
@@ -764,20 +792,18 @@ function Completer($field, options) {
 	function Logger() {
 		var logger = {};
 
-		logger.error = function(message) {
+		this.error = function(message) {
 			console.log("ERROR: " + module.name + ": " + message);
 		}
 
-		logger.warning = function(message) {
+		this.warning = function(message) {
 			console.log("WARNING: " + module.name + ": " + message);
 		}
-
-		return logger;
 	}
 
 }
 
 
-$.fn.completer = function(options) {
-	new Completer(this, options).init();
+$.fn.easyAutocomplete = function(options) {
+	new EasyAutocomplete(this, options).init();
 }

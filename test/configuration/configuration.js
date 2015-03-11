@@ -45,7 +45,7 @@ QUnit.test( "Configuration Default values", function( assert ) {
 
 			autocompleteOff: true,
 
-			url: "required",
+			url: "list-required",
 
 			getValue: function(element) {
 				return element;
@@ -284,5 +284,6 @@ QUnit.test( "Configuration required fields", function( assert ) {
 	var actualOptions = new Completer(null, options).getConfiguration();
 
 	//assert
-	assert.ok("required" == actualOptions.get("url") , "Passed - url equals required" );
+	assert.ok("list-required" == actualOptions.get("url") , "Passed - url equals list-required" );
+	assert.ok("list-required" == actualOptions.get("data") , "Passed - data equals list-required" );
 });

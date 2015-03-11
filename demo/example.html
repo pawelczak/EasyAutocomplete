@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Completer examples</title>
-		<link href="../dist/completer.css" rel="stylesheet" type="text/css">
+		<title>Easy autocomplete examples</title>
+		<link href="../dist/easy-autocomplete.css" rel="stylesheet" type="text/css">
 
 	</head>
 	<body>
-		<h1>Completer Examples</h1>
+		<h1>Easy autocomplete Examples</h1>
 
 		<h2>Simple</h2>
 		<div>
@@ -29,14 +29,14 @@
 		</div>
 
 		<script src="../lib/jquery-1.11.2.min.js"></script>
-		<script src="../src/completer.js" type="text/javascript" ></script>
+		<script src="../src/easy-autocomplete.js" type="text/javascript" ></script>
 		<script>
 
-			$("#simple").completer({
+			$("#simple").easyAutocomplete({
 				url: "colors2.json"
 			});
 
-			$("#sort").completer({
+			$("#sort").easyAutocomplete({
 				url: "colors2.json",
 				list: {
 					sort: {
@@ -45,7 +45,7 @@
 				}
 			});
 
-			$("#sort-reverse").completer({
+			$("#sort-reverse").easyAutocomplete({
 				url: "colors2.json",
 				list: {
 					sort: {
@@ -65,7 +65,7 @@
 			});
 
 
-			$("#matching").completer({
+			$("#matching").easyAutocomplete({
 				url: "countries.json",
 				getValue: function(element) {
 					return element.name;
