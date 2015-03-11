@@ -40,7 +40,7 @@ module.exports = function(grunt) {
 
 
     jshint: {
-      files: ['Gruntfile.js', 'javascript/module**/*.js', 'javascript/module/navigation**/*.js'],
+      files: ['<%= project.js.src %>'],
       options: {
         // options here to override JSHint defaults
         globals: {
@@ -82,6 +82,7 @@ module.exports = function(grunt) {
     },
 
 
+    //------------------------ MISC --------------------------
 
     watch: {
       build: {
@@ -94,6 +95,8 @@ module.exports = function(grunt) {
   
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
   
+  grunt.registerTask('doc:jshint', ['jshint']);
+
   grunt.registerTask('build', ['uglify', 'sass:dist']);
   
   grunt.registerTask('default', ['build']);
