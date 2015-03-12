@@ -1,2 +1,2 @@
-JQuest plugin easy autocomplete
+JQuery plugin easy autocomplete
 
