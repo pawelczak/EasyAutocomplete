@@ -439,7 +439,7 @@ function EasyAutocomplete($field, options) {
 		var inputPhrase = $field.val();
 		
 		if(config.get("dataType") === "xml") {
-			list = convertXmlToSimpleList(list);			
+			list = convertXmlToList(list);			
 		}
 
 		list = findMatching(list, inputPhrase);
@@ -448,7 +448,7 @@ function EasyAutocomplete($field, options) {
 
 		return list;
 
-		function convertXmlToSimpleList(list) {
+		function convertXmlToList(list) {
 			var simpleList = [];
 
 			$(list).find(config.get("xmlElementName")).each(function() {
@@ -769,7 +769,7 @@ function EasyAutocomplete($field, options) {
 	function Constans() {
 		var constants = {
 			CONTAINER_CLASS: "easy-autocomplete-container",
-			CONTAINER_ID: "CONTAINER-ID",
+			CONTAINER_ID: "eac-container-",
 
 			WRAPPER_CSS_CLASS: "easy-autocomplete"
 		};

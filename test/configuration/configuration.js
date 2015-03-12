@@ -5,7 +5,7 @@
 
 
 function assertValue (value, objectOne, objectTwo) {
-	//TODO
+	
 	assert = assertValue._assertMethod;
 
 	if(!assertValue._expected) {
@@ -110,6 +110,7 @@ QUnit.test( "Configuration Default values", function( assert ) {
 	assertValue("enabled", "matching", "list");
 	//assertValue("method", "matching", "list");
 
+	expect(7);
 });
 
 QUnit.test( "Configuration simple", function( assert ) {
@@ -174,6 +175,7 @@ QUnit.test( "Configuration simple", function( assert ) {
 	assertValue("enabled", "matching", "list");
 	assertValue("method", "matching", "list");
 
+	expect(10);
 });
 
 QUnit.test( "Configuration mixed", function( assert ) {
@@ -272,7 +274,7 @@ QUnit.test( "Configuration mixed", function( assert ) {
 	//assertDefaultValue("method", "sort", "list");
 	assertValue("enabled", "matching", "list");
 
-
+	expect(9);
 });
 
 QUnit.test( "Configuration required fields", function( assert ) {
@@ -286,6 +288,8 @@ QUnit.test( "Configuration required fields", function( assert ) {
 	//assert
 	assert.ok("list-required" == actualOptions.get("url") , "Passed - url equals list-required" );
 	assert.ok("list-required" == actualOptions.get("data") , "Passed - data equals list-required" );
+
+	expect(2);
 });
 
 QUnit.test( "Data field", function( assert ) {
@@ -302,7 +306,9 @@ QUnit.test( "Data field", function( assert ) {
 	assertValue._assertMethod = assert;
 	assertValue._expected = options;
 	assertValue._actual = actualOptions;
-	
+
 	assertValue("data");
+
+	expect(1);
 });
 

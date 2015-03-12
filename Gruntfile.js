@@ -72,12 +72,18 @@ module.exports = function(grunt) {
     
     
     csslint: {
-      options: {
-        csslintrc: '.csslintrc'
+      strict: {
+        options: {
+          import: 2
+        },
+        src: ['<%= project.sass.dist %>' + '/easy-autocomplete.min.css']
       },
-      src: [
-        '<%= project.sass.dist %>' + '/easy-autocomplete.min.css'
-      ]
+      lax: {
+        options: {
+         import: false
+        },
+        src: ['<%= project.sass.dist %>' + '/easy-autocomplete.min.css']
+      }
     },
 
 
@@ -110,11 +116,11 @@ module.exports = function(grunt) {
   
   grunt.registerTask('doc:jshint', ['jshint']);
 
-  grunt.registerTask('doc:csslint', ['csslint']);
+  grunt.registerTask('doc:csslint', ['csslint:lax']);
 
-  grunt.registerTask('doc', ['jshint', 'csslint']);
+  grunt.registerTask('doc', ['jshint', 'csslint:lax']);
 
-  grunt.registerTask('build', ['uglify', 'sass:dist']);
+  grunt.registerTask('build', ['uglify', 'sass:dist', 'usebanner']);
   
   grunt.registerTask('default', ['build']);
 };
