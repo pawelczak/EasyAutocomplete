@@ -287,3 +287,22 @@ QUnit.test( "Configuration required fields", function( assert ) {
 	assert.ok("list-required" == actualOptions.get("url") , "Passed - url equals list-required" );
 	assert.ok("list-required" == actualOptions.get("data") , "Passed - data equals list-required" );
 });
+
+QUnit.test( "Data field", function( assert ) {
+
+	//given
+	var options = {
+		data: ["red", "gree", "pink"]
+	};
+
+	//execute
+	var actualOptions = new EasyAutocomplete(null, options).getConfiguration();
+
+	//assert
+	assertValue._assertMethod = assert;
+	assertValue._expected = options;
+	assertValue._actual = actualOptions;
+	
+	assertValue("data");
+});
+

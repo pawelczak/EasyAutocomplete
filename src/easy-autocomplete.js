@@ -724,7 +724,8 @@ function EasyAutocomplete($field, options) {
 				for (var propertyName in source) {
 					if (target[propertyName] !== undefined && target[propertyName] !== null) {
 
-						if (typeof target[propertyName] !== "object") {
+						if (typeof target[propertyName] !== "object" || 
+								target[propertyName] instanceof Array) {
 							mergedObject[propertyName] = target[propertyName];		
 						} else {
 							mergeObjects(source[propertyName], target[propertyName])

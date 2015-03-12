@@ -76,13 +76,26 @@ module.exports = function(grunt) {
         csslintrc: '.csslintrc'
       },
       src: [
-        'dist/css/bootstrap.css',
-        'dist/css/bootstrap-theme.css'
+        '<%= project.sass.dist %>' + '/easy-autocomplete.min.css'
       ]
     },
 
 
     //------------------------ MISC --------------------------
+
+    usebanner: {
+      options: {
+        position: 'top',
+        banner: '<%= tag.banner %>'
+      },
+      files: {
+        src: [
+          '<%= project.sass.dist %>',
+          '<%= project.js.dist %>'
+        ]
+      }
+    },
+
 
     watch: {
       build: {
@@ -96,6 +109,10 @@ module.exports = function(grunt) {
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
   
   grunt.registerTask('doc:jshint', ['jshint']);
+
+  grunt.registerTask('doc:csslint', ['csslint']);
+
+  grunt.registerTask('doc', ['jshint', 'csslint']);
 
   grunt.registerTask('build', ['uglify', 'sass:dist']);
   
