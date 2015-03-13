@@ -4,7 +4,7 @@
  *
  * @author Łukasz Pawełczak
  */
-function EasyAutocomplete($field, options) {
+var EasyAutocomplete = function EasyAutocomplete($field, options) {
 				
 	var module = {
 			name: "easy autocomplete"
@@ -177,6 +177,8 @@ function EasyAutocomplete($field, options) {
 					})
 					.on("loadElements", function(event, list, phrase) {
 		
+
+						//TODO Move to separate module e.g. buildList 
 						var $item = "",
 							$list = $("<ul>"),
 							$listContainer = $elements_container.find("ul");
@@ -195,8 +197,12 @@ function EasyAutocomplete($field, options) {
 									.on("click", function() {
 
 										//TODO
-										$field.val(elementsValue);
+										$field.val(elementsValue);//move to event driven function
 										selectElement(j);
+									})
+									.mouseover(function() {
+
+										//selectElement(j);	
 									})
 									.html(highlight(elementsValue, phrase));
 							})();
@@ -390,8 +396,10 @@ function EasyAutocomplete($field, options) {
 		}
 
 		function bindKeydown() {
-			$field.keydown(function() {
-				
+			$field.keydown(function(event) {
+				if (event.keyCode === 38) {
+					return false;
+				}
 			});
 		}
 
@@ -405,7 +413,12 @@ function EasyAutocomplete($field, options) {
 
 		function bindFocus() {
 			$field.focus(function() {
-				hideContainer();
+
+				if ($field.val() !== "" && elementsList.length > 0) {
+					selectedElement = -1;//TODO change to event, also it should remove class active from li element
+					showContainer();	
+				}
+								
 			});
 		}
 
@@ -414,6 +427,8 @@ function EasyAutocomplete($field, options) {
 
 				//TODO
 				setTimeout(function() { 
+					
+					selectedElement = -1;//TODO change to event, also it should remove class active from li element
 					hideContainer();
 				}, 250);
 			});

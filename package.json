@@ -1,6 +1,6 @@
 {
-  "name": "easy-autocomplete",
-  "title": "Easy autocomplete - jQuery plugin for autocompletion",
+  "name": "Easy-autocomplete",
+  "title": "jQuery plugin for autocompletion",
   "author": "Łukasz Pawełczak",
   "version": "1.0.0",
   "devDependencies": {

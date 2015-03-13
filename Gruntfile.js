@@ -55,19 +55,32 @@ module.exports = function(grunt) {
     //------------------------ CSS --------------------------
 
     sass: {
-     dist: {
-       options: {
-         style: 'compressed',
-         compass: false
-       },
-       files: [{
-        expand: true,
-        cwd: '<%= project.sass.src %>',
-        src: ['*.scss'],
-        dest: '<%= project.sass.dist %>',
-        ext: '.min.css'
-       }]
-     },
+      dev: {
+        options: {
+          style: 'expanded',
+          compass: false
+        },
+        files: [{
+         expand: true,
+         cwd: '<%= project.sass.src %>',
+         src: ['*.scss'],
+         dest: '<%= project.sass.dist %>',
+         ext: '.css'
+        }]
+      },
+      dist: {
+        options: {
+          style: 'compressed',
+          compass: false
+        },
+        files: [{
+         expand: true,
+         cwd: '<%= project.sass.src %>',
+         src: ['*.scss'],
+         dest: '<%= project.sass.dist %>',
+         ext: '.min.css'
+        }]
+      },
     },
     
     
@@ -96,7 +109,7 @@ module.exports = function(grunt) {
       },
       files: {
         src: [
-          '<%= project.sass.dist %>',
+          '<%= project.sass.dist %>/*',
           '<%= project.js.dist %>'
         ]
       }
@@ -120,7 +133,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('doc', ['jshint', 'csslint:lax']);
 
-  grunt.registerTask('build', ['uglify', 'sass:dist', 'usebanner']);
+  grunt.registerTask('build', ['uglify', 'sass:dev', 'sass:dist', 'usebanner']);
   
   grunt.registerTask('default', ['build']);
 };
