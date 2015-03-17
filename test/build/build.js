@@ -2,7 +2,7 @@
 QUnit.test( "Build tests", function( assert ) {
 
 	//given
-	var completer = new EasyAutocomplete($("#inputOne"), {url: "test.json"});
+	var completer = new EasyAutocomplete.main($("#inputOne"), {url: "test.json"});
 
 	var Consts = completer.getConstants();
 
@@ -27,8 +27,8 @@ QUnit.test( "Build tests", function( assert ) {
 QUnit.test( "Build completer twice on same element", function( assert ) {
 
 	//given
-	var completer = new EasyAutocomplete($("#inputOne"), {url: "test.json"});
-	var completer = new EasyAutocomplete($("#inputOne"), {url: "test2.json"});
+	var completer = new EasyAutocomplete.main($("#inputOne"), {url: "test.json"});
+	var completer = new EasyAutocomplete.main($("#inputOne"), {url: "test2.json"});
 
 	var Consts = completer.getConstants();
 
@@ -55,8 +55,8 @@ QUnit.test( "Build completer twice on different element", function( assert ) {
 
 	
 	//given
-	var completerOne = new EasyAutocomplete($("#inputOne"), {url: "test.json"});
-	var completerTwo = new EasyAutocomplete($("#inputTwo"), {url: "test2.json", autocompleteOff: false});
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "test.json"});
+	var completerTwo = new EasyAutocomplete.main($("#inputTwo"), {url: "test2.json", autocompleteOff: false});
 
 	var Consts = completerOne.getConstants();
 

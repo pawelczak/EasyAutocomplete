@@ -29,9 +29,10 @@
 		</div>
 
 		<script src="../lib/jquery-1.11.2.min.js"></script>
-		<script src="../src/easy-autocomplete.js" type="text/javascript" ></script>
+		<script src="../dist/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
 		<script>
 
+		$(document).ready(function() {
 			$("#simple").easyAutocomplete({
 				data: ["red", "green", "blue", "pink"]
 			});
@@ -103,7 +104,7 @@
 				}
 			});
 
-
+		});
 		</script>
 	</body>
 </html>

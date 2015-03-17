@@ -6,7 +6,8 @@ module.exports = function(grunt) {
         app: '<%= pkg.name %>',
 
         js: {
-          src: 'src/easy-autocomplete.js',
+          files: 'src/processResponseData.js, src/configuration.js, src/easy-autocomplete.js',
+          src: 'src/*.js',
           dist: 'dist/jquery.easy-autocomplete.min.js'
         },
 
@@ -33,7 +34,7 @@ module.exports = function(grunt) {
     uglify: {
         dist: {
           files: {
-            '<%= project.js.dist %>' : ['<%= project.js.src %>']
+            '<%= project.js.dist %>' : ['src/configuration.js', 'src/logger.js', 'src/constans.js', 'src/proccessData.js', 'src/core.js']
           }
         }
     },

@@ -1,0 +1,30 @@
+<data>
+	<color>
+		<title>A</title>
+		<text>
+			<name>red</name>
+			<desc></desc>
+		</text>
+	</color>
+	<color>
+		<title>B</title>
+		<text>
+			<name>green</name>
+			<desc></desc>
+		</text>
+	</color>
+	<color>
+		<title>Z</title>
+		<text>
+			<name>blue</name>
+			<desc></desc>
+		</text>
+	</color>
+	<color>
+		<title>P</title>
+		<text>
+			<name>pink</name>
+			<desc></desc>
+		</text>
+	</color>
+</data>

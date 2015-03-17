@@ -10,7 +10,7 @@ QUnit.test("JSON - Simple list response", function( assert ) {
 	expect(4);
 	
 	//given
-	var completerOne = new EasyAutocomplete($("#inputOne"), {url: "../data/colors_string.json", ajaxCallback: function() {
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "../data/colors_string.json", ajaxCallback: function() {
 
 			//assert
 			
@@ -47,7 +47,7 @@ QUnit.test("JSON - Simple object", function( assert ) {
 	expect(4);
 	
 	//given
-	var completerOne = new EasyAutocomplete($("#inputOne"), {
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
 		
 		getValue: function(element) {
 			return element.name;
@@ -90,7 +90,7 @@ QUnit.test("JSON - Sorted list", function( assert ) {
 	expect(4);
 	
 	//given
-	var completerOne = new EasyAutocomplete($("#inputOne"), {url: "../data/colors_string.json", list: {sort: {enabled: true}}, ajaxCallback: function() {
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "../data/colors_string.json", list: {sort: {enabled: true}}, ajaxCallback: function() {
 
 			//assert
 			
@@ -127,7 +127,7 @@ QUnit.test("JSON - Reverse sorted list", function( assert ) {
 	expect(4);
 	
 	//given
-	var completerOne = new EasyAutocomplete($("#inputOne"), {url: "../data/colors_string.json",
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "../data/colors_string.json",
 
 		 list: {
 		 		sort: {
@@ -183,7 +183,7 @@ QUnit.test("JSON - Max elements number list", function( assert ) {
 	expect(2);
 	
 	//given
-	var completerOne = new EasyAutocomplete($("#inputOne"), {url: "../data/colors_string.json",
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "../data/colors_string.json",
 
 		list: {
 			maxNumberOfElements: 1
@@ -224,7 +224,7 @@ QUnit.test("JSON - Matching - string list phrase 're'", function( assert ) {
 	expect(3);
 	
 	//given
-	var completerOne = new EasyAutocomplete($("#inputOne"), {url: "../data/colors_string.json",
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "../data/colors_string.json",
 
 		list: {
 			matching: {
@@ -268,7 +268,7 @@ QUnit.test("JSON - Match all elements from list", function( assert ) {
 	expect(3);
 	
 	//given
-	var completerOne = new EasyAutocomplete($("#inputOne"), {url: "../data/countries.json",
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "../data/countries.json",
 
 		getValue: function(element) {
 			return element.name;
@@ -317,7 +317,7 @@ QUnit.test("JSON - Simple matching list phrase 'ok'", function( assert ) {
 	expect(3);
 	
 	//given
-	var completerOne = new EasyAutocomplete($("#inputOne"), {url: "../data/countries.json",
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "../data/countries.json",
 
 		getValue: function(element) {
 			return element.name;
@@ -365,7 +365,7 @@ QUnit.test("JSON - Dont highlight phrase", function( assert ) {
 	expect(2);
 	
 	//given
-	var completerOne = new EasyAutocomplete($("#inputOne"), {url: "../data/colors_string.json",
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "../data/colors_string.json",
 
 		highlightPhrase: false,
 
@@ -406,7 +406,7 @@ QUnit.test("JSON - Highlight - string list ", function( assert ) {
 	expect(2);
 	
 	//given
-	var completerOne = new EasyAutocomplete($("#inputOne"), {url: "../data/colors_string.json",
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "../data/colors_string.json",
 
 
 		highlightPhrase: true,
@@ -446,7 +446,7 @@ QUnit.test("JSON - Highlight - object list", function( assert ) {
 	expect(2);
 	
 	//given
-	var completerOne = new EasyAutocomplete($("#inputOne"), {url: "../data/colors_object.json",
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "../data/colors_object.json",
 
 		getValue: function(element) {
 			return element.name;

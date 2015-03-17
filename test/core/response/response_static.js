@@ -12,7 +12,7 @@ QUnit.test("Static data - string array", function( assert ) {
 	expect(5);
 	
 	//given
-	var completerOne = new EasyAutocomplete($("#inputOne"), {
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
 
 		data: ["red", "green", "blue", "pink"],
 
@@ -42,7 +42,7 @@ QUnit.test("Static data - object array", function( assert ) {
 	expect(5);
 	
 	//given
-	var completerOne = new EasyAutocomplete($("#inputOne"), {
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
 
 		data: [{"name": "red"}, {"name": "green"}, {"name": "blue"}, {"name": "pink"}],
 
