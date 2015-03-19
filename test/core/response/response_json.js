@@ -220,14 +220,14 @@ QUnit.test("JSON - Max elements number list", function( assert ) {
 	}
 });
 
-QUnit.test("JSON - Matching - string list phrase 're'", function( assert ) {
+QUnit.test("JSON - match - string list phrase 're'", function( assert ) {
 	expect(3);
 	
 	//given
 	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "../data/colors_string.json",
 
 		list: {
-			matching: {
+			match: {
 				enabled: true
 			},
 		},
@@ -276,7 +276,7 @@ QUnit.test("JSON - Match all elements from list", function( assert ) {
 
 		list: {
 			maxNumberOfElements:999,	
-			matching: {
+			match: {
 				enabled: true
 			},
 		},
@@ -313,7 +313,7 @@ QUnit.test("JSON - Match all elements from list", function( assert ) {
 	}
 });
 
-QUnit.test("JSON - Simple matching list phrase 'ok'", function( assert ) {
+QUnit.test("JSON - Simple match list phrase 'ok'", function( assert ) {
 	expect(3);
 	
 	//given
@@ -324,7 +324,7 @@ QUnit.test("JSON - Simple matching list phrase 'ok'", function( assert ) {
 		},
 
 		list: {
-			matching: {
+			match: {
 				enabled: true
 			},
 		},

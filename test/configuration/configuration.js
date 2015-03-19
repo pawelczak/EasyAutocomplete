@@ -69,7 +69,7 @@ QUnit.test("Configuration Default values", function( assert ) {
 
 				maxNumberOfElements: 6,
 
-				matching: {
+				match: {
 					enabled: false,
 					method: function(a, b) {
 						if (a === b){
@@ -106,8 +106,8 @@ QUnit.test("Configuration Default values", function( assert ) {
 	assertValue("enabled", "sort", "list");
 	//assertValue("method", "sort", "list");
 
-	assertValue("enabled", "matching", "list");
-	//assertValue("method", "matching", "list");
+	assertValue("enabled", "match", "list");
+	//assertValue("method", "match", "list");
 
 	expect(7);
 });
@@ -138,7 +138,7 @@ QUnit.test("Configuration simple", function( assert ) {
 
 				maxNumberOfElements: 3,
 
-				matching: {
+				match: {
 					enabled: false,
 					method: function(a, b) {
 						
@@ -171,8 +171,8 @@ QUnit.test("Configuration simple", function( assert ) {
 	assertValue("enabled", "sort", "list");
 	assertValue("method", "sort", "list");
 
-	assertValue("enabled", "matching", "list");
-	assertValue("method", "matching", "list");
+	assertValue("enabled", "match", "list");
+	assertValue("method", "match", "list");
 
 	expect(10);
 });
@@ -209,8 +209,8 @@ QUnit.test( "Configuration mixed", function( assert ) {
 
 				maxNumberOfElements: 6,
 
-				//TODO can be used different matching e.g. when 3 out of 4 in word letters are matched
-				matching: {
+				//TODO can be used different match e.g. when 3 out of 4 in word letters are matched
+				match: {
 					enabled: false,
 					method: function(a, b) {
 						if (a === b){
@@ -238,7 +238,7 @@ QUnit.test( "Configuration mixed", function( assert ) {
 					enabled: false
 				},
 
-				matching: {
+				match: {
 					method: function(a, b) {
 						
 						return 1;
@@ -262,7 +262,7 @@ QUnit.test( "Configuration mixed", function( assert ) {
 	assertValue("getValue");
 
 	assertValue("enabled", "sort", "list");
-	assertValue("method", "matching", "list");
+	assertValue("method", "match", "list");
 
 	assertValue._expected = defaultOptions;
 
@@ -271,7 +271,7 @@ QUnit.test( "Configuration mixed", function( assert ) {
 	assertValue("highlightPhrase");
 	assertValue("maxNumberOfElements", "list");
 	//assertDefaultValue("method", "sort", "list");
-	assertValue("enabled", "matching", "list");
+	assertValue("enabled", "match", "list");
 
 	expect(9);
 });

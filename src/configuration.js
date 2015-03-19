@@ -47,7 +47,7 @@ var EasyAutocomplete = (function(scope){
 
 				maxNumberOfElements: 6,
 
-				matching: {
+				match: {
 					enabled: false,
 					caseSensitive: false,
 					method: function(a, b) {
@@ -156,11 +156,11 @@ var EasyAutocomplete = (function(scope){
 					return 0;
 				}
 
-				if (!options.list.matching) {
-					options.list.matching = {};
+				if (!options.list.match) {
+					options.list.match = {};
 				}
 
-				options.list.matching.method = function(a, b) {
+				options.list.match.method = function(a, b) {
 					a = options.getValue(a);
 					b = options.getValue(b);
 

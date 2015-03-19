@@ -193,7 +193,7 @@ QUnit.test("XML - Simple object", function( assert ) {
 	}
 });
 
-QUnit.test("XML - Matching simple list - phrase 're'", function( assert ) {
+QUnit.test("XML - match simple list - phrase 're'", function( assert ) {
 	expect(3);
 	
 	//given
@@ -203,7 +203,7 @@ QUnit.test("XML - Matching simple list - phrase 're'", function( assert ) {
 		xmlElementName: "color",
 
 		list: {
-			matching: {
+			match: {
 				enabled: true
 			},
 		},
@@ -240,7 +240,7 @@ QUnit.test("XML - Matching simple list - phrase 're'", function( assert ) {
 	}
 });
 
-QUnit.test("XML - Matching advance object phrase 're'", function( assert ) {
+QUnit.test("XML - match advance object phrase 're'", function( assert ) {
 	expect(3);
 	
 	//given
@@ -254,7 +254,7 @@ QUnit.test("XML - Matching advance object phrase 're'", function( assert ) {
 		},
 
 		list: {
-			matching: {
+			match: {
 				enabled: true
 			},
 		},

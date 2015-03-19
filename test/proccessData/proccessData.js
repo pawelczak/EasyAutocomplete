@@ -125,13 +125,13 @@ QUnit.test("MaxSize & Sort - simple list", function( assert ) {
 	assert.equal(expectedList[1], actuaList[1], "Passed - equal second");
 });
 
-QUnit.test("Matching - simple list", function( assert ) {
+QUnit.test("match - simple list", function( assert ) {
 	expect(3);
 	
 	//given
 	var options = {
 			list: {
-				matching: {
+				match: {
 					enabled: true
 				}
 			}
@@ -152,13 +152,13 @@ QUnit.test("Matching - simple list", function( assert ) {
 	assert.equal(expectedList[1], actuaList[1], "Passed - equal second");
 });
 
-QUnit.test("Matching - simple list", function( assert ) {
+QUnit.test("match - simple list", function( assert ) {
 	expect(2);
 	
 	//given
 	var options = {
 			list: {
-				matching: {
+				match: {
 					enabled: true
 				}
 			}
@@ -310,7 +310,7 @@ QUnit.test("Sort & Max size - Json", function( assert ) {
 });
 
 
-QUnit.test("Matching - Json", function( assert ) {
+QUnit.test("match - Json", function( assert ) {
 	expect(3);
 	
 	//given
@@ -319,7 +319,7 @@ QUnit.test("Matching - Json", function( assert ) {
 				return element.name;
 			},
 			list: {
-				matching: {
+				match: {
 					enabled: true,
 					method: function(a, b) {
 						var a = options.getValue(a),
@@ -351,7 +351,7 @@ QUnit.test("Matching - Json", function( assert ) {
 	assert.equal(expectedList[1].name, actuaList[1].name, "Passed - equal second");
 });
 
-QUnit.test("Matching & Sorting- Json", function( assert ) {
+QUnit.test("match & Sorting- Json", function( assert ) {
 	expect(5);
 	
 	//given
@@ -360,7 +360,7 @@ QUnit.test("Matching & Sorting- Json", function( assert ) {
 				return element.name;
 			},
 			list: {
-				matching: {
+				match: {
 					enabled: true,
 					method: function(a, b) {
 						var a = options.getValue(a),
