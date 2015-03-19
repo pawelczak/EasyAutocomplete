@@ -8,6 +8,7 @@ module.exports = function(grunt) {
         js: {
           files: 'src/processResponseData.js, src/configuration.js, src/easy-autocomplete.js',
           src: 'src/*.js',
+          dest: 'dist/jquery.easy-autocomplete.js',
           dist: 'dist/jquery.easy-autocomplete.min.js'
         },
 
@@ -31,10 +32,17 @@ module.exports = function(grunt) {
 
     //------------------------ JAVASCRIPT --------------------------
 
+    concat: {
+      "src-js": {
+        src: ['src/configuration.js', 'src/logger.js', 'src/constans.js', 'src/proccessData.js', 'src/core.js'],
+        dest: '<%= project.js.dest %>',
+      }
+    },
+
     uglify: {
         dist: {
           files: {
-            '<%= project.js.dist %>' : ['src/configuration.js', 'src/logger.js', 'src/constans.js', 'src/proccessData.js', 'src/core.js']
+            '<%= project.js.dist %>' : '<%= project.js.dest %>'
           }
         }
     },
@@ -51,6 +59,10 @@ module.exports = function(grunt) {
           document: true
         }
       }
+    },
+
+    qunit: {
+      all: ['test/modules.html', 'test/core/build.html', 'test/core/response.html']
     },
     
     //------------------------ CSS --------------------------
@@ -134,7 +146,9 @@ module.exports = function(grunt) {
 
   grunt.registerTask('doc', ['jshint', 'csslint:lax']);
 
-  grunt.registerTask('build', ['uglify', 'sass:dev', 'sass:dist', 'usebanner']);
+  grunt.registerTask('test', ['qunit']);
+
+  grunt.registerTask('build', ['concat', 'uglify', 'sass:dev', 'sass:dist', 'usebanner']);
   
   grunt.registerTask('default', ['build']);
 };

@@ -12,6 +12,8 @@
     "grunt-contrib-watch": "~0.5.3",
     "grunt-contrib-sass": "~0.7.3",
     "grunt-banner": "~0.2.3",
-    "matchdep": "~0.3.0"
+    "matchdep": "~0.3.0",
+    "grunt-contrib-concat": "~0.5.1",
+    "grunt-contrib-qunit": "~0.5.2"
   }
 }

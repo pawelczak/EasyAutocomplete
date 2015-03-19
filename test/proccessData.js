@@ -381,8 +381,6 @@ QUnit.test("match & Sorting- Json", function( assert ) {
 						var a = a.power,
 							b = b.power;
 
-						console.log("foo");
-
 						if (a < b) {
 							return -1;
 						}
@@ -403,7 +401,6 @@ QUnit.test("match & Sorting- Json", function( assert ) {
 	//execute
 	var actuaList = EasyAutocomplete.proccess(config, unsortedList, "man");
 
-	console.log(actuaList);
 
 	//assert
 	assert.equal(2, actuaList.length, "Passed - list size");
