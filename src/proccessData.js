@@ -15,24 +15,24 @@ var EasyAutocomplete = (function(scope) {
 
 		var inputPhrase = phrase;//TODO REFACTOR
 
-		list = findMatching(list, inputPhrase);
+		list = findMatch(list, inputPhrase);
 		list = reduceElementsInList(list);
 		list = sort(list);
 
 		return list;
 
 
-		function findMatching(list, phrase) {
+		function findMatch(list, phrase) {
 			var preparedList = [],
 				value = "";
 
-			if (config.get("list").matching.enabled) {
+			if (config.get("list").match.enabled) {
 
 				for(var i = 0, length = list.length; i < length; i += 1) {
 
 					value = config.get("getValue")(list[i]);
 					
-					if (!config.get("list").matching.caseSensitive) {
+					if (!config.get("list").match.caseSensitive) {
 
 						if (typeof value === "string") {
 							value = value.toLowerCase();	
@@ -78,6 +78,8 @@ var EasyAutocomplete = (function(scope) {
 	};
 
 	return scope;
+
+
 
 })(EasyAutocomplete || {});
 
