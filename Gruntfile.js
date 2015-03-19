@@ -49,20 +49,21 @@ module.exports = function(grunt) {
 
 
     jshint: {
-      files: ['<%= project.js.src %>'],
+      all: [
+            '<%= project.js.src %>',
+            //'test/*.js',
+            //'test/core/*.js'
+      ],
       options: {
-        // options here to override JSHint defaults
-        globals: {
-          jQuery: true,
-          console: true,
-          module: true,
-          document: true
-        }
+        jshintrc: true
       }
     },
 
     qunit: {
-      all: ['test/modules.html', 'test/core/build.html', 'test/core/response.html']
+      all: [
+            'test/*.html',
+            'test/core/*.html'
+          ]
     },
     
     //------------------------ CSS --------------------------

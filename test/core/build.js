@@ -1,4 +1,8 @@
-
+/*
+ * Tests EasyAutocomplete - build eac wrapper
+ *
+ * @author Łukasz Pawełczak
+ */
 QUnit.test( "Build tests", function( assert ) {
 
 	//given

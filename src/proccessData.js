@@ -1,5 +1,5 @@
 /*
- * Data proccess module
+ * EasyAutocomplete - Data proccess module
  *
  * Process list to display:
  * - sort 

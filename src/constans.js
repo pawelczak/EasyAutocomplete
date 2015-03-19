@@ -1,7 +1,3 @@
-//---------------------------------------------------------------------
-//------------------------ CONSTANS -----------------------------------
-//---------------------------------------------------------------------
-
 /*
  * EasyAutocomplete - Constans
  *
@@ -21,10 +17,6 @@ var EasyAutocomplete = (function(scope){
 			return constants[propertyName];
 		}
 
-		function LIST_ID() {
-
-
-		}
 	};
 
 	return scope;

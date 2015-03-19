@@ -1,8 +1,8 @@
-//---------------------------------------------------------------------
-//------------------------ LOGGER -------------------------------------
-//---------------------------------------------------------------------
-
-
+/*
+ * EasyAutocomplete - Logger 
+ *
+ * @author Łukasz Pawełczak
+ */
 var EasyAutocomplete = (function(scope){
 	
 	scope.Logger = function Logger() {
@@ -21,4 +21,3 @@ var EasyAutocomplete = (function(scope){
 
 })(EasyAutocomplete || {});
 	
-

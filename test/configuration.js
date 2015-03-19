@@ -1,8 +1,8 @@
 /*
+ * Tests for Configuration module - EasyAutocomplete 
+ *
  * @author Łukasz Pawełczak
  */
-
-
 function assertValue (value, objectOne, objectTwo) {
 	
 	assert = assertValue._assertMethod;
