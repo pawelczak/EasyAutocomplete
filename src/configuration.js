@@ -31,6 +31,9 @@ var EasyAutocomplete = (function(scope){
 				sort: {
 					enabled: false,
 					method: function(a, b) {
+						a = defaults.getValue(a);
+						b = defaults.getValue(b);
+
 						//Alphabeticall sort
 						if (a < b) {
 							return -1;
@@ -48,6 +51,9 @@ var EasyAutocomplete = (function(scope){
 					enabled: false,
 					caseSensitive: false,
 					method: function(a, b) {
+						a = defaults.getValue(a);
+						b = defaults.getValue(b);
+
 						if (a === b){
 							return true	
 						}  

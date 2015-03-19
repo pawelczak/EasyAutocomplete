@@ -1,13 +1,14 @@
-//---------------------------------------------------------------------
-//------------------------ DATA PROCESS -------------------------------
-//---------------------------------------------------------------------
-
-
-//Process list to display:
-//- sort 
-//- decrease number to specific number
-//- show only matching list
-
+/*
+ * Data proccess module
+ *
+ * Process list to display:
+ * - sort 
+ * - decrease number to specific number
+ * - show only matching list
+ *
+ * @author Łukasz Pawełczak
+ *
+ */
 var EasyAutocomplete = (function(scope) {
 
 	scope.proccess = function proccessData(config, list, phrase) {
@@ -79,3 +80,4 @@ var EasyAutocomplete = (function(scope) {
 	return scope;
 
 })(EasyAutocomplete || {});
+

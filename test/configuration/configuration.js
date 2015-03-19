@@ -1,4 +1,3 @@
-
 /*
  * @author Łukasz Pawełczak
  */
@@ -37,7 +36,7 @@ function assertValue (value, objectOne, objectTwo) {
 }
 
 
-QUnit.test( "Configuration Default values", function( assert ) {
+QUnit.test("Configuration Default values", function( assert ) {
 
 	//given
 	var options = {};
@@ -88,7 +87,7 @@ QUnit.test( "Configuration Default values", function( assert ) {
 
  
 	//execute
-	var actualOptions = new EasyAutocomplete.main(null, options).getConfiguration();
+	var actualOptions = new EasyAutocomplete.Configuration(options);
 
 
 	//assert
@@ -113,7 +112,7 @@ QUnit.test( "Configuration Default values", function( assert ) {
 	expect(7);
 });
 
-QUnit.test( "Configuration simple", function( assert ) {
+QUnit.test("Configuration simple", function( assert ) {
 
 	//given
 
@@ -154,7 +153,7 @@ QUnit.test( "Configuration simple", function( assert ) {
 
 
 	//execute
-	var actualOptions = new EasyAutocomplete.main(null, options).getConfiguration();
+	var actualOptions = new EasyAutocomplete.Configuration(options);
 
 	//assert
 	assertValue._assertMethod = assert;
@@ -252,7 +251,7 @@ QUnit.test( "Configuration mixed", function( assert ) {
 
 
 	//execute
-	var actualOptions = new EasyAutocomplete.main(null, options).getConfiguration();
+	var actualOptions = new EasyAutocomplete.Configuration(options);
 
 	//assert
 	assertValue._assertMethod = assert;
@@ -283,7 +282,7 @@ QUnit.test( "Configuration required fields", function( assert ) {
 	var options = {};
 
 	//execute
-	var actualOptions = new EasyAutocomplete.main(null, options).getConfiguration();
+	var actualOptions = new EasyAutocomplete.Configuration(options);
 
 	//assert
 	assert.ok("list-required" == actualOptions.get("url") , "Passed - url equals list-required" );
@@ -300,7 +299,7 @@ QUnit.test( "Data field", function( assert ) {
 	};
 
 	//execute
-	var actualOptions = new EasyAutocomplete.main(null, options).getConfiguration();
+	var actualOptions = new EasyAutocomplete.Configuration(options);
 
 	//assert
 	assertValue._assertMethod = assert;
