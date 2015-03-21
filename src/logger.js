@@ -9,11 +9,11 @@ var EasyAutocomplete = (function(scope){
 		var logger = {};
 
 		this.error = function(message) {
-			console.log("ERROR: " + module.name + ": " + message);
+			console.log("ERROR: " + message);
 		}
 
 		this.warning = function(message) {
-			console.log("WARNING: " + module.name + ": " + message);
+			console.log("WARNING: " + message);
 		}
 	};
 

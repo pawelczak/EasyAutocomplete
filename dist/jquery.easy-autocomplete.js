@@ -7,10 +7,6 @@
  * Copyright .  licensed.
  */
 
-//-----------------------------------------------------------------
-//------------------------ CONFIGURATION --------------------------
-//-----------------------------------------------------------------
-
 /*
  * EasyAutocomplete - Configuration 
  *
@@ -233,22 +229,22 @@ var EasyAutocomplete = (function(scope){
 })(EasyAutocomplete || {});
 
 
-//---------------------------------------------------------------------
-//------------------------ LOGGER -------------------------------------
-//---------------------------------------------------------------------
-
-
+/*
+ * EasyAutocomplete - Logger 
+ *
+ * @author Łukasz Pawełczak
+ */
 var EasyAutocomplete = (function(scope){
 	
 	scope.Logger = function Logger() {
 		var logger = {};
 
 		this.error = function(message) {
-			console.log("ERROR: " + module.name + ": " + message);
+			console.log("ERROR: " + message);
 		}
 
 		this.warning = function(message) {
-			console.log("WARNING: " + module.name + ": " + message);
+			console.log("WARNING: " + message);
 		}
 	};
 
@@ -256,11 +252,6 @@ var EasyAutocomplete = (function(scope){
 
 })(EasyAutocomplete || {});
 	
-
-
-//---------------------------------------------------------------------
-//------------------------ CONSTANS -----------------------------------
-//---------------------------------------------------------------------
 
 /*
  * EasyAutocomplete - Constans
@@ -281,10 +272,6 @@ var EasyAutocomplete = (function(scope){
 			return constants[propertyName];
 		}
 
-		function LIST_ID() {
-
-
-		}
 	};
 
 	return scope;
@@ -292,7 +279,7 @@ var EasyAutocomplete = (function(scope){
 })(EasyAutocomplete || {});
 
 /*
- * Data proccess module
+ * EasyAutocomplete - Data proccess module
  *
  * Process list to display:
  * - sort 
