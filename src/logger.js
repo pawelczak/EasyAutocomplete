@@ -1,7 +1,5 @@
 /*
  * EasyAutocomplete - Logger 
- *
- * @author Łukasz Pawełczak
  */
 var EasyAutocomplete = (function(scope){
 	

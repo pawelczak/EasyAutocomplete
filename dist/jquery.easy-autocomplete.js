@@ -4,13 +4,11 @@
  * 
  * @author Łukasz Pawełczak
  * @version 1.0.0
- * Copyright .  licensed.
+ * Copyright MIT License: https://github.com/pawelczak/easy-autocomplete/blob/master/LICENSE.txt
  */
 
 /*
  * EasyAutocomplete - Configuration 
- *
- * @author Łukasz Pawełczak
  */
 var EasyAutocomplete = (function(scope){
 
@@ -231,8 +229,6 @@ var EasyAutocomplete = (function(scope){
 
 /*
  * EasyAutocomplete - Logger 
- *
- * @author Łukasz Pawełczak
  */
 var EasyAutocomplete = (function(scope){
 	
@@ -255,8 +251,6 @@ var EasyAutocomplete = (function(scope){
 
 /*
  * EasyAutocomplete - Constans
- *
- * @author �ukasz Pawe�czak
  */
 var EasyAutocomplete = (function(scope){	
 	
@@ -285,8 +279,6 @@ var EasyAutocomplete = (function(scope){
  * - sort 
  * - decrease number to specific number
  * - show only matching list
- *
- * @author Łukasz Pawełczak
  *
  */
 var EasyAutocomplete = (function(scope) {
@@ -366,8 +358,6 @@ var EasyAutocomplete = (function(scope) {
 
 /*
  * Easy autocomplete - jQuery plugin for autocompletion
- *
- * @author Łukasz Pawełczak
  *
  */
 var EasyAutocomplete = (function(scope) {

@@ -1,7 +1,5 @@
 /*
  * EasyAutocomplete - Constans
- *
- * @author £ukasz Pawe³czak
  */
 var EasyAutocomplete = (function(scope){	
 	

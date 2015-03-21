@@ -1,8 +1,6 @@
 /*
  * Easy autocomplete - jQuery plugin for autocompletion
  *
- * @author Łukasz Pawełczak
- *
  */
 var EasyAutocomplete = (function(scope) {
 

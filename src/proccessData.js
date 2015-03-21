@@ -6,8 +6,6 @@
  * - decrease number to specific number
  * - show only matching list
  *
- * @author Łukasz Pawełczak
- *
  */
 var EasyAutocomplete = (function(scope) {
 

@@ -1,7 +1,5 @@
 /*
  * EasyAutocomplete - Configuration 
- *
- * @author Łukasz Pawełczak
  */
 var EasyAutocomplete = (function(scope){
 
