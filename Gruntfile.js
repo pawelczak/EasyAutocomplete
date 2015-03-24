@@ -62,7 +62,9 @@ module.exports = function(grunt) {
     qunit: {
       all: [
             'test/*.html',
-            'test/core/*.html'
+            'test/core/build.html',
+            'test/core/event.html',
+            'test/core/response.html'
           ]
     },
     

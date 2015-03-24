@@ -28,6 +28,11 @@
 			<input id="matching"  />
 		</div>
 
+		<h2>Remote</h2>
+		<div>
+			<input id="remote" />
+		</div>
+
 		<script src="../lib/jquery-1.11.2.min.js"></script>
 		<script src="../dist/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
 		<script>
@@ -101,6 +106,16 @@
 					showAnimation: {
 						type: "slide"
 					},
+				}
+			});
+
+			$("#remote").easyAutocomplete({
+				url: function(phrase) {
+					return "remote/countrySelectService.php?phrase=" + phrase;
+				},
+
+				getValue: function(element) {
+					return element.name;
 				}
 			});
 

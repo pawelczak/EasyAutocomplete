@@ -19,7 +19,12 @@ function assertValue (value, objectOne, objectTwo) {
 
 	switch(length) {
 		case 1:
-			assert.ok(assertValue._expected[value] === assertValue._actual.get(value) , "Passed - " + value );
+			if (typeof assertValue._actual.get(value) === "function") {
+				assert.ok(assertValue._expected[value].toString() === assertValue._actual.get(value).toString() , "Passed - " + value );
+			} else {
+				assert.ok(assertValue._expected[value] === assertValue._actual.get(value) , "Passed - " + value );	
+			}
+			
 		break;
 
 		case 2:
@@ -120,7 +125,9 @@ QUnit.test("Configuration simple", function( assert ) {
 
 			autocompleteOff: false,
 
-			url: "test url",
+			url: function(phrase) {
+				return "test url";
+			},
 
 			getValue: function(element) {
 				return element;
@@ -184,7 +191,7 @@ QUnit.test( "Configuration mixed", function( assert ) {
 
 			autocompleteOff: true,
 
-			url: "required",
+			url: "abc.com",
 
 			getValue: function(element) {
 				return element;
@@ -226,7 +233,9 @@ QUnit.test( "Configuration mixed", function( assert ) {
 	};
 
 	var options = {
-			url: "abc.com",
+			url: function(phrase) {
+				return "abc.com";	
+			},
 
 			getValue: function(element) {
 				return element.name;

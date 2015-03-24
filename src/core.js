@@ -356,9 +356,10 @@ var EasyAutocomplete = (function(scope) {
 
 					function loadData() {
 
-						if (config.get("data") !== "list-required") {
-							var inputPhrase = $field.val();
+						var inputPhrase = $field.val();
 
+						if (config.get("data") !== "list-required") {
+							
 							elementsList = proccessResponseData(config, config.get("data"), $field.val());
 
 							loadElements(elementsList, inputPhrase);
@@ -369,15 +370,13 @@ var EasyAutocomplete = (function(scope) {
 
 						if (config.get("url") !== "list-required") {
 
-							$.ajax({url: config.get("url"), dataType: config.get("dataType")}) 
+							$.ajax({url: config.get("url")(inputPhrase), dataType: config.get("dataType")}) 
 								.done(function(data) {
 									var length = data.length;
 
 									if (length === 0) {
 										return;
 									}
-
-									var inputPhrase = $field.val();
 
 									elementsList = data;
 
@@ -426,13 +425,27 @@ var EasyAutocomplete = (function(scope) {
 					if (event.keyCode === 38) {
 						return false;
 					}
+
+					if (event.keyCode === 13) {
+
+						//enter
+
+						event.preventDefault();
+
+						//selectElement(selectedElement);
+
+						hideContainer();
+
+						
+					}
 				});
 			}
 
 			function bindKeypress() {
 				$field
 				.off("keypress")
-				.keypress(function() {
+				.keypress(function(event) {
+					
 					
 				});
 			}

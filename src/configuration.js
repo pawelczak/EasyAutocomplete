@@ -77,6 +77,8 @@ var EasyAutocomplete = (function(scope){
 
 		mergeOptions();
 
+		processAfterMerge();
+
 		this.get = function(propertyName) {
 			return defaults[propertyName];
 		}
@@ -192,6 +194,17 @@ var EasyAutocomplete = (function(scope){
 				return mergedObject;
 			}
 		}	
+
+
+		function processAfterMerge() {
+
+			if (defaults.url !== "list-required" && typeof defaults.url != "function") {
+				defaults.url = function(phrase) {
+					return defaults.url;
+				}
+			}
+
+		}
 
 		//TODO check if config has value
 		//check (param.name, value)
