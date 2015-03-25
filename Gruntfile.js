@@ -73,7 +73,6 @@ module.exports = function(grunt) {
       all: [
             'test/*.html',
             'test/core/build.html',
-            'test/core/event.html',
             'test/core/response.html'
           ]
     },

@@ -1,13 +1,4 @@
 /*
- * Easy-autocomplete
- * jQuery plugin for autocompletion
- * 
- * @author Łukasz Pawełczak
- * @version 1.0.0
- * Copyright MIT License: https://github.com/pawelczak/easy-autocomplete/blob/master/LICENSE.txt
- */
-
-/*
  * EasyAutocomplete - Configuration 
  */
 var EasyAutocomplete = (function(scope){
@@ -17,6 +8,10 @@ var EasyAutocomplete = (function(scope){
 			data: "list-required",
 			url: "list-required",
 			dataType: "json",
+
+			listName: function(data) {
+				return data;
+			},
 
 			xmlElementName: "",
 
@@ -36,8 +31,6 @@ var EasyAutocomplete = (function(scope){
 					method: function(a, b) {
 						a = defaults.getValue(a);
 						b = defaults.getValue(b);
-
-						//Alphabeticall sort
 						if (a < b) {
 							return -1;
 						}
@@ -108,8 +101,6 @@ var EasyAutocomplete = (function(scope){
 			}
 			return true;
 		}
-
-		//TODO think about better mechanism
 		this.checkRequiredProperties = function() {
 			for (var propertyName in defaults) {
 				if (defaults[propertyName] === "required") {
@@ -119,12 +110,6 @@ var EasyAutocomplete = (function(scope){
 			}
 			return true;
 		}
-
-
-		//------------------------ Prepare defaults --------------------------
-
-		//TODO
-		//different defaults are required for xml than json
 		function prepareDefaults() {
 
 			if (options.dataType == "xml") {
@@ -150,8 +135,6 @@ var EasyAutocomplete = (function(scope){
 				options.list.sort.method = function(a, b) {
 					a = options.getValue(a);
 					b = options.getValue(b);
-					
-					//Alphabeticall sort
 					if (a < b) {
 						return -1;
 					}
@@ -177,9 +160,6 @@ var EasyAutocomplete = (function(scope){
 
 			}
 		}
-
-
-		//------------------------ LOAD config --------------------------
 
 		function mergeOptions() {
 
@@ -210,14 +190,17 @@ var EasyAutocomplete = (function(scope){
 			if (defaults.url !== "list-required" && typeof defaults.url != "function") {
 				defaults.url = function(phrase) {
 					return defaults.url;
-				}
+				};
+			}
+
+			if (typeof defaults.listName === "string") {
+				var listName = defaults.listName;
+				defaults.listName = function(data) {
+					return data[listName];
+				};
 			}
 
 		}
-
-		//TODO check if config has value
-		//check (param.name, value)
-		//return boolean
 		function assign(name) {
 			if (defaults[name] !== undefined && defaults[name] !== null) {
 				return true;
@@ -325,8 +308,6 @@ var EasyAutocomplete = (function(scope) {
 						
 						phrase = phrase.toLowerCase();
 					}
-
-					//TODO Regex
 					if (value.search(phrase) > -1) {
 						preparedList.push(list[i]);
 					}
@@ -341,8 +322,6 @@ var EasyAutocomplete = (function(scope) {
 		}
 
 		function reduceElementsInList(list) {
-
-			//MAX NUMBER OF ELEMENTS
 			if (list.length > config.get("list").maxNumberOfElements) {
 				list = list.slice(0, config.get("list").maxNumberOfElements);
 			}
@@ -351,8 +330,6 @@ var EasyAutocomplete = (function(scope) {
 		}
 
 		function sort(list) {
-
-			//SORT
 			if (config.get("list").sort.enabled) {
 				list.sort(config.get("list").sort.method);
 			}
@@ -392,27 +369,15 @@ var EasyAutocomplete = (function(scope) {
 			$container = "",
 			elementsList = [],
 			selectedElement = -1;
-			
-
-		//------------------------ GETTERS --------------------------
-
-
-		//TODO Remove
 		this.getConfiguration = function() {
 			return config;
 		}
-
-		//TODO Remove
 		this.getConstants = function() {
 			return consts;
 		}
-
-		//TODO Remove
 		this.getContainer = function() {
 			return $container;
 		}
-
-		//------------------------ PUBLIC METHODS STARTS --------------------------	
 
 		this.build = function() {
 			prepareField();
@@ -421,11 +386,6 @@ var EasyAutocomplete = (function(scope) {
 		this.init = function() {
 			init();
 		}
-
-		//------------------------ PUBLIC METHODS ENDS --------------------------	
-
-
-		//Main method
 		function init() {
 
 
@@ -444,14 +404,6 @@ var EasyAutocomplete = (function(scope) {
 			bindEvents();	
 
 		}
-
-
-		//---------------------------------------------------------------------
-		//------------------------ FIELD PREPARATION --------------------------
-		//---------------------------------------------------------------------
-
-
-		//TODO Rebuild this function
 		function prepareField() {
 
 				
@@ -464,9 +416,6 @@ var EasyAutocomplete = (function(scope) {
 			createContainer();	
 
 			$container = $("#" + getContainerId());//.find("ul");
-
-
-			//Set placeholder for element
 			if (config.placeholder !== false) {
 				$field.attr("placeholder", config.placeholder);
 			}
@@ -479,8 +428,6 @@ var EasyAutocomplete = (function(scope) {
 				$wrapper
 					.addClass(consts.getValue("WRAPPER_CSS_CLASS"))
 					.css("width", fieldWidth);
-
-				//wrapp field with main div wrapper
 				$field.wrap($wrapper);
 			}
 
@@ -505,7 +452,6 @@ var EasyAutocomplete = (function(scope) {
 							switch(config.get("list").showAnimation.type) {
 
 								case "slide":
-									//TODO better handle time
 									var time = config.get("list").showAnimation.time,
 										callback = config.get("list").showAnimation.callback;
 
@@ -554,9 +500,6 @@ var EasyAutocomplete = (function(scope) {
 							$elements_container.find("ul li:nth-child(" + (selectedElement + 1) + ")").addClass("selected");
 						})
 						.on("loadElements", function(event, list, phrase) {
-			
-
-							//TODO Move to separate module e.g. buildList 
 							var $item = "",
 								$list = $("<ul>"),
 								$listContainer = $elements_container.find("ul");
@@ -573,14 +516,10 @@ var EasyAutocomplete = (function(scope) {
 
 									$item.find("span")
 										.on("click", function() {
-
-											//TODO
 											$field.val(elementsValue);//move to event driven function
 											selectElement(j);
 										})
 										.mouseover(function() {
-
-											//selectElement(j);	
 										})
 										.html(highlight(elementsValue, phrase));
 								})();
@@ -616,8 +555,6 @@ var EasyAutocomplete = (function(scope) {
 
 
 		}
-
-		//Generate unique element id
 		function getContainerId() {
 			
 			var elementId = $field.attr("id");
@@ -634,18 +571,9 @@ var EasyAutocomplete = (function(scope) {
 
 			return elementId;
 		}
-
-		//---------------------------------------------------------------------------
-		//------------------------ EVENTS HANDLING ----------------------------------
-		//---------------------------------------------------------------------------
-
-
-		//Binds event handlers
 		function bindEvents() {
 
 			bindAllEvents();
-
-			//------------------------ FUNCTIONS --------------------------					
 			
 
 			function bindAllEvents() {
@@ -660,10 +588,6 @@ var EasyAutocomplete = (function(scope) {
 				bindBlur();
 			}
 
-			//---------------------------------------------------------------------------
-			//------------------------ SPECIFIC EVENTS BINDIND --------------------------
-			//---------------------------------------------------------------------------
-
 			function bindKeyup() {
 				$field
 				.off("keyup")
@@ -673,26 +597,18 @@ var EasyAutocomplete = (function(scope) {
 
 						case 27:
 
-							//Esc
-
 							hideContainer();
 							loseFieldFocus();
 						break;
 
 						case 38:
 
-							//arrow up
-
 							event.preventDefault();
 
 							if(elementsList.length > 0 && selectedElement > 0) {
 
 								selectedElement -= 1
-
-								//TODO ellements list by getValue
 								$field.val(config.get("getValue")(elementsList[selectedElement]));
-
-								//TODO change name
 								selectElement(selectedElement);
 
 							}						
@@ -700,15 +616,11 @@ var EasyAutocomplete = (function(scope) {
 
 						case 40:
 
-							//arrow down
-
 							if(elementsList.length > 0 && selectedElement < elementsList.length - 1) {
 
 								event.preventDefault();
 
 								selectedElement += 1
-
-								//TODO ellements list by getValue
 								$field.val(config.get("getValue")(elementsList[selectedElement]));
 
 								selectElement(selectedElement);
@@ -743,16 +655,15 @@ var EasyAutocomplete = (function(scope) {
 
 							$.ajax({url: config.get("url")(inputPhrase), dataType: config.get("dataType")}) 
 								.done(function(data) {
-									var length = data.length;
+
+									elementsList = config.get("listName")(data);
+
+									var length = elementsList.length;
 
 									if (length === 0) {
 										return;
 									}
-
-									elementsList = data;
-
-									//TODO case insensitive match
-									if(config.get("dataType") === "xml") {
+									if(config.get("dataType").toUpperCase() === "XML") {
 										elementsList = convertXmlToList(elementsList);
 									}
 
@@ -799,11 +710,7 @@ var EasyAutocomplete = (function(scope) {
 
 					if (event.keyCode === 13) {
 
-						//enter
-
 						event.preventDefault();
-
-						//selectElement(selectedElement);
 
 						hideContainer();
 
@@ -834,8 +741,6 @@ var EasyAutocomplete = (function(scope) {
 
 			function bindBlur() {
 				$field.blur(function() {
-
-					//TODO
 					setTimeout(function() { 
 						
 						selectedElement = -1;//TODO change to event, also it should remove class active from li element
@@ -849,14 +754,6 @@ var EasyAutocomplete = (function(scope) {
 			}
 
 		}
-
-		
-
-		//---------------------------------------------------------------------
-		//------------------------ EVENTS -------------------------------------
-		//---------------------------------------------------------------------
-
-		// All html modifications should be made by events
 
 		function showContainer() {
 			$container.trigger("show");

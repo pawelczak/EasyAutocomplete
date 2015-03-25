@@ -372,16 +372,19 @@ var EasyAutocomplete = (function(scope) {
 
 							$.ajax({url: config.get("url")(inputPhrase), dataType: config.get("dataType")}) 
 								.done(function(data) {
-									var length = data.length;
+
+									elementsList = config.get("listName")(data);
+
+									var length = elementsList.length;
 
 									if (length === 0) {
 										return;
 									}
 
-									elementsList = data;
+									
 
 									//TODO case insensitive match
-									if(config.get("dataType") === "xml") {
+									if(config.get("dataType").toUpperCase() === "XML") {
 										elementsList = convertXmlToList(elementsList);
 									}
 

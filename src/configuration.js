@@ -9,6 +9,10 @@ var EasyAutocomplete = (function(scope){
 			url: "list-required",
 			dataType: "json",
 
+			listName: function(data) {
+				return data;
+			},
+
 			xmlElementName: "",
 
 			getValue: function(element) {
@@ -201,7 +205,14 @@ var EasyAutocomplete = (function(scope){
 			if (defaults.url !== "list-required" && typeof defaults.url != "function") {
 				defaults.url = function(phrase) {
 					return defaults.url;
-				}
+				};
+			}
+
+			if (typeof defaults.listName === "string") {
+				var listName = defaults.listName;
+				defaults.listName = function(data) {
+					return data[listName];
+				};
 			}
 
 		}
