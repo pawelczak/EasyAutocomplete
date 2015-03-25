@@ -9,7 +9,7 @@ var EasyAutocomplete = (function(scope){
 			url: "list-required",
 			dataType: "json",
 
-			listName: function(data) {
+			listLocation: function(data) {
 				return data;
 			},
 
@@ -203,15 +203,16 @@ var EasyAutocomplete = (function(scope){
 		function processAfterMerge() {
 
 			if (defaults.url !== "list-required" && typeof defaults.url != "function") {
+				var defaultUrl = defaults.url;
 				defaults.url = function(phrase) {
-					return defaults.url;
+					return defaultUrl;
 				};
 			}
 
-			if (typeof defaults.listName === "string") {
-				var listName = defaults.listName;
-				defaults.listName = function(data) {
-					return data[listName];
+			if (typeof defaults.listLocation === "string") {
+				var defaultlistLocation = defaults.listLocation;
+				defaults.listLocation = function(data) {
+					return data[defaultlistLocation];
 				};
 			}
 

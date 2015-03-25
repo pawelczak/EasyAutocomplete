@@ -70,11 +70,13 @@ module.exports = function(grunt) {
     },
 
     qunit: {
-      all: [
-            'test/*.html',
-            'test/core/build.html',
-            'test/core/response.html'
-          ]
+      unit: [
+        'test/*.html'
+      ],
+      integration: [
+        'test/core/build.html',
+        'test/core/response.html'
+      ]
     },
     
     //------------------------ CSS --------------------------
@@ -158,10 +160,10 @@ module.exports = function(grunt) {
 
   grunt.registerTask('doc', ['jshint', 'csslint:lax']);
 
-  grunt.registerTask('test', ['qunit']);
+  grunt.registerTask('test', ['qunit:unit', 'qunit:integration']);
 
-  grunt.registerTask('build', ['concat', 'comments', 'uglify', 'sass:dev', 'sass:dist', 'usebanner']);
+  grunt.registerTask('build', ['qunit:unit', 'concat', 'comments', 'uglify', 'sass:dev', 'sass:dist', 'usebanner']);
   
-  grunt.registerTask('default', ['build']);
+  grunt.registerTask('default', ['build', 'qunit:integration']);
 };
 

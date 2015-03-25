@@ -481,3 +481,55 @@ QUnit.test("JSON - Highlight - object list", function( assert ) {
 			QUnit.start();	
 	}
 });
+
+QUnit.test("JSON - duckduckgo response", function( assert ) {
+	expect(5);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+		
+		listLocation: "RelatedTopics",
+
+		getValue: function(element) {
+			return element.Text;
+		},
+
+		url: "resources/duckduckgo.json",
+
+		list: {
+			maxNumberOfElements: 10,
+		},
+
+		ajaxCallback: function() {
+
+			//assert
+			
+			assertList();
+		}
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	$("#inputOne").val("c").trigger("keyup");
+
+
+	QUnit.stop();
+
+
+	//assert
+
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul li");
+
+			assert.equal(10, elements.length, "Response size");
+			assert.equal("Autocorrect, automatic correction of misspelled words.", elements.eq(0).find("span").text(), "First element value");
+			assert.equal("Text editor features", elements.eq(6).find("span").text(), "Second element value");
+			assert.equal("Disability software", elements.eq(7).find("span").text(), "Third element value");
+			assert.equal("Free software", elements.eq(9).find("span").text(), "Fourth element value");
+			QUnit.start();	
+	}
+});
+

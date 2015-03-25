@@ -373,15 +373,13 @@ var EasyAutocomplete = (function(scope) {
 							$.ajax({url: config.get("url")(inputPhrase), dataType: config.get("dataType")}) 
 								.done(function(data) {
 
-									elementsList = config.get("listName")(data);
+									elementsList = config.get("listLocation")(data);
 
 									var length = elementsList.length;
 
 									if (length === 0) {
 										return;
 									}
-
-									
 
 									//TODO case insensitive match
 									if(config.get("dataType").toUpperCase() === "XML") {

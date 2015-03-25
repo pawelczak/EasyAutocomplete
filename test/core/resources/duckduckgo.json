@@ -1,0 +1,123 @@
+{
+   "DefinitionSource" : "",
+   "Heading" : "Autocomplete",
+   "ImageWidth" : 0,
+   "RelatedTopics" : [
+      {
+         "Result" : "<a href=\"https://duckduckgo.com/autocorrection\">Autocorrect</a>, automatic correction of misspelled words.",
+         "Icon" : {
+            "URL" : "",
+            "Height" : "",
+            "Width" : ""
+         },
+         "FirstURL" : "https://duckduckgo.com/autocorrection",
+         "Text" : "Autocorrect, automatic correction of misspelled words."
+      },
+      {
+         "Result" : "<a href=\"https://duckduckgo.com/Predictive_text\">Predictive text</a> - Predictive text is an input technology used where one key or button represents many letters, such as on mobile phones's numeric keypads and in accessibility technologies.",
+         "Icon" : {
+            "URL" : "",
+            "Height" : "",
+            "Width" : ""
+         },
+         "FirstURL" : "https://duckduckgo.com/Predictive_text",
+         "Text" : "Predictive text - Predictive text is an input technology used where one key or button represents many letters, such as on mobile phones's numeric keypads and in accessibility technologies."
+      },
+      {
+         "Result" : "<a href=\"https://duckduckgo.com/Autofill\">Autofill</a> - Autofill is a function in some computer applications or programs, typically those containing forms, which fills in a field automatically.",
+         "Icon" : {
+            "URL" : "",
+            "Height" : "",
+            "Width" : ""
+         },
+         "FirstURL" : "https://duckduckgo.com/Autofill",
+         "Text" : "Autofill - Autofill is a function in some computer applications or programs, typically those containing forms, which fills in a field automatically."
+      },
+      {
+         "Result" : "<a href=\"https://duckduckgo.com/Incremental_search\">Incremental search</a> - In computing, incremental search, incremental find or real-time suggestions is a user interface interaction method to progressively search for and filter through text. As the user types text, one or more possible matches for the text are found and immediately presented to the user.",
+         "Icon" : {
+            "URL" : "",
+            "Height" : "",
+            "Width" : ""
+         },
+         "FirstURL" : "https://duckduckgo.com/Incremental_search",
+         "Text" : "Incremental search - In computing, incremental search, incremental find or real-time suggestions is a user interface interaction method to progressively search for and filter through text. As the user types text, one or more possible matches for the text are found and immediately presented to the user."
+      },
+      {
+         "Result" : "<a href=\"https://duckduckgo.com/Snippet_(programming)\">Snippet</a> - Snippet is a programming term for a small region of re-usable source code, machine code, or text. Ordinarily, these are formally defined operative units to incorporate into larger programming modules.",
+         "Icon" : {
+            "URL" : "",
+            "Height" : "",
+            "Width" : ""
+         },
+         "FirstURL" : "https://duckduckgo.com/Snippet_(programming)",
+         "Text" : "Snippet - Snippet is a programming term for a small region of re-usable source code, machine code, or text. Ordinarily, these are formally defined operative units to incorporate into larger programming modules."
+      },
+      {
+         "Result" : "<a href=\"https://duckduckgo.com/context-sensitive_user_interface\">Context sensitive user interface</a> - A context sensitive user interface is one which can automatically choose from a multiplicity of options based on the current or previous state of the program operation.Context sensitivity is almost ubiquitous in current graphical user interfaces, usually in the form of context menus.",
+         "Icon" : {
+            "URL" : "",
+            "Height" : "",
+            "Width" : ""
+         },
+         "FirstURL" : "https://duckduckgo.com/context-sensitive_user_interface",
+         "Text" : "Context sensitive user interface - A context sensitive user interface is one which can automatically choose from a multiplicity of options based on the current or previous state of the program operation.Context sensitivity is almost ubiquitous in current graphical user interfaces, usually in the form of context menus."
+      },
+      {
+         "Result" : "<a href=\"https://duckduckgo.com/c/Text_editor_features\">Text editor features</a>",
+         "Icon" : {
+            "URL" : "",
+            "Height" : "",
+            "Width" : ""
+         },
+         "FirstURL" : "https://duckduckgo.com/c/Text_editor_features",
+         "Text" : "Text editor features"
+      },
+      {
+         "Result" : "<a href=\"https://duckduckgo.com/c/Disability_software\">Disability software</a>",
+         "Icon" : {
+            "URL" : "",
+            "Height" : "",
+            "Width" : ""
+         },
+         "FirstURL" : "https://duckduckgo.com/c/Disability_software",
+         "Text" : "Disability software"
+      },
+      {
+         "Result" : "<a href=\"https://duckduckgo.com/c/Assistive_technology\">Assistive technology</a>",
+         "Icon" : {
+            "URL" : "",
+            "Height" : "",
+            "Width" : ""
+         },
+         "FirstURL" : "https://duckduckgo.com/c/Assistive_technology",
+         "Text" : "Assistive technology"
+      },
+      {
+         "Result" : "<a href=\"https://duckduckgo.com/c/Free_software\">Free software</a>",
+         "Icon" : {
+            "URL" : "",
+            "Height" : "",
+            "Width" : ""
+         },
+         "FirstURL" : "https://duckduckgo.com/c/Free_software",
+         "Text" : "Free software"
+      }
+   ],
+   "Entity" : "",
+   "Type" : "A",
+   "Redirect" : "",
+   "DefinitionURL" : "",
+   "AbstractURL" : "https://en.wikipedia.org/wiki/Autocomplete",
+   "Definition" : "",
+   "AbstractSource" : "Wikipedia",
+   "Infobox" : "",
+   "Image" : "",
+   "ImageIsLogo" : 0,
+   "Abstract" : "Autocomplete, or word completion, is a feature in which an application predicts the rest of a word a user is typing. In graphical user interfaces, users can typically press the tab key to accept a suggestion or the down arrow key to accept one of several.",
+   "AbstractText" : "Autocomplete, or word completion, is a feature in which an application predicts the rest of a word a user is typing. In graphical user interfaces, users can typically press the tab key to accept a suggestion or the down arrow key to accept one of several.",
+   "AnswerType" : "",
+   "ImageHeight" : 0,
+   "Results" : [],
+   "Answer" : ""
+}
