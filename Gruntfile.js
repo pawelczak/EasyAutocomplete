@@ -34,9 +34,22 @@ module.exports = function(grunt) {
 
     concat: {
       "src-js": {
+        stripBanners: {
+          line: true
+        },
         src: ['src/configuration.js', 'src/logger.js', 'src/constans.js', 'src/proccessData.js', 'src/core.js'],
         dest: '<%= project.js.dest %>',
       }
+    },
+
+    comments: {
+      js_dist: {
+        options: {
+            singleline: true,
+            multiline: false
+        },
+        src: [ '<%= project.js.dest %>'] 
+      },
     },
 
     uglify: {
@@ -151,7 +164,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('test', ['qunit']);
 
-  grunt.registerTask('build', ['concat', 'uglify', 'sass:dev', 'sass:dist', 'usebanner']);
+  grunt.registerTask('build', ['concat', 'comments', 'uglify', 'sass:dev', 'sass:dist', 'usebanner']);
   
   grunt.registerTask('default', ['build']);
 };
