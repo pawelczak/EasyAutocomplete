@@ -18,7 +18,9 @@ QUnit.test("Static data - string array", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("a").trigger(e);
 
 	
 	//assert
@@ -51,7 +53,9 @@ QUnit.test("Static data - object array", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("").trigger(e);
 
 
 	//assert

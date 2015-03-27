@@ -1,5 +1,5 @@
 /*
- * Easy-autocomplete
+ * EasyAutocomplete
  * jQuery plugin for autocompletion
  * 
  * @author Łukasz Pawełczak
@@ -9,6 +9,9 @@
 
 .easy-autocomplete {
   position: relative;
+}
+.easy-autocomplete input[type="text"] {
+  color: #333;
 }
 
 .easy-autocomplete-container {
@@ -38,9 +41,6 @@
   font-weight: normal;
   padding: 4px 12px;
 }
-.easy-autocomplete-container ul li:hover {
-  background: #ebebeb;
-}
 .easy-autocomplete-container ul li:last-child {
   border-radius: 0 0 2px 2px;
   border-width: 0 1px 1px;
@@ -48,11 +48,14 @@
 .easy-autocomplete-container ul li.selected {
   background: none repeat scroll 0 0 #ebebeb;
   cursor: pointer;
-  font-weight: bold;
 }
 .easy-autocomplete-container ul li.selected span {
-  font-weight: bold;
+  font-weight: normal;
 }
 .easy-autocomplete-container ul li span {
+  display: block;
   font-weight: normal;
+}
+.easy-autocomplete-container ul li b {
+  font-weight: bold;
 }

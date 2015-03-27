@@ -216,6 +216,13 @@ var EasyAutocomplete = (function(scope){
 				};
 			}
 
+			if (typeof defaults.getValue === "string") {
+				var defaultsGetValue = defaults.getValue;
+				defaults.getValue = function(element) {
+					return element[defaultsGetValue];
+				}
+			}
+
 		}
 
 		//TODO check if config has value

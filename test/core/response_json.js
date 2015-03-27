@@ -20,7 +20,9 @@ QUnit.test("JSON - Simple list response", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("c").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("c").trigger(e);
 
 
 	QUnit.stop();
@@ -63,7 +65,52 @@ QUnit.test("JSON - Simple object", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("c").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("c").trigger(e);
+
+
+	QUnit.stop();
+
+
+	//assert
+
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul li");
+
+			assert.equal(3, elements.length, "Response size");
+			assert.equal("red", elements.eq(0).find("span").text(), "First element value");
+			assert.equal("yellow", elements.eq(1).find("span").text(), "Second element value");
+			assert.equal("brown", elements.eq(2).find("span").text(), "Third element value");
+			
+			QUnit.start();	
+	}
+});
+
+QUnit.test("JSON - Simple object - getValue equals string", function( assert ) {
+	expect(4);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+		
+		getValue: "name",
+
+		url: "resources/colors_object.json", ajaxCallback: function() {
+
+			//assert
+			
+			assertList();
+		}
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("c").trigger(e);
 
 
 	QUnit.stop();
@@ -100,7 +147,9 @@ QUnit.test("JSON - Sorted list", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("c").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("c").trigger(e);
 
 
 	QUnit.stop();
@@ -155,7 +204,9 @@ QUnit.test("JSON - Reverse sorted list", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("c").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("c").trigger(e);
 
 
 	QUnit.stop();
@@ -199,7 +250,9 @@ QUnit.test("JSON - Max elements number list", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("c").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("c").trigger(e);
 
 
 	QUnit.stop();
@@ -242,7 +295,9 @@ QUnit.test("JSON - match - string list phrase 're'", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("r").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("r").trigger(e);
 
 
 	QUnit.stop();
@@ -291,7 +346,9 @@ QUnit.test("JSON - Match all elements from list", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("a").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("a").trigger(e);
 
 
 	QUnit.stop();
@@ -339,7 +396,9 @@ QUnit.test("JSON - Simple match list phrase 'ok'", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("ok").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("ok").trigger(e);
 
 
 	QUnit.stop();
@@ -380,7 +439,9 @@ QUnit.test("JSON - Dont highlight phrase", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("r").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("r").trigger(e);
 
 
 	QUnit.stop();
@@ -421,7 +482,9 @@ QUnit.test("JSON - Highlight - string list ", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("r").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("r").trigger(e);
 
 
 	QUnit.stop();
@@ -464,7 +527,9 @@ QUnit.test("JSON - Highlight - object list", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("r").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("r").trigger(e);
 
 
 	QUnit.stop();
@@ -513,7 +578,9 @@ QUnit.test("JSON - duckduckgo response", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("c").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("c").trigger(e);
 
 
 	QUnit.stop();

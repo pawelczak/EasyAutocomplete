@@ -31,7 +31,9 @@ QUnit.test("Remote service - Json countries", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("po").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("po").trigger(e);
 
 
 	QUnit.stop();
@@ -82,7 +84,9 @@ QUnit.test("Remote service - XML countries", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("po").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("po").trigger(e);
 
 
 	QUnit.stop();

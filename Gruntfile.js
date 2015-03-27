@@ -74,6 +74,7 @@ module.exports = function(grunt) {
         'test/*.html'
       ],
       integration: [
+        'test/core/plugin.html',
         'test/core/build.html',
         'test/core/response.html'
       ]

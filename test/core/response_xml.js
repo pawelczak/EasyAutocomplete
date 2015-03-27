@@ -27,7 +27,9 @@ QUnit.test("XML - Simple response", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("").trigger(e);
 
 
 	QUnit.stop();
@@ -74,7 +76,9 @@ QUnit.test("XML - Sorted list", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("c").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("c").trigger(e);
 
 
 	QUnit.stop();
@@ -123,7 +127,9 @@ QUnit.test("XML - Max elements number list", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("c").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("c").trigger(e);
 
 
 	QUnit.stop();
@@ -167,7 +173,9 @@ QUnit.test("XML - Simple object", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("a").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("a").trigger(e);
 
 
 	QUnit.stop();
@@ -216,7 +224,9 @@ QUnit.test("XML - match simple list - phrase 're'", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("re").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("re").trigger(e);
 
 
 	QUnit.stop();
@@ -267,7 +277,9 @@ QUnit.test("XML - match advance object phrase 're'", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("re").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("re").trigger(e);
 
 
 	QUnit.stop();
@@ -310,7 +322,9 @@ QUnit.test("XML - Highlight phrase", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("e").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("e").trigger(e);
 
 
 	QUnit.stop();
@@ -356,7 +370,9 @@ QUnit.test("XML - Dont highlight phrase", function( assert ) {
 	
 	completerOne.init();
 
-	$("#inputOne").val("e").trigger("keyup");
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("e").trigger(e);
 
 
 	QUnit.stop();

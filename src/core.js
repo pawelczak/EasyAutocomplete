@@ -1,5 +1,5 @@
 /*
- * Easy autocomplete - jQuery plugin for autocompletion
+ * EasyAutocomplete - jQuery plugin for autocompletion
  *
  */
 var EasyAutocomplete = (function(scope) {
@@ -8,7 +8,7 @@ var EasyAutocomplete = (function(scope) {
 	scope.main = function Core($field, options) {
 				
 		var module = {
-				name: "easy autocomplete"
+				name: "EasyAutocomplete"
 			};
 
 		var consts = new scope.Constans(),
@@ -25,15 +25,13 @@ var EasyAutocomplete = (function(scope) {
 
 		//------------------------ GETTERS --------------------------
 
+		this.getConstants = function() {
+			return consts;
+		}
 
 		//TODO Remove
 		this.getConfiguration = function() {
 			return config;
-		}
-
-		//TODO Remove
-		this.getConstants = function() {
-			return consts;
 		}
 
 		//TODO Remove
@@ -209,7 +207,8 @@ var EasyAutocomplete = (function(scope) {
 										})
 										.mouseover(function() {
 
-											//selectElement(j);	
+											selectedElement = j;
+											selectElement(j);	
 										})
 										.html(highlight(elementsValue, phrase));
 								})();
@@ -331,9 +330,9 @@ var EasyAutocomplete = (function(scope) {
 
 							//arrow down
 
-							if(elementsList.length > 0 && selectedElement < elementsList.length - 1) {
+							event.preventDefault();
 
-								event.preventDefault();
+							if(elementsList.length > 0 && selectedElement < elementsList.length - 1) {
 
 								selectedElement += 1
 
@@ -348,7 +347,10 @@ var EasyAutocomplete = (function(scope) {
 
 						default:
 
-							loadData();
+							if (event.keyCode > 40 || event.keyCode === 8) {
+								loadData();	
+							}
+							
 
 						break;
 					}
@@ -375,16 +377,17 @@ var EasyAutocomplete = (function(scope) {
 
 									elementsList = config.get("listLocation")(data);
 
+									
+									if(config.get("dataType").toUpperCase() === "XML") {
+										elementsList = convertXmlToList(elementsList);
+									}
+
 									var length = elementsList.length;
 
 									if (length === 0) {
 										return;
 									}
-
-									//TODO case insensitive match
-									if(config.get("dataType").toUpperCase() === "XML") {
-										elementsList = convertXmlToList(elementsList);
-									}
+									
 
 									elementsList = proccessResponseData(config, elementsList, $field.val());
 
@@ -422,39 +425,45 @@ var EasyAutocomplete = (function(scope) {
 			}
 
 			function bindKeydown() {
-				$field.keydown(function(event) {
-					if (event.keyCode === 38) {
+				$field
+					.on("keydown", function(evt) {
+	        		    evt = evt || window.event;
+	        		    var keyCode = evt.keyCode;
+	        		    if (keyCode == 38) {
+	        		        suppressKeypress = true; 
+	        		        return false;
+	        		    }
+		        	})
+					.keydown(function(event) {
+					/*if (event.keyCode === 38) {
+						suppressKeypress = true;
 						return false;
-					}
+					}*/
 
-					if (event.keyCode === 13) {
+					if (event.keyCode === 13 && selectedElement > -1) {
 
 						//enter
 
-						event.preventDefault();
-
-						//selectElement(selectedElement);
-
+						$field.val(config.get("getValue")(elementsList[selectedElement]));
+						selectedElement = -1
 						hideContainer();
 
-						
+						event.preventDefault();
+
 					}
 				});
 			}
 
 			function bindKeypress() {
 				$field
-				.off("keypress")
-				.keypress(function(event) {
-					
-					
-				});
+				.off("keypress");
 			}
 
 			function bindFocus() {
 				$field.focus(function() {
 
 					if ($field.val() !== "" && elementsList.length > 0) {
+						
 						selectedElement = -1;//TODO change to event, also it should remove class active from li element
 						showContainer();	
 					}
