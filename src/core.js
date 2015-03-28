@@ -29,12 +29,10 @@ var EasyAutocomplete = (function(scope) {
 			return consts;
 		}
 
-		//TODO Remove
 		this.getConfiguration = function() {
 			return config;
 		}
 
-		//TODO Remove
 		this.getContainer = function() {
 			return $container;
 		}
@@ -90,12 +88,12 @@ var EasyAutocomplete = (function(scope) {
 			createWrapper();
 			createContainer();	
 
-			$container = $("#" + getContainerId());//.find("ul");
+			$container = $("#" + getContainerId());
 
 
 			//Set placeholder for element
-			if (config.placeholder !== false) {
-				$field.attr("placeholder", config.placeholder);
+			if (config.get("placeholder")) {
+				$field.attr("placeholder", config.get("placeholder"));
 			}
 
 
@@ -183,7 +181,6 @@ var EasyAutocomplete = (function(scope) {
 						.on("loadElements", function(event, list, phrase) {
 			
 
-							//TODO Move to separate module e.g. buildList 
 							var $item = "",
 								$list = $("<ul>"),
 								$listContainer = $elements_container.find("ul");
@@ -201,8 +198,7 @@ var EasyAutocomplete = (function(scope) {
 									$item.find("span")
 										.on("click", function() {
 
-											//TODO
-											$field.val(elementsValue);//move to event driven function
+											$field.val(elementsValue);
 											selectElement(j);
 										})
 										.mouseover(function() {
@@ -317,10 +313,8 @@ var EasyAutocomplete = (function(scope) {
 
 								selectedElement -= 1
 
-								//TODO ellements list by getValue
 								$field.val(config.get("getValue")(elementsList[selectedElement]));
 
-								//TODO change name
 								selectElement(selectedElement);
 
 							}						
@@ -336,7 +330,6 @@ var EasyAutocomplete = (function(scope) {
 
 								selectedElement += 1
 
-								//TODO ellements list by getValue
 								$field.val(config.get("getValue")(elementsList[selectedElement]));
 
 								selectElement(selectedElement);
@@ -435,10 +428,6 @@ var EasyAutocomplete = (function(scope) {
 	        		    }
 		        	})
 					.keydown(function(event) {
-					/*if (event.keyCode === 38) {
-						suppressKeypress = true;
-						return false;
-					}*/
 
 					if (event.keyCode === 13 && selectedElement > -1) {
 
@@ -449,7 +438,6 @@ var EasyAutocomplete = (function(scope) {
 						hideContainer();
 
 						event.preventDefault();
-
 					}
 				});
 			}
@@ -464,7 +452,7 @@ var EasyAutocomplete = (function(scope) {
 
 					if ($field.val() !== "" && elementsList.length > 0) {
 						
-						selectedElement = -1;//TODO change to event, also it should remove class active from li element
+						selectedElement = -1;
 						showContainer();	
 					}
 									
@@ -477,7 +465,7 @@ var EasyAutocomplete = (function(scope) {
 					//TODO
 					setTimeout(function() { 
 						
-						selectedElement = -1;//TODO change to event, also it should remove class active from li element
+						selectedElement = -1;
 						hideContainer();
 					}, 250);
 				});
@@ -499,7 +487,7 @@ var EasyAutocomplete = (function(scope) {
 
 		function showContainer() {
 			$container.trigger("show");
-			selectElement(selectedElement);//TODO
+			selectElement(selectedElement);
 		}
 
 		function hideContainer() {

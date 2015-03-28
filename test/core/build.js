@@ -105,4 +105,35 @@ QUnit.test( "Build completer twice on different element", function( assert ) {
 	
 });
 
+QUnit.test( "Build tests - no placeholder", function( assert ) {
+
+	//given
+	var completer = new EasyAutocomplete.main($("#inputOne"), {url: "test.json"});
+
+
+	//execute
+	completer.init();
+
+	var $field = $("#inputOne");
+
+	//assert
+	assert.equal(undefined, $field.attr("placeholder"), "No placeholder");
+});
+
+
+QUnit.test( "Build tests - placeholder", function( assert ) {
+
+	//given
+	var phrase = "search phrase",
+		completer = new EasyAutocomplete.main($("#inputTwo"), {url: "test.json", placeholder: phrase});
+
+
+	//execute
+	completer.init();
+
+	var $field = $("#inputTwo");
+
+	//assert
+	assert.equal(phrase, $field.attr("placeholder"), "Placeholder Ok");
+});
 
