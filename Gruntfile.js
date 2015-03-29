@@ -69,6 +69,15 @@ module.exports = function(grunt) {
       }
     },
 
+      jscs: {
+        options: {
+          config: ".jscsrc"
+        },
+        all: [
+          "<%= jshint.all %>"
+        ]
+      },
+
     qunit: {
       unit: [
         'test/*.html'
@@ -155,11 +164,13 @@ module.exports = function(grunt) {
   
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
   
+grunt.registerTask('doc:jscs', ['jscs']);
+
   grunt.registerTask('doc:jshint', ['jshint']);
 
   grunt.registerTask('doc:csslint', ['csslint:lax']);
 
-  grunt.registerTask('doc', ['jshint', 'csslint:lax']);
+  grunt.registerTask('doc', ['jshint', 'jscs', 'csslint:lax']);
 
   grunt.registerTask('test', ['qunit:unit', 'qunit:integration']);
 

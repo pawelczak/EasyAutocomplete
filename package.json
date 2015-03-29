@@ -19,6 +19,7 @@
     "matchdep": "~0.3.0",
     "grunt-contrib-concat": "~0.5.1",
     "grunt-contrib-qunit": "~0.5.2",
-    "grunt-stripcomments": "~0.3.1"
+    "grunt-stripcomments": "~0.3.1",
+    "grunt-jscs": "~1.6.0"
   }
 }
