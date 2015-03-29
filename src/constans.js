@@ -13,7 +13,7 @@ var EasyAutocomplete = (function(scope){
 
 		this.getValue = function(propertyName) {
 			return constants[propertyName];
-		}
+		};
 
 	};
 

@@ -53,7 +53,7 @@ var EasyAutocomplete = (function(scope){
 						b = defaults.getValue(b);
 
 						if (a === b){
-							return true	
+							return true;
 						}  
 						return false;
 					}
@@ -69,11 +69,11 @@ var EasyAutocomplete = (function(scope){
 					type: "normal",
 					time: 400,
 					callback: function() {}
-				},
+				}
 
 			},
 
-			highlightPhrase: true,
+			highlightPhrase: true
 
 		};
 
@@ -85,7 +85,7 @@ var EasyAutocomplete = (function(scope){
 
 		this.get = function(propertyName) {
 			return defaults[propertyName];
-		}
+		};
 
 		this.equals = function(name, value) {
 			if (isAssigned(name)) {
@@ -95,14 +95,14 @@ var EasyAutocomplete = (function(scope){
 			} 
 			
 			return false;
-		}
+		};
 
 		this.checkDataUrlProperties = function() {
 			if (defaults.url === "list-required" && defaults.data === "list-required") {
 				return false;
 			}
 			return true;
-		}
+		};
 
 		//TODO think about better mechanism
 		this.checkRequiredProperties = function() {
@@ -113,7 +113,7 @@ var EasyAutocomplete = (function(scope){
 				}
 			}
 			return true;
-		}
+		};
 
 
 		//------------------------ Prepare defaults --------------------------
@@ -122,13 +122,13 @@ var EasyAutocomplete = (function(scope){
 		//different defaults are required for xml than json
 		function prepareDefaults() {
 
-			if (options.dataType == "xml") {
+			if (options.dataType === "xml") {
 				
 				if (!options.getValue) {
 
 					options.getValue = function(element) {
 						return $(element).text();
-					}
+					};
 				}
 
 				
@@ -138,7 +138,7 @@ var EasyAutocomplete = (function(scope){
 				} 
 
 				if (!options.list.sort) {
-					options.list.sort = {}
+					options.list.sort = {};
 				}
 
 
@@ -154,7 +154,7 @@ var EasyAutocomplete = (function(scope){
 						return 1;
 					}
 					return 0;
-				}
+				};
 
 				if (!options.list.match) {
 					options.list.match = {};
@@ -165,10 +165,10 @@ var EasyAutocomplete = (function(scope){
 					b = options.getValue(b);
 
 					if (a === b){
-						return true	
+						return true;
 					}  
 					return false;
-				}
+				};
 
 			}
 		}
@@ -190,7 +190,7 @@ var EasyAutocomplete = (function(scope){
 								target[propertyName] instanceof Array) {
 							mergedObject[propertyName] = target[propertyName];		
 						} else {
-							mergeObjects(source[propertyName], target[propertyName])
+							mergeObjects(source[propertyName], target[propertyName]);
 						}
 					}
 				}
@@ -202,9 +202,9 @@ var EasyAutocomplete = (function(scope){
 
 		function processAfterMerge() {
 
-			if (defaults.url !== "list-required" && typeof defaults.url != "function") {
+			if (defaults.url !== "list-required" && typeof defaults.url !== "function") {
 				var defaultUrl = defaults.url;
-				defaults.url = function(phrase) {
+				defaults.url = function() {
 					return defaultUrl;
 				};
 			}
@@ -220,20 +220,9 @@ var EasyAutocomplete = (function(scope){
 				var defaultsGetValue = defaults.getValue;
 				defaults.getValue = function(element) {
 					return element[defaultsGetValue];
-				}
+				};
 			}
 
-		}
-
-		//TODO check if config has value
-		//check (param.name, value)
-		//return boolean
-		function assign(name) {
-			if (defaults[name] !== undefined && defaults[name] !== null) {
-				return true;
-			} else {
-				return false;
-			}
 		}
 
 		function isAssigned(name) {

@@ -5,7 +5,7 @@
 var EasyAutocomplete = (function(scope) {
 
 	
-	scope.main = function Core($field, options) {
+	scope.main = function Core($input, options) {
 				
 		var module = {
 				name: "EasyAutocomplete"
@@ -17,7 +17,7 @@ var EasyAutocomplete = (function(scope) {
 			proccessResponseData = scope.proccess,
 			checkParam = config.equals,
 
-			$field = $field, 
+			$field = $input, 
 			$container = "",
 			elementsList = [],
 			selectedElement = -1;
@@ -27,25 +27,25 @@ var EasyAutocomplete = (function(scope) {
 
 		this.getConstants = function() {
 			return consts;
-		}
+		};
 
 		this.getConfiguration = function() {
 			return config;
-		}
+		};
 
 		this.getContainer = function() {
 			return $container;
-		}
+		};
 
 		//------------------------ PUBLIC METHODS STARTS --------------------------	
 
 		this.build = function() {
 			prepareField();
-		}
+		};
 
 		this.init = function() {
 			init();
-		}
+		};
 
 		//------------------------ PUBLIC METHODS ENDS --------------------------	
 
@@ -131,17 +131,17 @@ var EasyAutocomplete = (function(scope) {
 
 								case "slide":
 									//TODO better handle time
-									var time = config.get("list").showAnimation.time,
+									var animationTime = config.get("list").showAnimation.time,
 										callback = config.get("list").showAnimation.callback;
 
-									$elements_container.find("ul").slideDown(time, callback);
+									$elements_container.find("ul").slideDown(animationTime, callback);
 								break;
 
 								case "fade":
-									var time = config.get("list").showAnimation.time,
+									var animationTime = config.get("list").showAnimation.time,
 										callback = config.get("list").showAnimation.callback;
 
-									$elements_container.find("ul").fadeIn(time), callback;
+									$elements_container.find("ul").fadeIn(animationTime), callback;
 								break;
 
 								default:
@@ -156,17 +156,17 @@ var EasyAutocomplete = (function(scope) {
 							switch(config.get("list").hideAnimation.type) {
 
 								case "slide":
-									var time = config.get("list").hideAnimation.time,
+									var animationTime = config.get("list").hideAnimation.time,
 										callback = config.get("list").hideAnimation.callback;
 
-									$elements_container.find("ul").slideUp(time, callback);
+									$elements_container.find("ul").slideUp(animationTime, callback);
 								break;
 
 								case "fade":
-									var time = config.get("list").hideAnimation.time,
+									var animationTime = config.get("list").hideAnimation.time,
 										callback = config.get("list").hideAnimation.callback;
 
-									$elements_container.find("ul").fadeOut(time, callback);
+									$elements_container.find("ul").fadeOut(animationTime, callback);
 								break;
 
 								default:
@@ -250,7 +250,7 @@ var EasyAutocomplete = (function(scope) {
 				
 				do {
 					elementId = consts.getValue("CONTAINER_ID") + Math.rand(10000);	
-				} while($("#" + elementId).length == 0);
+				} while($("#" + elementId).length === 0);
 
 			} else {
 				elementId = consts.getValue("CONTAINER_ID") + elementId;
@@ -311,7 +311,7 @@ var EasyAutocomplete = (function(scope) {
 
 							if(elementsList.length > 0 && selectedElement > 0) {
 
-								selectedElement -= 1
+								selectedElement -= 1;
 
 								$field.val(config.get("getValue")(elementsList[selectedElement]));
 
@@ -328,7 +328,7 @@ var EasyAutocomplete = (function(scope) {
 
 							if(elementsList.length > 0 && selectedElement < elementsList.length - 1) {
 
-								selectedElement += 1
+								selectedElement += 1;
 
 								$field.val(config.get("getValue")(elementsList[selectedElement]));
 
@@ -412,8 +412,6 @@ var EasyAutocomplete = (function(scope) {
 					}
 
 
-					
-
 				});
 			}
 
@@ -422,7 +420,7 @@ var EasyAutocomplete = (function(scope) {
 					.on("keydown", function(evt) {
 	        		    evt = evt || window.event;
 	        		    var keyCode = evt.keyCode;
-	        		    if (keyCode == 38) {
+	        		    if (keyCode === 38) {
 	        		        suppressKeypress = true; 
 	        		        return false;
 	        		    }
@@ -434,7 +432,7 @@ var EasyAutocomplete = (function(scope) {
 						//enter
 
 						$field.val(config.get("getValue")(elementsList[selectedElement]));
-						selectedElement = -1
+						selectedElement = -1;
 						hideContainer();
 
 						event.preventDefault();
@@ -508,7 +506,7 @@ var EasyAutocomplete = (function(scope) {
 		}
 
 
-	}
+	};
 
 	return scope;
 

@@ -60,7 +60,7 @@ var EasyAutocomplete = (function(scope){
 						b = defaults.getValue(b);
 
 						if (a === b){
-							return true	
+							return true;
 						}  
 						return false;
 					}
@@ -76,11 +76,11 @@ var EasyAutocomplete = (function(scope){
 					type: "normal",
 					time: 400,
 					callback: function() {}
-				},
+				}
 
 			},
 
-			highlightPhrase: true,
+			highlightPhrase: true
 
 		};
 
@@ -92,7 +92,7 @@ var EasyAutocomplete = (function(scope){
 
 		this.get = function(propertyName) {
 			return defaults[propertyName];
-		}
+		};
 
 		this.equals = function(name, value) {
 			if (isAssigned(name)) {
@@ -102,14 +102,14 @@ var EasyAutocomplete = (function(scope){
 			} 
 			
 			return false;
-		}
+		};
 
 		this.checkDataUrlProperties = function() {
 			if (defaults.url === "list-required" && defaults.data === "list-required") {
 				return false;
 			}
 			return true;
-		}
+		};
 		this.checkRequiredProperties = function() {
 			for (var propertyName in defaults) {
 				if (defaults[propertyName] === "required") {
@@ -118,16 +118,16 @@ var EasyAutocomplete = (function(scope){
 				}
 			}
 			return true;
-		}
+		};
 		function prepareDefaults() {
 
-			if (options.dataType == "xml") {
+			if (options.dataType === "xml") {
 				
 				if (!options.getValue) {
 
 					options.getValue = function(element) {
 						return $(element).text();
-					}
+					};
 				}
 
 				
@@ -137,7 +137,7 @@ var EasyAutocomplete = (function(scope){
 				} 
 
 				if (!options.list.sort) {
-					options.list.sort = {}
+					options.list.sort = {};
 				}
 
 
@@ -151,7 +151,7 @@ var EasyAutocomplete = (function(scope){
 						return 1;
 					}
 					return 0;
-				}
+				};
 
 				if (!options.list.match) {
 					options.list.match = {};
@@ -162,10 +162,10 @@ var EasyAutocomplete = (function(scope){
 					b = options.getValue(b);
 
 					if (a === b){
-						return true	
+						return true;
 					}  
 					return false;
-				}
+				};
 
 			}
 		}
@@ -184,7 +184,7 @@ var EasyAutocomplete = (function(scope){
 								target[propertyName] instanceof Array) {
 							mergedObject[propertyName] = target[propertyName];		
 						} else {
-							mergeObjects(source[propertyName], target[propertyName])
+							mergeObjects(source[propertyName], target[propertyName]);
 						}
 					}
 				}
@@ -196,9 +196,9 @@ var EasyAutocomplete = (function(scope){
 
 		function processAfterMerge() {
 
-			if (defaults.url !== "list-required" && typeof defaults.url != "function") {
+			if (defaults.url !== "list-required" && typeof defaults.url !== "function") {
 				var defaultUrl = defaults.url;
-				defaults.url = function(phrase) {
+				defaults.url = function() {
 					return defaultUrl;
 				};
 			}
@@ -214,16 +214,9 @@ var EasyAutocomplete = (function(scope){
 				var defaultsGetValue = defaults.getValue;
 				defaults.getValue = function(element) {
 					return element[defaultsGetValue];
-				}
+				};
 			}
 
-		}
-		function assign(name) {
-			if (defaults[name] !== undefined && defaults[name] !== null) {
-				return true;
-			} else {
-				return false;
-			}
 		}
 
 		function isAssigned(name) {
@@ -277,7 +270,7 @@ var EasyAutocomplete = (function(scope){
 
 		this.getValue = function(propertyName) {
 			return constants[propertyName];
-		}
+		};
 
 	};
 
@@ -370,7 +363,7 @@ var EasyAutocomplete = (function(scope) {
 var EasyAutocomplete = (function(scope) {
 
 	
-	scope.main = function Core($field, options) {
+	scope.main = function Core($input, options) {
 				
 		var module = {
 				name: "EasyAutocomplete"
@@ -382,30 +375,30 @@ var EasyAutocomplete = (function(scope) {
 			proccessResponseData = scope.proccess,
 			checkParam = config.equals,
 
-			$field = $field, 
+			$field = $input, 
 			$container = "",
 			elementsList = [],
 			selectedElement = -1;
 
 		this.getConstants = function() {
 			return consts;
-		}
+		};
 
 		this.getConfiguration = function() {
 			return config;
-		}
+		};
 
 		this.getContainer = function() {
 			return $container;
-		}
+		};
 
 		this.build = function() {
 			prepareField();
-		}
+		};
 
 		this.init = function() {
 			init();
-		}
+		};
 		function init() {
 
 
@@ -472,17 +465,17 @@ var EasyAutocomplete = (function(scope) {
 							switch(config.get("list").showAnimation.type) {
 
 								case "slide":
-									var time = config.get("list").showAnimation.time,
+									var animationTime = config.get("list").showAnimation.time,
 										callback = config.get("list").showAnimation.callback;
 
-									$elements_container.find("ul").slideDown(time, callback);
+									$elements_container.find("ul").slideDown(animationTime, callback);
 								break;
 
 								case "fade":
-									var time = config.get("list").showAnimation.time,
+									var animationTime = config.get("list").showAnimation.time,
 										callback = config.get("list").showAnimation.callback;
 
-									$elements_container.find("ul").fadeIn(time), callback;
+									$elements_container.find("ul").fadeIn(animationTime), callback;
 								break;
 
 								default:
@@ -497,17 +490,17 @@ var EasyAutocomplete = (function(scope) {
 							switch(config.get("list").hideAnimation.type) {
 
 								case "slide":
-									var time = config.get("list").hideAnimation.time,
+									var animationTime = config.get("list").hideAnimation.time,
 										callback = config.get("list").hideAnimation.callback;
 
-									$elements_container.find("ul").slideUp(time, callback);
+									$elements_container.find("ul").slideUp(animationTime, callback);
 								break;
 
 								case "fade":
-									var time = config.get("list").hideAnimation.time,
+									var animationTime = config.get("list").hideAnimation.time,
 										callback = config.get("list").hideAnimation.callback;
 
-									$elements_container.find("ul").fadeOut(time, callback);
+									$elements_container.find("ul").fadeOut(animationTime, callback);
 								break;
 
 								default:
@@ -589,7 +582,7 @@ var EasyAutocomplete = (function(scope) {
 				
 				do {
 					elementId = consts.getValue("CONTAINER_ID") + Math.rand(10000);	
-				} while($("#" + elementId).length == 0);
+				} while($("#" + elementId).length === 0);
 
 			} else {
 				elementId = consts.getValue("CONTAINER_ID") + elementId;
@@ -633,7 +626,7 @@ var EasyAutocomplete = (function(scope) {
 
 							if(elementsList.length > 0 && selectedElement > 0) {
 
-								selectedElement -= 1
+								selectedElement -= 1;
 
 								$field.val(config.get("getValue")(elementsList[selectedElement]));
 
@@ -648,7 +641,7 @@ var EasyAutocomplete = (function(scope) {
 
 							if(elementsList.length > 0 && selectedElement < elementsList.length - 1) {
 
-								selectedElement += 1
+								selectedElement += 1;
 
 								$field.val(config.get("getValue")(elementsList[selectedElement]));
 
@@ -732,8 +725,6 @@ var EasyAutocomplete = (function(scope) {
 					}
 
 
-					
-
 				});
 			}
 
@@ -742,7 +733,7 @@ var EasyAutocomplete = (function(scope) {
 					.on("keydown", function(evt) {
 	        		    evt = evt || window.event;
 	        		    var keyCode = evt.keyCode;
-	        		    if (keyCode == 38) {
+	        		    if (keyCode === 38) {
 	        		        suppressKeypress = true; 
 	        		        return false;
 	        		    }
@@ -752,7 +743,7 @@ var EasyAutocomplete = (function(scope) {
 					if (event.keyCode === 13 && selectedElement > -1) {
 
 						$field.val(config.get("getValue")(elementsList[selectedElement]));
-						selectedElement = -1
+						selectedElement = -1;
 						hideContainer();
 
 						event.preventDefault();
@@ -816,7 +807,7 @@ var EasyAutocomplete = (function(scope) {
 		}
 
 
-	}
+	};
 
 	return scope;
 
