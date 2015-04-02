@@ -46,22 +46,34 @@ QUnit.test("Configuration Default values", function( assert ) {
 	//given
 	var options = {};
 	var expectedOptions = {
-
-			autocompleteOff: true,
-
+			data: "list-required",
 			url: "list-required",
+			dataType: "json",
+
+			listLocation: function(data) {
+				return data;
+			},
+
+			xmlElementName: "",
 
 			getValue: function(element) {
 				return element;
 			},
 
+			autocompleteOff: true,
+
 			placeholder: false,
+
+			ajaxCallback: function() {},
 
 			list: {
 				sort: {
 					enabled: false,
 					method: function(a, b) {
-						
+						a = defaults.getValue(a);
+						b = defaults.getValue(b);
+
+						//Alphabeticall sort
 						if (a < b) {
 							return -1;
 						}
@@ -76,17 +88,37 @@ QUnit.test("Configuration Default values", function( assert ) {
 
 				match: {
 					enabled: false,
+					caseSensitive: false,
 					method: function(a, b) {
+						a = defaults.getValue(a);
+						b = defaults.getValue(b);
+
 						if (a === b){
-							return true	
+							return true;
 						}  
 						return false;
 					}
 				},
 
+				showAnimation: {
+					type: "normal", //normal|slide|fade
+					time: 400,
+					callback: function() {}
+				},
+
+				hideAnimation: {
+					type: "normal",
+					time: 400,
+					callback: function() {}
+				}
+
 			},
 
 			highlightPhrase: true,
+
+			theme: "",
+
+			cssClasses: ""
 	};
 
 
@@ -102,8 +134,17 @@ QUnit.test("Configuration Default values", function( assert ) {
 
 	assertValue("autocompleteOff");
 	assertValue("url");
+	assertValue("data");
+	assertValue("dataType");
 	assertValue("placeholder");
+	assertValue("listLocation");
+	assertValue("xmlElementName");
+
 	assertValue("highlightPhrase");
+	assertValue("theme");
+	assertValue("cssClasses");
+
+
 	//assertValue("getValue");
 	
 	assertValue("maxNumberOfElements", "list");
@@ -114,7 +155,13 @@ QUnit.test("Configuration Default values", function( assert ) {
 	assertValue("enabled", "match", "list");
 	//assertValue("method", "match", "list");
 
-	expect(7);
+	assertValue("type", "showAnimation", "list");
+	assertValue("time", "showAnimation", "list");
+
+	assertValue("type", "hideAnimation", "list");
+	assertValue("time", "hideAnimation", "list");
+
+	expect(17);
 });
 
 QUnit.test("Configuration simple", function( assert ) {
@@ -230,6 +277,10 @@ QUnit.test( "Configuration mixed", function( assert ) {
 			},
 
 			highlightPhrase: true,
+
+			theme: "blue",
+
+			cssClasses: "red",
 	};
 
 	var options = {
@@ -256,6 +307,9 @@ QUnit.test( "Configuration mixed", function( assert ) {
 
 			},
 
+			theme: "blue",
+
+			cssClasses: "red",
 	};
 
 
@@ -269,6 +323,8 @@ QUnit.test( "Configuration mixed", function( assert ) {
 
 	assertValue("url");
 	assertValue("getValue");
+	assertValue("theme");
+	assertValue("cssClasses");
 
 	assertValue("enabled", "sort", "list");
 	assertValue("method", "match", "list");
@@ -282,7 +338,24 @@ QUnit.test( "Configuration mixed", function( assert ) {
 	//assertDefaultValue("method", "sort", "list");
 	assertValue("enabled", "match", "list");
 
-	expect(9);
+	expect(11);
+});
+
+QUnit.test( "Parameter not in configuration", function( assert ) {
+
+	//given
+	var options = {
+		foo: "bar"
+	};
+
+	//execute
+	var actualOptions = new EasyAutocomplete.Configuration(options);
+
+
+	//assert
+	assert.equal(undefined, actualOptions.get("foo") , "Passed - configuration parameter not defined" );
+
+	expect(1);
 });
 
 QUnit.test( "Configuration required fields", function( assert ) {
@@ -320,4 +393,24 @@ QUnit.test( "Data field", function( assert ) {
 	expect(1);
 });
 
+QUnit.test( "String getValue", function( assert ) {
 
+	//given
+	var options = {
+		data: ["red", "gree", "pink"],
+		getValue: "name"
+	},
+	expectedGetValue = function(element) {
+		return element["name"];
+	},
+	testObject = {name: "foo", test: "bar"};
+
+	//execute
+	var actualOptions = new EasyAutocomplete.Configuration(options);
+
+
+	//assert
+	assert.ok(expectedGetValue(testObject) === actualOptions.get("getValue")(testObject) , "Passed - getValue" );
+
+	expect(1);
+});

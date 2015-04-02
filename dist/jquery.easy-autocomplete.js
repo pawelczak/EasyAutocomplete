@@ -80,7 +80,11 @@ var EasyAutocomplete = (function(scope){
 
 			},
 
-			highlightPhrase: true
+			highlightPhrase: true,
+
+			theme: "",
+
+			cssClasses: ""
 
 		};
 
@@ -436,12 +440,30 @@ var EasyAutocomplete = (function(scope) {
 
 			function createWrapper() {
 				var $wrapper = $("<div>"),
-					fieldWidth = $field.outerWidth();
+					classes = consts.getValue("WRAPPER_CSS_CLASS");
+
+			
+				if (config.get("theme")) {
+					classes += " eac-" + config.get("theme");
+				}
+
+				if (config.get("cssClasses")) {
+					classes += " " + config.get("cssClasses");
+				}
 
 				$wrapper
-					.addClass(consts.getValue("WRAPPER_CSS_CLASS"))
-					.css("width", fieldWidth);
+					.addClass(classes);
 				$field.wrap($wrapper);
+
+
+				adjustWrapperWidth();
+
+			}
+
+			function adjustWrapperWidth() {
+				var fieldWidth = $field.outerWidth();
+
+				$field.parent().css("width", fieldWidth);				
 			}
 
 			function removeWrapper() {

@@ -118,6 +118,8 @@ QUnit.test( "Build tests - no placeholder", function( assert ) {
 
 	//assert
 	assert.equal(undefined, $field.attr("placeholder"), "No placeholder");
+
+	expect(1);
 });
 
 
@@ -135,5 +137,120 @@ QUnit.test( "Build tests - placeholder", function( assert ) {
 
 	//assert
 	assert.equal(phrase, $field.attr("placeholder"), "Placeholder Ok");
+
+	expect(1);
 });
 
+
+
+QUnit.test( "Build tests - color theme", function( assert ) {
+
+	//given
+	var cssClass = "blue-light",
+		completer = new EasyAutocomplete.main($("#inputOne"), {url: "test.json", theme: cssClass});
+
+
+	Array.prototype.contains = function(obj) {
+		var i = this.length;
+	    while (i--) {
+	        if (this[i] === obj) {
+	            return true;
+	        }
+	    }
+	    return false;
+	};
+
+	//execute
+	completer.init();
+
+	var $field = $("#inputOne");
+
+	var classes = $field.parent().attr("class").split(" ");
+
+	//assert
+	assert.ok(classes.contains("eac-" + cssClass), "Color theme");
+
+	expect(1);
+});
+
+
+QUnit.test( "Build tests - custom classes", function( assert ) {
+
+	//given
+	var cssClass = "my custom classes",
+		completer = new EasyAutocomplete.main($("#inputTwo"), {url: "test.json", cssClasses: cssClass});
+
+
+	Array.prototype.contains = function(obj) {
+		var i = this.length;
+	    while (i--) {
+	        if (this[i] === obj) {
+	            return true;
+	        }
+	    }
+	    return false;
+	};
+
+	//execute
+	completer.init();
+
+	var $field = $("#inputTwo");
+
+	var classes = $field.parent().attr("class").split(" ");
+
+	//assert
+	assert.ok(classes.contains("my"), "first class");
+	assert.ok(classes.contains("custom"), "second css class");
+	assert.ok(classes.contains("classes"), "third css class");
+
+	expect(3);
+});
+
+QUnit.test( "Build tests - themes & custom classes", function( assert ) {
+
+	//given
+	var theme = "blue-light"
+		cssClass = "my custom classes",
+		completer = new EasyAutocomplete.main($("#inputTwo"), {url: "test.json", theme: theme, cssClasses: cssClass});
+
+
+	Array.prototype.contains = function(obj) {
+		var i = this.length;
+	    while (i--) {
+	        if (this[i] === obj) {
+	            return true;
+	        }
+	    }
+	    return false;
+	};
+
+	//execute
+	completer.init();
+
+	var $field = $("#inputTwo");
+
+	var classes = $field.parent().attr("class").split(" ");
+
+	//assert
+	assert.ok(classes.contains("eac-" + theme), "theme class");
+	assert.ok(classes.contains("my"), "first class");
+	assert.ok(classes.contains("custom"), "second css class");
+	assert.ok(classes.contains("classes"), "third css class");
+
+	expect(4);
+});
+
+QUnit.test( "Build tests - wrapper width", function( assert ) {
+
+	//given
+	var completer = new EasyAutocomplete.main($("#inputTwo"), {url: "test.json"});
+
+	//execute
+	completer.init();
+
+	//assert
+	//Doesnt work when not runned in browser
+	//assert.equal(169, $("#inputTwo").parent().innerWidth(), "Passes - wrapper width");
+	
+	expect(0);
+});

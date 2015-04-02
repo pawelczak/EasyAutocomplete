@@ -99,14 +99,33 @@ var EasyAutocomplete = (function(scope) {
 
 			function createWrapper() {
 				var $wrapper = $("<div>"),
-					fieldWidth = $field.outerWidth();
+					classes = consts.getValue("WRAPPER_CSS_CLASS");
+
+			
+				if (config.get("theme")) {
+					classes += " eac-" + config.get("theme");
+				}
+
+				if (config.get("cssClasses")) {
+					classes += " " + config.get("cssClasses");
+				}
 
 				$wrapper
-					.addClass(consts.getValue("WRAPPER_CSS_CLASS"))
-					.css("width", fieldWidth);
+					.addClass(classes);
+
 
 				//wrapp field with main div wrapper
 				$field.wrap($wrapper);
+
+
+				adjustWrapperWidth();
+
+			}
+
+			function adjustWrapperWidth() {
+				var fieldWidth = $field.outerWidth();
+
+				$field.parent().css("width", fieldWidth);				
 			}
 
 			function removeWrapper() {

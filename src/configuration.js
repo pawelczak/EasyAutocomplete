@@ -73,7 +73,11 @@ var EasyAutocomplete = (function(scope){
 
 			},
 
-			highlightPhrase: true
+			highlightPhrase: true,
+
+			theme: "",
+
+			cssClasses: ""
 
 		};
 

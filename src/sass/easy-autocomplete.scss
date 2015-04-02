@@ -1,10 +1,235 @@
+
+$blue: #5A91CB;
+$blue-light: rgba(102, 175, 233, 1);
+$blue-lighter: rgba(102, 175, 233, 0.6);
+$green-light: #41DB00;
+$green-lighter: rgba(146, 237, 107, 0.6);
+$red-light: #ff5b5b;
+$red-lighter: rgba(255, 90, 90, 0.6);
+$yellow-light: #ffdb00;
+$yellow-lighter: rgba(255, 231, 84, 0.6);
+$dark-light: #333;
+$dark-lighter: rgba(55, 55, 55, 0.6);
+
+$dark: #333;
+
 .easy-autocomplete {
     position: relative;
 
-    input[type="text"] {
-        color: #333;
+    input {
+        border: {
+            color: #ccc;
+            radius: 2px;
+            style: solid;
+            width: 1px;
+        }
+        color: #555;
+        padding: 6px 12px;
     }
+
+
+
+
+    &.eac-blue-light {
+
+        input {
+
+            &:hover, &:focus {
+                border-color: $blue-light;
+                box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px $blue-lighter;
+            }
+        }
+
+        ul {
+            border-color: $blue-light;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px $blue-lighter;
+
+            li {
+                border-color: $blue-light;
+
+                &.selected {
+                    background-color: lighten($blue-light, 30%);
+                }
+
+            }
+        }
+    }
+
+    &.eac-green-light {
+
+        input {
+            &:hover, &:focus {
+                border-color: $green-light;
+                box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px $green-lighter;
+            }
+        }
+
+        ul {
+            border-color: $green-light;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px $green-lighter;
+
+            li {
+                border-color: $green-light;
+
+                &.selected {
+                    background-color: lighten($green-light, 30%);
+                }
+
+            }
+        }
+    }
+
+    &.eac-red-light {
+
+        input {
+            &:hover, &:focus {
+                border-color: $red-light;
+                box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px $red-lighter;
+            }
+        }
+
+        ul {
+            border-color: $red-light;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px $red-lighter;
+
+            li {
+                border-color: $red-light;
+
+                &.selected {
+                    background-color: lighten($red-light, 10%);
+                }
+
+            }
+        }
+    }
+
+    &.eac-yellow-light {
+
+        input {
+            &:hover, &:focus {
+                border-color: $yellow-light;
+                box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px $yellow-lighter;
+            }
+        }
+
+        ul {
+            border-color: $yellow-light;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px $yellow-lighter;
+
+            li {
+                border-color: $yellow-light;
+
+                &.selected {
+                    background-color: lighten($yellow-light, 10%);
+                }
+
+            }
+        }
+    }
+
+    &.eac-dark-light {
+
+        input {
+            &:hover, &:focus {
+                border-color: $dark-light;
+                box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px $dark-lighter;
+            }
+        }
+
+        ul {
+            border-color: $dark-light;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px $dark-lighter;
+
+            li {
+                border-color: $dark-light;
+
+                &.selected {
+                    background-color: lighten($dark-light, 10%);
+                    color: #fff;
+                }
+
+            }
+        }
+    }
+
+    &.eac-dark {
+        color: #fff;
+
+        input {
+            background-color: lighten($dark-light, 5%);
+            border: {
+                radius: 4px;
+            }
+            color: #f6f6f6;
+
+            &:hover, &:focus {
+                border-color: $dark;
+            }
+        }
+
+        ul {
+            border-color: $dark;
+
+            li {
+                background-color: lighten($dark-light, 5%);
+                border-color: $dark;
+
+                &.selected {
+                    background-color: lighten($dark, 25%);
+                    color: #f6f6f6;
+                }
+
+            }
+        }
+    }
+
+
+    &.eac-blue {
+        color: #fff;
+
+        input {
+            background-color: lighten($blue, 5%);
+            border: {
+                radius: 4px;
+            }
+            color: #f6f6f6;
+
+            &:hover, &:focus {
+                border-color: $blue;
+            }
+        }
+
+        ul {
+            border-color: $blue;
+
+            li {
+                background-color: lighten($blue, 5%);
+                border-color: $blue;
+
+                &.selected {
+                    background-color: lighten($blue, 15%);
+                    color: #f6f6f6;
+                }
+
+            }
+        }
+    }
+
+    &.eac-bootstrap {
+
+        input {
+            border-color: #ccc;
+            border-radius: 4px;
+            border-style: solid;
+            border-width: 1px;
+            color: #555;
+            padding: 6px 12px;
+        }
+    }
+
+
 }
+
  
 .easy-autocomplete-container {
     left: 0;
