@@ -3,7 +3,7 @@
 
 
 
-Visit EasyAutocomplete page <a href='http://easyautocomplete.com' >http://easyautocomplete.com</a>. You can found there full documentation <a href='http://easyautocomplete.com/?page=guide' >guide</a> on how to use EasyAutocomplete plugin.
+Visit EasyAutocomplete page <a href='http://easyautocomplete.com' >http://easyautocomplete.com</a>. You can find there full documentation <a href='http://easyautocomplete.com/?page=guide' >guide</a> on how to use EasyAutocomplete plugin.
 
 ###File location:
 * Distribution files Javascript, CSS are in `dist` folder,
