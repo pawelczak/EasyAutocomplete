@@ -1,9 +1,9 @@
 /*
- * EasyAutocomplete
+ * easy-autocomplete
  * jQuery plugin for autocompletion
  * 
- * @author Łukasz Pawełczak
- * @version 1.0.0
+ * @author Łukasz Pawełczak (http://github.com/pawelczak)
+ * @version 1.0.2
  * Copyright MIT License: https://github.com/pawelczak/easy-autocomplete/blob/master/LICENSE.txt
  */
 
@@ -361,6 +361,157 @@ var EasyAutocomplete = (function(scope) {
 
 
 /*
+ * EasyAutocomplete - Template 
+ *
+ * 
+ *
+ */
+var EasyAutocomplete = (function(scope){
+
+	scope.Template = function Template(options) {
+
+
+
+		var genericTemplates = {
+			basic: {
+				type: "basic",
+				method: function(element) { return element; }
+			},
+			description: {
+				type: "description",
+				fields: {
+					description: "description"
+				},
+				method: function(element) {	return element + " - description"; }
+			},
+			iconLeft: {
+				type: "iconLeft",
+				fields: {
+					icon: ""
+				},
+				method: function(element) {
+					return element;
+				}
+			},
+			iconRight: {
+				type: "iconRight",
+				fields: {
+					iconSrc: ""
+				},
+				method: function(element) {
+					return element;
+				}
+			},
+			custom: {
+				type: "custom",
+				method: function() {}
+			}
+		},
+
+
+
+
+
+		/*
+		 * Converts method with {{text}} to function
+		 */
+		convertTemplateToMethod = function(template) {
+
+			if (template.type === "description") {
+
+			
+				var _fields = template.fields;
+
+				var buildMethod = function(elementValue, element) {
+					return elementValue + " - " + element[_fields.description];
+				};
+
+
+				return buildMethod;
+
+			}
+
+			if (template.type === "iconRight") {
+
+				var _fields = template.fields;
+
+				var buildMethod = "";
+
+				if (typeof _fields.iconSrc === "string") {
+					buildMethod = function(elementValue, element) {
+						return elementValue + "<img class='eac-icon' src='" + element[_fields.iconSrc] + "' />" ;
+					};					
+				} else if (typeof _fields.iconSrc === "function") {
+					buildMethod = function(elementValue, element) {
+						return elementValue + "<img class='eac-icon' src='" + _fields.iconSrc(element) + "' />" ;
+					};
+				}
+
+				return buildMethod;
+			}
+
+
+			if (template.type === "iconLeft") {
+
+				var _fields = template.fields;
+
+				var buildMethod = "";
+
+				if (typeof _fields.iconSrc === "string") {
+					buildMethod = function(elementValue, element) {
+						return "<img class='eac-icon' src='" + element[_fields.iconSrc] + "' />" + elementValue ;
+					};					
+				} else if (typeof _fields.iconSrc === "function") {
+					buildMethod = function(elementValue, element) {
+						return "<img class='eac-icon' src='" + _fields.iconSrc(element) + "' />" + elementValue;
+					};
+				}
+
+				return buildMethod;
+			}
+
+
+			if (template.type === "custom") {
+
+				return template.method;
+			}
+
+			return genericTemplates.basic.method;
+
+		}
+
+
+		prepareBuildMethod = function(options) {
+			if (!options || !options.type) {
+
+				return genericTemplates.basic.method;
+			}
+
+			if (options.type && genericTemplates[options.type]) {
+				return convertTemplateToMethod(options);
+			} else {
+
+				return genericTemplates.basic.method;
+			}
+
+
+
+			return convertTemplateToMethod(template);
+
+		};
+
+
+		this.build = prepareBuildMethod(options);
+
+
+	}
+
+	return scope;
+
+})(EasyAutocomplete || {});
+
+
+/*
  * EasyAutocomplete - jQuery plugin for autocompletion
  *
  */
@@ -376,6 +527,7 @@ var EasyAutocomplete = (function(scope) {
 		var consts = new scope.Constans(),
 			config = new scope.Configuration(options),
 			logger = new scope.Logger(),
+			template = new scope.Template(options.template),
 			proccessResponseData = scope.proccess,
 			checkParam = config.equals,
 
@@ -544,14 +696,14 @@ var EasyAutocomplete = (function(scope) {
 							$listContainer.empty();
 
 							for(var i = 0, length = list.length; i < length; i += 1) {
-								$item = $("<li><span></span></li>");
+								$item = $("<li><div class='eac-item'></div></li>");
 								
 
 								(function() {
 									var j = i,
 										elementsValue = config.get("getValue")(list[j]);
 
-									$item.find("span")
+									$item.find(" > div")
 										.on("click", function() {
 
 											$field.val(elementsValue);
@@ -562,7 +714,7 @@ var EasyAutocomplete = (function(scope) {
 											selectedElement = j;
 											selectElement(j);	
 										})
-										.html(highlight(elementsValue, phrase));
+										.html(template.build(highlight(elementsValue, phrase), list[j]));
 								})();
 
 								$listContainer.append($item);

@@ -34,9 +34,9 @@ QUnit.test("JSON - Simple list response", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 			assert.equal(3, elements.length, "Response size");
-			assert.equal("red", elements.eq(0).find("span").text(), "First element value");
-			assert.equal("yellow", elements.eq(1).find("span").text(), "Second element value");
-			assert.equal("brown", elements.eq(2).find("span").text(), "Third element value");
+			assert.equal("red", elements.eq(0).find("div").text(), "First element value");
+			assert.equal("yellow", elements.eq(1).find("div").text(), "Second element value");
+			assert.equal("brown", elements.eq(2).find("div").text(), "Third element value");
 			
 			QUnit.start();	
 	}
@@ -79,9 +79,9 @@ QUnit.test("JSON - Simple object", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 			assert.equal(3, elements.length, "Response size");
-			assert.equal("red", elements.eq(0).find("span").text(), "First element value");
-			assert.equal("yellow", elements.eq(1).find("span").text(), "Second element value");
-			assert.equal("brown", elements.eq(2).find("span").text(), "Third element value");
+			assert.equal("red", elements.eq(0).find("div").text(), "First element value");
+			assert.equal("yellow", elements.eq(1).find("div").text(), "Second element value");
+			assert.equal("brown", elements.eq(2).find("div").text(), "Third element value");
 			
 			QUnit.start();	
 	}
@@ -122,9 +122,9 @@ QUnit.test("JSON - Simple object - getValue equals string", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 			assert.equal(3, elements.length, "Response size");
-			assert.equal("red", elements.eq(0).find("span").text(), "First element value");
-			assert.equal("yellow", elements.eq(1).find("span").text(), "Second element value");
-			assert.equal("brown", elements.eq(2).find("span").text(), "Third element value");
+			assert.equal("red", elements.eq(0).find("div").text(), "First element value");
+			assert.equal("yellow", elements.eq(1).find("div").text(), "Second element value");
+			assert.equal("brown", elements.eq(2).find("div").text(), "Third element value");
 			
 			QUnit.start();	
 	}
@@ -161,9 +161,9 @@ QUnit.test("JSON - Sorted list", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 			assert.equal(3, elements.length, "Response size");
-			assert.equal("brown", elements.eq(0).find("span").text(), "First element value");
-			assert.equal("red", elements.eq(1).find("span").text(), "Second element value");
-			assert.equal("yellow", elements.eq(2).find("span").text(), "Third element value");
+			assert.equal("brown", elements.eq(0).find("div").text(), "First element value");
+			assert.equal("red", elements.eq(1).find("div").text(), "Second element value");
+			assert.equal("yellow", elements.eq(2).find("div").text(), "Third element value");
 			
 			QUnit.start();	
 	}
@@ -218,9 +218,9 @@ QUnit.test("JSON - Reverse sorted list", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 			assert.equal(3, elements.length, "Response size");
-			assert.equal("yellow", elements.eq(0).find("span").text(), "First element value");
-			assert.equal("red", elements.eq(1).find("span").text(), "Second element value");
-			assert.equal("brown", elements.eq(2).find("span").text(), "Third element value");
+			assert.equal("yellow", elements.eq(0).find("div").text(), "First element value");
+			assert.equal("red", elements.eq(1).find("div").text(), "Second element value");
+			assert.equal("brown", elements.eq(2).find("div").text(), "Third element value");
 			
 			QUnit.start();	
 	}
@@ -264,7 +264,7 @@ QUnit.test("JSON - Max elements number list", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 			assert.equal(1, elements.length, "Response size");
-			assert.equal("red", elements.eq(0).find("span").text(), "First element value");
+			assert.equal("red", elements.eq(0).find("div").text(), "First element value");
 			
 			QUnit.start();	
 	}
@@ -309,8 +309,8 @@ QUnit.test("JSON - match - string list phrase 're'", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 			assert.equal(2, elements.length, "Response size");
-			assert.equal("red", elements.eq(0).find("span").text(), "Red element value");
-			assert.equal("brown", elements.eq(1).find("span").text(), "Brown element value");
+			assert.equal("red", elements.eq(0).find("div").text(), "Red element value");
+			assert.equal("brown", elements.eq(1).find("div").text(), "Brown element value");
 			
 			QUnit.start();	
 	}
@@ -360,8 +360,8 @@ QUnit.test("JSON - Match all elements from list", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 			assert.equal(206, elements.length, "Response size");
-			assert.equal("Cocos (Keeling) Islands", elements.eq(41).find("span").text(), "Cocos (Keeling) Islands element value");
-			assert.equal("Malaysia", elements.eq(111).find("span").text(), "Malaysia element value");
+			assert.equal("Cocos (Keeling) Islands", elements.eq(41).find("div").text(), "Cocos (Keeling) Islands element value");
+			assert.equal("Malaysia", elements.eq(111).find("div").text(), "Malaysia element value");
 			
 			QUnit.start();	
 	}
@@ -410,8 +410,8 @@ QUnit.test("JSON - Simple match list phrase 'ok'", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 			assert.equal(2, elements.length, "Response size");
-			assert.equal("Cook Islands", elements.eq(0).find("span").text(), "Cook island element value");
-			assert.equal("Tokelau", elements.eq(1).find("span").text(), "Tokelau element value");
+			assert.equal("Cook Islands", elements.eq(0).find("div").text(), "Cook island element value");
+			assert.equal("Tokelau", elements.eq(1).find("div").text(), "Tokelau element value");
 			
 			QUnit.start();	
 	}
@@ -452,8 +452,8 @@ QUnit.test("JSON - Dont highlight phrase", function( assert ) {
 	function assertList() {
 		var elements = $("#inputOne").next().find("ul li");
 
-			assert.equal("red", elements.eq(0).find("span").html(), "red element value");
-			assert.equal("brown", elements.eq(2).find("span").html(), "brown element value");
+			assert.equal("red", elements.eq(0).find("div").html(), "red element value");
+			assert.equal("brown", elements.eq(2).find("div").html(), "brown element value");
 			
 			QUnit.start();	
 	}
@@ -495,8 +495,8 @@ QUnit.test("JSON - Highlight - string list ", function( assert ) {
 	function assertList() {
 		var elements = $("#inputOne").next().find("ul li");
 
-			assert.equal("<b>r</b>ed", elements.eq(0).find("span").html(), "red element value");
-			assert.equal("b<b>r</b>own", elements.eq(2).find("span").html(), "brown element value");
+			assert.equal("<b>r</b>ed", elements.eq(0).find("div").html(), "red element value");
+			assert.equal("b<b>r</b>own", elements.eq(2).find("div").html(), "brown element value");
 			
 			QUnit.start();	
 	}
@@ -540,8 +540,8 @@ QUnit.test("JSON - Highlight - object list", function( assert ) {
 	function assertList() {
 		var elements = $("#inputOne").next().find("ul li");
 
-			assert.equal("<b>r</b>ed", elements.eq(0).find("span").html(), "red element value");
-			assert.equal("b<b>r</b>own", elements.eq(2).find("span").html(), "brown element value");
+			assert.equal("<b>r</b>ed", elements.eq(0).find("div").html(), "red element value");
+			assert.equal("b<b>r</b>own", elements.eq(2).find("div").html(), "brown element value");
 			
 			QUnit.start();	
 	}
@@ -592,10 +592,10 @@ QUnit.test("JSON - duckduckgo response", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 			assert.equal(10, elements.length, "Response size");
-			assert.equal("Autocorrect, automatic correction of misspelled words.", elements.eq(0).find("span").text(), "First element value");
-			assert.equal("Text editor features", elements.eq(6).find("span").text(), "Second element value");
-			assert.equal("Disability software", elements.eq(7).find("span").text(), "Third element value");
-			assert.equal("Free software", elements.eq(9).find("span").text(), "Fourth element value");
+			assert.equal("Autocorrect, automatic correction of misspelled words.", elements.eq(0).find("div").text(), "First element value");
+			assert.equal("Text editor features", elements.eq(6).find("div").text(), "Second element value");
+			assert.equal("Disability software", elements.eq(7).find("div").text(), "Third element value");
+			assert.equal("Free software", elements.eq(9).find("div").text(), "Fourth element value");
 			QUnit.start();	
 	}
 });

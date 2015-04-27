@@ -41,10 +41,10 @@ QUnit.test("XML - Simple response", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 			assert.equal(4, elements.length, "Response size");
-			assert.equal("red", elements.eq(0).find("span").text(), "First element value");
-			assert.equal("green", elements.eq(1).find("span").text(), "Second element value");
-			assert.equal("blue", elements.eq(2).find("span").text(), "Third element value");
-			assert.equal("pink", elements.eq(3).find("span").text(), "Fourth element value");
+			assert.equal("red", elements.eq(0).find("div").text(), "First element value");
+			assert.equal("green", elements.eq(1).find("div").text(), "Second element value");
+			assert.equal("blue", elements.eq(2).find("div").text(), "Third element value");
+			assert.equal("pink", elements.eq(3).find("div").text(), "Fourth element value");
 			
 			QUnit.start();	
 	}
@@ -90,10 +90,10 @@ QUnit.test("XML - Sorted list", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 			assert.equal(4, elements.length, "Response size");
-			assert.equal("blue", elements.eq(0).find("span").text(), "First element value");
-			assert.equal("green", elements.eq(1).find("span").text(), "Second element value");
-			assert.equal("pink", elements.eq(2).find("span").text(), "Third element value");
-			assert.equal("red", elements.eq(3).find("span").text(), "Fourth element value");
+			assert.equal("blue", elements.eq(0).find("div").text(), "First element value");
+			assert.equal("green", elements.eq(1).find("div").text(), "Second element value");
+			assert.equal("pink", elements.eq(2).find("div").text(), "Third element value");
+			assert.equal("red", elements.eq(3).find("div").text(), "Fourth element value");
 			
 			QUnit.start();	
 	}
@@ -141,7 +141,7 @@ QUnit.test("XML - Max elements number list", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 			assert.equal(1, elements.length, "Response size");
-			assert.equal("red", elements.eq(0).find("span").text(), "First element value");
+			assert.equal("red", elements.eq(0).find("div").text(), "First element value");
 			
 			QUnit.start();	
 	}
@@ -187,10 +187,10 @@ QUnit.test("XML - Simple object", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 			assert.equal(4, elements.length, "Response size");
-			assert.equal("red", elements.eq(0).find("span").text(), "First element value");
-			assert.equal("green", elements.eq(1).find("span").text(), "Second element value");
-			assert.equal("blue", elements.eq(2).find("span").text(), "Third element value");
-			assert.equal("pink", elements.eq(3).find("span").text(), "Fourth element value");
+			assert.equal("red", elements.eq(0).find("div").text(), "First element value");
+			assert.equal("green", elements.eq(1).find("div").text(), "Second element value");
+			assert.equal("blue", elements.eq(2).find("div").text(), "Third element value");
+			assert.equal("pink", elements.eq(3).find("div").text(), "Fourth element value");
 			
 			QUnit.start();	
 	}
@@ -238,8 +238,8 @@ QUnit.test("XML - match simple list - phrase 're'", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 			assert.equal(2, elements.length, "Response size");
-			assert.equal("red", elements.eq(0).find("span").text(), "Red element value");
-			assert.equal("green", elements.eq(1).find("span").text(), "Green element value");
+			assert.equal("red", elements.eq(0).find("div").text(), "Red element value");
+			assert.equal("green", elements.eq(1).find("div").text(), "Green element value");
 			
 			QUnit.start();	
 	}
@@ -291,8 +291,8 @@ QUnit.test("XML - match advance object phrase 're'", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 			assert.equal(2, elements.length, "Response size");
-			assert.equal("red", elements.eq(0).find("span").text(), "Red element value");
-			assert.equal("green", elements.eq(1).find("span").text(), "Green element value");
+			assert.equal("red", elements.eq(0).find("div").text(), "Red element value");
+			assert.equal("green", elements.eq(1).find("div").text(), "Green element value");
 			
 			QUnit.start();	
 	}
@@ -336,10 +336,10 @@ QUnit.test("XML - Highlight phrase", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 			assert.equal(4, elements.length, "Response size");
-			assert.equal("r<b>e</b>d", elements.eq(0).find("span").html(), "First element value");
-			assert.equal("gr<b>e</b><b>e</b>n", elements.eq(1).find("span").html(), "Second element value");
-			assert.equal("blu<b>e</b>", elements.eq(2).find("span").html(), "Third element value");
-			assert.equal("pink", elements.eq(3).find("span").html(), "Fourth element value");
+			assert.equal("r<b>e</b>d", elements.eq(0).find("div").html(), "First element value");
+			assert.equal("gr<b>e</b><b>e</b>n", elements.eq(1).find("div").html(), "Second element value");
+			assert.equal("blu<b>e</b>", elements.eq(2).find("div").html(), "Third element value");
+			assert.equal("pink", elements.eq(3).find("div").html(), "Fourth element value");
 			
 			QUnit.start();	
 	}
@@ -384,10 +384,10 @@ QUnit.test("XML - Dont highlight phrase", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 			assert.equal(4, elements.length, "Response size");
-			assert.equal("red", elements.eq(0).find("span").html(), "First element value");
-			assert.equal("green", elements.eq(1).find("span").html(), "Second element value");
-			assert.equal("blue", elements.eq(2).find("span").html(), "Third element value");
-			assert.equal("pink", elements.eq(3).find("span").html(), "Fourth element value");
+			assert.equal("red", elements.eq(0).find("div").html(), "First element value");
+			assert.equal("green", elements.eq(1).find("div").html(), "Second element value");
+			assert.equal("blue", elements.eq(2).find("div").html(), "Third element value");
+			assert.equal("pink", elements.eq(3).find("div").html(), "Fourth element value");
 			
 			QUnit.start();	
 	}

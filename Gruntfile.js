@@ -34,7 +34,7 @@ module.exports = function(grunt) {
 
     concat: {
       "src-js": {
-        src: ['src/configuration.js', 'src/logger.js', 'src/constans.js', 'src/proccessData.js', 'src/core.js'],
+        src: ['src/configuration.js', 'src/logger.js', 'src/constans.js', 'src/proccessData.js', 'src/template.js', 'src/core.js'],
         dest: '<%= project.js.dest %>',
       }
     },
@@ -69,14 +69,14 @@ module.exports = function(grunt) {
       }
     },
 
-      jscs: {
-        options: {
-          config: ".jscsrc"
-        },
-        all: [
-          "<%= jshint.all %>"
-        ]
+    jscs: {
+      options: {
+        config: ".jscsrc"
       },
+      all: [
+        "<%= jshint.all %>"
+      ]
+    },
 
     qunit: {
       unit: [
@@ -85,7 +85,8 @@ module.exports = function(grunt) {
       integration: [
         'test/core/plugin.html',
         'test/core/build.html',
-        'test/core/response.html'
+        'test/core/response.html',
+        'test/core/template.html'
       ]
     },
     

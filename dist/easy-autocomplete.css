@@ -1,9 +1,9 @@
 /*
- * EasyAutocomplete
+ * easy-autocomplete
  * jQuery plugin for autocompletion
  * 
- * @author Łukasz Pawełczak
- * @version 1.0.0
+ * @author Łukasz Pawełczak (http://github.com/pawelczak)
+ * @version 1.0.2
  * Copyright MIT License: https://github.com/pawelczak/easy-autocomplete/blob/master/LICENSE.txt
  */
 
@@ -257,10 +257,10 @@
   background: none repeat scroll 0 0 #ebebeb;
   cursor: pointer;
 }
-.easy-autocomplete-container ul li.selected span {
+.easy-autocomplete-container ul li.selected div {
   font-weight: normal;
 }
-.easy-autocomplete-container ul li span {
+.easy-autocomplete-container ul li div {
   display: block;
   font-weight: normal;
 }

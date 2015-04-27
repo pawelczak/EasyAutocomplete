@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>EasyAutocomplete json example</title>
+		<link href="../dist/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
+		<link href="resources/flags.css"  rel="stylesheet" type="text/css" >
+		<script src="../lib/jquery-1.11.2.min.js"></script>
+		<script src="../dist/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
+	</head>
+	<body>
+
+		<h1>EasyAutocomplete - country flags example</h1>
+
+		<input id="flags" />
+
+		<script>
+
+		var options = {
+			url: "resources/countries.json",
+
+			getValue: "name",
+
+			list: {
+				match: {
+					enabled: true
+				}
+			},
+
+			template: {
+				type: "custom",
+				method: function(value, item) {
+					return "<span class='flag flag-" + (item.code).toLowerCase() + "' ></span>" + value;
+				}
+			}
+		};
+
+		$("#flags").easyAutocomplete(options);
+
+		</script>
+
+	</body>
+
+</html>

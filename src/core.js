@@ -14,6 +14,7 @@ var EasyAutocomplete = (function(scope) {
 		var consts = new scope.Constans(),
 			config = new scope.Configuration(options),
 			logger = new scope.Logger(),
+			template = new scope.Template(options.template),
 			proccessResponseData = scope.proccess,
 			checkParam = config.equals,
 
@@ -207,14 +208,14 @@ var EasyAutocomplete = (function(scope) {
 							$listContainer.empty();
 
 							for(var i = 0, length = list.length; i < length; i += 1) {
-								$item = $("<li><span></span></li>");
+								$item = $("<li><div class='eac-item'></div></li>");
 								
 
 								(function() {
 									var j = i,
 										elementsValue = config.get("getValue")(list[j]);
 
-									$item.find("span")
+									$item.find(" > div")
 										.on("click", function() {
 
 											$field.val(elementsValue);
@@ -225,7 +226,7 @@ var EasyAutocomplete = (function(scope) {
 											selectedElement = j;
 											selectElement(j);	
 										})
-										.html(highlight(elementsValue, phrase));
+										.html(template.build(highlight(elementsValue, phrase), list[j]));
 								})();
 
 								$listContainer.append($item);
