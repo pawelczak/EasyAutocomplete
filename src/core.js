@@ -111,6 +111,11 @@ var EasyAutocomplete = (function(scope) {
 					classes += " " + config.get("cssClasses");
 				}
 
+				if (template.getTemplateClass() !== "") {
+					classes += " " + template.getTemplateClass();
+				}
+				
+
 				$wrapper
 					.addClass(classes);
 
@@ -535,4 +540,5 @@ var EasyAutocomplete = (function(scope) {
 
 $.fn.easyAutocomplete = function(options) {
 	new EasyAutocomplete.main(this, options).init();
-}
+};
+

@@ -390,6 +390,7 @@ $purple: #c7c0de;
             div {
                 display: block;
                 font-weight: normal;
+                word-break: break-all;
             }
 
             b {
@@ -402,3 +403,42 @@ $purple: #c7c0de;
 }
 
 
+.eac-description {
+    
+    .eac-item {
+
+        span {
+            color: #aaa;
+            font-style: italic;
+            font-size: 0.9em;
+        }
+    }
+}
+
+.eac-icon-left {
+    
+    .eac-item {
+        img {
+            margin-right: 4px;
+            max-height: 30px;
+        }
+    }    
+}
+
+
+.eac-icon-right {
+    
+    .eac-item {
+        margin-top: 8px;
+        min-height: 24px;
+        position: relative;
+
+        img {
+            margin-left: 4px;
+            max-height: 30px;
+            position: absolute;
+            right: -4px;
+            top: -8px;
+        }
+    }    
+}

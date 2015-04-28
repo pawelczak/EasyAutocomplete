@@ -49,7 +49,7 @@ QUnit.test("Template - description template", function( assert ) {
 
 	//assert
 	assert.ok(typeof template.build == "function", "Build is function");
-	assert.ok(template.build("bruce", {description: "willis"}) === "bruce - willis", "Build returns value");	
+	assert.ok(template.build("bruce", {description: "willis"}) === "bruce - <span>willis</span>", "Build returns value");	
 	//assert.ok(template.build.toString() === 'function (element) {	return element + " - description"; }', "Build equals def value");
 	expect(2);
 });
@@ -71,4 +71,25 @@ QUnit.test("Template - custom template", function( assert ) {
 	assert.ok(template.build.toString() === 'function () {}', "Build equals def value");
 	expect(2);
 });
+
+
+
+
+
+QUnit.test("Template - cssClass description", function( assert ) {
+	
+
+	//given
+	var	options = {type: "description", method: function() {}};
+
+
+	//execute
+	var template = new EasyAutocomplete.Template(options);
+				
+	//assert
+	assert.ok(typeof template.getTemplateClass === "function", "Build is function");
+	assert.ok(template.getTemplateClass() === 'eac-description', "Build equals def value");
+	expect(2);
+});
+
 

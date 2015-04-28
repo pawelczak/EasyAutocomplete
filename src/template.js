@@ -9,7 +9,6 @@ var EasyAutocomplete = (function(scope){
 	scope.Template = function Template(options) {
 
 
-
 		var genericTemplates = {
 			basic: {
 				type: "basic",
@@ -20,7 +19,8 @@ var EasyAutocomplete = (function(scope){
 				fields: {
 					description: "description"
 				},
-				method: function(element) {	return element + " - description"; }
+				method: function(element) {	return element + " - description"; },
+				cssClass: "eac-description"
 			},
 			iconLeft: {
 				type: "iconLeft",
@@ -29,7 +29,8 @@ var EasyAutocomplete = (function(scope){
 				},
 				method: function(element) {
 					return element;
-				}
+				},
+				cssClass: "eac-icon-left"
 			},
 			iconRight: {
 				type: "iconRight",
@@ -38,7 +39,8 @@ var EasyAutocomplete = (function(scope){
 				},
 				method: function(element) {
 					return element;
-				}
+				},
+				cssClass: "eac-icon-right"
 			},
 			custom: {
 				type: "custom",
@@ -48,24 +50,18 @@ var EasyAutocomplete = (function(scope){
 
 
 
-
-
 		/*
 		 * Converts method with {{text}} to function
 		 */
 		convertTemplateToMethod = function(template) {
 
 
-			//TODO 
-			//Move template.fields here + unit tests
+			var _fields = template.fields;
 
 			if (template.type === "description") {
 
-			
-				var _fields = template.fields;
-
 				var buildMethod = function(elementValue, element) {
-					return elementValue + " - " + element[_fields.description];
+					return elementValue + " - <span>" + element[_fields.description] + "</span>";
 				};
 
 
@@ -74,8 +70,6 @@ var EasyAutocomplete = (function(scope){
 			}
 
 			if (template.type === "iconRight") {
-
-				var _fields = template.fields;
 
 				var buildMethod = "";
 
@@ -94,8 +88,6 @@ var EasyAutocomplete = (function(scope){
 
 
 			if (template.type === "iconLeft") {
-
-				var _fields = template.fields;
 
 				var buildMethod = "";
 
@@ -137,19 +129,37 @@ var EasyAutocomplete = (function(scope){
 
 			if (options.type && genericTemplates[options.type]) {
 
-				//return genericTemplates[options.type].method;
 				return convertTemplateToMethod(options);
 			} else {
 
 				return genericTemplates.basic.method;
 			}
 
+		},
 
+		templateClass = function(options) {
+			var emptyStringFunction = function() {return "";};
 
-			return convertTemplateToMethod(template);
+			if (!options || !options.type) {
 
+				return emptyStringFunction;
+			}
+
+			//There is no generic template that matches 
+			//client template type
+
+			if (options.type && genericTemplates[options.type]) {
+				return (function (){ 
+					var _cssClass = genericTemplates[options.type].cssClass;
+					return function() { return _cssClass;}
+				})();
+			} else {
+				return emptyStringFunction;
+			}
 		};
 
+
+		this.getTemplateClass = templateClass(options);
 
 		this.build = prepareBuildMethod(options);
 
