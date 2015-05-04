@@ -165,7 +165,7 @@ module.exports = function(grunt) {
   
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
   
-grunt.registerTask('doc:jscs', ['jscs']);
+  grunt.registerTask('doc:jscs', ['jscs']);
 
   grunt.registerTask('doc:jshint', ['jshint']);
 

@@ -15,6 +15,13 @@ $dark: #333;
 $yellow: rgba(255, 212, 100, 1);
 $purple: #c7c0de;
 
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}  
+}
+
 .easy-autocomplete {
     position: relative;
 
@@ -228,6 +235,9 @@ $purple: #c7c0de;
         color: #fff;
 
         input {
+            @include placeholder {
+                color: #f6f6f6;
+            }
             background-color: lighten($blue, 5%);
             border: {
                 radius: 4px;

@@ -1,0 +1,163 @@
+
+
+.easy-autocomplete {
+
+
+
+	/* Theme Square */
+
+	$square-grey: #7f8c8d;
+
+	&.eac-square {	
+		font-family: "Roboto", "Helvetica Neue",Helvetica,Arial,sans-serif;
+
+		input {
+			border: 1px solid $square-grey;
+		    color: $square-grey;
+		    font-family: inherit;
+		    font-size: 18px;
+		    font-style: italic;
+		    font-weight: 300;
+		    margin: 0;
+		    min-width: 350px;
+		    padding: 12px 43px 12px 15px;
+		}
+
+
+		ul {
+            border-color: $square-grey;
+            border-top: 0;
+            box-shadow: none;
+            top: 0;
+
+            li {
+                border-color: $square-grey;
+                font-family: inherit;
+                font-size: 16px;
+                font-weight: 300;
+                padding: 6px 12px;
+                transition: all 0.4s ease 0s;
+
+                * {
+                	font-weight: 300;
+                }
+
+                &.selected {
+                    background-color: #f1f1f1;
+                }
+
+                b {
+                	font-weight: 600;
+                }
+
+            }
+        }
+
+	}
+
+
+
+	/* Round */
+	$round-color: #888;
+	$round-blue: #3079ed;
+
+	&.eac-round {
+		font-family: "Open Sans", "Helvetica Neue",Helvetica,Arial,sans-serif;
+
+		input {
+			border: 2px solid $round-color;
+			border-radius: 10px;
+		    color: $round-color;
+		    font-family: inherit;
+		    font-size: 16px;
+		    font-weight: 400;
+		    margin: 0;
+		    min-width: 300px;
+		    padding: 10px;
+
+		    &:hover, &:focus {
+		    	border-color: $round-blue;
+
+		    }
+		}
+
+		ul {
+            border-color: $round-color;
+            border-width: 0;
+            box-shadow: none;
+            min-width: 300px;
+            top: 20px;
+
+            li {
+                border-color: $round-blue;
+                border-width: 0 2px;
+                font-size: 14px;
+                padding: 8px 12px;
+                transition: all 0.4s ease 0s;
+
+                &.selected {
+                    background-color: lighten($round-blue, 35%);
+                }
+
+                &:first-child {
+                	border-radius: 10px 10px 0 0;
+                	border-width: 2px 2px 0;
+                }
+
+                &:last-child {
+                	border-radius: 0 0 10px 10px;
+                	border-width: 0 2px 2px;
+                }
+
+                b {
+                	font-weight: 700;
+                }
+
+            }
+        }		
+
+	}
+
+
+	/* Funky */
+	$funky-green: #07ED89;
+	$funky-purple: #ED076B;
+	$funky-orange: #8907ED;
+
+	&.eac-funky {
+		font-family: "Inconsolata", "Helvetica Neue",Helvetica,Arial,sans-serif;
+
+
+		input {
+			background: $funky-green;
+			border: 0;
+			border-radius: 0;
+			font-family: inherit;
+			font-size: 16px;
+			padding: 10px;
+		}
+
+
+		ul {
+			background: transparent;
+			border: 0;
+
+			li {
+				background: transparent;
+				border: 0;
+				color: $funky-purple;
+				font-size: 16px;
+				padding: 10px;
+				transition: all 0.4s ease 0s;
+
+				&.selected {
+					color: $funky-orange;
+				}
+
+			}
+
+		}
+
+	}
+}
+

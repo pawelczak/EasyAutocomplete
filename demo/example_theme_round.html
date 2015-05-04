@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>EasyAutocomplete json example</title>
+		<link href="../dist/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
+		<link href="../dist/easy-autocomplete-themes.min.css" rel="stylesheet" type="text/css">
+		<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,700,700italic&amp;subset=latin,cyrillic-ext,greek-ext,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+		<script src="../lib/jquery-1.11.2.min.js"></script>
+		<script src="../dist/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
+	</head>
+	<body>
+
+		<h1>EasyAutocomplete - css themes</h1>
+
+		<input id="square" />
+
+		<script>
+
+		var options = {
+			url: "resources/countries.json",
+
+			getValue: "name",
+
+			list: {
+				match: {
+					enabled: true
+				},
+				maxNumberOfElements: 6,
+
+				showAnimation: {
+					type: "slide",
+					time: 300
+				},
+				hideAnimation: {
+					type: "slide",
+					time: 300
+				}
+			},
+
+			theme: "round"
+
+		};
+
+		$("#square").easyAutocomplete(options);
+
+		</script>
+
+	</body>
+
+</html>
