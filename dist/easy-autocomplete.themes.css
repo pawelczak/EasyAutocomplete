@@ -45,6 +45,7 @@
 }
 .easy-autocomplete.eac-square ul li.selected {
   background-color: #f1f1f1;
+  font-weight: 300;
 }
 .easy-autocomplete.eac-square ul li b {
   font-weight: 600;
@@ -114,7 +115,7 @@
   border: 0;
   color: #ed076b;
   font-size: 16px;
-  padding: 10px;
+  padding: 4px;
   transition: all 0.4s ease 0s;
 }
 .easy-autocomplete.eac-funky ul li.selected {

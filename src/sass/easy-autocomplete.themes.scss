@@ -44,6 +44,7 @@
 
                 &.selected {
                     background-color: #f1f1f1;
+                    font-weight: 300;
                 }
 
                 b {
@@ -147,7 +148,7 @@
 				border: 0;
 				color: $funky-purple;
 				font-size: 16px;
-				padding: 10px;
+				padding: 4px;
 				transition: all 0.4s ease 0s;
 
 				&.selected {

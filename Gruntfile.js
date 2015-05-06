@@ -104,6 +104,9 @@ module.exports = function(grunt) {
          src: ['*.scss'],
          dest: '<%= project.sass.dist %>',
          ext: '.css'
+        },
+        {
+         '<%= project.sass.dist %>/easy-autocomplete.themes.css': '<%= project.sass.src %>/easy-autocomplete.themes.scss'
         }]
       },
       dist: {
@@ -117,6 +120,9 @@ module.exports = function(grunt) {
          src: ['*.scss'],
          dest: '<%= project.sass.dist %>',
          ext: '.min.css'
+        },
+        {
+         '<%= project.sass.dist %>/easy-autocomplete.themes.min.css': '<%= project.sass.src %>/easy-autocomplete.themes.scss'
         }]
       },
     },
