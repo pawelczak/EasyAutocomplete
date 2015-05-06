@@ -711,7 +711,10 @@ var EasyAutocomplete = (function(scope) {
 								$list = $("<ul>"),
 								$listContainer = $elements_container.find("ul");
 
-							$listContainer.empty();
+							$listContainer
+								.empty()
+								.detach();
+
 
 							for(var i = 0, length = list.length; i < length; i += 1) {
 								$item = $("<li><div class='eac-item'></div></li>");
@@ -736,7 +739,10 @@ var EasyAutocomplete = (function(scope) {
 								})();
 
 								$listContainer.append($item);
+								
 							}
+
+							$elements_container.append($listContainer);
 
 						});
 
