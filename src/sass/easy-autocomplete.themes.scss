@@ -13,6 +13,7 @@
 
 		input {
 			border: 1px solid $square-grey;
+			border-radius: 0;
 		    color: $square-grey;
 		    font-family: inherit;
 		    font-size: 18px;
@@ -133,9 +134,11 @@
 			background: $funky-green;
 			border: 0;
 			border-radius: 0;
+			color: $funky-purple;
 			font-family: inherit;
-			font-size: 16px;
-			padding: 10px;
+			font-size: 18px;
+			min-width: 240px;
+			padding: 12px;
 		}
 
 
@@ -147,8 +150,8 @@
 				background: transparent;
 				border: 0;
 				color: $funky-purple;
-				font-size: 16px;
-				padding: 4px;
+				font-size: 18px;
+				padding: 4px 12px;
 				transition: all 0.4s ease 0s;
 
 				&.selected {

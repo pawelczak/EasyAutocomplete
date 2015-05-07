@@ -12,12 +12,15 @@
 }
 .easy-autocomplete input {
   border-color: #ccc;
-  border-radius: 2px;
+  border-radius: 4px;
   border-style: solid;
   border-width: 1px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
   color: #555;
   padding: 6px 12px;
+}
+.easy-autocomplete input:hover, .easy-autocomplete input:focus {
+  box-shadow: none;
 }
 .easy-autocomplete.eac-blue-light input:hover, .easy-autocomplete.eac-blue-light input:focus {
   border-color: #66afe9;
