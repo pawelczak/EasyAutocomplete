@@ -12,7 +12,7 @@
 
 		<h1>EasyAutocomplete - css themes</h1>
 
-		<input id="square" />
+		<input id="theme" />
 
 		<script>
 
@@ -25,23 +25,15 @@
 				match: {
 					enabled: true
 				},
-				maxNumberOfElements: 6,
+				maxNumberOfElements: 6
 
-				showAnimation: {
-					type: "slide",
-					time: 300
-				},
-				hideAnimation: {
-					type: "slide",
-					time: 300
-				}
 			},
 
-			theme: "round"
+			theme: "solid"
 
 		};
 
-		$("#square").easyAutocomplete(options);
+		$("#theme").easyAutocomplete(options);
 
 		</script>
 
