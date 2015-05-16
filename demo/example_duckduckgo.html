@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>EasyAutocomplete duckduckgo example</title>
+		<link href="../dist/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
+		<script src="../lib/jquery-1.11.2.min.js"></script>
+		<script src="../dist/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
+	</head>
+	<body>
+
+		<h1>EasyAutocomplete - duckduckgo example</h1>
+
+		<input id="ddg" />
+
+		<script>
+
+		var options = {
+			url: "http://api.duckduckgo.com/?q=nba&format=json",
+
+			getValue: "Text",
+
+			ajaxSettings: {
+				dataType: "jsonp"
+			},
+
+			listLocation: "RelatedTopics",
+		};
+
+		$("#ddg").easyAutocomplete(options);
+
+		</script>
+
+	</body>
+
+</html>
