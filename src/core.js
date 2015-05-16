@@ -394,9 +394,22 @@ var EasyAutocomplete = (function(scope) {
 
 						}
 
-						if (config.get("url") !== "list-required") {
+						var settings = config.get("ajaxSettings") || {};
 
-							$.ajax({url: config.get("url")(inputPhrase), dataType: config.get("dataType")}) 
+						if (settings.url === undefined || settings.url === "") {
+							settings.url = config.get("url")
+						}
+
+						if (settings.dataType === undefined || settings.dataType === "") {
+							settings.dataType = config.get("dataType");
+						}
+
+
+						if (settings.url !== undefined && settings.url !== "list-required") {
+
+							settings.url = settings.url(inputPhrase);
+
+							$.ajax(settings) 
 								.done(function(data) {
 
 									elementsList = config.get("listLocation")(data);
@@ -439,6 +452,7 @@ var EasyAutocomplete = (function(scope) {
 
 							return simpleList;
 						}
+
 
 					}
 

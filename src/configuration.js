@@ -85,7 +85,10 @@ var EasyAutocomplete = (function(scope){
 
 		mergeOptions();
 
+		addAjaxSettings();
+
 		processAfterMerge();
+		
 
 		this.get = function(propertyName) {
 			return defaults[propertyName];
@@ -213,6 +216,13 @@ var EasyAutocomplete = (function(scope){
 				};
 			}
 
+			if (defaults.ajaxSettings.url !== undefined && typeof defaults.ajaxSettings.url !== "function") {
+				var defaultUrl = defaults.ajaxSettings.url;
+				defaults.ajaxSettings.url = function() {
+					return defaultUrl;
+				};
+			}
+
 			if (typeof defaults.listLocation === "string") {
 				var defaultlistLocation = defaults.listLocation;
 				defaults.listLocation = function(data) {
@@ -227,6 +237,16 @@ var EasyAutocomplete = (function(scope){
 				};
 			}
 
+		}
+
+		function addAjaxSettings() {
+
+			if (options.ajaxSettings !== undefined && typeof options.ajaxSettings === "object") {
+				defaults.ajaxSettings = options.ajaxSettings;
+			} else {
+				defaults.ajaxSettings = {};	
+			}
+			
 		}
 
 		function isAssigned(name) {

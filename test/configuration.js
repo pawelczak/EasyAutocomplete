@@ -414,3 +414,25 @@ QUnit.test( "String getValue", function( assert ) {
 
 	expect(1);
 });
+
+
+QUnit.test( "Ajax Settings", function( assert ) {
+
+	//given
+	var options = {
+		ajaxSettings: {
+			dataType: "xml",
+			content: "utf"
+		}
+	};
+
+	//execute
+	var actualOptions = new EasyAutocomplete.Configuration(options);
+
+
+	//assert
+	assert.ok(options.ajaxSettings === actualOptions.get("ajaxSettings") , "Passed - ajaxSettings" );
+
+	expect(1);
+});
+

@@ -3,7 +3,7 @@
  * jQuery plugin for autocompletion
  * 
  * @author Łukasz Pawełczak (http://github.com/pawelczak)
- * @version 1.1.0
+ * @version 1.1.2
  * Copyright MIT License: https://github.com/pawelczak/easy-autocomplete/blob/master/LICENSE.txt
  */
 
@@ -92,7 +92,10 @@ var EasyAutocomplete = (function(scope){
 
 		mergeOptions();
 
+		addAjaxSettings();
+
 		processAfterMerge();
+		
 
 		this.get = function(propertyName) {
 			return defaults[propertyName];
@@ -207,6 +210,13 @@ var EasyAutocomplete = (function(scope){
 				};
 			}
 
+			if (defaults.ajaxSettings.url !== undefined && typeof defaults.ajaxSettings.url !== "function") {
+				var defaultUrl = defaults.ajaxSettings.url;
+				defaults.ajaxSettings.url = function() {
+					return defaultUrl;
+				};
+			}
+
 			if (typeof defaults.listLocation === "string") {
 				var defaultlistLocation = defaults.listLocation;
 				defaults.listLocation = function(data) {
@@ -221,6 +231,16 @@ var EasyAutocomplete = (function(scope){
 				};
 			}
 
+		}
+
+		function addAjaxSettings() {
+
+			if (options.ajaxSettings !== undefined && typeof options.ajaxSettings === "object") {
+				defaults.ajaxSettings = options.ajaxSettings;
+			} else {
+				defaults.ajaxSettings = {};	
+			}
+			
 		}
 
 		function isAssigned(name) {
@@ -874,9 +894,22 @@ var EasyAutocomplete = (function(scope) {
 
 						}
 
-						if (config.get("url") !== "list-required") {
+						var settings = config.get("ajaxSettings") || {};
 
-							$.ajax({url: config.get("url")(inputPhrase), dataType: config.get("dataType")}) 
+						if (settings.url === undefined || settings.url === "") {
+							settings.url = config.get("url")
+						}
+
+						if (settings.dataType === undefined || settings.dataType === "") {
+							settings.dataType = config.get("dataType");
+						}
+
+
+						if (settings.url !== undefined && settings.url !== "list-required") {
+
+							settings.url = settings.url(inputPhrase);
+
+							$.ajax(settings) 
 								.done(function(data) {
 
 									elementsList = config.get("listLocation")(data);
@@ -919,6 +952,7 @@ var EasyAutocomplete = (function(scope) {
 
 							return simpleList;
 						}
+
 
 					}
 

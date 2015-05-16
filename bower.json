@@ -3,7 +3,7 @@
   "description": "EasyAutocomplete is a jQuery autocomplete plugin. Easy to create autocomplete dropdown list for text input fields",
   "version": "1.1.2",
   "authors": [
-    "Łukasz Pawełcza <lukaspawelczak@gmail.com>"
+    "Łukasz Pawełczak <lukaspawelczak@gmail.com>"
   ],
   "main": [
     "dist/jquery.easy-autocomplete.js"
