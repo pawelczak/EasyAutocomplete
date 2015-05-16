@@ -34,6 +34,8 @@ var EasyAutocomplete = (function(scope){
 
 			ajaxCallback: function() {},
 
+			matchResponseProperty: false,
+
 			list: {
 				sort: {
 					enabled: false,
@@ -926,11 +928,15 @@ var EasyAutocomplete = (function(scope) {
 									}
 									
 
-									elementsList = proccessResponseData(config, elementsList, $field.val());
+									if (checkInputPhraseMatchResponse(inputPhrase, data)) {
 
-									loadElements(elementsList, inputPhrase);
+										elementsList = proccessResponseData(config, elementsList, $field.val());
 
-									showContainer();
+										loadElements(elementsList, inputPhrase);	
+										
+										showContainer();
+									}
+
 
 									config.get("ajaxCallback")();
 
@@ -955,15 +961,30 @@ var EasyAutocomplete = (function(scope) {
 
 						function createAjaxSettings() {
 
-							var settings = new Object();
-
-							var ajaxSettings = config.get("ajaxSettings") || {};
+							var settings = new Object(),
+								ajaxSettings = config.get("ajaxSettings") || {};
 
 							for (set in ajaxSettings) {
 								settings[set] = ajaxSettings[set];
 							}
 
 							return settings;
+						}
+
+						function checkInputPhraseMatchResponse(inputPhrase, data) {
+
+							if (config.get("matchResponseProperty") !== false || typeof config.get("matchResponseProperty") === "string") {
+
+								if (data[config.get("matchResponseProperty")] == inputPhrase) {
+									return true;
+								} else {
+									return false;
+								}
+
+							} else {
+								return true;
+							}
+
 						}
 
 
