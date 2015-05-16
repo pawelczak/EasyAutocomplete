@@ -394,10 +394,10 @@ var EasyAutocomplete = (function(scope) {
 
 						}
 
-						var settings = config.get("ajaxSettings") || {};
+						var settings = createAjaxSettings();
 
 						if (settings.url === undefined || settings.url === "") {
-							settings.url = config.get("url")
+							settings.url = config.get("url");
 						}
 
 						if (settings.dataType === undefined || settings.dataType === "") {
@@ -451,6 +451,19 @@ var EasyAutocomplete = (function(scope) {
 							});
 
 							return simpleList;
+						}
+
+						function createAjaxSettings() {
+
+							var settings = new Object();
+
+							var ajaxSettings = config.get("ajaxSettings") || {};
+
+							for (set in ajaxSettings) {
+								settings[set] = ajaxSettings[set];
+							}
+
+							return settings;
 						}
 
 

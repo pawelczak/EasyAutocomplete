@@ -416,7 +416,7 @@ QUnit.test( "String getValue", function( assert ) {
 });
 
 
-QUnit.test( "Ajax Settings", function( assert ) {
+QUnit.test( "Ajax Settings - string", function( assert ) {
 
 	//given
 	var options = {
@@ -436,3 +436,29 @@ QUnit.test( "Ajax Settings", function( assert ) {
 	expect(1);
 });
 
+QUnit.test( "Ajax Settings - function", function( assert ) {
+
+
+
+	//given
+	var getUrl = function(phrase) {return "www" + phrase;};
+
+
+	var options = {
+		ajaxSettings: {
+			dataType: "xml",
+			content: "utf",
+			url: getUrl
+		}
+	};
+
+	//execute
+	var actualOptions = new EasyAutocomplete.Configuration(options);
+
+
+	//assert
+	assert.ok(options.ajaxSettings === actualOptions.get("ajaxSettings") , "Passed - ajaxSettings" );
+	assert.ok(options.ajaxSettings.url.toString() === actualOptions.get("ajaxSettings").url.toString() , "Passed - ajaxSettings url" );
+
+	expect(2);
+});

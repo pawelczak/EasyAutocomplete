@@ -21,6 +21,7 @@ QUnit.test("Static data - string array", function( assert ) {
 	var e = $.Event('keyup');
 	e.keyCode = 50; 
 	$("#inputOne").val("a").trigger(e);
+	$("#inputOne").val("a").trigger(e);
 
 	
 	//assert

@@ -15,7 +15,9 @@
 		<script>
 
 		var options = {
-			url: "http://api.duckduckgo.com/?q=nba&format=json",
+			url: function(phrase) { 
+				return phrase !== "" ? "http://api.duckduckgo.com/?q=" + phrase + "&format=json" : "http://api.duckduckgo.com/?q=empty&format=json";
+			},
 
 			getValue: "Text",
 
