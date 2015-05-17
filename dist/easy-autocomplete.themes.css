@@ -70,6 +70,7 @@
   border-color: #3079ed;
 }
 .easy-autocomplete.eac-round ul {
+  background: none;
   border-color: #888888;
   border-width: 0;
   box-shadow: none;
@@ -77,6 +78,7 @@
   top: 20px;
 }
 .easy-autocomplete.eac-round ul li {
+  background: #fff;
   border-color: #3079ed;
   border-width: 0 2px;
   font-size: 14px;

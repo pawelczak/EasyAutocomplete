@@ -84,6 +84,7 @@
 		}
 
 		ul {
+			background: none;
             border-color: $round-color;
             border-width: 0;
             box-shadow: none;
@@ -91,6 +92,7 @@
             top: 20px;
 
             li {
+            	background: #fff;
                 border-color: $round-blue;
                 border-width: 0 2px;
                 font-size: 14px;
