@@ -1,10 +1,10 @@
-# <a href='http://easyautocomplete.com' >EasyAutocomplete</a>
+# <a href='http://easyautocomplete.com' >EasyAutocomplete - plugin for jQuery</a>
 Jquery autocomplete plugin
 
 
 
  If you are interested in using this jQuery autocomplete plugin on your site, you can find out more details in the
-<a href="?page=guide">EasyAutocomplete - jquery autocomplete - guide section</a>. You can find there full documentation <a href='http://easyautocomplete.com/?page=guide' >guide</a> on how to use EasyAutocomplete plugin.
+<a href="http://easyautocomplete.com/">EasyAutocomplete - jQuery autocomplete - homepage</a>. You can find there full documentation <a href='http://easyautocomplete.com/?page=guide' >easy guide</a> on how to use EasyAutocomplete plugin.
 
 ###File location:
 * Distribution files Javascript, CSS are in `dist` folder,
