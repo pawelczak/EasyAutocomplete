@@ -4,7 +4,7 @@ Jquery autocomplete plugin
 
 
  If you are interested in using this jQuery autocomplete plugin on your site, you can find out more details in the
-<a href="http://easyautocomplete.com/">EasyAutocomplete - jQuery autocomplete - homepage</a>. You can find there full documentation <a href='http://easyautocomplete.com/?page=guide' >easy guide</a> on how to use EasyAutocomplete plugin.
+<a href="http://easyautocomplete.com/">EasyAutocomplete - jQuery autocomplete - homepage</a>. You can find there <a href='http://easyautocomplete.com/guide' >full documentation and easy guide</a> on how to use EasyAutocomplete plugin.
 
 ###File location:
 * Distribution files Javascript, CSS are in `dist` folder,
