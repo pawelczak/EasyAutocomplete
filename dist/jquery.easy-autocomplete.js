@@ -3,7 +3,7 @@
  * jQuery plugin for autocompletion
  * 
  * @author Łukasz Pawełczak (http://github.com/pawelczak)
- * @version 1.1.2
+ * @version 1.1.3
  * Copyright MIT License: https://github.com/pawelczak/easy-autocomplete/blob/master/LICENSE.txt
  */
 
@@ -35,6 +35,7 @@ var EasyAutocomplete = (function(scope){
 			ajaxCallback: function() {},
 
 			matchResponseProperty: false,
+
 
 			list: {
 				sort: {
@@ -78,7 +79,13 @@ var EasyAutocomplete = (function(scope){
 					type: "normal",
 					time: 400,
 					callback: function() {}
-				}
+				},
+
+				/* Events */
+				onClickEvent: function() {},
+				onLoadEvent: function() {},
+				onMouseOverEvent: function() {},
+				onMouseOutEvent: function() {},	
 
 			},
 
@@ -751,11 +758,18 @@ var EasyAutocomplete = (function(scope) {
 
 											$field.val(elementsValue);
 											selectElement(j);
+
+											config.get("list").onClickEvent();
 										})
 										.mouseover(function() {
 
 											selectedElement = j;
 											selectElement(j);	
+
+											config.get("list").onMouseOverEvent();
+										})
+										.mouseout(function() {
+											config.get("list").onMouseOutEvent();
 										})
 										.html(template.build(highlight(elementsValue, phrase), list[j]));
 								})();
@@ -766,6 +780,8 @@ var EasyAutocomplete = (function(scope) {
 
 							$elements_container.append($listContainer);
 
+
+							config.get("list").onLoadEvent();
 						});
 
 				})();

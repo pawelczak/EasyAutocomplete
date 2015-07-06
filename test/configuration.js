@@ -66,6 +66,12 @@ QUnit.test("Configuration Default values", function( assert ) {
 
 			ajaxCallback: function() {},
 
+			onClickEvent: function() {},
+			onLoadEvent: function() {},
+			onInitEvent: function() {},
+			onMouseOverEvent: function() {},
+			onMouseOutEvent: function() {},	
+
 			list: {
 				sort: {
 					enabled: false,

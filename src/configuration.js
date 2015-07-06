@@ -27,6 +27,7 @@ var EasyAutocomplete = (function(scope){
 
 			matchResponseProperty: false,
 
+
 			list: {
 				sort: {
 					enabled: false,
@@ -71,7 +72,13 @@ var EasyAutocomplete = (function(scope){
 					type: "normal",
 					time: 400,
 					callback: function() {}
-				}
+				},
+
+				/* Events */
+				onClickEvent: function() {},
+				onLoadEvent: function() {},
+				onMouseOverEvent: function() {},
+				onMouseOutEvent: function() {},	
 
 			},
 

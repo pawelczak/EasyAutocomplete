@@ -228,11 +228,18 @@ var EasyAutocomplete = (function(scope) {
 
 											$field.val(elementsValue);
 											selectElement(j);
+
+											config.get("list").onClickEvent();
 										})
 										.mouseover(function() {
 
 											selectedElement = j;
 											selectElement(j);	
+
+											config.get("list").onMouseOverEvent();
+										})
+										.mouseout(function() {
+											config.get("list").onMouseOutEvent();
 										})
 										.html(template.build(highlight(elementsValue, phrase), list[j]));
 								})();
@@ -243,6 +250,8 @@ var EasyAutocomplete = (function(scope) {
 
 							$elements_container.append($listContainer);
 
+
+							config.get("list").onLoadEvent();
 						});
 
 				})();
