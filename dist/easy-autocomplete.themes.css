@@ -12,6 +12,7 @@
   /* Round */
   /* Funky */
   /* Solid */
+  /* Plate */
 }
 .easy-autocomplete.eac-square {
   font-family: "Roboto", "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -140,4 +141,66 @@
 }
 .easy-autocomplete.eac-solid ul li.selected {
   background-color: #f2f2f2;
+}
+.easy-autocomplete.eac-plate {
+  font-family: "Open Sans", "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.easy-autocomplete.eac-plate input {
+  font-size: 13px;
+  padding: 6px 12px;
+}
+.easy-autocomplete.eac-plate ul {
+  background: #b5b5b5;
+  border-radius: 6px;
+  border-width: 0;
+  top: 10px;
+}
+.easy-autocomplete.eac-plate ul li {
+  background: #b5b5b5;
+  color: #FAFAFA;
+  font-size: 12px;
+  transition: all 0.4s ease 0s;
+}
+.easy-autocomplete.eac-plate ul li b {
+  color: #ffd464;
+}
+.easy-autocomplete.eac-plate ul li.selected {
+  background: #656565;
+}
+.easy-autocomplete.eac-plate ul li:first-child {
+  border-radius: 6px 6px 0 0;
+}
+.easy-autocomplete.eac-plate ul li:last-child {
+  border-radius: 0 0 6px 6px;
+}
+.easy-autocomplete.eac-plate-dark {
+  font-family: "Open Sans", "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.easy-autocomplete.eac-plate-dark input {
+  font-size: 13px;
+  padding: 6px 12px;
+}
+.easy-autocomplete.eac-plate-dark ul {
+  background: #212121;
+  border-radius: 6px;
+  border-width: 0;
+  top: 10px;
+}
+.easy-autocomplete.eac-plate-dark ul li {
+  background: #212121;
+  color: #FAFAFA;
+  font-size: 12px;
+  transition: all 0.4s ease 0s;
+}
+.easy-autocomplete.eac-plate-dark ul li b {
+  color: #ffd464;
+}
+.easy-autocomplete.eac-plate-dark ul li.selected {
+  background: #656565;
+}
+.easy-autocomplete.eac-plate-dark ul li:first-child {
+  border-radius: 6px 6px 0 0;
+}
+.easy-autocomplete.eac-plate-dark ul li:last-child {
+  border-radius: 0 0 6px 6px;
 }
