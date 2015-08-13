@@ -480,14 +480,16 @@ var EasyAutocomplete = (function(scope) {
 
 						function checkInputPhraseMatchResponse(inputPhrase, data) {
 
-							if (config.get("matchResponseProperty") !== false || typeof config.get("matchResponseProperty") === "string") {
-
-								if (data[config.get("matchResponseProperty")] == inputPhrase) {
-									return true;
-								} else {
-									return false;
+							if (config.get("matchResponseProperty") !== false) {
+								if (typeof config.get("matchResponseProperty") === "string") {
+									return (data[config.get("matchResponseProperty")] == inputPhrase);
 								}
 
+								if (typeof config.get("matchResponseProperty") === "function") {
+									return (config.get("matchResponseProperty")(data) === inputPhrase);
+								}
+
+								return true;
 							} else {
 								return true;
 							}
