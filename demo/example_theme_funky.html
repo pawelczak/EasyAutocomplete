@@ -16,6 +16,7 @@
 
 		<script>
 
+		/*
 		var options = {
 			url: "resources/countries.json",
 
@@ -37,6 +38,61 @@
 
 			theme: "funky"
 
+		};
+		*/
+
+		var options = {
+			data: [
+					{
+					"product_title": "Insightly",
+					"icon": "", 
+					"page_link": "http://www.site.com/page.html"
+					},
+					{
+					"product_title": "CiviCRM",
+					"icon": "",
+					"page_link": "http://www.site.com/page.html"
+					},
+					{
+					"product_title": "Highrise",
+					"icon": "",
+					"page_link": "http://www.site.com/page.html"
+					},
+					{
+					"product_title": "Goldmine",
+					"icon": "",
+					"page_link": "http://www.site.com/page.html"
+					},
+					{
+					"product_title": "Vtiger",
+					"icon": "",
+					"page_link": "http://www.site.com/page.html"
+					},
+					{
+					"product_title": "Relenta CRM",
+					"icon": "",
+					"page_link": "http://www.site.com/page.html"
+					}
+					    
+					    
+					],
+            
+
+			getValue: "product_title",
+
+			list: {
+                maxNumberOfElements: 8,
+				match: {
+					enabled: true
+				}
+			},
+            
+       		template: {
+				type: "custom",
+				method: function(value, item) {
+					return "<a href='" + item.page_link + "' >" + value + "</a>";
+				}
+			}
 		};
 
 		$("#funky").easyAutocomplete(options);

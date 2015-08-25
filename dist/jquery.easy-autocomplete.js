@@ -3,7 +3,7 @@
  * jQuery plugin for autocompletion
  * 
  * @author Łukasz Pawełczak (http://github.com/pawelczak)
- * @version 1.1.3
+ * @version 1.1.4
  * Copyright MIT License: https://github.com/pawelczak/easy-autocomplete/blob/master/LICENSE.txt
  */
 
@@ -198,20 +198,25 @@ var EasyAutocomplete = (function(scope){
 
 						if (typeof target[propertyName] !== "object" || 
 								target[propertyName] instanceof Array) {
-							mergedObject[propertyName] = target[propertyName];		
+							mergedObject[propertyName] = target[propertyName];
 						} else {
 							mergeObjects(source[propertyName], target[propertyName]);
 						}
 					}
 				}
-				
+			
+				/* If data is an object */
+				if (target.data !== undefined && target.data !== null && typeof target.data == "object") {
+					mergedObject.data = target.data;
+				}
+
 				return mergedObject;
 			}
 		}	
 
 
 		function processAfterMerge() {
-
+			
 			if (defaults.url !== "list-required" && typeof defaults.url !== "function") {
 				var defaultUrl = defaults.url;
 				defaults.url = function() {
@@ -903,8 +908,10 @@ var EasyAutocomplete = (function(scope) {
 						var inputPhrase = $field.val();
 
 						if (config.get("data") !== "list-required") {
-							
-							elementsList = proccessResponseData(config, config.get("data"), $field.val());
+
+							elementsList = config.get("listLocation")(config.get("data"));
+
+							elementsList = proccessResponseData(config, elementsList, $field.val());
 
 							loadElements(elementsList, inputPhrase);
 

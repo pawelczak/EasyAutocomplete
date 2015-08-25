@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>EasyAutocomplete email example</title>
+		<link href="../dist/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
+		<script src="../lib/jquery-1.11.2.min.js"></script>
+		<script src="../dist/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
+	</head>
+	<body>
+
+		<h1>EasyAutocomplete - email example</h1>
+
+		<input id="data-email" />
+
+		<script>
+
+		var options = {
+			url: "resources/people.json",
+
+		    getValue: "email",
+
+		    template: {
+		        type: "description",
+		        fields: {
+		            description: "email"
+		        }
+		    },
+
+		    list: {
+		        match: {
+		            enabled: true
+		        }
+		    },
+
+		    theme: "plate-dark"
+		};
+
+		$("#data-email").easyAutocomplete(options);
+
+		</script>
+
+	</body>
+
+</html>

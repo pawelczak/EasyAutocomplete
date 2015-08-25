@@ -204,20 +204,25 @@ var EasyAutocomplete = (function(scope){
 
 						if (typeof target[propertyName] !== "object" || 
 								target[propertyName] instanceof Array) {
-							mergedObject[propertyName] = target[propertyName];		
+							mergedObject[propertyName] = target[propertyName];
 						} else {
 							mergeObjects(source[propertyName], target[propertyName]);
 						}
 					}
 				}
-				
+			
+				/* If data is an object */
+				if (target.data !== undefined && target.data !== null && typeof target.data == "object") {
+					mergedObject.data = target.data;
+				}
+
 				return mergedObject;
 			}
 		}	
 
 
 		function processAfterMerge() {
-
+			
 			if (defaults.url !== "list-required" && typeof defaults.url !== "function") {
 				var defaultUrl = defaults.url;
 				defaults.url = function() {

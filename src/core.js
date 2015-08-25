@@ -394,8 +394,10 @@ var EasyAutocomplete = (function(scope) {
 						var inputPhrase = $field.val();
 
 						if (config.get("data") !== "list-required") {
-							
-							elementsList = proccessResponseData(config, config.get("data"), $field.val());
+
+							elementsList = config.get("listLocation")(config.get("data"));
+
+							elementsList = proccessResponseData(config, elementsList, $field.val());
 
 							loadElements(elementsList, inputPhrase);
 
