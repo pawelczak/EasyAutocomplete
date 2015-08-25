@@ -124,7 +124,9 @@ QUnit.test("Configuration Default values", function( assert ) {
 
 			theme: "",
 
-			cssClasses: ""
+			cssClasses: "",
+
+			minCharNumber: 0
 	};
 
 
@@ -149,6 +151,8 @@ QUnit.test("Configuration Default values", function( assert ) {
 	assertValue("highlightPhrase");
 	assertValue("theme");
 	assertValue("cssClasses");
+	assertValue("minCharNumber");
+
 
 
 	//assertValue("getValue");
@@ -167,7 +171,7 @@ QUnit.test("Configuration Default values", function( assert ) {
 	assertValue("type", "hideAnimation", "list");
 	assertValue("time", "hideAnimation", "list");
 
-	expect(17);
+	expect(18);
 });
 
 QUnit.test("Configuration simple", function( assert ) {
@@ -351,7 +355,8 @@ QUnit.test( "Parameter not in configuration", function( assert ) {
 
 	//given
 	var options = {
-		foo: "bar"
+		foo: "bar",
+		loggerEnabled: false
 	};
 
 	//execute
@@ -467,4 +472,53 @@ QUnit.test( "Ajax Settings - function", function( assert ) {
 	assert.ok(options.ajaxSettings.url.toString() === actualOptions.get("ajaxSettings").url.toString() , "Passed - ajaxSettings url" );
 
 	expect(2);
+});
+
+
+QUnit.test( "Print wrong configuration property", function( assert ) {
+
+
+	//given
+	var consol = {
+			phrases: [],
+
+			getPhrases: function() {
+				return consol.phrases;
+			},
+
+			log: function(phrase) {
+				//console.log(phrase);
+				consol.phrases.push(phrase);
+			}
+		};
+		
+
+	var options = {
+		
+		foi: "bar",
+		url: "www",
+
+		matchResponseProperti: false,
+
+			
+		list: {
+			
+			listProperty: "notFound",
+			sort: {},
+			maxNumberOfElements: 6
+		},
+
+		loggerEnabled: false
+
+	};
+
+	//execute
+	var actualOptions = new EasyAutocomplete.Configuration(options);
+
+	actualOptions.printPropertiesThatDoesntExist(consol, options);
+
+	//assert
+	assert.ok(3 === consol.getPhrases().length, "Passes");
+
+	expect(1);
 });

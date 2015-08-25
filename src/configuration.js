@@ -88,17 +88,15 @@ var EasyAutocomplete = (function(scope){
 
 			cssClasses: "",
 
-			minCharNumber: 0
+			minCharNumber: 0,
+
+			ajaxSettings: {},
+
+			loggerEnabled: true,
+
+			template: ""
 
 		};
-
-		prepareDefaults();
-
-		mergeOptions();
-
-		addAjaxSettings();
-
-		processAfterMerge();
 		
 
 		this.get = function(propertyName) {
@@ -132,6 +130,23 @@ var EasyAutocomplete = (function(scope){
 			}
 			return true;
 		};
+
+		this.printPropertiesThatDoesntExist = function(consol, optionsToCheck) {
+			printPropertiesThatDoesntExist(consol, optionsToCheck);
+		}
+
+
+		prepareDefaults();
+
+		mergeOptions();
+
+		if (defaults.loggerEnabled === true) {
+			printPropertiesThatDoesntExist(console, options);	
+		}
+
+		addAjaxSettings();
+
+		processAfterMerge();
 
 
 		//------------------------ Prepare defaults --------------------------
@@ -270,6 +285,42 @@ var EasyAutocomplete = (function(scope){
 				return true;
 			} else {
 				return false;
+			}
+		}
+
+		//Consol is object that should have method log that prints string
+		//Normally invoke this function with console as consol
+		function printPropertiesThatDoesntExist(consol, optionsToCheck) {
+			
+
+			checkPropertiesIfExist(defaults, optionsToCheck);
+
+			function checkPropertiesIfExist(source, target) {
+				for(var property in target) {
+					if (source[property] === undefined) {
+						consol.log("Option property '" + property + "' does not exist in EasyAutocomplete API.");		
+					}
+
+					if (typeof source[property] === "object" && !externalObject(property)) {
+						checkPropertiesIfExist(source[property], target[property]);
+					}
+				}	
+			}
+
+			function externalObject(property) {
+				var notTestedObjects = ["ajaxSettings", "template"];
+
+				Array.prototype.contains = function(obj) {
+					var i = this.length;
+				    while (i--) {
+				        if (this[i] === obj) {
+				            return true;
+				        }
+				    }
+				    return false;
+				};
+
+				return notTestedObjects.contains(property);
 			}
 		}
 	};
