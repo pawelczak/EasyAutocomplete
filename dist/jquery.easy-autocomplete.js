@@ -93,7 +93,9 @@ var EasyAutocomplete = (function(scope){
 
 			theme: "",
 
-			cssClasses: ""
+			cssClasses: "",
+
+			minCharNumber: 0
 
 		};
 
@@ -906,6 +908,11 @@ var EasyAutocomplete = (function(scope) {
 					function loadData() {
 
 						var inputPhrase = $field.val();
+
+						if (inputPhrase.length < config.get("minCharNumber")) {
+							return;
+						}
+
 
 						if (config.get("data") !== "list-required") {
 

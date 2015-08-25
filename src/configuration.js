@@ -86,7 +86,9 @@ var EasyAutocomplete = (function(scope){
 
 			theme: "",
 
-			cssClasses: ""
+			cssClasses: "",
+
+			minCharNumber: 0
 
 		};
 

@@ -254,3 +254,67 @@ QUnit.test( "Build tests - wrapper width", function( assert ) {
 	
 	expect(0);
 });
+
+
+QUnit.test("Minimal number of characters in input phrase - false", function( assert ) {
+	expect(1);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+
+		data: ["black", "white", "magenta", "yellow"],
+		
+		minCharNumber: 3
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("a").trigger(e);
+	$("#inputOne").val("a").trigger(e);
+
+	
+	//assert
+
+	var elements = $("#inputOne").next().find("ul li");
+
+	assert.equal(0, elements.length, "Response size");
+		
+});
+
+QUnit.test("Minimal number of characters in input phrase - true", function( assert ) {
+	expect(5);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+
+		data: ["black", "white", "magenta", "yellow"],
+		
+		minCharNumber: 4
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("more").trigger(e);
+
+	
+	//assert
+
+	var elements = $("#inputOne").next().find("ul li");
+
+	assert.equal(4, elements.length, "Response size");
+	assert.equal("black", elements.eq(0).find("div").text(), "First element value");
+	assert.equal("white", elements.eq(1).find("div").text(), "Second element value");
+	assert.equal("magenta", elements.eq(2).find("div").text(), "Third element value");
+	assert.equal("yellow", elements.eq(3).find("div").text(), "Fourth element value");
+		
+});

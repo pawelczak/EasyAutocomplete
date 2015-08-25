@@ -393,6 +393,11 @@ var EasyAutocomplete = (function(scope) {
 
 						var inputPhrase = $field.val();
 
+						if (inputPhrase.length < config.get("minCharNumber")) {
+							return;
+						}
+
+
 						if (config.get("data") !== "list-required") {
 
 							elementsList = config.get("listLocation")(config.get("data"));
