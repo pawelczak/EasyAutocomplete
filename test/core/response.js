@@ -234,3 +234,87 @@ QUnit.test("Match response", function( assert ) {
 	}
 });
 
+
+QUnit.test("Input field should have value changed when user clicks on one element from suggestions list", function( assert ) {
+	expect(1);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), 
+			{
+				url: "resources/colors.json", 
+
+				getValue: "name",
+
+				ajaxCallback: function() {
+
+					var elements = $input.next().find("ul li");
+					//selects first element
+					elements.eq(0).find("div").click();
+
+					//assert
+					assert.equal("blue", $input.val());			
+
+					QUnit.start();	
+				}
+	});
+
+
+	//execute
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	var $input = $("#inputOne").val("rr").trigger(e);
+
+
+	QUnit.stop();
+
+});
+
+
+QUnit.test("Input field should trigger change event when user clicks on one element from suggestions list", function( assert ) {
+	expect(1);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), 
+			{
+				url: "resources/colors.json", 
+
+				getValue: "name",
+
+				ajaxCallback: function() {
+
+					var elements = $input.next().find("ul li");
+					//selects first element
+					elements.eq(0).find("div").click();
+
+
+					//assert		
+					assert.equal(true, flag);
+
+					QUnit.start();	
+				}
+	}),
+		flag = false,
+		$input = $("#inputOne");
+
+
+	$input.change(function() {
+		flag = true;
+	});
+
+
+	//execute
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$input.val("rr").trigger(e);
+
+
+
+	QUnit.stop();
+
+});
+
+

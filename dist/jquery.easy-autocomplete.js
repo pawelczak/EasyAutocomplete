@@ -811,7 +811,7 @@ var EasyAutocomplete = (function(scope) {
 									$item.find(" > div")
 										.on("click", function() {
 
-											$field.val(elementsValue);
+											$field.val(elementsValue).trigger("change");
 											selectElement(j);
 
 											config.get("list").onClickEvent();

@@ -33,14 +33,25 @@
 				match: {
 					enabled: true
 				},
-				maxNumberOfElements: 8
+				maxNumberOfElements: 8,
+
+				onClickEvent: function() {
+					$("#square").change();
+				}
 			},
+
+
 
 			theme: "square"
 
 		};
 
 		$("#square").easyAutocomplete(options);
+
+
+		$("#square").change(function() {
+			console.log($(this).val());
+		});
 
 		</script>
 
