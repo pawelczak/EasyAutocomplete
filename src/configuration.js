@@ -299,7 +299,7 @@ var EasyAutocomplete = (function(scope){
 			function checkPropertiesIfExist(source, target) {
 				for(var property in target) {
 					if (source[property] === undefined) {
-						consol.log("Option property '" + property + "' does not exist in EasyAutocomplete API.");		
+						consol.log("Property '" + property + "' does not exist in EasyAutocomplete options API.");		
 					}
 
 					if (typeof source[property] === "object" && !externalObject(property)) {
