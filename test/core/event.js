@@ -226,8 +226,53 @@ QUnit.test("Event onMouseOutEvent ", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 		assert.equal(3, elements.length, "Response size");
-		//assert.equal("none", $("#eac-container-inputOne").find("ul").css("display"), "List should be hidden");
 
 		QUnit.start();	
 	}
 });
+
+QUnit.test("Event onSelectItemEvent ", function( assert ) {
+	expect(1);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "resources/colors_string.json",
+
+			list: {
+				onSelectItemEvent: function() {
+
+					//assert
+					assertList();
+				},
+				onLoadEvent: function() {
+
+					//trigger select event
+					var key = $.Event('keyup');
+					key.keyCode = 40; 
+					$input.trigger(key);
+				}	
+			}
+			
+	}),
+	$input = $("#inputOne");
+
+
+	//execute
+	completerOne.init();
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$input.val("c").trigger(e);
+
+	QUnit.stop();
+
+	//assert
+
+	function assertList() {
+
+		var elements = $("#inputOne").next().find("ul li");
+
+		assert.equal(3, elements.length, "Response size");
+
+		QUnit.start();	
+	}
+});
+

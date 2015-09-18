@@ -83,6 +83,7 @@ var EasyAutocomplete = (function(scope){
 
 				/* Events */
 				onClickEvent: function() {},
+				onSelectItemEvent: function() {},
 				onLoadEvent: function() {},
 				onMouseOverEvent: function() {},
 				onMouseOutEvent: function() {},	
@@ -787,6 +788,8 @@ var EasyAutocomplete = (function(scope) {
 						.on("selectElement", function(event, selected) {
 							$elements_container.find("ul li").removeClass("selected");
 							$elements_container.find("ul li:nth-child(" + (selectedElement + 1) + ")").addClass("selected");
+
+							config.get("list").onSelectItemEvent();
 						})
 						.on("loadElements", function(event, list, phrase) {
 			
@@ -1130,7 +1133,6 @@ var EasyAutocomplete = (function(scope) {
 
 		function showContainer() {
 			$container.trigger("show");
-			selectElement(selectedElement);
 		}
 
 		function hideContainer() {

@@ -76,6 +76,7 @@ var EasyAutocomplete = (function(scope){
 
 				/* Events */
 				onClickEvent: function() {},
+				onSelectItemEvent: function() {},
 				onLoadEvent: function() {},
 				onMouseOverEvent: function() {},
 				onMouseOutEvent: function() {},	
