@@ -54,6 +54,75 @@ QUnit.test("Template - description template", function( assert ) {
 	expect(2);
 });
 
+QUnit.test("Template - iconLeft template", function( assert ) {
+	
+
+	//given
+	var	options = {type: "iconLeft", fields: {iconSrc: "iconSrc"}};
+
+
+	//execute
+	var template = new EasyAutocomplete.Template(options);
+
+
+	//assert
+	assert.ok(typeof template.build == "function", "Build is function");
+	assert.ok(template.build("Brad Pitt", {iconSrc: "http://easyautocomplete.com/icon/pitt.jpg"}) === "<img class='eac-icon' src='http://easyautocomplete.com/icon/pitt.jpg' />Brad Pitt", "Build returns value");	
+	expect(2);
+});
+
+QUnit.test("Template - iconRight template", function( assert ) {
+	
+
+	//given
+	var	options = {type: "iconRight", fields: {iconSrc: "iconSrc"}};
+
+
+	//execute
+	var template = new EasyAutocomplete.Template(options);
+
+
+	//assert
+	assert.ok(typeof template.build == "function", "Build is function");
+	assert.ok(template.build("Matt", {iconSrc: "http://Damon.com"}) === "Matt<img class='eac-icon' src='http://Damon.com' />", "Build returns value");	
+	expect(2);
+});
+
+QUnit.test("Template - links template", function( assert ) {
+	
+
+	//given
+	var	options = {type: "links", fields: {link: "website_link"}};
+
+
+	//execute
+	var template = new EasyAutocomplete.Template(options);
+
+
+	//assert
+	assert.ok(typeof template.build == "function", "Build is function");
+	assert.ok(template.build("EasyAutocomplete website", {website_link: "http://easyautocomplete.com"}) === "<a href='http://easyautocomplete.com' >EasyAutocomplete website</a>", "Build returns value");	
+	expect(2);
+});
+
+
+QUnit.test("Template - links template", function( assert ) {
+	
+
+	//given
+	var	options = {type: "links", fields: {link: "website_link"}};
+
+
+	//execute
+	var template = new EasyAutocomplete.Template(options);
+
+
+	//assert
+	assert.ok(typeof template.build == "function", "Build is function");
+	assert.ok(template.build("EasyAutocomplete website", {website_link: "http://easyautocomplete.com"}) === "<a href='http://easyautocomplete.com' >EasyAutocomplete website</a>", "Build returns value");	
+	expect(2);
+});
+
 
 QUnit.test("Template - custom template", function( assert ) {
 	

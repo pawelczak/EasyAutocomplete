@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>EasyAutocomplete static links</title>
+		<link href="../dist/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
+		<script src="../lib/jquery-1.11.2.min.js"></script>
+		<script src="../dist/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
+	</head>
+	<body>
+
+		<h1>EasyAutocomplete - static links</h1>
+
+		<input id="data-links" />
+
+		<script>
+
+		var options = {
+			url: "resources/site.json",
+
+		    getValue: "text",
+
+		    template: {
+		        type: "links",
+		        fields: {
+		            link: "site"
+		        }
+		    },
+
+		    list: {
+		        match: {
+		            enabled: false
+		        }
+		    },
+
+		    theme: "plate-dark"
+		};
+
+		$("#data-links").easyAutocomplete(options);
+
+		</script>
+
+	</body>
+
+</html>

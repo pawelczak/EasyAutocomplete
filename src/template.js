@@ -42,6 +42,15 @@ var EasyAutocomplete = (function(scope){
 				},
 				cssClass: "eac-icon-right"
 			},
+			links: {
+				type: "links",
+				fields: {
+					link: ""
+				},
+				method: function(element) {
+					return element;
+				}
+			},
 			custom: {
 				type: "custom",
 				method: function() {}
@@ -66,7 +75,6 @@ var EasyAutocomplete = (function(scope){
 
 
 				return buildMethod;
-
 			}
 
 			if (template.type === "iconRight") {
@@ -93,11 +101,28 @@ var EasyAutocomplete = (function(scope){
 
 				if (typeof _fields.iconSrc === "string") {
 					buildMethod = function(elementValue, element) {
-						return "<img class='eac-icon' src='" + element[_fields.iconSrc] + "' />" + elementValue ;
+						return "<img class='eac-icon' src='" + element[_fields.iconSrc] + "' />" + elementValue;
 					};					
 				} else if (typeof _fields.iconSrc === "function") {
 					buildMethod = function(elementValue, element) {
 						return "<img class='eac-icon' src='" + _fields.iconSrc(element) + "' />" + elementValue;
+					};
+				}
+
+				return buildMethod;
+			}
+
+			if(template.type === "links") {
+
+				var buildMethod = "";
+
+				if (typeof _fields.link === "string") {
+					buildMethod = function(elementValue, element) {
+						return "<a href='" + element[_fields.link] + "' >" + elementValue + "</a>";
+					};					
+				} else if (typeof _fields.link === "function") {
+					buildMethod = function(elementValue, element) {
+						return "<a href='" + _fields.link(element) + "' >" + elementValue + "</a>";
 					};
 				}
 
