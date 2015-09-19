@@ -234,6 +234,53 @@ QUnit.test("Match response", function( assert ) {
 	}
 });
 
+QUnit.test("Match response - property function", function( assert ) {
+	expect(4);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), 
+			{
+				url: "resources/response.json", 
+
+				listLocation: "items",
+				
+				matchResponseProperty: function(data) {
+					return data.inputPhrase;
+				},
+
+				ajaxCallback: function() {
+
+					//assert
+					assertList();
+				}
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("rr").trigger(e);
+
+
+	QUnit.stop();
+
+
+	//assert
+
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul li");
+
+			assert.equal(3, elements.length, "Response size");
+			assert.equal("red", elements.eq(0).find("div").text(), "First element value");
+			assert.equal("yellow", elements.eq(1).find("div").text(), "Second element value");
+			assert.equal("brown", elements.eq(2).find("div").text(), "Third element value");
+			
+			QUnit.start();	
+	}
+});
 
 QUnit.test("Input field should have value changed when user clicks on one element from suggestions list", function( assert ) {
 	expect(1);
