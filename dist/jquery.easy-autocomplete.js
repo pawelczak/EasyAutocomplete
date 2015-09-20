@@ -854,7 +854,7 @@ var EasyAutocomplete = (function(scope) {
 									(function() {
 										var j = i,
 											itemCounter = counter,
-											elementsValue = config.get("getValue")(listData[j]);
+											elementsValue = listBuilder[builderIndex].getValue(listData[j]);
 
 										$item.find(" > div")
 											.on("click", function() {
@@ -1016,7 +1016,11 @@ var EasyAutocomplete = (function(scope) {
 
 							var listBuilder = [];
 
-							listBuilder.push({data: config.get("listLocation")(config.get("data"))});
+							var builder = {};
+							builder.data = config.get("listLocation")(config.get("data"));
+							builder.getValue = config.get("getValue");
+
+							listBuilder.push(builder);
 
 							if (config.get("categoriesAssigned")) {
 
@@ -1059,8 +1063,11 @@ var EasyAutocomplete = (function(scope) {
 								.done(function(data) {
 
 									var listBuilder = [];
-
-									listBuilder.push({data: config.get("listLocation")(data)});
+									var builder = {};
+									builder.data = config.get("listLocation")(data);
+									builder.getValue = config.get("getValue");
+									
+									listBuilder.push(builder);
 
 									if (config.get("categoriesAssigned")) {
 
@@ -1069,22 +1076,6 @@ var EasyAutocomplete = (function(scope) {
 										for(var i = 0; i < config.get("categories").length; i += 1) {
 
 											var builder = convertToListBuilder(config.get("categories")[i], data);
-
-											/*
-											if (config.get("categories")[i].listLocation !== undefined) {
-
-												if (typeof config.get("categories")[i].listLocation === "string") {
-													builder.data = data[config.get("categories")[i].listLocation];
-												} else if (typeof config.get("categories")[i].listLocation === "function") {
-													builder.data = config.get("categories")[i].listLocation(data);
-												}
-
-											}
-
-											if (config.get("categories")[i].header !== undefined) {
-												builder.header = config.get("categories")[i].header;
-											}
-											*/
 
 											listBuilder.push(builder);
 										}
@@ -1098,10 +1089,14 @@ var EasyAutocomplete = (function(scope) {
 										}
 									}
 
+
 									var length = 0;
 
 									for(var i = 0; i < listBuilder.length; i+=1) {
-										length += listBuilder[i].data.length;
+
+										if (listBuilder[i].data !== undefined && listBuilder[i].data instanceof Array) {
+											length += listBuilder[i].data.length;	
+										} 
 									}
 
 									if (length === 0) {
@@ -1187,6 +1182,22 @@ var EasyAutocomplete = (function(scope) {
 							if (category.header !== undefined) {
 								builder.header = category.header;
 							}
+
+							if (category.getValue !== undefined) {
+
+								if (typeof category.getValue === "string") {
+									var defaultsGetValue = category.getValue;
+									builder.getValue = function(element) {
+										return element[defaultsGetValue];
+									};
+								} else if (typeof category.getValue === "function") {
+									builder.getValue = category.getValue;
+								}
+
+							} else {
+								builder.getValue = config.get("getValue");	
+							}
+							
 
 							return builder;
 						}
