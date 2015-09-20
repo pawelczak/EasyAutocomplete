@@ -201,11 +201,11 @@ var EasyAutocomplete = (function(scope) {
 						})
 						.on("selectElement", function(event, selected) {
 							$elements_container.find("ul li").removeClass("selected");
-							$elements_container.find("ul li:nth-child(" + (selectedElement + 1) + ")").addClass("selected");
+							$elements_container.find("ul li").eq(selectedElement).addClass("selected");
 
 							config.get("list").onSelectItemEvent();
 						})
-						.on("loadElements", function(event, list, phrase) {
+						.on("loadElements", function(event, listBuilder, phrase) {
 			
 
 							var $item = "",
@@ -216,38 +216,52 @@ var EasyAutocomplete = (function(scope) {
 								.empty()
 								.detach();
 
+							elementsList = [];
 
-							for(var i = 0, length = list.length; i < length; i += 1) {
-								$item = $("<li><div class='eac-item'></div></li>");
-								
+							//Categories REFACTOR
+							var counter = 0;
+							for(var builderIndex = 0; builderIndex < listBuilder.length; builderIndex += 1) {
 
-								(function() {
-									var j = i,
-										elementsValue = config.get("getValue")(list[j]);
+								if (listBuilder[builderIndex].header !== undefined && listBuilder[builderIndex].header.length > 0) {
+									$listContainer.append("<div class='eac-category' >" + listBuilder[builderIndex].header + "</div>");
+								}
 
-									$item.find(" > div")
-										.on("click", function() {
+								var listData = listBuilder[builderIndex].data;
 
-											$field.val(elementsValue).trigger("change");
-											selectElement(j);
+								for(var i = 0, length = listData.length; i < length; i += 1) {
+									$item = $("<li><div class='eac-item'></div></li>");
+									
 
-											config.get("list").onClickEvent();
-										})
-										.mouseover(function() {
+									(function() {
+										var j = i,
+											itemCounter = counter,
+											elementsValue = config.get("getValue")(listData[j]);
 
-											selectedElement = j;
-											selectElement(j);	
+										$item.find(" > div")
+											.on("click", function() {
 
-											config.get("list").onMouseOverEvent();
-										})
-										.mouseout(function() {
-											config.get("list").onMouseOutEvent();
-										})
-										.html(template.build(highlight(elementsValue, phrase), list[j]));
-								})();
+												$field.val(elementsValue).trigger("change");
+												selectElement(itemCounter);
 
-								$listContainer.append($item);
-								
+												config.get("list").onClickEvent();
+											})
+											.mouseover(function() {
+
+												selectedElement = itemCounter;
+												selectElement(itemCounter);	
+
+												config.get("list").onMouseOverEvent();
+											})
+											.mouseout(function() {
+												config.get("list").onMouseOutEvent();
+											})
+											.html(template.build(highlight(elementsValue, phrase), listData[j]));
+									})();
+
+									$listContainer.append($item);
+									elementsList.push(listData[i]);
+									counter += 1;
+								}
 							}
 
 							$elements_container.append($listContainer);
@@ -402,11 +416,27 @@ var EasyAutocomplete = (function(scope) {
 
 						if (config.get("data") !== "list-required") {
 
-							elementsList = config.get("listLocation")(config.get("data"));
+							var listBuilder = [];
 
-							elementsList = proccessResponseData(config, elementsList, $field.val());
+							listBuilder.push({data: config.get("listLocation")(config.get("data"))});
 
-							loadElements(elementsList, inputPhrase);
+							if (config.get("categoriesAssigned")) {
+
+								listBuilder = [];
+
+								for(var i = 0; i < config.get("categories").length; i += 1) {
+
+									var builder = convertToListBuilder(config.get("categories")[i], data);
+
+									listBuilder.push(builder);
+								}
+							}
+
+							for(var i = 0; i < listBuilder.length; i+=1) {
+								listBuilder[i].data = proccessResponseData(config, listBuilder[i].data, inputPhrase);
+							}
+
+							loadElements(listBuilder, inputPhrase);
 
 							showContainer();
 
@@ -430,25 +460,49 @@ var EasyAutocomplete = (function(scope) {
 							$.ajax(settings) 
 								.done(function(data) {
 
-									elementsList = config.get("listLocation")(data);
+									var listBuilder = [];
+
+									listBuilder.push({data: config.get("listLocation")(data)});
+
+									if (config.get("categoriesAssigned")) {
+
+										listBuilder = [];
+
+										for(var i = 0; i < config.get("categories").length; i += 1) {
+
+											var builder = convertToListBuilder(config.get("categories")[i], data);
+
+											listBuilder.push(builder);
+										}
+									}
 
 									
 									if(config.get("dataType").toUpperCase() === "XML") {
-										elementsList = convertXmlToList(elementsList);
+
+										for(var i = 0; i < listBuilder.length; i += 1) {
+											listBuilder[i].data = convertXmlToList(listBuilder[i].data);
+										}
 									}
 
-									var length = elementsList.length;
+									var length = 0;
+
+									for(var i = 0; i < listBuilder.length; i+=1) {
+										length += listBuilder[i].data.length;
+									}
 
 									if (length === 0) {
 										return;
 									}
 									
 
+									//Todo
 									if (checkInputPhraseMatchResponse(inputPhrase, data)) {
 
-										elementsList = proccessResponseData(config, elementsList, $field.val());
+										for(var i = 0; i < listBuilder.length; i += 1) {
+											listBuilder[i].data = proccessResponseData(config, listBuilder[i].data, inputPhrase);
+										}
 
-										loadElements(elementsList, inputPhrase);	
+										loadElements(listBuilder, inputPhrase);	
 										
 										showContainer();
 									}
@@ -503,6 +557,27 @@ var EasyAutocomplete = (function(scope) {
 								return true;
 							}
 
+						}
+
+						function convertToListBuilder(category, data) {
+
+							var builder = {};
+
+							if (category.listLocation !== undefined) {
+
+								if (typeof category.listLocation === "string") {
+									builder.data = data[category.listLocation];
+								} else if (typeof category.listLocation === "function") {
+									builder.data = category.listLocation(data);
+								}
+
+							}
+
+							if (category.header !== undefined) {
+								builder.header = category.header;
+							}
+
+							return builder;
 						}
 
 

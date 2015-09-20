@@ -375,7 +375,7 @@ $purple: #c7c0de;
         position: relative;
         top: -1px;
 
-        li {
+        li, .eac-category {
             background: inherit;
             border: {
                 color: #ccc;
@@ -389,6 +389,9 @@ $purple: #c7c0de;
                 weight: normal;
             }
             padding: 4px 12px;
+        }
+
+        li {
 
             &:last-child {
                 border: {
@@ -418,6 +421,13 @@ $purple: #c7c0de;
                 }
             }
         }
+
+        .eac-category {
+            font: {
+                weight: bold;
+            }
+        }
+
     }
 }
 

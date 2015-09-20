@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>EasyAutocomplete categories</title>
+		<link href="../dist/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
+		<script src="../lib/jquery-1.11.2.min.js"></script>
+		<script src="../dist/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
+	</head>
+	<body>
+
+		<h1>EasyAutocomplete - categories example</h1>
+
+		<input id="data-categories" />
+
+		<script>
+
+		var options = {
+			url: "resources/categories.json",
+
+			categories: [{
+				listLocation: "fruits"
+			}, {
+				listLocation: "vagatables",
+				header: "--- VAGATABLES ---"
+			}],
+
+		    template: {
+		        type: "description",
+		        fields: {
+		            description: function() {
+		            	return "nice";
+		            }
+		        }
+		    },
+
+		    list: {
+		        match: {
+		            enabled: false
+		        },
+		        maxNumberOfElements: 10
+		    },
+
+		    theme: "plate-dark"
+		};
+
+		$("#data-categories").easyAutocomplete(options);
+
+		</script>
+
+	</body>
+
+</html>

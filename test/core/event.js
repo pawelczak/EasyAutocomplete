@@ -113,7 +113,7 @@ QUnit.test("Event onClickEvent ", function( assert ) {
 			onLoadEvent: function() {
 
 				//trigger click event
-				$("#inputOne").next().find("ul li:first-child > div").trigger("click");
+				$("#inputOne").next().find("ul li").eq(0).find(" > div").trigger("click");
 			}
 		}
 
@@ -158,7 +158,7 @@ QUnit.test("Event onMouseOverEvent ", function( assert ) {
 			onLoadEvent: function() {
 
 				//trigger click event
-				$("#inputOne").next().find("ul li:first-child > div").trigger("mouseover");
+				$("#inputOne").next().find("ul li").eq(0).find(" > div").trigger("mouseover");
 			}
 		}
 			
@@ -203,7 +203,7 @@ QUnit.test("Event onMouseOutEvent ", function( assert ) {
 				onLoadEvent: function() {
 
 					//trigger click event
-					$("#inputOne").next().find("ul li:first-child > div").trigger("mouseout");
+					$("#inputOne").next().find("ul li").eq(0).find(" > div").trigger("mouseout");
 				}	
 			}
 			

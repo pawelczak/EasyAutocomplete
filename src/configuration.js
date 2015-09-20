@@ -95,7 +95,13 @@ var EasyAutocomplete = (function(scope){
 
 			loggerEnabled: true,
 
-			template: ""
+			template: "",
+
+			categoriesAssigned: false,
+
+			categories: [{
+				listLocation: ""
+			}]
 
 		};
 		
@@ -267,6 +273,10 @@ var EasyAutocomplete = (function(scope){
 				defaults.getValue = function(element) {
 					return element[defaultsGetValue];
 				};
+			}
+
+			if (options.categories !== undefined) {
+				defaults.categoriesAssigned = true;
 			}
 
 		}

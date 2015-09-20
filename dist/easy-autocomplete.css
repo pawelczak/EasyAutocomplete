@@ -3,7 +3,7 @@
  * jQuery plugin for autocompletion
  * 
  * @author Łukasz Pawełczak (http://github.com/pawelczak)
- * @version 1.1.4
+ * @version 1.1.5
  * Copyright MIT License: https://github.com/pawelczak/easy-autocomplete/blob/master/LICENSE.txt
  */
 
@@ -257,7 +257,7 @@
   position: relative;
   top: -1px;
 }
-.easy-autocomplete-container ul li {
+.easy-autocomplete-container ul li, .easy-autocomplete-container ul .eac-category {
   background: inherit;
   border-color: #ccc;
   border-image: none;
@@ -285,6 +285,9 @@
   word-break: break-all;
 }
 .easy-autocomplete-container ul li b {
+  font-weight: bold;
+}
+.easy-autocomplete-container ul .eac-category {
   font-weight: bold;
 }
 

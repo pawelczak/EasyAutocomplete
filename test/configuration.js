@@ -522,3 +522,45 @@ QUnit.test( "Print wrong configuration property", function( assert ) {
 
 	expect(1);
 });
+
+
+QUnit.test( "Categories assigned", function( assert ) {
+
+
+
+	//given
+	var options = {
+		categories: [{
+			listLocation: "test"
+		}]
+	};
+
+	//execute
+	var actualOptions = new EasyAutocomplete.Configuration(options);
+
+
+	//assert
+	assert.ok(true === actualOptions.get("categoriesAssigned") , "Passed - categoriesAssigned" );
+
+	expect(1);
+});
+
+
+QUnit.test( "Categories not assigned", function( assert ) {
+
+
+
+	//given
+	var options = {
+		url: "test"
+	};
+
+	//execute
+	var actualOptions = new EasyAutocomplete.Configuration(options);
+
+
+	//assert
+	assert.ok(false === actualOptions.get("categoriesAssigned") , "Passed - categoriesAssigned" );
+
+	expect(1);
+});

@@ -86,8 +86,10 @@ module.exports = function(grunt) {
         'test/core/plugin.html',
         'test/core/build.html',
         'test/core/response.html',
+        'test/core/categories.html',
         'test/core/event.html',
-        'test/core/template.html'
+        'test/core/template.html',
+
       ]
     },
     
