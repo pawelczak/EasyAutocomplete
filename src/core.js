@@ -407,7 +407,11 @@ var EasyAutocomplete = (function(scope) {
 
 					function loadData() {
 
+						
+						var ListBuilder = new ListBuilder(config);
 						var inputPhrase = $field.val();
+
+
 
 						if (inputPhrase.length < config.get("minCharNumber")) {
 							return;
@@ -416,29 +420,13 @@ var EasyAutocomplete = (function(scope) {
 
 						if (config.get("data") !== "list-required") {
 
-							var listBuilder = [];
+							var data = config.get("data");
 
-							var builder = {};
-							builder.data = config.get("listLocation")(config.get("data"));
-							builder.getValue = config.get("getValue");
+							var listBuilder = ListBuilder.init(data);
 
-							listBuilder.push(builder);
+							listBuilder = ListBuilder.updateCategories(listBuilder, data);
 
-							if (config.get("categoriesAssigned")) {
-
-								listBuilder = [];
-
-								for(var i = 0; i < config.get("categories").length; i += 1) {
-
-									var builder = convertToListBuilder(config.get("categories")[i], data);
-
-									listBuilder.push(builder);
-								}
-							}
-
-							for(var i = 0; i < listBuilder.length; i+=1) {
-								listBuilder[i].data = proccessResponseData(config, listBuilder[i].data, inputPhrase);
-							}
+							listBuilder = ListBuilder.processData(listBuilder, inputPhrase);
 
 							loadElements(listBuilder, inputPhrase);
 
@@ -464,47 +452,15 @@ var EasyAutocomplete = (function(scope) {
 							$.ajax(settings) 
 								.done(function(data) {
 
-									var listBuilder = [];
+									var listBuilder = ListBuilder.init(data);
 
-
-									//TODO
-									var builder = {};
-									builder.data = config.get("listLocation")(data);
-									builder.getValue = config.get("getValue");
-									
-									listBuilder.push(builder);
-
-									if (config.get("categoriesAssigned")) {
-
-										listBuilder = [];
-
-										for(var i = 0; i < config.get("categories").length; i += 1) {
-
-											var builder = convertToListBuilder(config.get("categories")[i], data);
-
-											listBuilder.push(builder);
-										}
-									}
+									listBuilder = ListBuilder.updateCategories(listBuilder, data);
 
 									
-									if(config.get("dataType").toUpperCase() === "XML") {
-
-										for(var i = 0; i < listBuilder.length; i += 1) {
-											listBuilder[i].data = convertXmlToList(listBuilder[i].data);
-										}
-									}
+									listBuilder = ListBuilder.convertXml(listBuilder);
 
 
-									var length = 0;
-
-									for(var i = 0; i < listBuilder.length; i+=1) {
-
-										if (listBuilder[i].data !== undefined && listBuilder[i].data instanceof Array) {
-											length += listBuilder[i].data.length;	
-										} 
-									}
-
-									if (length === 0) {
+									if (!ListBuilder.checkIfDataExists(listBuilder)) {
 										return;
 									}
 
@@ -512,9 +468,7 @@ var EasyAutocomplete = (function(scope) {
 									//Todo
 									if (checkInputPhraseMatchResponse(inputPhrase, data)) {
 
-										for(var i = 0; i < listBuilder.length; i += 1) {
-											listBuilder[i].data = proccessResponseData(config, listBuilder[i].data, inputPhrase);
-										}
+										listBuilder = ListBuilder.processData(listBuilder, inputPhrase);
 
 										loadElements(listBuilder, inputPhrase);	
 										
@@ -533,15 +487,7 @@ var EasyAutocomplete = (function(scope) {
 								});
 						}
 
-						function convertXmlToList(list) {
-							var simpleList = [];
-
-							$(list).find(config.get("xmlElementName")).each(function() {
-								simpleList.push(this);
-							});
-
-							return simpleList;
-						}
+						
 
 						function createAjaxSettings() {
 
@@ -573,43 +519,155 @@ var EasyAutocomplete = (function(scope) {
 
 						}
 
-						function convertToListBuilder(category, data) {
+						
 
-							var builder = {};
+						//TODO export to separate module && refactor
+						function ListBuilder(configuration) {
 
-							if (category.listLocation !== undefined) {
+							this.init = function(data) {
+								var listBuilder = [],
+									builder = {};
 
-								if (typeof category.listLocation === "string") {
-									builder.data = data[category.listLocation];
-								} else if (typeof category.listLocation === "function") {
-									builder.data = category.listLocation(data);
+								builder.data = configuration.get("listLocation")(data);
+								builder.getValue = configuration.get("getValue");
+									
+								listBuilder.push(builder);
+
+								return listBuilder;
+							};
+
+							this.updateCategories = function(listBuilder, data) {
+								if (configuration.get("categoriesAssigned")) {
+
+									listBuilder = [];
+
+									for(var i = 0; i < configuration.get("categories").length; i += 1) {
+
+										var builder = convertToListBuilder(configuration.get("categories")[i], data);
+
+										listBuilder.push(builder);
+									}
+
+								} 
+
+								return listBuilder;
+							};
+
+							this.convertXml = function(listBuilder) {
+								if(configuration.get("dataType").toUpperCase() === "XML") {
+
+									for(var i = 0; i < listBuilder.length; i += 1) {
+										listBuilder[i].data = convertXmlToList(listBuilder[i]);
+									}
 								}
 
-							}
+								return listBuilder;
+							};
 
-							if (category.header !== undefined) {
-								builder.header = category.header;
-							}
+							this.processData = function(listBuilder, inputPhrase) {
 
-							if (category.getValue !== undefined) {
-
-								if (typeof category.getValue === "string") {
-									var defaultsGetValue = category.getValue;
-									builder.getValue = function(element) {
-										return element[defaultsGetValue];
-									};
-								} else if (typeof category.getValue === "function") {
-									builder.getValue = category.getValue;
+								for(var i = 0, length = listBuilder.length; i < length; i+=1) {
+									listBuilder[i].data = proccessResponseData(configuration, listBuilder[i].data, inputPhrase);
 								}
 
-							} else {
-								builder.getValue = config.get("getValue");	
-							}
-							
+								return listBuilder;
+							};
 
-							return builder;
+							this.checkIfDataExists = function(listBuilder) {
+
+								for(var i = 0, length = listBuilder.length; i < length; i += 1) {
+
+									if (listBuilder[i].data !== undefined && listBuilder[i].data instanceof Array) {
+										if (listBuilder[i].data.length > 0) {
+											return true;
+										}
+									} 
+								}
+
+								return false;
+							};
+
+
+							function convertToListBuilder(category, data) {
+
+								var builder = {};
+
+								if(configuration.get("dataType").toUpperCase() === "XML") {
+
+									if (category.xmlElementName !== undefined) {
+										builder.xmlElementName = category.xmlElementName;
+									}
+
+
+									if (category.listLocation !== undefined) {
+
+										if (typeof category.listLocation === "string") {
+											builder.data = $(data).find(category.listLocation);
+										} else if (typeof category.listLocation === "function") {
+											builder.data = category.listLocation(data);
+										}	
+
+									} else {
+
+										builder.data = data;
+									}
+
+
+								} else {
+
+									if (category.listLocation !== undefined) {
+
+										if (typeof category.listLocation === "string") {
+											builder.data = data[category.listLocation];
+										} else if (typeof category.listLocation === "function") {
+											builder.data = category.listLocation(data);
+										}
+									} else {
+										builder.data = data;
+									}
+
+								}
+								
+
+								if (category.header !== undefined) {
+									builder.header = category.header;
+								}
+
+								if (category.getValue !== undefined) {
+
+									if (typeof category.getValue === "string") {
+										var defaultsGetValue = category.getValue;
+										builder.getValue = function(element) {
+											return element[defaultsGetValue];
+										};
+									} else if (typeof category.getValue === "function") {
+										builder.getValue = category.getValue;
+									}
+
+								} else {
+									builder.getValue = configuration.get("getValue");	
+								}
+								
+
+								return builder;
+							}
+
+							function convertXmlToList(builder) {
+								var simpleList = [];
+
+								if (builder.xmlElementName === undefined) {
+									builder.xmlElementName = configuration.get("xmlElementName");
+								}
+
+
+								$(builder.data).find(builder.xmlElementName).each(function() {
+									simpleList.push(this);
+								});
+
+								return simpleList;
+							}
+
 						}
-
 
 					}
 
