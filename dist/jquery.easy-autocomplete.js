@@ -833,7 +833,8 @@ var EasyAutocomplete = (function(scope) {
 	scope.main = function Core($input, options) {
 				
 		var module = {
-				name: "EasyAutocomplete"
+				name: "EasyAutocomplete",
+				shortcut: "eac"
 			};
 
 		var consts = new scope.Constans(),
@@ -859,6 +860,10 @@ var EasyAutocomplete = (function(scope) {
 
 		this.getContainer = function() {
 			return $container;
+		};
+
+		this.getSelectedItem = function() {
+			return selectedElement;
 		};
 
 		this.build = function() {
@@ -1040,6 +1045,8 @@ var EasyAutocomplete = (function(scope) {
 											.on("click", function() {
 
 												$field.val(elementsValue).trigger("change");
+
+												selectedElement = itemCounter;
 												selectElement(itemCounter);
 
 												config.get("list").onClickEvent();
@@ -1064,7 +1071,6 @@ var EasyAutocomplete = (function(scope) {
 							}
 
 							$elements_container.append($listContainer);
-
 
 							config.get("list").onLoadEvent();
 						});
@@ -1101,9 +1107,15 @@ var EasyAutocomplete = (function(scope) {
 
 			if (elementId === undefined || elementId === null) {
 				
+				var fieldId = "";
+
 				do {
-					elementId = consts.getValue("CONTAINER_ID") + Math.rand(10000);	
-				} while($("#" + elementId).length === 0);
+					fieldId = module.shortcut + "-" + Math.floor(Math.random() * 10000);		
+				} while($("#" + fieldId).length !== 0);
+				
+				elementId = consts.getValue("CONTAINER_ID") + fieldId;
+
+				$field.attr("id", fieldId);
 
 			} else {
 				elementId = consts.getValue("CONTAINER_ID") + elementId;
@@ -1383,8 +1395,25 @@ var EasyAutocomplete = (function(scope) {
 
 })(EasyAutocomplete || {});
 
+$.fn.easyAutocompleteHandles = [];
 
 $.fn.easyAutocomplete = function(options) {
-	new EasyAutocomplete.main(this, options).init();
+	var eacHandle = new EasyAutocomplete.main(this, options);
+
+	eacHandle.init();
+
+	$.fn.easyAutocompleteHandles[$(this).attr("id")] = eacHandle;
 };
 
+$.fn.getSelectedItem = function() {
+
+	var inputId = $(this).attr("id");
+
+	if (inputId !== undefined) {
+		if ($.fn.easyAutocompleteHandles[inputId] !== undefined) {
+			return $.fn.easyAutocompleteHandles[inputId].getSelectedItem();
+		}
+	}
+
+	return -1;
+};

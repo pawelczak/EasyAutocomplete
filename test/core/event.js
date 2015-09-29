@@ -76,9 +76,6 @@ QUnit.test("Event onLoadEvent ", function( assert ) {
 	e.keyCode = 50; 
 	$("#inputOne").val("c").trigger(e);
 
-	//$("#inputOne").next().find("ul li:first-child > div").trigger("click");
-
-
 	QUnit.stop();
 
 
@@ -88,7 +85,6 @@ QUnit.test("Event onLoadEvent ", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 		assert.equal(3, elements.length, "Response size");
-		//assert.equal("none", $("#eac-container-inputOne").find("ul").css("display"), "List should be hidden");
 
 		QUnit.start();	
 	}
@@ -137,7 +133,6 @@ QUnit.test("Event onClickEvent ", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 		assert.equal(3, elements.length, "Response size");
-		//assert.equal("none", $("#eac-container-inputOne").find("ul").css("display"), "List should be hidden");
 
 		QUnit.start();	
 	}
@@ -181,7 +176,6 @@ QUnit.test("Event onMouseOverEvent ", function( assert ) {
 		var elements = $("#inputOne").next().find("ul li");
 
 		assert.equal(3, elements.length, "Response size");
-		//assert.equal("none", $("#eac-container-inputOne").find("ul").css("display"), "List should be hidden");
 
 		QUnit.start();	
 	}
