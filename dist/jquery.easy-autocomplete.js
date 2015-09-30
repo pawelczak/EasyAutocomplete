@@ -257,9 +257,16 @@ var EasyAutocomplete = (function(scope){
 
 			if (typeof defaults.listLocation === "string") {
 				var defaultlistLocation = defaults.listLocation;
-				defaults.listLocation = function(data) {
-					return data[defaultlistLocation];
-				};
+
+				if (defaults.dataType.toUpperCase() === "XML") {
+					defaults.listLocation = function(data) {
+						return $(data).find(defaultlistLocation);
+					};
+				} else {
+					defaults.listLocation = function(data) {
+						return data[defaultlistLocation];
+					};	
+				}
 			}
 
 			if (typeof defaults.getValue === "string") {
@@ -491,21 +498,28 @@ var EasyAutocomplete = (function(scope) {
 
 			function convertXmlToListBuilder() {
 
-				var builder = {};
+				var builder = {},
+					listLocation;
 
 				if (category.xmlElementName !== undefined) {
 					builder.xmlElementName = category.xmlElementName;
 				}
 
-
 				if (category.listLocation !== undefined) {
 
-					if (typeof category.listLocation === "string") {
-						builder.data = $(data).find(category.listLocation);
-					} else if (typeof category.listLocation === "function") {
-						builder.data = category.listLocation(data);
-					}	
+					listLocation = category.listLocation;
+				} else if (configuration.get("listLocation") !== undefined) {
 
+					listLocation = configuration.get("listLocation");
+				}
+
+				if (listLocation !== undefined) {
+					if (typeof listLocation === "string") {
+						builder.data = $(data).find(listLocation);
+					} else if (typeof listLocation === "function") {
+
+						builder.data = listLocation(data);
+					}
 				} else {
 
 					builder.data = data;

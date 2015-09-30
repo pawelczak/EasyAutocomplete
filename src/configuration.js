@@ -263,9 +263,16 @@ var EasyAutocomplete = (function(scope){
 
 			if (typeof defaults.listLocation === "string") {
 				var defaultlistLocation = defaults.listLocation;
-				defaults.listLocation = function(data) {
-					return data[defaultlistLocation];
-				};
+
+				if (defaults.dataType.toUpperCase() === "XML") {
+					defaults.listLocation = function(data) {
+						return $(data).find(defaultlistLocation);
+					};
+				} else {
+					defaults.listLocation = function(data) {
+						return data[defaultlistLocation];
+					};	
+				}
 			}
 
 			if (typeof defaults.getValue === "string") {

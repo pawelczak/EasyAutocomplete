@@ -394,3 +394,112 @@ QUnit.test("XML - Dont highlight phrase", function( assert ) {
 });
 
  
+QUnit.test("XML - string listLocation - file with two fruit lists", function( assert ) {
+	expect(5);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "resources/categories/otherFruits.xml",
+
+		dataType: "xml",
+		xmlElementName: "fruit",
+
+		highlightPhrase: false,
+
+		listLocation: "otherFruits",
+
+		getValue: function(element) {
+			return $(element).text().trim();
+		},
+
+		ajaxCallback: function() {
+
+			//assert
+			
+			assertList();
+		}
+
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("e").trigger(e);
+
+
+	QUnit.stop();
+
+
+	//assert
+
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul li");
+
+			assert.equal(5, elements.length, "Response size");
+			assert.equal("Orange", elements.eq(0).find("div").html(), "First element value");
+			assert.equal("Strawberry", elements.eq(1).find("div").html(), "Second element value");
+			assert.equal("Melon", elements.eq(2).find("div").html(), "Third element value");
+			assert.equal("Lemon", elements.eq(3).find("div").html(), "Fourth element value");
+			
+			QUnit.start();	
+	}
+});
+
+QUnit.test("XML - function listLocation - file with two fruit lists", function( assert ) {
+	expect(5);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "resources/categories/otherFruits.xml",
+
+		dataType: "xml",
+		xmlElementName: "fruit",
+
+		highlightPhrase: false,
+
+		listLocation: function(data) {
+			return $(data).find("otherFruits");
+		},
+
+		getValue: function(element) {
+			return $(element).text().trim();
+		},
+
+		ajaxCallback: function() {
+
+			//assert
+			
+			assertList();
+		}
+
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("e").trigger(e);
+
+
+	QUnit.stop();
+
+
+	//assert
+
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul li");
+
+			assert.equal(5, elements.length, "Response size");
+			assert.equal("Orange", elements.eq(0).find("div").html(), "First element value");
+			assert.equal("Strawberry", elements.eq(1).find("div").html(), "Second element value");
+			assert.equal("Melon", elements.eq(2).find("div").html(), "Third element value");
+			assert.equal("Lemon", elements.eq(3).find("div").html(), "Fourth element value");
+			
+			QUnit.start();	
+	}
+});

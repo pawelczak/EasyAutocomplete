@@ -1,0 +1,40 @@
+<data>
+	<fruits>
+		<fruit>
+			<name>Apple</name>
+		</fruit>
+		<fruit>
+			<name>Cherry</name>
+		</fruit>
+		<fruit>
+			<name>Clementine</name>
+		</fruit>
+		<fruit>
+			<name>Honeydew melon</name>
+		</fruit>
+		<fruit>
+			<name>Watermelon</name>
+		</fruit>
+		<fruit>
+			<name>Satsuma</name>
+		</fruit>
+	</fruits>
+	<otherFruits>
+		<fruit>
+			<name>Orange</name>
+		</fruit>
+		<fruit>
+			<name>Strawberry</name>
+		</fruit>
+		<fruit>
+			<name>Melon</name>
+		</fruit>
+		<fruit>
+			<name>Lemon</name>
+		</fruit>
+		<fruit>
+			<name>Grape</name>
+		</fruit>
+	</otherFruits>
+</data>
+
