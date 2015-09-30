@@ -318,3 +318,4 @@ QUnit.test("Minimal number of characters in input phrase - true", function( asse
 	assert.equal("yellow", elements.eq(3).find("div").text(), "Fourth element value");
 		
 });
+

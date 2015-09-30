@@ -85,6 +85,7 @@ module.exports = function(grunt) {
       integration: [
         'test/core/plugin.html',
         'test/core/build.html',
+        'test/core/functions.html',
         'test/core/response.html',
         'test/core/categories.html',
         'test/core/event.html',
