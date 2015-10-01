@@ -542,3 +542,184 @@ QUnit.test("Category - xml - two list", function( assert ) {
 		QUnit.start();	
 	}
 });
+
+QUnit.test("Category and processData - sort", function( assert ) {
+	expect(15);
+
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), 
+			{
+				categories: [{
+					listLocation: "fruits",
+					header: "--- FRUITS ---"
+				},{
+					listLocation: "vegetables",
+					header: "--- vegetables ---"
+				}],
+				url: "resources/categories.json",
+
+				list: {
+					sort: {
+						enabled: true
+					}
+				},
+
+				ajaxCallback: function() {
+
+					//assert
+					assertList();
+				}
+	});
+
+
+	//execute
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("c").trigger(e);
+
+
+	QUnit.stop();
+
+
+	//assert
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul").find(" > div, > li");
+
+		assert.equal(14, elements.length, "Response size");
+		assert.equal("--- FRUITS ---", elements.eq(0).text(), "Header - first category");
+		assert.equal("Apple", elements.eq(1).find("div").text(), "Apple element value - first category");
+		assert.equal("Cherry", elements.eq(2).find("div").text(), "Cherry element value - first category");
+		assert.equal("Clementine", elements.eq(3).find("div").text(), "Clementine element value - first category");
+		assert.equal("Honeydew melon", elements.eq(4).find("div").text(), "Honeydew melon element value - first category");
+		assert.equal("Satsuma", elements.eq(5).find("div").text(), "Satsuma element value - first category");
+		assert.equal("Watermelon", elements.eq(6).find("div").text(), "Watermelon element value - first category");
+		assert.equal("--- vegetables ---", elements.eq(7).text(), "Header - second category");
+		assert.equal("Courgette", elements.eq(8).find("div").text(), "Courgette element value - second category");
+		assert.equal("Fennel", elements.eq(9).find("div").text(), "Fennel element value - second category");
+		assert.equal("Green bean", elements.eq(10).find("div").text(), "Green bean element value - second category");
+		assert.equal("Jerusalem artichoke", elements.eq(11).find("div").text(), "Jerusalem artichoke element value - second category");
+		assert.equal("Pepper", elements.eq(12).find("div").text(), "Pepper element value - second category");
+		assert.equal("Yam", elements.eq(13).find("div").text(), "Yam element value - second category");
+		
+		QUnit.start();	
+	}
+});
+
+
+QUnit.test("Category and processData - match", function( assert ) {
+	expect(9);
+
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), 
+			{
+				categories: [{
+					listLocation: "fruits",
+					header: "--- FRUITS ---"
+				},{
+					listLocation: "vegetables",
+					header: "--- vegetables ---"
+				}],
+				url: "resources/categories.json",
+
+				list: {
+					match: {
+						enabled: true
+					}
+				},
+
+				ajaxCallback: function() {
+
+					//assert
+					assertList();
+				}
+	});
+
+
+	//execute
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("a").trigger(e);
+
+
+	QUnit.stop();
+
+
+	//assert
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul").find(" > div, > li");
+
+		assert.equal(8, elements.length, "Response size");
+		assert.equal("--- FRUITS ---", elements.eq(0).text(), "Header - first category");
+		assert.equal("Apple", elements.eq(1).find("div").text(), "Apple element value - first category");
+		assert.equal("Watermelon", elements.eq(2).find("div").text(), "Watermelon element value - first category");
+		assert.equal("Satsuma", elements.eq(3).find("div").text(), "Satsuma element value - first category");
+		assert.equal("--- vegetables ---", elements.eq(4).text(), "Header - second category");
+		assert.equal("Jerusalem artichoke", elements.eq(5).find("div").text(), "Jerusalem artichoke element value - second category");
+		assert.equal("Green bean", elements.eq(6).find("div").text(), "Green bean element value - second category");
+		assert.equal("Yam", elements.eq(7).find("div").text(), "Yam element value - second category");
+		
+		QUnit.start();	
+	}
+});
+
+QUnit.test("Category and processData - maxNumberOfElements", function( assert ) {
+	expect(11);
+
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), 
+			{
+				categories: [{
+					listLocation: "fruits",
+					header: "--- FRUITS ---"
+				},{
+					listLocation: "vegetables",
+					header: "--- vegetables ---"
+				}],
+				url: "resources/categories.json",
+
+				list: {
+					maxNumberOfElements: 4
+				},
+
+				ajaxCallback: function() {
+
+					//assert
+					assertList();
+				}
+	});
+
+
+	//execute
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("a").trigger(e);
+
+
+	QUnit.stop();
+
+
+	//assert
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul").find(" > div, > li");
+
+		assert.equal(10, elements.length, "Response size");
+		assert.equal("--- FRUITS ---", elements.eq(0).text(), "Header - first category");
+		assert.equal("Apple", elements.eq(1).find("div").text(), "Apple element value - first category");
+		assert.equal("Cherry", elements.eq(2).find("div").text(), "Cherry element value - first category");
+		assert.equal("Clementine", elements.eq(3).find("div").text(), "Clementine element value - first category");
+		assert.equal("Honeydew melon", elements.eq(4).find("div").text(), "Honeydew melon element value - first category");
+		assert.equal("--- vegetables ---", elements.eq(5).text(), "Header - second category");
+		assert.equal("Pepper", elements.eq(6).find("div").text(), "Pepper element value - second category");
+		assert.equal("Jerusalem artichoke", elements.eq(7).find("div").text(), "Jerusalem artichoke element value - second category");
+		assert.equal("Green bean", elements.eq(8).find("div").text(), "Green bean element value - second category");
+		assert.equal("Fennel", elements.eq(9).find("div").text(), "Fennel element value - second category");
+		
+		QUnit.start();	
+	}
+});
