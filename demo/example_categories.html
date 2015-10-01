@@ -10,7 +10,7 @@
 
 		<h1>EasyAutocomplete - categories example</h1>
 
-		<input id="data-categories" />
+		<input id="data-categories" placeholder="Fruits and vegetables" />
 
 		<script>
 
@@ -18,20 +18,12 @@
 			url: "resources/categories.json",
 
 			categories: [{
-				listLocation: "fruits"
+				listLocation: "fruits",
+				header: "--- FRUITS ---"
 			}, {
-				listLocation: "vagatables",
-				header: "--- VAGATABLES ---"
+				listLocation: "vegetables",
+				header: "--- VEGETABLES ---"
 			}],
-
-		    template: {
-		        type: "description",
-		        fields: {
-		            description: function() {
-		            	return "nice";
-		            }
-		        }
-		    },
 
 		    list: {
 		        match: {

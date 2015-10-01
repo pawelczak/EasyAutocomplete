@@ -19,25 +19,25 @@
 			<name>Satsuma</name>
 		</fruit>
 	</fruits>
-	<vagatables>
-		<vagatable>
+	<vegetables>
+		<vegetable>
 			<name>Carrot</name>
-		</vagatable>
-		<vagatable>
+		</vegetable>
+		<vegetable>
 			<name>Tomato</name>
-		</vagatable>
-		<vagatable>
+		</vegetable>
+		<vegetable>
 			<name>Potatoe</name>
-		</vagatable>
-		<vagatable>
+		</vegetable>
+		<vegetable>
 			<name>Cucamber</name>
-		</vagatable>
-		<vagatable>
+		</vegetable>
+		<vegetable>
 			<name>Radish</name>
-		</vagatable>
-		<vagatable>
+		</vegetable>
+		<vegetable>
 			<name>Yam</name>
-		</vagatable>
-	</vagatables>
+		</vegetable>
+	</vegetables>
 </data>
 

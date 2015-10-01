@@ -56,7 +56,7 @@ QUnit.test("Simple categories - two list", function( assert ) {
 				categories: [{
 					listLocation: "fruits"
 				}, {
-					listLocation: "vagatables"
+					listLocation: "vegetables"
 				}],
 				url: "resources/categories.json",
 				ajaxCallback: function() {
@@ -95,6 +95,47 @@ QUnit.test("Simple categories - two list", function( assert ) {
 
 		QUnit.start();	
 	}
+});
+
+QUnit.test("Simple categories - two list - local data", function( assert ) {
+	expect(7);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), 
+			{
+				categories: [{
+					listLocation: "fruits"
+				}, {
+					listLocation: "vegetables"
+				}],
+
+				data: {
+					fruits: ["Apple", "Cherry", "Clementine", "Honeydew melon", "Watermelon", "Satsuma"],
+					vegetables: ["Pepper", "Jerusalem artichoke", "Green bean", "Fennel", "Courgette", "Yam"]
+				}
+	});
+
+
+	//execute
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("c").trigger(e);
+
+
+	//assert
+	var elements = $("#inputOne").next().find("ul li");
+
+	assert.equal(12, elements.length, "Response size");
+	assert.equal("Apple", elements.eq(0).find("div").text(), "First element value");
+	assert.equal("Cherry", elements.eq(1).find("div").text(), "Second element value");
+	assert.equal("Satsuma", elements.eq(5).find("div").text(), "Last element value");
+	
+	assert.equal("Pepper", elements.eq(6).find("div").text(), "First element value - second category");
+	assert.equal("Jerusalem artichoke", elements.eq(7).find("div").text(), "Second element value - second category");
+	assert.equal("Yam", elements.eq(11).find("div").text(), "Last element value - second category")
+
 });
 
 QUnit.test("Simple category- no list location", function( assert ) {
@@ -198,8 +239,8 @@ QUnit.test("Simple category - two categories, with header", function( assert ) {
 					listLocation: "fruits",
 					header: "--- FRUITS ---"
 				},{
-					listLocation: "vagatables",
-					header: "--- VAGATABLES ---"
+					listLocation: "vegetables",
+					header: "--- vegetables ---"
 				}],
 				url: "resources/categories.json",
 				ajaxCallback: function() {
@@ -231,7 +272,7 @@ QUnit.test("Simple category - two categories, with header", function( assert ) {
 		assert.equal("--- FRUITS ---", elements.eq(0).text(), "Header - first category");
 		assert.equal(true, elements.eq(0).hasClass("eac-category"), "Header - first category");
 		assert.equal("Satsuma", elements.eq(6).find("div").text(), "Last element value - first category");
-		assert.equal("--- VAGATABLES ---", elements.eq(7).text(), "Header - second category");
+		assert.equal("--- vegetables ---", elements.eq(7).text(), "Header - second category");
 		assert.equal(true, elements.eq(0).hasClass("eac-category"), "Header - first category");
 		assert.equal("Pepper", elements.eq(8).find("div").text(), "First element value - second category");
 		
@@ -295,7 +336,7 @@ QUnit.test("Category - data as objects list - two different list", function( ass
 					listLocation: "fruits",
 					getValue: "name"
 				}, {
-					listLocation: "vagatables",
+					listLocation: "vegetables",
 					getValue: function(item) {return item.text;}
 				}],
 
@@ -452,9 +493,9 @@ QUnit.test("Category - xml - two list", function( assert ) {
 			listLocation: "fruits",
 			xmlElementName: "fruit"
 		},{
-			header: "xml - vagatables",
-			listLocation: "vagatables",
-			xmlElementName: "vagatable"
+			header: "xml - vegetables",
+			listLocation: "vegetables",
+			xmlElementName: "vegetable"
 		}],
 
 		getValue: function(element) { return $(element).find("name").text();},

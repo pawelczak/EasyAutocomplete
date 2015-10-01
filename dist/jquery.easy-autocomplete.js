@@ -1229,7 +1229,7 @@ var EasyAutocomplete = (function(scope) {
 							var listBuilders = listBuilderService.init(data);
 
 							listBuilders = listBuilderService.updateCategories(listBuilders, data);
-
+							
 							listBuilders = listBuilderService.processData(listBuilders, inputPhrase);
 
 							loadElements(listBuilders, inputPhrase);

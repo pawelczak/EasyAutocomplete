@@ -1,4 +1,4 @@
 {
 	"fruits": ["Apple", "Cherry", "Clementine", "Honeydew melon", "Watermelon", "Satsuma"],
-	"vagatables": ["Pepper", "Jerusalem artichoke", "Green bean", "Fennel", "Courgette", "Yam"]
+	"vegetables": ["Pepper", "Jerusalem artichoke", "Green bean", "Fennel", "Courgette", "Yam"]
 }
