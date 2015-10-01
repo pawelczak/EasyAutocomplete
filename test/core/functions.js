@@ -360,3 +360,45 @@ QUnit.test("getSelectedItem - response - two different easyAutocomplete instance
 	
 	expect(2);
 });
+
+
+QUnit.test("getSelectedItem should work with categories", function( assert ) {
+	
+	
+	//given
+	$("#inputOne").easyAutocomplete({
+			
+			categories: [{
+				listLocation: "fruits"
+			}, {
+				listLocation: "vegetables"
+			}],
+
+			url: "resources/categories.json",
+
+			list: {
+
+				onLoadEvent: function() {
+					//trigger select event
+					$("#inputOne").next().find("ul li").eq(8).find(" > div").trigger("click");
+				},
+
+				onSelectItemEvent: function() {
+					
+					assert.equal(8, $("#inputOne").getSelectedItem(), "second fruit selected");
+
+					QUnit.start();
+				}
+		}
+	});
+
+
+	//execute
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("more").trigger(e);
+
+	QUnit.stop();
+	
+	expect(1);
+});
