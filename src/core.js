@@ -228,11 +228,16 @@ var EasyAutocomplete = (function(scope) {
 							var counter = 0;
 							for(var builderIndex = 0; builderIndex < listBuilder.length; builderIndex += 1) {
 
+								var listData = listBuilder[builderIndex].data;
+
+
+								if (listData.length === 0) {
+									continue;
+								}
+
 								if (listBuilder[builderIndex].header !== undefined && listBuilder[builderIndex].header.length > 0) {
 									$listContainer.append("<div class='eac-category' >" + listBuilder[builderIndex].header + "</div>");
 								}
-
-								var listData = listBuilder[builderIndex].data;
 
 								for(var i = 0, length = listData.length; i < length; i += 1) {
 									$item = $("<li><div class='eac-item'></div></li>");

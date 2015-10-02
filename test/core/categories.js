@@ -723,3 +723,43 @@ QUnit.test("Category and processData - maxNumberOfElements", function( assert ) 
 		QUnit.start();	
 	}
 });
+
+
+QUnit.test("Categories - when list ist empty, header should be hidden", function( assert ) {
+	expect(5);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), 
+			{
+				categories: [{
+					listLocation: "fruits"
+				}, {
+					listLocation: "vegetables",
+					header: "--- vegetables ---"
+				}],
+
+				data: {
+					fruits: [],
+					vegetables: ["Pepper", "Jerusalem artichoke", "Green bean", "Fennel", "Courgette", "Yam"]
+				}
+	});
+
+
+	//execute
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("c").trigger(e);
+
+
+	//assert
+	var elements = $("#inputOne").next().find("ul").find(" > div, > li");
+
+	assert.equal(7, elements.length, "Response size");
+	assert.equal("--- vegetables ---", elements.eq(0).text(), "Header - second category");
+	assert.equal("Pepper", elements.eq(1).find("div").text(), "First element value - second category");
+	assert.equal("Jerusalem artichoke", elements.eq(2).find("div").text(), "Second element value - second category");
+	assert.equal("Yam", elements.eq(6).find("div").text(), "Last element value - second category")
+
+});
