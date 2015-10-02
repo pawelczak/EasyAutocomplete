@@ -3,7 +3,7 @@
  *
  * @author Łukasz Pawełczak
  */
-QUnit.test("getSelectedItem - input with id", function( assert ) {
+QUnit.test("getSelectedItemIndex - input with id", function( assert ) {
 	
 	
 	//given
@@ -20,12 +20,12 @@ QUnit.test("getSelectedItem - input with id", function( assert ) {
 	$("#inputOne").val("more").trigger(e);
 
 
-	var beforeSelectedItem = $("#inputOne").getSelectedItem();
+	var beforeSelectedItem = $("#inputOne").getSelectedItemIndex();
 
 	//select second element
 	$("#inputOne").next().find("ul li").eq(1).find(" > div").trigger("mouseover");
 
-	var afterSelectedItem = $("#inputOne").getSelectedItem();
+	var afterSelectedItem = $("#inputOne").getSelectedItemIndex();
 
 	//assert
 	var elements = $("#inputOne").next().find("ul li");
@@ -36,14 +36,14 @@ QUnit.test("getSelectedItem - input with id", function( assert ) {
 	assert.equal(false, elements.eq(2).hasClass("selected"), "Third element is not selected");
 	assert.equal(false, elements.eq(3).hasClass("selected"), "Fourth element is not selected");
 	
-	assert.equal(-1, beforeSelectedItem, "getSelectedItem returns actual item before mouseover");	
-	assert.equal(1, afterSelectedItem, "getSelectedItem returns actual item after mouseover");
+	assert.equal(-1, beforeSelectedItem, "getSelectedItemIndex returns actual item before mouseover");	
+	assert.equal(1, afterSelectedItem, "getSelectedItemIndex returns actual item after mouseover");
 
 	expect(7);
 });
 
 
-QUnit.test("getSelectedItem - input with no id", function( assert ) {
+QUnit.test("getSelectedItemIndex - input with no id", function( assert ) {
 	
 	
 	//given
@@ -60,12 +60,12 @@ QUnit.test("getSelectedItem - input with no id", function( assert ) {
 	$(".inputOne").val("more").trigger(e);
 
 
-	var beforeSelectedItem = $(".inputOne").getSelectedItem();
+	var beforeSelectedItem = $(".inputOne").getSelectedItemIndex();
 
 	//select second element
 	$(".inputOne").next().find("ul li").eq(1).find(" > div").trigger("mouseover");
 
-	var afterSelectedItem = $(".inputOne").getSelectedItem();
+	var afterSelectedItem = $(".inputOne").getSelectedItemIndex();
 
 	//assert
 	var elements = $(".inputOne").next().find("ul li");
@@ -76,14 +76,14 @@ QUnit.test("getSelectedItem - input with no id", function( assert ) {
 	assert.equal(false, elements.eq(2).hasClass("selected"), "Third element is not selected");
 	assert.equal(false, elements.eq(3).hasClass("selected"), "Fourth element is not selected");
 	
-	assert.equal(-1, beforeSelectedItem, "getSelectedItem returns actual item before mouseover");	
-	assert.equal(1, afterSelectedItem, "getSelectedItem returns actual item after mouseover");
+	assert.equal(-1, beforeSelectedItem, "getSelectedItemIndex returns actual item before mouseover");	
+	assert.equal(1, afterSelectedItem, "getSelectedItemIndex returns actual item after mouseover");
 
 	expect(7);
 });
 
 
-QUnit.test("getSelectedItem - input with id - click trigger", function( assert ) {
+QUnit.test("getSelectedItemIndex - input with id - click trigger", function( assert ) {
 	
 	
 	//given
@@ -100,12 +100,12 @@ QUnit.test("getSelectedItem - input with id - click trigger", function( assert )
 	$("#inputOne").val("more").trigger(e);
 
 
-	var beforeSelectedItem = $("#inputOne").getSelectedItem();
+	var beforeSelectedItem = $("#inputOne").getSelectedItemIndex();
 
 	//select second element
 	$("#inputOne").next().find("ul li").eq(1).find(" > div").trigger("click");
 
-	var afterSelectedItem = $("#inputOne").getSelectedItem();
+	var afterSelectedItem = $("#inputOne").getSelectedItemIndex();
 
 	//assert
 	var elements = $("#inputOne").next().find("ul li");
@@ -116,13 +116,13 @@ QUnit.test("getSelectedItem - input with id - click trigger", function( assert )
 	assert.equal(false, elements.eq(2).hasClass("selected"), "Third element is not selected");
 	assert.equal(false, elements.eq(3).hasClass("selected"), "Fourth element is not selected");
 	
-	assert.equal(-1, beforeSelectedItem, "getSelectedItem returns actual item before click");	
-	assert.equal(1, afterSelectedItem, "getSelectedItem returns actual item after click");
+	assert.equal(-1, beforeSelectedItem, "getSelectedItemIndex returns actual item before click");	
+	assert.equal(1, afterSelectedItem, "getSelectedItemIndex returns actual item after click");
 
 	expect(7);
 });
 
-QUnit.test("getSelectedItem - input with id - arrowDown trigger", function( assert ) {
+QUnit.test("getSelectedItemIndex - input with id - arrowDown trigger", function( assert ) {
 	
 	
 	//given
@@ -139,7 +139,7 @@ QUnit.test("getSelectedItem - input with id - arrowDown trigger", function( asse
 	$("#inputOne").val("more").trigger(e);
 
 
-	var beforeSelectedItem = $("#inputOne").getSelectedItem();
+	var beforeSelectedItem = $("#inputOne").getSelectedItemIndex();
 
 	//select third element
 	e.keyCode = 40; 
@@ -147,7 +147,7 @@ QUnit.test("getSelectedItem - input with id - arrowDown trigger", function( asse
 	$("#inputOne").trigger(e);
 	$("#inputOne").trigger(e);
 
-	var afterSelectedItem = $("#inputOne").getSelectedItem();
+	var afterSelectedItem = $("#inputOne").getSelectedItemIndex();
 
 	//assert
 	var elements = $("#inputOne").next().find("ul li");
@@ -158,13 +158,13 @@ QUnit.test("getSelectedItem - input with id - arrowDown trigger", function( asse
 	assert.equal(true, elements.eq(2).hasClass("selected"), "Third element is selected");
 	assert.equal(false, elements.eq(3).hasClass("selected"), "Fourth element is not selected");
 	
-	assert.equal(-1, beforeSelectedItem, "getSelectedItem returns actual item before click");	
-	assert.equal(2, afterSelectedItem, "getSelectedItem returns actual item after click");
+	assert.equal(-1, beforeSelectedItem, "getSelectedItemIndex returns actual item before click");	
+	assert.equal(2, afterSelectedItem, "getSelectedItemIndex returns actual item after click");
 
 	expect(7);
 });
 
-QUnit.test("getSelectedItem - input with id - arrowDown/arrowUp mixin", function( assert ) {
+QUnit.test("getSelectedItemIndex - input with id - arrowDown/arrowUp mixin", function( assert ) {
 	
 	
 	//given
@@ -181,7 +181,7 @@ QUnit.test("getSelectedItem - input with id - arrowDown/arrowUp mixin", function
 	$("#inputOne").val("more").trigger(e);
 
 
-	var beforeSelectedItem = $("#inputOne").getSelectedItem();
+	var beforeSelectedItem = $("#inputOne").getSelectedItemIndex();
 
 	//select third element
 	e.keyCode = 40; 
@@ -194,7 +194,7 @@ QUnit.test("getSelectedItem - input with id - arrowDown/arrowUp mixin", function
 	$("#inputOne").trigger(e);
 	
 
-	var afterSelectedItem = $("#inputOne").getSelectedItem();
+	var afterSelectedItem = $("#inputOne").getSelectedItemIndex();
 
 	//assert
 	var elements = $("#inputOne").next().find("ul li");
@@ -205,13 +205,13 @@ QUnit.test("getSelectedItem - input with id - arrowDown/arrowUp mixin", function
 	assert.equal(true, elements.eq(2).hasClass("selected"), "Third element is selected");
 	assert.equal(false, elements.eq(3).hasClass("selected"), "Fourth element is not selected");
 	
-	assert.equal(-1, beforeSelectedItem, "getSelectedItem returns actual item before click");	
-	assert.equal(2, afterSelectedItem, "getSelectedItem returns actual item after click");
+	assert.equal(-1, beforeSelectedItem, "getSelectedItemIndex returns actual item before click");	
+	assert.equal(2, afterSelectedItem, "getSelectedItemIndex returns actual item after click");
 
 	expect(7);
 });
 
-QUnit.test("getSelectedItem - response - on onLoadEvent", function( assert ) {
+QUnit.test("getSelectedItemIndex - response - on onLoadEvent", function( assert ) {
 	
 	
 	//given
@@ -221,7 +221,7 @@ QUnit.test("getSelectedItem - response - on onLoadEvent", function( assert ) {
 		
 		list: {
 			onLoadEvent: function() {
-				var beforeSelectedItem = $("#inputOne").getSelectedItem();
+				var beforeSelectedItem = $("#inputOne").getSelectedItemIndex();
 
 				//select first element
 				e.keyCode = 40; 
@@ -234,7 +234,7 @@ QUnit.test("getSelectedItem - response - on onLoadEvent", function( assert ) {
 				$("#inputOne").trigger(e);
 				
 
-				var afterSelectedItem = $("#inputOne").getSelectedItem();
+				var afterSelectedItem = $("#inputOne").getSelectedItemIndex();
 
 				//assert
 				var elements = $("#inputOne").next().find("ul li");
@@ -244,8 +244,8 @@ QUnit.test("getSelectedItem - response - on onLoadEvent", function( assert ) {
 				assert.equal(true, elements.eq(1).hasClass("selected"), "Second element is selected");
 				assert.equal(false, elements.eq(2).hasClass("selected"), "Third element is not selected");
 				
-				assert.equal(-1, beforeSelectedItem, "getSelectedItem returns actual item before click");	
-				assert.equal(1, afterSelectedItem, "getSelectedItem returns actual item after click");
+				assert.equal(-1, beforeSelectedItem, "getSelectedItemIndex returns actual item before click");	
+				assert.equal(1, afterSelectedItem, "getSelectedItemIndex returns actual item after click");
 
 				QUnit.start();
 			}
@@ -266,7 +266,7 @@ QUnit.test("getSelectedItem - response - on onLoadEvent", function( assert ) {
 });
 
 
-QUnit.test("getSelectedItem - response - on onSelectItemEvent", function( assert ) {
+QUnit.test("getSelectedItemIndex - response - on onSelectItemEvent", function( assert ) {
 	
 	
 	//given
@@ -281,7 +281,7 @@ QUnit.test("getSelectedItem - response - on onSelectItemEvent", function( assert
 			},
 			onSelectItemEvent: function() {
 				
-				var afterSelectedItem = $("#inputOne").getSelectedItem();
+				var afterSelectedItem = $("#inputOne").getSelectedItemIndex();
 
 				//assert
 				var elements = $("#inputOne").next().find("ul li");
@@ -291,7 +291,7 @@ QUnit.test("getSelectedItem - response - on onSelectItemEvent", function( assert
 				assert.equal(true, elements.eq(1).hasClass("selected"), "Second element is selected");
 				assert.equal(false, elements.eq(2).hasClass("selected"), "Third element is not selected");
 				
-				assert.equal(1, afterSelectedItem, "getSelectedItem returns actual item after click");
+				assert.equal(1, afterSelectedItem, "getSelectedItemIndex returns actual item after click");
 
 				QUnit.start();
 			}
@@ -312,7 +312,7 @@ QUnit.test("getSelectedItem - response - on onSelectItemEvent", function( assert
 });
 
 
-QUnit.test("getSelectedItem - response - two different easyAutocomplete instances", function( assert ) {
+QUnit.test("getSelectedItemIndex - response - two different easyAutocomplete instances", function( assert ) {
 	
 	
 	//given
@@ -340,8 +340,8 @@ QUnit.test("getSelectedItem - response - two different easyAutocomplete instance
 			},
 			onSelectItemEvent: function() {
 				
-				assert.equal(1, $("#inputOne").getSelectedItem(), "getSelectedItem from #inputOne");
-				assert.equal(2, $(".inputOne").getSelectedItem(), "getSelectedItem .inputOne");
+				assert.equal(1, $("#inputOne").getSelectedItemIndex(), "getSelectedItemIndex from #inputOne");
+				assert.equal(2, $(".inputOne").getSelectedItemIndex(), "getSelectedItemIndex .inputOne");
 
 				QUnit.start();
 			}
@@ -362,7 +362,7 @@ QUnit.test("getSelectedItem - response - two different easyAutocomplete instance
 });
 
 
-QUnit.test("getSelectedItem should work with categories", function( assert ) {
+QUnit.test("getSelectedItemIndex should work with categories", function( assert ) {
 	
 	
 	//given
@@ -385,7 +385,7 @@ QUnit.test("getSelectedItem should work with categories", function( assert ) {
 
 				onSelectItemEvent: function() {
 					
-					assert.equal(8, $("#inputOne").getSelectedItem(), "second fruit selected");
+					assert.equal(8, $("#inputOne").getSelectedItemIndex(), "second fruit selected");
 
 					QUnit.start();
 				}
