@@ -60,7 +60,7 @@ $purple: #c7c0de;
             border-color: $blue-light;
             box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px $blue-lighter;
 
-            li {
+            li, .eac-category {
                 border-color: $blue-light;
 
                 &.selected {
@@ -84,7 +84,7 @@ $purple: #c7c0de;
             border-color: $green-light;
             box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px $green-lighter;
 
-            li {
+            li, .eac-category {
                 border-color: $green-light;
 
                 &.selected {
@@ -108,7 +108,7 @@ $purple: #c7c0de;
             border-color: $red-light;
             box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px $red-lighter;
 
-            li {
+            li, .eac-category {
                 border-color: $red-light;
 
                 &.selected {
@@ -132,7 +132,7 @@ $purple: #c7c0de;
             border-color: $yellow-light;
             box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px $yellow-lighter;
 
-            li {
+            li, .eac-category {
                 border-color: $yellow-light;
 
                 &.selected {
@@ -156,7 +156,7 @@ $purple: #c7c0de;
             border-color: $dark-light;
             box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px $dark-lighter;
 
-            li {
+            li, .eac-category {
                 border-color: $dark-light;
 
                 &.selected {
@@ -188,7 +188,7 @@ $purple: #c7c0de;
         ul {
             border-color: $dark;
 
-            li {
+            li, .eac-category {
                 background-color: lighten($dark-light, 5%);
                 border-color: $dark;
 
@@ -221,7 +221,7 @@ $purple: #c7c0de;
         ul {
             border-color: $dark-glass;
 
-            li {
+            li, .eac-category {
                 background-color: $dark-glass;
                 border-color: $dark-glass;
 
@@ -263,7 +263,7 @@ $purple: #c7c0de;
         ul {
             border-color: $blue;
 
-            li {
+            li, .eac-category {
                 background-color: lighten($blue, 5%);
                 border-color: $blue;
 
@@ -297,7 +297,7 @@ $purple: #c7c0de;
         ul {
             border-color: #333;
 
-            li {
+            li, .eac-category {
                 background-color: lighten($yellow, 5%);
                 border-color: #333;
 
@@ -330,7 +330,7 @@ $purple: #c7c0de;
         ul {
             border-color: #333;
 
-            li {
+            li, .eac-category {
                 background-color: lighten($purple, 5%);
                 border-color: #333;
 
@@ -424,7 +424,8 @@ $purple: #c7c0de;
 
         .eac-category {
             font: {
-                weight: bold;
+                color: #aaa;
+                style: italic;
             }
         }
 

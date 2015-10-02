@@ -31,7 +31,7 @@
             box-shadow: none;
             top: 0;
 
-            li {
+            li, .eac-category {
                 border-color: $square-grey;
                 font-family: inherit;
                 font-size: 16px;
@@ -91,7 +91,7 @@
             min-width: 300px;
             top: 20px;
 
-            li {
+            li, .eac-category {
             	background: #fff;
                 border-color: $round-blue;
                 border-width: 0 2px;
@@ -148,7 +148,7 @@
 			background: transparent;
 			border: 0;
 
-			li {
+			li, .eac-category {
 				background: transparent;
 				border: 0;
 				color: $funky-purple;
@@ -182,7 +182,7 @@
 
 		ul {
 			
-			li {
+			li, .eac-category {
 				transition: all 0.4s ease 0s;
 
 				&.selected {
@@ -217,7 +217,7 @@
 			border-width: 0;
 			top: 10px;
 
-			li {
+			li, .eac-category {
 				background: rgba(181,181,181, 1);
 				color: #FAFAFA;
 				font-size: 12px;
@@ -262,7 +262,7 @@
 			border-width: 0;
 			top: 10px;
 
-			li {
+			li, .eac-category {
 				background: rgba(33,33,33, 1);
 				color: #FAFAFA;
 				font-size: 12px;
@@ -290,7 +290,5 @@
 		}
 
 	}
-
-
 }
 
