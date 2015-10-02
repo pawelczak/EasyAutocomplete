@@ -1,13 +1,4 @@
 /*
- * easy-autocomplete
- * jQuery plugin for autocompletion
- * 
- * @author Łukasz Pawełczak (http://github.com/pawelczak)
- * @version 1.1.6
- * Copyright MIT License: https://github.com/pawelczak/easy-autocomplete/blob/master/LICENSE.txt
- */
-
-/*
  * EasyAutocomplete - Configuration 
  */
 var EasyAutocomplete = (function(scope){
@@ -32,6 +23,7 @@ var EasyAutocomplete = (function(scope){
 
 			placeholder: false,
 
+			ajaxData: function () {},
 			ajaxCallback: function() {},
 
 			matchResponseProperty: false,
@@ -253,6 +245,13 @@ var EasyAutocomplete = (function(scope){
 				var defaultUrl = defaults.ajaxSettings.url;
 				defaults.ajaxSettings.url = function() {
 					return defaultUrl;
+				};
+			}
+
+			if (typeof defaults.ajaxData !== "function") {
+				var ajaxData = defaults.ajaxData;
+				defaults.ajaxData = function () {
+					return ajaxData;
 				};
 			}
 
@@ -1263,6 +1262,7 @@ var EasyAutocomplete = (function(scope) {
 						if (settings.url !== undefined && settings.url !== "list-required") {
 
 							settings.url = settings.url(inputPhrase);
+							settings.data = config.get("ajaxData")(inputPhrase);
 
 							$.ajax(settings) 
 								.done(function(data) {

@@ -471,6 +471,7 @@ var EasyAutocomplete = (function(scope) {
 						if (settings.url !== undefined && settings.url !== "list-required") {
 
 							settings.url = settings.url(inputPhrase);
+							settings.data = config.get("ajaxData")(inputPhrase);
 
 							$.ajax(settings) 
 								.done(function(data) {
