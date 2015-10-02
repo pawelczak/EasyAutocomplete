@@ -179,6 +179,8 @@ var EasyAutocomplete = (function(scope) {
 									$elements_container.find("ul").show();
 								break;
 							}
+
+							config.get("list").onShowListEvent();
 							
 						})
 						/* List hide animation */
@@ -204,6 +206,9 @@ var EasyAutocomplete = (function(scope) {
 									$elements_container.find("ul").hide();
 								break;
 							}
+
+							config.get("list").onHideListEvent();
+
 						})
 						.on("selectElement", function(event, selected) {
 							$elements_container.find("ul li").removeClass("selected");

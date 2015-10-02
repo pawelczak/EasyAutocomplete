@@ -80,7 +80,8 @@ var EasyAutocomplete = (function(scope){
 				onLoadEvent: function() {},
 				onMouseOverEvent: function() {},
 				onMouseOutEvent: function() {},	
-
+				onShowListEvent: function() {},
+				onHideListEvent: function() {}
 			},
 
 			highlightPhrase: true,

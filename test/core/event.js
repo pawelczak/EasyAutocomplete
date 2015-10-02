@@ -270,3 +270,86 @@ QUnit.test("Event onSelectItemEvent ", function( assert ) {
 	}
 });
 
+QUnit.test("Event onShowListEvent ", function( assert ) {
+	expect(1);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "resources/colors_string.json",
+
+			list: {
+				onShowListEvent: function() {
+
+					//assert
+					assertList();
+				}
+			}
+			
+	}),
+	$input = $("#inputOne");
+
+
+	//execute
+	completerOne.init();
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$input.val("c").trigger(e); //trigger show list
+
+	QUnit.stop();
+
+	//assert
+
+	function assertList() {
+
+		var elements = $("#inputOne").next().find("ul li");
+
+		assert.equal(3, elements.length, "Response size");
+
+		QUnit.start();	
+	}
+});
+
+QUnit.test("Event onHideListEvent ", function( assert ) {
+	expect(1);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "resources/colors_string.json",
+
+			list: {
+				onHideListEvent: function() {
+
+					//assert
+					assertList();
+				},
+				onLoadEvent: function() {
+
+					//trigger hide list
+					var key = $.Event('keyup');
+					key.keyCode = 27; 
+					$input.trigger(key);
+				}	
+			}
+			
+	}),
+	$input = $("#inputOne");
+
+
+	//execute
+	completerOne.init();
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$input.val("c").trigger(e);
+
+	QUnit.stop();
+
+	//assert
+
+	function assertList() {
+
+		var elements = $("#inputOne").next().find("ul li");
+
+		assert.equal(3, elements.length, "Response size");
+
+		QUnit.start();	
+	}
+});
+
