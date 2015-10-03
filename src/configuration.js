@@ -23,6 +23,7 @@ var EasyAutocomplete = (function(scope){
 
 			placeholder: false,
 
+			ajaxData: function () {},
 			ajaxCallback: function() {},
 
 			matchResponseProperty: false,
@@ -259,6 +260,13 @@ var EasyAutocomplete = (function(scope){
 				var defaultUrl = defaults.ajaxSettings.url;
 				defaults.ajaxSettings.url = function() {
 					return defaultUrl;
+				};
+			}
+
+			if (typeof defaults.ajaxData !== "function") {
+				var ajaxData = defaults.ajaxData;
+				defaults.ajaxData = function () {
+					return ajaxData;
 				};
 			}
 
