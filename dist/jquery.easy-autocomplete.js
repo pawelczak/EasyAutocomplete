@@ -1118,10 +1118,14 @@ var EasyAutocomplete = (function(scope) {
 					
 			}
 
-			function highlightPhrase(string, phrase) {
-				return (string + "").replace(new RegExp("(" + phrase + ")", "gi") , "<b>$1</b>");
+			function escapeRegExp(str) {
+				return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 			}
 
+			function highlightPhrase(string, phrase) {
+				var escapedPhrase = escapeRegExp(phrase);
+				return (string + "").replace(new RegExp("(" + escapedPhrase + ")", "gi"), "<b>$1</b>");
+			}
 
 
 		}
