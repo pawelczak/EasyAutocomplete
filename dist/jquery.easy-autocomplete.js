@@ -1469,7 +1469,7 @@ $.fn.getSelectedItemData = function() {
 
 	var inputId = $(this).attr("id");
 
-	if (inputId !== undefined && selectedItemIndex > -1) {
+	if (inputId !== undefined) {
 		if ($.fn.easyAutocompleteHandles[inputId] !== undefined) {
 			return $.fn.easyAutocompleteHandles[inputId].getSelectedItemData();
 		}
