@@ -44,6 +44,19 @@ var EasyAutocomplete = (function(scope) {
 			return selectedElement;
 		};
 
+		this.getItemData = function(index) {
+
+			if (elementsList.length < index || elementsList[index] === undefined) {
+				return -1;
+			} else {
+				return elementsList[index];
+			}
+		};
+
+		this.getSelectedItemData = function() {
+			return this.getItemData(selectedElement);
+		};
+
 		//------------------------ PUBLIC METHODS STARTS --------------------------	
 
 		this.build = function() {
@@ -216,7 +229,7 @@ var EasyAutocomplete = (function(scope) {
 
 							config.get("list").onSelectItemEvent();
 						})
-						.on("loadElements", function(event, listBuilder, phrase) {
+						.on("loadElements", function(event, listBuilders, phrase) {
 			
 
 							var $item = "",
@@ -231,27 +244,26 @@ var EasyAutocomplete = (function(scope) {
 
 							//Categories REFACTOR
 							var counter = 0;
-							for(var builderIndex = 0; builderIndex < listBuilder.length; builderIndex += 1) {
+							for(var builderIndex = 0, listBuildersLength = listBuilders.length; builderIndex < listBuildersLength; builderIndex += 1) {
 
-								var listData = listBuilder[builderIndex].data;
-
+								var listData = listBuilders[builderIndex].data;
 
 								if (listData.length === 0) {
 									continue;
 								}
 
-								if (listBuilder[builderIndex].header !== undefined && listBuilder[builderIndex].header.length > 0) {
-									$listContainer.append("<div class='eac-category' >" + listBuilder[builderIndex].header + "</div>");
+								if (listBuilders[builderIndex].header !== undefined && listBuilders[builderIndex].header.length > 0) {
+									$listContainer.append("<div class='eac-category' >" + listBuilders[builderIndex].header + "</div>");
 								}
 
-								for(var i = 0, length = listData.length; i < length; i += 1) {
+								for(var i = 0, listDataLength = listData.length; i < listDataLength; i += 1) {
 									$item = $("<li><div class='eac-item'></div></li>");
 									
 
 									(function() {
 										var j = i,
 											itemCounter = counter,
-											elementsValue = listBuilder[builderIndex].getValue(listData[j]);
+											elementsValue = listBuilders[builderIndex].getValue(listData[j]);
 
 										$item.find(" > div")
 											.on("click", function() {
@@ -430,10 +442,7 @@ var EasyAutocomplete = (function(scope) {
 
 					function loadData() {
 
-						
-						
 						var inputPhrase = $field.val();
-
 
 
 						if (inputPhrase.length < config.get("minCharNumber")) {
@@ -660,6 +669,32 @@ $.fn.getSelectedItemIndex = function() {
 	if (inputId !== undefined) {
 		if ($.fn.easyAutocompleteHandles[inputId] !== undefined) {
 			return $.fn.easyAutocompleteHandles[inputId].getSelectedItemIndex();
+		}
+	}
+
+	return -1;
+};
+
+$.fn.getItemData = function(index) {
+
+	var inputId = $(this).attr("id");
+
+	if (inputId !== undefined && index > -1) {
+		if ($.fn.easyAutocompleteHandles[inputId] !== undefined) {
+			return $.fn.easyAutocompleteHandles[inputId].getItemData(index);
+		}
+	}
+
+	return -1;
+};
+
+$.fn.getSelectedItemData = function() {
+
+	var inputId = $(this).attr("id");
+
+	if (inputId !== undefined && selectedItemIndex > -1) {
+		if ($.fn.easyAutocompleteHandles[inputId] !== undefined) {
+			return $.fn.easyAutocompleteHandles[inputId].getSelectedItemData();
 		}
 	}
 
