@@ -51,9 +51,11 @@ var EasyAutocomplete = (function(scope) {
 		};
 
 		this.processData = function(listBuilder, inputPhrase) {
-
-			for(var i = 0, length = listBuilder.length; i < length; i+=1) {
-				listBuilder[i].data = proccessResponseData(configuration, listBuilder[i].data, inputPhrase);
+			for (var i = 0, length = listBuilder.length; i < length; i += 1) {
+				var unproccessedData = listBuilder[i].data;
+				if (unproccessedData) {
+					listBuilder[i].data = proccessResponseData(configuration, unproccessedData, inputPhrase);
+				}
 			}
 
 			return listBuilder;

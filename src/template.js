@@ -69,10 +69,13 @@ var EasyAutocomplete = (function(scope){
 
 			if (template.type === "description") {
 
-				var buildMethod = function(elementValue, element) {
-					return elementValue + " - <span>" + element[_fields.description] + "</span>";
+				var buildMethod = function (elementValue, element) {
+					var hint = element[_fields.description];
+					if (hint) {
+						return elementValue + " - <span>" + hint + "</span>";
+					}
+					return elementValue;
 				};
-
 
 				return buildMethod;
 			}

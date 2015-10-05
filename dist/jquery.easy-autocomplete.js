@@ -437,9 +437,11 @@ var EasyAutocomplete = (function(scope) {
 		};
 
 		this.processData = function(listBuilder, inputPhrase) {
-
-			for(var i = 0, length = listBuilder.length; i < length; i+=1) {
-				listBuilder[i].data = proccessResponseData(configuration, listBuilder[i].data, inputPhrase);
+			for (var i = 0, length = listBuilder.length; i < length; i += 1) {
+				var unproccessedData = listBuilder[i].data;
+				if (unproccessedData) {
+					listBuilder[i].data = proccessResponseData(configuration, unproccessedData, inputPhrase);
+				}
 			}
 
 			return listBuilder;
@@ -719,10 +721,13 @@ var EasyAutocomplete = (function(scope){
 
 			if (template.type === "description") {
 
-				var buildMethod = function(elementValue, element) {
-					return elementValue + " - <span>" + element[_fields.description] + "</span>";
+				var buildMethod = function (elementValue, element) {
+					var hint = element[_fields.description];
+					if (hint) {
+						return elementValue + " - <span>" + hint + "</span>";
+					}
+					return elementValue;
 				};
-
 
 				return buildMethod;
 			}
@@ -1048,7 +1053,7 @@ var EasyAutocomplete = (function(scope) {
 								var listData = listBuilder[builderIndex].data;
 
 
-								if (listData.length === 0) {
+								if (!listData || listData.length === 0) {
 									continue;
 								}
 

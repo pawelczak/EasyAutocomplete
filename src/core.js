@@ -236,7 +236,7 @@ var EasyAutocomplete = (function(scope) {
 								var listData = listBuilder[builderIndex].data;
 
 
-								if (listData.length === 0) {
+								if (!listData || listData.length === 0) {
 									continue;
 								}
 
