@@ -903,6 +903,10 @@ var EasyAutocomplete = (function(scope) {
 		};
 		function init() {
 
+			if ($field.length === 0) {
+				logger.error("Input field doesn't exist.");
+				return;
+			}
 
 			if (!config.checkDataUrlProperties()) {
 				logger.error("One of options variables 'data' or 'url' must be defined.");
