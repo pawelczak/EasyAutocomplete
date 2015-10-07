@@ -3,7 +3,34 @@
  *
  * @author Łukasz Pawełczak
  */
-QUnit.test("Static data - string array", function( assert ) {
+ QUnit.test("Local data - empty array", function( assert ) {
+	expect(1);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+
+		data: [],
+
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("a").trigger(e);
+
+	
+	//assert
+	var elements = $("#inputOne").next().find("ul li");
+
+	assert.equal(0, elements.length, "Response size");
+			
+});
+
+QUnit.test("Local data - string array", function( assert ) {
 	expect(5);
 	
 	//given
@@ -36,7 +63,7 @@ QUnit.test("Static data - string array", function( assert ) {
 		
 });
 
-QUnit.test("Static data - object array", function( assert ) {
+QUnit.test("Local data - object array", function( assert ) {
 	expect(5);
 	
 	//given
@@ -73,7 +100,7 @@ QUnit.test("Static data - object array", function( assert ) {
 	
 });
 
-QUnit.test("Static data + listLocation- string array", function( assert ) {
+QUnit.test("Local data + listLocation- string array", function( assert ) {
 	expect(5);
 	
 	//given
@@ -110,7 +137,7 @@ QUnit.test("Static data + listLocation- string array", function( assert ) {
 		
 });
 
-QUnit.test("Static data + listLocation - object array", function( assert ) {
+QUnit.test("Local data + listLocation - object array", function( assert ) {
 	expect(5);
 	
 	//given
