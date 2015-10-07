@@ -33,6 +33,35 @@ QUnit.test("Sort - sorting simple list", function( assert ) {
 	assert.equal(expectedList[3], actuaList[3], "Passed - equal fourth");
 });
 
+QUnit.test("Sort - sorting - data with numbers", function( assert ) {
+	expect(5);
+	
+	//given
+	var options = {
+			list: {
+				sort: {
+					enabled: true,
+				}
+			}
+		},
+		unsortedList = ["ab12ba", "aaba", "red333", "44pink"],
+		expectedList = ["44pink", "aaba", "ab12ba", "red333"],
+
+		config = new EasyAutocomplete.Configuration(options);
+
+
+	//execute
+	var actuaList = EasyAutocomplete.proccess(config, unsortedList);
+
+
+	//assert
+	assert.equal(4, actuaList.length, "Passed - list size");
+	assert.equal(expectedList[0], actuaList[0], "Passed - equal first");
+	assert.equal(expectedList[1], actuaList[1], "Passed - equal second");
+	assert.equal(expectedList[2], actuaList[2], "Passed - equal third");
+	assert.equal(expectedList[3], actuaList[3], "Passed - equal fourth");
+});
+
 QUnit.test("Sort - reverse simple list", function( assert ) {
 	expect(5);
 	
