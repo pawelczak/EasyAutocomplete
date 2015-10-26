@@ -27,7 +27,6 @@ var EasyAutocomplete = (function(scope){
 
 			matchResponseProperty: false,
 
-
 			list: {
 				sort: {
 					enabled: false,
@@ -47,6 +46,8 @@ var EasyAutocomplete = (function(scope){
 				},
 
 				maxNumberOfElements: 6,
+
+				hideOnEmptyPhrase: true,
 
 				match: {
 					enabled: false,

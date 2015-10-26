@@ -436,7 +436,15 @@ var EasyAutocomplete = (function(scope) {
 						default:
 
 							if (event.keyCode > 40 || event.keyCode === 8) {
-								loadData();	
+
+								var inputPhrase = $field.val();
+
+								if (!(config.get("list").hideOnEmptyPhrase === true && event.keyCode === 8 && inputPhrase === "")) {
+									loadData(inputPhrase);	
+								} else {
+									hideContainer();
+								}
+								
 							}
 							
 
@@ -444,9 +452,7 @@ var EasyAutocomplete = (function(scope) {
 					}
 				
 
-					function loadData() {
-
-						var inputPhrase = $field.val();
+					function loadData(inputPhrase) {
 
 
 						if (inputPhrase.length < config.get("minCharNumber")) {
@@ -572,17 +578,17 @@ var EasyAutocomplete = (function(scope) {
 		        	})
 					.keydown(function(event) {
 
-					if (event.keyCode === 13 && selectedElement > -1) {
+						if (event.keyCode === 13 && selectedElement > -1) {
 
-						//enter
+							//enter
 
-						$field.val(config.get("getValue")(elementsList[selectedElement]));
-						selectedElement = -1;
-						hideContainer();
+							$field.val(config.get("getValue")(elementsList[selectedElement]));
+							selectedElement = -1;
+							hideContainer();
 
-						event.preventDefault();
-					}
-				});
+							event.preventDefault();
+						}
+					});
 			}
 
 			function bindKeypress() {

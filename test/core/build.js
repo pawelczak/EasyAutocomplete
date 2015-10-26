@@ -319,3 +319,114 @@ QUnit.test("Minimal number of characters in input phrase - true", function( asse
 		
 });
 
+
+
+QUnit.test("List, hideOnEmptyPhrase - false ", function( assert ) {
+	expect(1);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "resources/colors_string.json",
+
+			list: {
+				onLoadEvent: function() {
+					assertList();
+				},
+
+				hideOnEmptyPhrase: false
+			}
+			
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 8; //backspace
+	$("#inputOne").val("").trigger(e);
+
+	QUnit.stop();
+
+	//assert
+
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul li");
+
+		assert.equal(3, elements.length, "Response size");
+
+		QUnit.start();	
+	}
+});
+
+QUnit.test("List, hideOnEmptyPhrase - true - empty input", function( assert ) {
+	expect(1);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "resources/colors_string.json",
+
+			list: {
+
+				hideOnEmptyPhrase: true	
+			}
+			
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 8; //backspace
+	$("#inputOne").val("").trigger(e);
+
+
+	//assert
+	var elements = $("#inputOne").next().find("ul li");
+
+	assert.equal(0, elements.length, "Response size");
+
+		
+});
+
+
+QUnit.test("List, hideOnEmptyPhrase - true - not empty input", function( assert ) {
+	expect(1);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "resources/colors_string.json",
+
+			list: {
+				onLoadEvent: function() {
+					assertList();
+				},
+
+				hideOnEmptyPhrase: true	
+			}
+			
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 8; //backspace
+	$("#inputOne").val("aaaa").trigger(e);
+
+	QUnit.stop();
+
+	//assert
+
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul li");
+
+		assert.equal(3, elements.length, "Response size");
+
+		QUnit.start();	
+	}
+
+		
+});

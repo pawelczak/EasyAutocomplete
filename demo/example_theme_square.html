@@ -29,17 +29,16 @@
 
 			getValue: "name",
 
+			minCharNumber: 0,
+
 			list: {
 				match: {
 					enabled: true
 				},
 				maxNumberOfElements: 8,
 
-				onClickEvent: function() {
-					$("#square").change();
-				}
+				hideOnEmptyPhrase: true
 			},
-
 
 
 			theme: "square"
@@ -47,11 +46,6 @@
 		};
 
 		$("#square").easyAutocomplete(options);
-
-
-		$("#square").change(function() {
-			console.log($(this).val());
-		});
 
 		</script>
 

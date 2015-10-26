@@ -3,7 +3,7 @@
  * jQuery plugin for autocompletion
  * 
  * @author Łukasz Pawełczak (http://github.com/pawelczak)
- * @version 1.1.6
+ * @version 1.2.0
  * Copyright MIT License: https://github.com/pawelczak/easy-autocomplete/blob/master/LICENSE.txt
  */
 
@@ -36,7 +36,6 @@ var EasyAutocomplete = (function(scope){
 
 			matchResponseProperty: false,
 
-
 			list: {
 				sort: {
 					enabled: false,
@@ -54,6 +53,8 @@ var EasyAutocomplete = (function(scope){
 				},
 
 				maxNumberOfElements: 6,
+
+				hideOnEmptyPhrase: true,
 
 				match: {
 					enabled: false,
@@ -1228,7 +1229,15 @@ var EasyAutocomplete = (function(scope) {
 						default:
 
 							if (event.keyCode > 40 || event.keyCode === 8) {
-								loadData();	
+
+								var inputPhrase = $field.val();
+
+								if (!(config.get("list").hideOnEmptyPhrase === true && event.keyCode === 8 && inputPhrase === "")) {
+									loadData(inputPhrase);	
+								} else {
+									hideContainer();
+								}
+								
 							}
 							
 
@@ -1236,9 +1245,7 @@ var EasyAutocomplete = (function(scope) {
 					}
 				
 
-					function loadData() {
-
-						var inputPhrase = $field.val();
+					function loadData(inputPhrase) {
 
 
 						if (inputPhrase.length < config.get("minCharNumber")) {
@@ -1361,15 +1368,15 @@ var EasyAutocomplete = (function(scope) {
 		        	})
 					.keydown(function(event) {
 
-					if (event.keyCode === 13 && selectedElement > -1) {
+						if (event.keyCode === 13 && selectedElement > -1) {
 
-						$field.val(config.get("getValue")(elementsList[selectedElement]));
-						selectedElement = -1;
-						hideContainer();
+							$field.val(config.get("getValue")(elementsList[selectedElement]));
+							selectedElement = -1;
+							hideContainer();
 
-						event.preventDefault();
-					}
-				});
+							event.preventDefault();
+						}
+					});
 			}
 
 			function bindKeypress() {
