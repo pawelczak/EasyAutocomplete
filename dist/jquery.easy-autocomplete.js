@@ -86,6 +86,7 @@ var EasyAutocomplete = (function(scope){
 				onClickEvent: function() {},
 				onSelectItemEvent: function() {},
 				onLoadEvent: function() {},
+				onChooseEvent: function() {},
 				onKeyEnterEvent: function() {},
 				onMouseOverEvent: function() {},
 				onMouseOutEvent: function() {},	
@@ -1093,6 +1094,7 @@ var EasyAutocomplete = (function(scope) {
 												selectElement(itemCounter);
 
 												config.get("list").onClickEvent();
+												config.get("list").onChooseEvent();
 											})
 											.mouseover(function() {
 
@@ -1376,6 +1378,7 @@ var EasyAutocomplete = (function(scope) {
 							hideContainer();
 
 							config.get("list").onKeyEnterEvent();
+							config.get("list").onChooseEvent();
 
 							event.preventDefault();
 						}

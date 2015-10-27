@@ -404,3 +404,101 @@ QUnit.test("Event onKeyEnterEvent ", function( assert ) {
 		QUnit.start();	
 	}
 });
+
+
+
+QUnit.test("Event onChooseEvent - key enter", function( assert ) {
+	expect(1);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "resources/colors_string.json",
+
+			list: {
+				onChooseEvent: function() {
+
+					//assert
+					assertList();
+				},
+				onLoadEvent: function() {
+
+
+					//trigger select event
+					var key = $.Event('keyup');
+					key.keyCode = 40; 
+					$input.trigger(key);
+
+
+					//trigger key enter
+					var key = $.Event('keydown');
+					key.keyCode = 13; 
+					$input.trigger(key);
+				}	
+			}
+			
+	}),
+	$input = $("#inputOne");
+
+
+	//execute
+	completerOne.init();
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$input.val("c").trigger(e);
+
+	QUnit.stop();
+
+	//assert
+
+	function assertList() {
+
+		var elements = $("#inputOne").next().find("ul li");
+
+		assert.equal(3, elements.length, "Response size");
+
+		QUnit.start();	
+	}
+});
+
+QUnit.test("Event onChooseEvent - click", function( assert ) {
+	expect(1);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "resources/colors_string.json",
+
+			list: {
+				onChooseEvent: function() {
+
+					//assert
+					assertList();
+				},
+				onLoadEvent: function() {
+
+
+					//trigger click event
+					$("#inputOne").next().find("ul li").eq(0).find(" > div").trigger("click");
+				}	
+			}
+			
+	}),
+	$input = $("#inputOne");
+
+
+	//execute
+	completerOne.init();
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$input.val("c").trigger(e);
+
+	QUnit.stop();
+
+	//assert
+
+	function assertList() {
+
+		var elements = $("#inputOne").next().find("ul li");
+
+		assert.equal(3, elements.length, "Response size");
+
+		QUnit.start();	
+	}
+});
