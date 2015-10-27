@@ -249,12 +249,24 @@ QUnit.test( "Build tests - wrapper width", function( assert ) {
 	completer.init();
 
 	//assert
-	//Doesnt work when not runned in browser
-	//assert.equal(169, $("#inputTwo").parent().innerWidth(), "Passes - wrapper width");
+	assert.ok($("#inputTwo").parent().attr("style") !== undefined, "Passes - wrapper width");
 	
-	expect(0);
+	expect(1);
 });
 
+QUnit.test( "Build tests - wrapper width- adjusting turned off", function( assert ) {
+
+	//given
+	var completer = new EasyAutocomplete.main($("#inputTwo"), {url: "test.json", adjustWidth: false});
+
+	//execute
+	completer.init();
+
+	//assert
+	assert.ok($("#inputTwo").parent().attr("style") === undefined, "Passes - wrapper width");
+	
+	expect(1);
+});
 
 QUnit.test("Minimal number of characters in input phrase - false", function( assert ) {
 	expect(1);

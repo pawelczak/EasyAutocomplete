@@ -102,6 +102,8 @@ var EasyAutocomplete = (function(scope){
 
 			minCharNumber: 0,
 
+			adjustWidth: true,
+
 			ajaxSettings: {},
 
 			loggerEnabled: true,
@@ -966,7 +968,10 @@ var EasyAutocomplete = (function(scope) {
 				$field.wrap($wrapper);
 
 
-				adjustWrapperWidth();
+				if (config.get("adjustWidth") === true) {
+					adjustWrapperWidth();	
+				}
+				
 
 			}
 

@@ -147,7 +147,10 @@ var EasyAutocomplete = (function(scope) {
 				$field.wrap($wrapper);
 
 
-				adjustWrapperWidth();
+				if (config.get("adjustWidth") === true) {
+					adjustWrapperWidth();	
+				}
+				
 
 			}
 

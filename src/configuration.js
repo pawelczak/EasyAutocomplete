@@ -95,6 +95,8 @@ var EasyAutocomplete = (function(scope){
 
 			minCharNumber: 0,
 
+			adjustWidth: true,
+
 			ajaxSettings: {},
 
 			loggerEnabled: true,
