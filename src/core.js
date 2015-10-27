@@ -126,11 +126,11 @@ var EasyAutocomplete = (function(scope) {
 					classes = consts.getValue("WRAPPER_CSS_CLASS");
 
 			
-				if (config.get("theme")) {
+				if (config.get("theme") && config.get("theme") !== "") {
 					classes += " eac-" + config.get("theme");
 				}
 
-				if (config.get("cssClasses")) {
+				if (config.get("cssClasses") && config.get("cssClasses") !== "") {
 					classes += " " + config.get("cssClasses");
 				}
 

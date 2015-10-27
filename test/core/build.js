@@ -430,3 +430,33 @@ QUnit.test("List, hideOnEmptyPhrase - true - not empty input", function( assert 
 
 		
 });
+
+QUnit.test("Build cssClasses - undefined", function( assert ) {
+	expect(1);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "resources/colors_string.json",
+
+			cssClasses: ""
+			
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 8; //backspace
+	$("#inputOne").val("aaaa").trigger(e);
+
+
+	//assert
+
+	var classes = $("#inputOne").parent().attr("class");
+
+	assert.equal("easy-autocomplete", classes, "Response size");
+
+		
+});
+

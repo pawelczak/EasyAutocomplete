@@ -3,7 +3,7 @@
  * jQuery plugin for autocompletion
  * 
  * @author Łukasz Pawełczak (http://github.com/pawelczak)
- * @version 1.2.0
+ * @version 1.2.1
  * Copyright MIT License: https://github.com/pawelczak/easy-autocomplete/blob/master/LICENSE.txt
  */
 
@@ -946,11 +946,11 @@ var EasyAutocomplete = (function(scope) {
 					classes = consts.getValue("WRAPPER_CSS_CLASS");
 
 			
-				if (config.get("theme")) {
+				if (config.get("theme") && config.get("theme") !== "") {
 					classes += " eac-" + config.get("theme");
 				}
 
-				if (config.get("cssClasses")) {
+				if (config.get("cssClasses") && config.get("cssClasses") !== "") {
 					classes += " " + config.get("cssClasses");
 				}
 
