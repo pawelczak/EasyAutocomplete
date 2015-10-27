@@ -586,6 +586,8 @@ var EasyAutocomplete = (function(scope) {
 							selectedElement = -1;
 							hideContainer();
 
+							config.get("list").onKeyEnterEvent();
+
 							event.preventDefault();
 						}
 					});

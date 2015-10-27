@@ -86,6 +86,7 @@ var EasyAutocomplete = (function(scope){
 				onClickEvent: function() {},
 				onSelectItemEvent: function() {},
 				onLoadEvent: function() {},
+				onKeyEnterEvent: function() {},
 				onMouseOverEvent: function() {},
 				onMouseOutEvent: function() {},	
 				onShowListEvent: function() {},
@@ -1373,6 +1374,8 @@ var EasyAutocomplete = (function(scope) {
 							$field.val(config.get("getValue")(elementsList[selectedElement]));
 							selectedElement = -1;
 							hideContainer();
+
+							config.get("list").onKeyEnterEvent();
 
 							event.preventDefault();
 						}
