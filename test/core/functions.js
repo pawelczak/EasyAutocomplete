@@ -458,12 +458,12 @@ QUnit.test("getSelectedItemIndex should work with categories", function( assert 
 
 				onLoadEvent: function() {
 					//trigger select event
-					$("#inputOne").next().find("ul li").eq(8).find(" > div").trigger("click");
+					$("#inputOne").next().find("ul li").eq(4).find(" > div").trigger("click");
 				},
 
 				onSelectItemEvent: function() {
 					
-					assert.equal(8, $("#inputOne").getSelectedItemIndex(), "second fruit selected");
+					assert.equal(4, $("#inputOne").getSelectedItemIndex(), "second fruit selected");
 
 					QUnit.start();
 				}
@@ -573,9 +573,9 @@ QUnit.test("getItemData should work with categories", function( assert ) {
 					assert.equal("Apple", $("#inputOne").getItemData(0), "first element");
 					assert.equal("Cherry", $("#inputOne").getItemData(1), "second element");
 					assert.equal("Clementine", $("#inputOne").getItemData(2), "third element");
-					assert.equal("Pepper", $("#inputOne").getItemData(6), "first element");
-					assert.equal("Jerusalem artichoke", $("#inputOne").getItemData(7), "second element");
-					assert.equal("Green bean", $("#inputOne").getItemData(8), "third element");
+					assert.equal("Pepper", $("#inputOne").getItemData(4), "first element");
+					assert.equal("Jerusalem artichoke", $("#inputOne").getItemData(5), "second element");
+					assert.equal("Green bean", $("#inputOne").getItemData(6), "third element");
 					assert.equal(-1, $("#inputOne").getItemData(12), "not exist");
 					assert.equal(-1, $("#inputOne").getItemData(-1), "not exist");
 					assert.equal(-1, $("#inputOne").getItemData("not exist"), "fnot exist");
@@ -806,7 +806,7 @@ QUnit.test("getSelectedItemData should work with categories", function( assert )
 
 				onLoadEvent: function() {
 					//trigger select event
-					$("#inputOne").next().find("ul li").eq(8).find(" > div").trigger("click");
+					$("#inputOne").next().find("ul li").eq(6).find(" > div").trigger("click");
 				},
 
 				onSelectItemEvent: function() {

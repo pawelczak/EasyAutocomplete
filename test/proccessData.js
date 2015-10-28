@@ -18,11 +18,15 @@ QUnit.test("Sort - sorting simple list", function( assert ) {
 		unsortedList = ["abba", "aaba", "red", "pink"],
 		expectedList = ["aaba", "abba", "pink", "red"],
 
-		config = new EasyAutocomplete.Configuration(options);
+		config = new EasyAutocomplete.Configuration(options),
+
+		listBuilder = {};
+
+	listBuilder.data = unsortedList;
 
 
 	//execute
-	var actuaList = EasyAutocomplete.proccess(config, unsortedList);
+	var actuaList = EasyAutocomplete.proccess(config, listBuilder);
 
 
 	//assert
@@ -47,11 +51,14 @@ QUnit.test("Sort - sorting - data with numbers", function( assert ) {
 		unsortedList = ["ab12ba", "aaba", "red333", "44pink"],
 		expectedList = ["44pink", "aaba", "ab12ba", "red333"],
 
-		config = new EasyAutocomplete.Configuration(options);
+		config = new EasyAutocomplete.Configuration(options),
 
+		listBuilder = {};
+
+	listBuilder.data = unsortedList;
 
 	//execute
-	var actuaList = EasyAutocomplete.proccess(config, unsortedList);
+	var actuaList = EasyAutocomplete.proccess(config, listBuilder);
 
 
 	//assert
@@ -86,11 +93,15 @@ QUnit.test("Sort - reverse simple list", function( assert ) {
 		unsortedList = ["abba", "aaba", "red", "pink"],
 		expectedList = ["red", "pink", "abba", "aaba"],
 
-		config = new EasyAutocomplete.Configuration(options);
+		config = new EasyAutocomplete.Configuration(options),
+
+		listBuilder = {};
+
+	listBuilder.data = unsortedList;
 
 
 	//execute
-	var actuaList = EasyAutocomplete.proccess(config, unsortedList);
+	var actuaList = EasyAutocomplete.proccess(config, listBuilder);
 
 
 	//assert
@@ -113,11 +124,16 @@ QUnit.test("MaxSize - simple list", function( assert ) {
 		unsortedList = ["fiat", "alfa romeo", "lancia"],
 		expectedList = ["fiat", "alfa romeo"],
 
-		config = new EasyAutocomplete.Configuration(options);
+		config = new EasyAutocomplete.Configuration(options),
+
+		listBuilder = {};
+
+	listBuilder.data = unsortedList;
+	listBuilder.maxNumberOfElements = options.list.maxNumberOfElements;
 
 
 	//execute
-	var actuaList = EasyAutocomplete.proccess(config, unsortedList);
+	var actuaList = EasyAutocomplete.proccess(config, listBuilder);
 
 
 	//assert
@@ -141,11 +157,16 @@ QUnit.test("MaxSize & Sort - simple list", function( assert ) {
 		unsortedList = ["fiat", "alfa romeo", "lancia"],
 		expectedList = ["alfa romeo", "fiat"],
 
-		config = new EasyAutocomplete.Configuration(options);
+		config = new EasyAutocomplete.Configuration(options),
+
+		listBuilder = {};
+
+	listBuilder.data = unsortedList;
+	listBuilder.maxNumberOfElements = options.list.maxNumberOfElements;
 
 
 	//execute
-	var actuaList = EasyAutocomplete.proccess(config, unsortedList);
+	var actuaList = EasyAutocomplete.proccess(config, listBuilder);
 
 
 	//assert
@@ -168,11 +189,15 @@ QUnit.test("match - simple list", function( assert ) {
 		unsortedList = ["hi-man", "hulk", "batman", "flash"],
 		expectedList = ["hi-man", "batman"],
 
-		config = new EasyAutocomplete.Configuration(options);
+		config = new EasyAutocomplete.Configuration(options),
+
+		listBuilder = {};
+
+	listBuilder.data = unsortedList;
 
 
 	//execute
-	var actuaList = EasyAutocomplete.proccess(config, unsortedList, "man");
+	var actuaList = EasyAutocomplete.proccess(config, listBuilder, "man");
 
 
 	//assert
@@ -195,11 +220,15 @@ QUnit.test("match - simple list", function( assert ) {
 		unsortedList = ["batman i robin", "hulk", "romeo i julia", "makaron"],
 		expectedList = ["batman i robin"],
 
-		config = new EasyAutocomplete.Configuration(options);
+		config = new EasyAutocomplete.Configuration(options),
+
+		listBuilder = {};
+
+	listBuilder.data = unsortedList;
 
 
 	//execute
-	var actuaList = EasyAutocomplete.proccess(config, unsortedList, "man");
+	var actuaList = EasyAutocomplete.proccess(config, listBuilder, "man");
 
 
 	//assert
@@ -237,11 +266,15 @@ QUnit.test("Sort - Object", function( assert ) {
 		unsortedList = [{name: "red"}, {name: "green"}, {name: "blue"}, {name: "pink"}],
 		expectedList = [{name: "blue"}, {name: "green"}, {name: "pink"}, {name: "red"}],
 
-		config = new EasyAutocomplete.Configuration(options);
+		config = new EasyAutocomplete.Configuration(options),
+
+		listBuilder = {};
+
+	listBuilder.data = unsortedList;
 
 
 	//execute
-	var actuaList = EasyAutocomplete.proccess(config, unsortedList);
+	var actuaList = EasyAutocomplete.proccess(config, listBuilder);
 
 	//assert
 	assert.equal(4, actuaList.length, "Passed - list size");
@@ -281,11 +314,15 @@ QUnit.test("Sort - Json", function( assert ) {
 		unsortedList = [{"name": "red"}, {"name": "green"}, {"name": "blue"}, {"name": "pink"}],
 		expectedList = [{"name": "blue"}, {"name": "green"}, {"name": "pink"}, {"name": "red"}],
 
-		config = new EasyAutocomplete.Configuration(options);
+		config = new EasyAutocomplete.Configuration(options),
+
+		listBuilder = {};
+		
+	listBuilder.data = unsortedList;
 
 
 	//execute
-	var actuaList = EasyAutocomplete.proccess(config, unsortedList);
+	var actuaList = EasyAutocomplete.proccess(config, listBuilder);
 
 	//assert
 	assert.equal(4, actuaList.length, "Passed - list size");
@@ -325,11 +362,16 @@ QUnit.test("Sort & Max size - Json", function( assert ) {
 		unsortedList = [{"car": "mercedes"}, {"car": "volkswagen"}, {"car": "bmw"}, {"car": "opel"}, {"car": "audi"}],
 		expectedList = [{"car": "audi"}, {"car": "bmw"}, {"car": "mercedes"}],
 
-		config = new EasyAutocomplete.Configuration(options);
+		config = new EasyAutocomplete.Configuration(options),
+
+		listBuilder = {};
+		
+	listBuilder.data = unsortedList;
+	listBuilder.maxNumberOfElements = options.list.maxNumberOfElements;
 
 
 	//execute
-	var actuaList = EasyAutocomplete.proccess(config, unsortedList);
+	var actuaList = EasyAutocomplete.proccess(config, listBuilder);
 
 	//assert
 	assert.equal(3, actuaList.length, "Passed - list size");
@@ -368,11 +410,15 @@ QUnit.test("match - Json", function( assert ) {
 		unsortedList = [{"name": "thick"}, {"name": "batman i robin"}, {"name": "wolverine"}, {"name": "spiderman"}],
 		expectedList = [{"name": "batman i robin"}, {"name": "spiderman"}],
 
-		config = new EasyAutocomplete.Configuration(options);
+		config = new EasyAutocomplete.Configuration(options),
+
+		listBuilder = {};
+		
+	listBuilder.data = unsortedList;
 
 
 	//execute
-	var actuaList = EasyAutocomplete.proccess(config, unsortedList, "man");
+	var actuaList = EasyAutocomplete.proccess(config, listBuilder, "man");
 
 	//assert
 	assert.equal(2, actuaList.length, "Passed - list size");
@@ -424,11 +470,15 @@ QUnit.test("match & Sorting- Json", function( assert ) {
 		unsortedList = [{"name": "thick", "power": "3"}, {"name": "batman i robin", "power": "5"}, {"name": "wolverine", "power": "4"}, {"name": "spiderman", "power": "4"}],
 		expectedList = [{"name": "spiderman", "power": "4"}, {"name": "batman i robin", "power": "5"}],
 
-		config = new EasyAutocomplete.Configuration(options);
+		config = new EasyAutocomplete.Configuration(options),
+
+		listBuilder = {};
+		
+	listBuilder.data = unsortedList;
 
 
 	//execute
-	var actuaList = EasyAutocomplete.proccess(config, unsortedList, "man");
+	var actuaList = EasyAutocomplete.proccess(config, listBuilder, "man");
 
 
 	//assert

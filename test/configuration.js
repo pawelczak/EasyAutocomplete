@@ -545,6 +545,38 @@ QUnit.test( "Categories assigned", function( assert ) {
 	expect(1);
 });
 
+QUnit.test( "Categories parameters", function( assert ) {
+
+
+
+	//given
+	var options = {
+		categories: [{
+			listLocation: "test",
+			maxNumberOfElements: 5
+		}, {
+			maxNumberOfElements: 6
+		}, {
+			listLocation: "url",
+		}]
+	};
+
+	//execute
+	var actualOptions = new EasyAutocomplete.Configuration(options);
+
+
+	//assert
+	assert.equal("test", actualOptions.get("categories")[0].listLocation , "Passed - listLocation" );
+	assert.equal(5, actualOptions.get("categories")[0].maxNumberOfElements , "Passed - maxNumberOfElements" );
+
+	assert.equal(6, actualOptions.get("categories")[1].maxNumberOfElements , "Passed - maxNumberOfElements" );
+
+	assert.equal("url", actualOptions.get("categories")[2].listLocation , "Passed - listLocation" );
+	assert.equal(4, actualOptions.get("categories")[2].maxNumberOfElements , "Passed - maxNumberOfElements - default" );
+
+	expect(5);
+});
+
 
 QUnit.test( "Categories not assigned", function( assert ) {
 
@@ -564,3 +596,5 @@ QUnit.test( "Categories not assigned", function( assert ) {
 
 	expect(1);
 });
+
+

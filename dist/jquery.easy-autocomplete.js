@@ -113,7 +113,7 @@ var EasyAutocomplete = (function(scope){
 			categoriesAssigned: false,
 
 			categories: [{
-				listLocation: ""
+				maxNumberOfElements: 4
 			}]
 
 		};
@@ -213,6 +213,26 @@ var EasyAutocomplete = (function(scope){
 					return false;
 				};
 
+			}
+			if (options.categories !== undefined && options.categories instanceof Array) {
+
+				var categories = [];
+
+				for (var i = 0, length = options.categories.length; i < length; i += 1) { 
+
+					var category = options.categories[i];
+
+					for (var property in defaults.categories[0]) {
+
+						if (category[property] === undefined) {
+							category[property] = defaults.categories[0][property];
+						}
+					}
+
+					categories.push(category);
+				}
+
+				options.categories = categories;
 			}
 		}
 
@@ -407,6 +427,8 @@ var EasyAutocomplete = (function(scope) {
 
 			builder.data = configuration.get("listLocation")(data);
 			builder.getValue = configuration.get("getValue");
+			builder.maxListSize = configuration.get("list").maxNumberOfElements;
+
 				
 			listBuilder.push(builder);
 
@@ -445,7 +467,7 @@ var EasyAutocomplete = (function(scope) {
 		this.processData = function(listBuilder, inputPhrase) {
 
 			for(var i = 0, length = listBuilder.length; i < length; i+=1) {
-				listBuilder[i].data = proccessResponseData(configuration, listBuilder[i].data, inputPhrase);
+				listBuilder[i].data = proccessResponseData(configuration, listBuilder[i], inputPhrase);
 			}
 
 			return listBuilder;
@@ -481,6 +503,15 @@ var EasyAutocomplete = (function(scope) {
 
 			if (category.header !== undefined) {
 				builder.header = category.header;
+			}
+
+			if (category.maxNumberOfElements !== undefined) {
+				builder.maxNumberOfElements = category.maxNumberOfElements;
+			}
+
+			if (configuration.get("list").maxNumberOfElements !== undefined) {
+
+				builder.maxListSize = configuration.get("list").maxNumberOfElements;
 			}
 
 			if (category.getValue !== undefined) {
@@ -587,9 +618,10 @@ var EasyAutocomplete = (function(scope) {
  */
 var EasyAutocomplete = (function(scope) {
 
-	scope.proccess = function proccessData(config, list, phrase) {
+	scope.proccess = function proccessData(config, listBuilder, phrase) {
 
-		var inputPhrase = phrase;//TODO REFACTOR
+		var list = listBuilder.data,
+			inputPhrase = phrase;//TODO REFACTOR
 
 		list = findMatch(list, inputPhrase);
 		list = reduceElementsInList(list);
@@ -630,9 +662,14 @@ var EasyAutocomplete = (function(scope) {
 		}
 
 		function reduceElementsInList(list) {
+			if (listBuilder.maxNumberOfElements !== undefined && list.length > listBuilder.maxNumberOfElements) {
+				list = list.slice(0, listBuilder.maxNumberOfElements);
+			}
+			/*
 			if (list.length > config.get("list").maxNumberOfElements) {
 				list = list.slice(0, config.get("list").maxNumberOfElements);
 			}
+			*/
 
 			return list;
 		}
@@ -1081,7 +1118,7 @@ var EasyAutocomplete = (function(scope) {
 									$listContainer.append("<div class='eac-category' >" + listBuilders[builderIndex].header + "</div>");
 								}
 
-								for(var i = 0, listDataLength = listData.length; i < listDataLength; i += 1) {
+								for(var i = 0, listDataLength = listData.length; i < listDataLength && i < listBuilders[builderIndex].maxListSize; i += 1) {
 									$item = $("<li><div class='eac-item'></div></li>");
 									
 

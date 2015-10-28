@@ -106,7 +106,8 @@ var EasyAutocomplete = (function(scope){
 			categoriesAssigned: false,
 
 			categories: [{
-				listLocation: ""
+				//listLocation: "",
+				maxNumberOfElements: 4
 			}]
 
 		};
@@ -216,6 +217,28 @@ var EasyAutocomplete = (function(scope){
 					return false;
 				};
 
+			}
+
+			//Prepare categories defaults
+			if (options.categories !== undefined && options.categories instanceof Array) {
+
+				var categories = [];
+
+				for (var i = 0, length = options.categories.length; i < length; i += 1) { 
+
+					var category = options.categories[i];
+
+					for (var property in defaults.categories[0]) {
+
+						if (category[property] === undefined) {
+							category[property] = defaults.categories[0][property];
+						}
+					}
+
+					categories.push(category);
+				}
+
+				options.categories = categories;
 			}
 		}
 

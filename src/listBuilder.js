@@ -15,6 +15,8 @@ var EasyAutocomplete = (function(scope) {
 
 			builder.data = configuration.get("listLocation")(data);
 			builder.getValue = configuration.get("getValue");
+			builder.maxListSize = configuration.get("list").maxNumberOfElements;
+
 				
 			listBuilder.push(builder);
 
@@ -53,7 +55,7 @@ var EasyAutocomplete = (function(scope) {
 		this.processData = function(listBuilder, inputPhrase) {
 
 			for(var i = 0, length = listBuilder.length; i < length; i+=1) {
-				listBuilder[i].data = proccessResponseData(configuration, listBuilder[i].data, inputPhrase);
+				listBuilder[i].data = proccessResponseData(configuration, listBuilder[i], inputPhrase);
 			}
 
 			return listBuilder;
@@ -89,6 +91,17 @@ var EasyAutocomplete = (function(scope) {
 
 			if (category.header !== undefined) {
 				builder.header = category.header;
+			}
+
+			if (category.maxNumberOfElements !== undefined) {
+				builder.maxNumberOfElements = category.maxNumberOfElements;
+			}
+
+			if (configuration.get("list").maxNumberOfElements !== undefined) {
+
+				builder.maxListSize = configuration.get("list").maxNumberOfElements;
+
+				//builder.maxNumberOfElements = configuration.get("list").maxNumberOfElements;
 			}
 
 			if (category.getValue !== undefined) {

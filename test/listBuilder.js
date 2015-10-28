@@ -47,6 +47,10 @@ QUnit.test("ListBuilder - init", function( assert ) {
 					return function(foo) {return "bar"};
 				break;
 
+				case "list": 
+					return {maxNumberOfElements: function() {return 3}};
+				break;
+
 				default:
 				break;
 			};

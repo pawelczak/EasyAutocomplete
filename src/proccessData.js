@@ -9,9 +9,10 @@
  */
 var EasyAutocomplete = (function(scope) {
 
-	scope.proccess = function proccessData(config, list, phrase) {
+	scope.proccess = function proccessData(config, listBuilder, phrase) {
 
-		var inputPhrase = phrase;//TODO REFACTOR
+		var list = listBuilder.data,
+			inputPhrase = phrase;//TODO REFACTOR
 
 		list = findMatch(list, inputPhrase);
 		list = reduceElementsInList(list);
@@ -56,9 +57,14 @@ var EasyAutocomplete = (function(scope) {
 		function reduceElementsInList(list) {
 
 			//MAX NUMBER OF ELEMENTS
+			if (listBuilder.maxNumberOfElements !== undefined && list.length > listBuilder.maxNumberOfElements) {
+				list = list.slice(0, listBuilder.maxNumberOfElements);
+			}
+			/*
 			if (list.length > config.get("list").maxNumberOfElements) {
 				list = list.slice(0, config.get("list").maxNumberOfElements);
 			}
+			*/
 
 			return list;
 		}
