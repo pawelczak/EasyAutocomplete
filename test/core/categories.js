@@ -63,6 +63,10 @@ QUnit.test("Simple categories - two list", function( assert ) {
 
 					//assert
 					assertList();
+				},
+
+				list: {
+					maxNumberOfElements: 8
 				}
 	});
 
@@ -113,6 +117,10 @@ QUnit.test("Simple categories - two list - local data", function( assert ) {
 				data: {
 					fruits: ["Apple", "Cherry", "Clementine", "Honeydew melon", "Watermelon", "Satsuma"],
 					vegetables: ["Pepper", "Jerusalem artichoke", "Green bean", "Fennel", "Courgette", "Yam"]
+				},
+
+				list: {
+					maxNumberOfElements: 8
 				}
 	});
 
@@ -153,6 +161,10 @@ QUnit.test("Simple category - no list location", function( assert ) {
 
 					//assert
 					assertList();
+				},
+
+				list: {
+					maxNumberOfElements: 8
 				}
 	});
 
@@ -198,6 +210,10 @@ QUnit.test("Simple category - with header", function( assert ) {
 
 					//assert
 					assertList();
+				},
+
+				list: {
+					maxNumberOfElements: 8
 				}
 	});
 
@@ -248,6 +264,10 @@ QUnit.test("Simple category - two categories, with header", function( assert ) {
 
 					//assert
 					assertList();
+				},
+
+				list: {
+					maxNumberOfElements: 8
 				}
 	});
 
@@ -297,6 +317,10 @@ QUnit.test("Category - data as objects list", function( assert ) {
 
 					//assert
 					assertList();
+				},
+
+				list: {
+					maxNumberOfElements: 8
 				}
 	});
 
@@ -346,6 +370,10 @@ QUnit.test("Category - data as objects list - two different list", function( ass
 
 					//assert
 					assertList();
+				},
+
+				list: {
+					maxNumberOfElements: 8
 				}
 	});
 
@@ -509,6 +537,10 @@ QUnit.test("Category - xml - two list", function( assert ) {
 
 			//assert
 			assertList();
+		},
+
+		list: {
+			maxNumberOfElements: 8
 		}
 	});
 
@@ -562,7 +594,8 @@ QUnit.test("Category and processData - sort", function( assert ) {
 				list: {
 					sort: {
 						enabled: true
-					}
+					},
+					maxNumberOfElements: 8
 				},
 
 				ajaxCallback: function() {
@@ -703,7 +736,7 @@ QUnit.test("Category and processData - maxNumberOfElements - default", function(
 	function assertList() {
 		var elements = $("#inputOne").next().find("ul").find(" > div, > li");
 
-		assert.equal(10, elements.length, "Response size");
+		assert.equal(8, elements.length, "Response size");
 		assert.equal("--- FRUITS ---", elements.eq(0).text(), "Header - first category");
 		assert.equal("Apple", elements.eq(1).find("div").text(), "Apple element value - first category");
 		assert.equal("Cherry", elements.eq(2).find("div").text(), "Cherry element value - first category");
@@ -717,7 +750,7 @@ QUnit.test("Category and processData - maxNumberOfElements - default", function(
 	}
 });
 
-QUnit.test("Category and processData - maxNumberOfElements - specified", function( assert ) {
+QUnit.test("Category and processData - maxNumberOfElements - specified - list size default", function( assert ) {
 	expect(8);
 
 	//given
@@ -733,11 +766,6 @@ QUnit.test("Category and processData - maxNumberOfElements - specified", functio
 					maxNumberOfElements: 3
 				}],
 				url: "resources/categories.json",
-
-				/*
-				list: {
-					maxNumberOfElements: 4
-				},*/
 
 				ajaxCallback: function() {
 
@@ -774,6 +802,65 @@ QUnit.test("Category and processData - maxNumberOfElements - specified", functio
 		QUnit.start();	
 	}
 });
+
+
+QUnit.test("Category and processData - maxNumberOfElements - specified - list size specified", function( assert ) {
+	expect(7);
+
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), 
+			{
+				categories: [{
+					listLocation: "fruits",
+					header: "--- FRUITS ---",
+					maxNumberOfElements: 2
+				},{
+					listLocation: "vegetables",
+					header: "--- vegetables ---",
+					maxNumberOfElements: 3
+				}],
+				url: "resources/categories.json",
+
+				
+				list: {
+					maxNumberOfElements: 4
+				},
+
+				ajaxCallback: function() {
+
+					//assert
+					assertList();
+				}
+	});
+
+
+	//execute
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("a").trigger(e);
+
+
+	QUnit.stop();
+
+
+	//assert
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul").find(" > div, > li");
+
+		assert.equal(6, elements.length, "Response size");
+		assert.equal("--- FRUITS ---", elements.eq(0).text(), "Header - first category");
+		assert.equal("Apple", elements.eq(1).find("div").text(), "Apple element value - first category");
+		assert.equal("Cherry", elements.eq(2).find("div").text(), "Cherry element value - first category");
+		assert.equal("--- vegetables ---", elements.eq(3).text(), "Header - second category");
+		assert.equal("Pepper", elements.eq(4).find("div").text(), "Pepper element value - second category");
+		assert.equal("Jerusalem artichoke", elements.eq(5).find("div").text(), "Jerusalem artichoke element value - second category");
+		
+		QUnit.start();	
+	}
+});
+
 
 
 QUnit.test("Categories - when list ist empty, header should be hidden", function( assert ) {

@@ -263,7 +263,7 @@ var EasyAutocomplete = (function(scope) {
 									$listContainer.append("<div class='eac-category' >" + listBuilders[builderIndex].header + "</div>");
 								}
 
-								for(var i = 0, listDataLength = listData.length; i < listDataLength && i < listBuilders[builderIndex].maxListSize; i += 1) {
+								for(var i = 0, listDataLength = listData.length; i < listDataLength && counter < listBuilders[builderIndex].maxListSize; i += 1) {
 									$item = $("<li><div class='eac-item'></div></li>");
 									
 

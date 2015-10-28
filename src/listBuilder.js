@@ -100,8 +100,6 @@ var EasyAutocomplete = (function(scope) {
 			if (configuration.get("list").maxNumberOfElements !== undefined) {
 
 				builder.maxListSize = configuration.get("list").maxNumberOfElements;
-
-				//builder.maxNumberOfElements = configuration.get("list").maxNumberOfElements;
 			}
 
 			if (category.getValue !== undefined) {

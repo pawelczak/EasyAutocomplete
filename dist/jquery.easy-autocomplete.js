@@ -665,11 +665,6 @@ var EasyAutocomplete = (function(scope) {
 			if (listBuilder.maxNumberOfElements !== undefined && list.length > listBuilder.maxNumberOfElements) {
 				list = list.slice(0, listBuilder.maxNumberOfElements);
 			}
-			/*
-			if (list.length > config.get("list").maxNumberOfElements) {
-				list = list.slice(0, config.get("list").maxNumberOfElements);
-			}
-			*/
 
 			return list;
 		}
@@ -1118,7 +1113,7 @@ var EasyAutocomplete = (function(scope) {
 									$listContainer.append("<div class='eac-category' >" + listBuilders[builderIndex].header + "</div>");
 								}
 
-								for(var i = 0, listDataLength = listData.length; i < listDataLength && i < listBuilders[builderIndex].maxListSize; i += 1) {
+								for(var i = 0, listDataLength = listData.length; i < listDataLength && counter < listBuilders[builderIndex].maxListSize; i += 1) {
 									$item = $("<li><div class='eac-item'></div></li>");
 									
 
