@@ -172,42 +172,45 @@ QUnit.test("requestDelay - local data ", function( assert ) {
 	assert.equal(0, elements.length, "Response size");
 
 	//#THIRD
-	setTimeout(function() {
+	$("#inputOne").val("bla").trigger(e);
 
-		$("#inputOne").val("bla").trigger(e);
+	setTimeout(function() {
 
 		elements = $("#inputOne").next().find("ul li");
 		assert.equal(4, elements.length, "Response size");
+		assert.equal("<b>bla</b>ck", elements.eq(0).find("div").html(), "Third request - First element");
 
 		QUnit.start();
 
-	}, 500);
+			//#FOURTH
+			$("#inputOne").val("bl").trigger(e);
 
-	QUnit.stop();
-
-	//#FOURTH
-	$("#inputOne").val("bl").trigger(e);
-
-	elements = $("#inputOne").next().find("ul li");
-	assert.equal(0, elements.length, "Response size");
+			elements = $("#inputOne").next().find("ul li");
+			assert.equal(4, elements.length, "Response size");
+			assert.equal("<b>bla</b>ck", elements.eq(0).find("div").html(), "Fourth request - First element");
 
 
-	//#FIFTH
-	setTimeout(function() {
+			//#FIFTH
+			$("#inputOne").val("b").trigger(e);
 
-		$("#inputOne").val("bla").trigger(e);
+			setTimeout(function() {
 
-		elements = $("#inputOne").next().find("ul li");
-		assert.equal(4, elements.length, "Response size");
+				elements = $("#inputOne").next().find("ul li");
+				assert.equal(4, elements.length, "Response size");
+				assert.equal("<b>b</b>lack", elements.eq(0).find("div").html(), "Fifth request - First element");
 
-		QUnit.start();
+				QUnit.start();
+
+			}, 500);
+
+			QUnit.stop();
 
 	}, 500);
 
 	QUnit.stop();
 
 	
-	expect(5);
+	expect(8);
 });
 
 
@@ -226,7 +229,7 @@ QUnit.test("requestDelay - remote data ", function( assert ) {
 	//execute
 	var e = $.Event('keyup');
 	e.keyCode = 50; 
-	$("#inputOne").val("b").trigger(e);
+	$("#inputOne").val("r").trigger(e);
 
 	//assert
 
@@ -237,46 +240,49 @@ QUnit.test("requestDelay - remote data ", function( assert ) {
 	
 
 	//#SECOND
-	$("#inputOne").val("bl").trigger(e);
+	$("#inputOne").val("re").trigger(e);
 
 	elements = $("#inputOne").next().find("ul li");
 	assert.equal(0, elements.length, "Response size");
 
 	//#THIRD
-	setTimeout(function() {
+	$("#inputOne").val("red").trigger(e);
 
-		$("#inputOne").val("bla").trigger(e);
+	setTimeout(function() {
 
 		elements = $("#inputOne").next().find("ul li");
 		assert.equal(3, elements.length, "Response size");
+		assert.equal("<b>red</b>", elements.eq(0).find("div").html(), "Third request - First element");
 
 		QUnit.start();
 
-	}, 500);
+			//#FOURTH
+			$("#inputOne").val("re").trigger(e);
 
-	QUnit.stop();
-
-	//#FOURTH
-	$("#inputOne").val("bl").trigger(e);
-
-	elements = $("#inputOne").next().find("ul li");
-	assert.equal(0, elements.length, "Response size");
+			elements = $("#inputOne").next().find("ul li");
+			assert.equal(3, elements.length, "Response size");
+			assert.equal("<b>red</b>", elements.eq(0).find("div").html(), "Fourth request - First element");
 
 
-	//#FIFTH
-	setTimeout(function() {
+			//#FIFTH
+			$("#inputOne").val("r").trigger(e);
 
-		$("#inputOne").val("bla").trigger(e);
+			setTimeout(function() {
 
-		elements = $("#inputOne").next().find("ul li");
-		assert.equal(3, elements.length, "Response size");
+				elements = $("#inputOne").next().find("ul li");
+				assert.equal(3, elements.length, "Response size");
+				assert.equal("<b>r</b>ed", elements.eq(0).find("div").html(), "Fifth request - First element");
 
-		QUnit.start();
+				QUnit.start();
+
+			}, 500);
+
+			QUnit.stop();
 
 	}, 500);
 
 	QUnit.stop();
 
 	
-	expect(5);
+	expect(8);
 });
