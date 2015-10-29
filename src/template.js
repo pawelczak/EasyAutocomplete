@@ -137,7 +137,7 @@ var EasyAutocomplete = (function(scope){
 
 			return genericTemplates.basic.method;
 
-		}
+		},
 
 
 		prepareBuildMethod = function(options) {
@@ -174,9 +174,9 @@ var EasyAutocomplete = (function(scope){
 			//client template type
 
 			if (options.type && genericTemplates[options.type]) {
-				return (function (){ 
+				return (function () { 
 					var _cssClass = genericTemplates[options.type].cssClass;
-					return function() { return _cssClass;}
+					return function() { return _cssClass;};
 				})();
 			} else {
 				return emptyStringFunction;
@@ -189,7 +189,7 @@ var EasyAutocomplete = (function(scope){
 		this.build = prepareBuildMethod(options);
 
 
-	}
+	};
 
 	return scope;
 

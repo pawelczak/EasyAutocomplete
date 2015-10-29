@@ -153,7 +153,7 @@ var EasyAutocomplete = (function(scope){
 
 		this.printPropertiesThatDoesntExist = function(consol, optionsToCheck) {
 			printPropertiesThatDoesntExist(consol, optionsToCheck);
-		}
+		};
 
 
 		prepareDefaults();
@@ -258,7 +258,7 @@ var EasyAutocomplete = (function(scope){
 				}
 			
 				/* If data is an object */
-				if (target.data !== undefined && target.data !== null && typeof target.data == "object") {
+				if (target.data !== undefined && target.data !== null && typeof target.data === "object") {
 					mergedObject.data = target.data;
 				}
 
@@ -827,7 +827,7 @@ var EasyAutocomplete = (function(scope){
 
 			return genericTemplates.basic.method;
 
-		}
+		},
 
 
 		prepareBuildMethod = function(options) {
@@ -855,9 +855,9 @@ var EasyAutocomplete = (function(scope){
 			}
 
 			if (options.type && genericTemplates[options.type]) {
-				return (function (){ 
+				return (function () { 
 					var _cssClass = genericTemplates[options.type].cssClass;
-					return function() { return _cssClass;}
+					return function() { return _cssClass;};
 				})();
 			} else {
 				return emptyStringFunction;
@@ -870,7 +870,7 @@ var EasyAutocomplete = (function(scope){
 		this.build = prepareBuildMethod(options);
 
 
-	}
+	};
 
 	return scope;
 
@@ -896,7 +896,6 @@ var EasyAutocomplete = (function(scope) {
 			logger = new scope.Logger(),
 			template = new scope.Template(options.template),
 			listBuilderService = new scope.ListBuilderService(config, scope.proccess),
-			proccessResponseData = scope.proccess,
 			checkParam = config.equals,
 
 			$field = $input, 
@@ -1085,7 +1084,7 @@ var EasyAutocomplete = (function(scope) {
 							config.get("list").onHideListEvent();
 
 						})
-						.on("selectElement", function(event, selected) {
+						.on("selectElement", function() {
 							$elements_container.find("ul li").removeClass("selected");
 							$elements_container.find("ul li").eq(selectedElement).addClass("selected");
 
@@ -1095,7 +1094,6 @@ var EasyAutocomplete = (function(scope) {
 			
 
 							var $item = "",
-								$list = $("<ul>"),
 								$listContainer = $elements_container.find("ul");
 
 							$listContainer
@@ -1380,10 +1378,10 @@ var EasyAutocomplete = (function(scope) {
 
 						function createAjaxSettings() {
 
-							var settings = new Object(),
+							var settings = {},
 								ajaxSettings = config.get("ajaxSettings") || {};
 
-							for (set in ajaxSettings) {
+							for (var set in ajaxSettings) {
 								settings[set] = ajaxSettings[set];
 							}
 
@@ -1394,7 +1392,7 @@ var EasyAutocomplete = (function(scope) {
 
 							if (config.get("matchResponseProperty") !== false) {
 								if (typeof config.get("matchResponseProperty") === "string") {
-									return (data[config.get("matchResponseProperty")] == inputPhrase);
+									return (data[config.get("matchResponseProperty")] === inputPhrase);
 								}
 
 								if (typeof config.get("matchResponseProperty") === "function") {

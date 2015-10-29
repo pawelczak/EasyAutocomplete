@@ -149,7 +149,7 @@ var EasyAutocomplete = (function(scope){
 
 		this.printPropertiesThatDoesntExist = function(consol, optionsToCheck) {
 			printPropertiesThatDoesntExist(consol, optionsToCheck);
-		}
+		};
 
 
 		prepareDefaults();
@@ -267,7 +267,7 @@ var EasyAutocomplete = (function(scope){
 				}
 			
 				/* If data is an object */
-				if (target.data !== undefined && target.data !== null && typeof target.data == "object") {
+				if (target.data !== undefined && target.data !== null && typeof target.data === "object") {
 					mergedObject.data = target.data;
 				}
 
