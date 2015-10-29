@@ -23,7 +23,8 @@ var EasyAutocomplete = (function(scope) {
 			$field = $input, 
 			$container = "",
 			elementsList = [],
-			selectedElement = -1;
+			selectedElement = -1,
+			requestDelayTimeoutId;
 			
 
 		//------------------------ GETTERS --------------------------
@@ -449,7 +450,19 @@ var EasyAutocomplete = (function(scope) {
 								var inputPhrase = $field.val();
 
 								if (!(config.get("list").hideOnEmptyPhrase === true && event.keyCode === 8 && inputPhrase === "")) {
-									loadData(inputPhrase);	
+
+									if (config.get("requestDelay") > 0) {
+
+										//clear previous timeout's
+										if (requestDelayTimeoutId !== undefined) {
+											clearTimeout(requestDelayTimeoutId);
+										}
+
+										requestDelayTimeoutId = setTimeout(function () { loadData(inputPhrase);}, config.get("requestDelay"));
+									} else {
+										loadData(inputPhrase);
+									}
+
 								} else {
 									hideContainer();
 								}
