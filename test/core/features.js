@@ -286,3 +286,23 @@ QUnit.test("requestDelay - remote data ", function( assert ) {
 	
 	expect(8);
 });
+
+
+QUnit.test("Set default value", function( assert ) {
+	
+	
+	//given
+	var completerOne = $("#inputThree").easyAutocomplete({
+
+		data: ["simple data"]
+		
+	});
+
+	//execute
+
+	//assert
+	assert.equal("default value", $("#inputThree").val());
+
+	expect(1);
+});
+
