@@ -108,6 +108,8 @@ var EasyAutocomplete = (function(scope){
 
 			ajaxSettings: {},
 
+			preparePostData: function(data) {return data;},
+
 			loggerEnabled: true,
 
 			template: "",
@@ -1339,6 +1341,8 @@ var EasyAutocomplete = (function(scope) {
 						if (settings.url !== undefined && settings.url !== "list-required") {
 
 							settings.url = settings.url(inputPhrase);
+
+							settings.data = config.get("preparePostData")(settings.data);
 
 							$.ajax(settings) 
 								.done(function(data) {

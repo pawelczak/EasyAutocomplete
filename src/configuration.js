@@ -101,6 +101,8 @@ var EasyAutocomplete = (function(scope){
 
 			ajaxSettings: {},
 
+			preparePostData: function(data) {return data;},
+
 			loggerEnabled: true,
 
 			template: "",

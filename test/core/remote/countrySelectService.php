@@ -8,12 +8,16 @@ $phrase = "";
 
 if(isset($_GET['phrase'])) {
 	$phrase = $_GET['phrase'];
+} else if(isset($_POST['phrase'])) {
+	$phrase = $_POST['phrase'];
 }
 
 $dataType = "json";
 
 if(isset($_GET['dataType'])) {
 	$dataType = $_GET['dataType'];
+} else if(isset($_POST['dataType'])) {
+	$dataType = $_POST['dataType'];
 }
 
 $found_countries = array();

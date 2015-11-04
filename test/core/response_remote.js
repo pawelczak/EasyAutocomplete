@@ -106,3 +106,72 @@ QUnit.test("Remote service - XML countries", function( assert ) {
 	}	
 });
 
+QUnit.test("Remote service - Json countries - post data", function( assert ) {
+	expect(5);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+
+		url: function(phrase) {
+			return "remote/countrySelectService.php";
+		},
+
+		getValue: function(element) {
+			return element.name;
+		},
+
+		ajaxCallback: function() {
+
+			//assert
+			
+			assertList();
+		},
+
+		ajaxSettings: {
+			dataType: 'json',
+			method: 'POST',
+			data: {
+				country: "NL",
+				postCode:  "test",
+				dataType: "json"
+			}
+		},
+
+		preparePostData: function(data) {
+
+			data.phrase = $("#inputTwo").val() + $("#inputOne").val();
+
+			return data;
+		}
+
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputTwo").val("p").trigger("change");
+	$("#inputOne").val("o").trigger(e);
+
+
+	QUnit.stop();
+
+	//assert
+
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul li");
+
+		assert.equal(4, elements.length, "Response size");
+		assert.equal("FRENCH POLYNESIA", elements.eq(0).find("div").text(), "First element value");
+		assert.equal("POLAND", elements.eq(1).find("div").text(), "Second element value");
+		assert.equal("PORTUGAL", elements.eq(2).find("div").text(), "Third element value");
+		assert.equal("SINGAPORE", elements.eq(3).find("div").text(), "Fourth element value");
+			
+		QUnit.start();	
+	}	
+});
+
+
