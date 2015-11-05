@@ -1352,17 +1352,15 @@ var EasyAutocomplete = (function(scope) {
 									listBuilders = listBuilderService.updateCategories(listBuilders, data);
 									
 									listBuilders = listBuilderService.convertXml(listBuilders);
-
-
-									if (!listBuilderService.checkIfDataExists(listBuilders)) {
-										return;
-									}
 									if (checkInputPhraseMatchResponse(inputPhrase, data)) {
 
 										listBuilders = listBuilderService.processData(listBuilders, inputPhrase);
 
 										loadElements(listBuilders, inputPhrase);	
-										
+																				
+									}
+
+									if (listBuilderService.checkIfDataExists(listBuilders)) {
 										showContainer();
 									}
 

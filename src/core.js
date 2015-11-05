@@ -523,18 +523,16 @@ var EasyAutocomplete = (function(scope) {
 									listBuilders = listBuilderService.convertXml(listBuilders);
 
 
-									if (!listBuilderService.checkIfDataExists(listBuilders)) {
-										return;
-									}
-
-
-									//Todo
+									//TODO
 									if (checkInputPhraseMatchResponse(inputPhrase, data)) {
 
 										listBuilders = listBuilderService.processData(listBuilders, inputPhrase);
 
 										loadElements(listBuilders, inputPhrase);	
-										
+																				
+									}
+
+									if (listBuilderService.checkIfDataExists(listBuilders)) {
 										showContainer();
 									}
 

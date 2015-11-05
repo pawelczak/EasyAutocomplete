@@ -53,6 +53,57 @@ QUnit.test("Remote service - Json countries", function( assert ) {
 	}	
 });
 
+QUnit.test("Remote service - Json countries - no match", function( assert ) {
+	expect(1);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+
+		url: function(phrase) {
+			return "remote/countrySelectService.php?phrase=" + phrase + "&dataType=json";
+		},
+
+		getValue: function(element) {
+			return element.name;
+		},
+
+		ajaxCallback: function() {
+
+			//assert
+			
+			assertList();
+		},
+	    list: {
+	        match: {
+	            enabled: true
+	        }
+	    }
+
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("poli").trigger(e);
+
+
+	QUnit.stop();
+
+	//assert
+
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul li");
+
+		assert.equal(0, elements.length, "Response size");
+			
+		QUnit.start();	
+	}	
+});
+
 QUnit.test("Remote service - XML countries", function( assert ) {
 	expect(5);
 	
