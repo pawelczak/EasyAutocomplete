@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>EasyAutocomplete custom template example</title>
+		<link href="../dist/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
+		<script src="../lib/jquery-1.11.2.min.js"></script>
+		<script src="../dist/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
+	</head>
+	<body>
+
+		<h1>EasyAutocomplete - custom template example</h1>
+
+		<input id="custom-template" />
+
+		<script>
+
+		var options = {
+			data: [{civilite: "lorem", prenom: "ipsum", nom: "sed ut", fonction: "unde", departement: "voluptatem", coderegion: "accusantium"}],
+
+			getValue: "civilite",
+
+			template: {
+		        type: "custom",
+		        method: function(value, item) {
+		            return "<span class='s-1'>" + value + "</span> <span class='s-2'>" + item.prenom + " " + item.nom + "</span> <span class='s-3'>" + item.fonction + "</span> <span class='s-4'>" + item.departement + ' (' + item.coderegion + ')</span>';
+		        }
+		    }
+		};
+
+		$("#custom-template").easyAutocomplete(options);
+
+		</script>
+
+	</body>
+
+</html>
