@@ -188,9 +188,9 @@ QUnit.test("Remote service - Json countries - post data", function( assert ) {
 			}
 		},
 
-		preparePostData: function(data) {
+		preparePostData: function(data, inputPhrase) {
 
-			data.phrase = $("#inputTwo").val() + $("#inputOne").val();
+			data.phrase = $("#inputTwo").val() + inputPhrase;
 
 			return data;
 		}

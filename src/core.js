@@ -511,7 +511,7 @@ var EasyAutocomplete = (function(scope) {
 
 							settings.url = settings.url(inputPhrase);
 
-							settings.data = config.get("preparePostData")(settings.data);
+							settings.data = config.get("preparePostData")(settings.data, inputPhrase);
 
 							$.ajax(settings) 
 								.done(function(data) {
