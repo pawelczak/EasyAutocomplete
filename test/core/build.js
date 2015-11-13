@@ -472,5 +472,96 @@ QUnit.test("Build cssClasses - undefined", function( assert ) {
 		
 });
 
+QUnit.test("Shows container element '<ul>' when there are items", function( assert ) {
+	expect(1);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+
+		data: ["orange", "lime", "pineapple"]
+			
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 8; //backspace
+	$("#inputOne").val("aaaa").trigger(e);
+
+
+	//assert
+
+	var $container = $("#inputOne").parent().find("ul");
+
+	assert.equal("block", $container.css("display"), "css display should be block");
+
+		
+});
+
+QUnit.test("Hides container element '<ul>' when there are no items", function( assert ) {
+	expect(1);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+
+		data: []
+			
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 8; //backspace
+	$("#inputOne").val("aaaa").trigger(e);
+
+
+	//assert
+
+	var $container = $("#inputOne").parent().find("ul");
+
+	assert.equal("none", $container.css("display"), "css display should be none");
+
+		
+});
+
+QUnit.test("Hides container element '<ul>' when there are no items that matches", function( assert ) {
+	expect(1);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+
+		data: ["orange", "apple"],
+
+		list: {
+			match: {
+				enabled: true
+			}
+		}
+			
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 8; //backspace
+	$("#inputOne").val("aaaa").trigger(e);
+
+
+	//assert
+
+	var $container = $("#inputOne").parent().find("ul");
+
+	assert.equal("none", $container.css("display"), "css display should be none");
+		
+});
 
 

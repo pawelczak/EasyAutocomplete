@@ -492,7 +492,11 @@ var EasyAutocomplete = (function(scope) {
 
 							loadElements(listBuilders, inputPhrase);
 
-							showContainer();
+							if ($field.parent().find("li").length > 0) {
+								showContainer();	
+							} else {
+								hideContainer();
+							}
 
 						}
 
@@ -532,10 +536,11 @@ var EasyAutocomplete = (function(scope) {
 																				
 									}
 
-									if (listBuilderService.checkIfDataExists(listBuilders)) {
-										showContainer();
+									if (listBuilderService.checkIfDataExists(listBuilders) && $field.parent().find("li").length > 0) {
+										showContainer();	
+									} else {
+										hideContainer();
 									}
-
 
 									config.get("ajaxCallback")();
 
