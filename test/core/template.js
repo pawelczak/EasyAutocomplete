@@ -78,6 +78,46 @@ QUnit.test("Template - description", function( assert ) {
 		
 });
 
+QUnit.test("Template - description - function", function( assert ) {
+	expect(3);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+
+		data: [{country: "Poland", code: "pol"}, {country: "Germany", code: "ger"}, {country: "Italy", code: "ita"}],
+
+		getValue: "country",
+
+		template: {
+			type: "description",
+			fields: {
+				description: function(element) {return element.code;}
+			}
+		}
+
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("a").trigger(e);
+
+	
+	//assert
+
+	var elements = $("#inputOne").next().find("ul li");
+
+	assert.equal(3, elements.length, "Response size");
+	assert.equal("Poland - pol", elements.eq(0).find("div").text(), "First element value");
+	assert.equal("Germany - ger", elements.eq(1).find("div").text(), "Second element value");
+
+		
+});
+
 
 QUnit.test("Template - icon right - iconSrc string", function( assert ) {
 	expect(3);

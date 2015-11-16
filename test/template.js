@@ -142,14 +142,11 @@ QUnit.test("Template - custom template", function( assert ) {
 });
 
 
-
-
-
 QUnit.test("Template - cssClass description", function( assert ) {
 	
 
 	//given
-	var	options = {type: "description", method: function() {}};
+	var	options = {type: "description", fields: {description: "description"}, method: function() {}};
 
 
 	//execute

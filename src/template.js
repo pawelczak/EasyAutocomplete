@@ -69,10 +69,17 @@ var EasyAutocomplete = (function(scope){
 
 			if (template.type === "description") {
 
-				var buildMethod = function(elementValue, element) {
-					return elementValue + " - <span>" + element[_fields.description] + "</span>";
-				};
+				var buildMethod = genericTemplates.description.method; 
 
+				if (typeof _fields.description === "string") {
+					buildMethod = function(elementValue, element) {
+						return elementValue + " - <span>" + element[_fields.description] + "</span>";
+					};					
+				} else if (typeof _fields.description === "function") {
+					buildMethod = function(elementValue, element) {
+						return elementValue + " - <span>" + _fields.description(element) + "</span>";
+					};	
+				}
 
 				return buildMethod;
 			}
