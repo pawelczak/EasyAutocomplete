@@ -49,9 +49,10 @@ QUnit.test("Template - description template", function( assert ) {
 
 	//assert
 	assert.ok(typeof template.build == "function", "Build is function");
-	assert.ok(template.build("bruce", {description: "willis"}) === "bruce - <span>willis</span>", "Build returns value");	
+	assert.ok(template.build("bruce", {description: "willis"}) === "bruce - <span>willis</span>", "Build returns value");
+	assert.ok(template.getTemplateClass() === 'eac-description', "css class");	
 	//assert.ok(template.build.toString() === 'function (element) {	return element + " - description"; }', "Build equals def value");
-	expect(2);
+	expect(3);
 });
 
 QUnit.test("Template - iconLeft template", function( assert ) {
@@ -68,7 +69,8 @@ QUnit.test("Template - iconLeft template", function( assert ) {
 	//assert
 	assert.ok(typeof template.build == "function", "Build is function");
 	assert.ok(template.build("Brad Pitt", {iconSrc: "http://easyautocomplete.com/icon/pitt.jpg"}) === "<img class='eac-icon' src='http://easyautocomplete.com/icon/pitt.jpg' />Brad Pitt", "Build returns value");	
-	expect(2);
+	assert.ok(template.getTemplateClass() === 'eac-icon-left', "css class");
+	expect(3);
 });
 
 QUnit.test("Template - iconRight template", function( assert ) {
@@ -85,7 +87,8 @@ QUnit.test("Template - iconRight template", function( assert ) {
 	//assert
 	assert.ok(typeof template.build == "function", "Build is function");
 	assert.ok(template.build("Matt", {iconSrc: "http://Damon.com"}) === "Matt<img class='eac-icon' src='http://Damon.com' />", "Build returns value");	
-	expect(2);
+	assert.ok(template.getTemplateClass() === 'eac-icon-right', "css class");
+	expect(3);
 });
 
 QUnit.test("Template - links template", function( assert ) {

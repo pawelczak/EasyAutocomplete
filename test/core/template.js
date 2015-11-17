@@ -39,7 +39,7 @@ QUnit.test("Template - basic", function( assert ) {
 
 
 QUnit.test("Template - description", function( assert ) {
-	expect(3);
+	expect(4);
 	
 	//given
 	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
@@ -74,12 +74,13 @@ QUnit.test("Template - description", function( assert ) {
 	assert.equal(3, elements.length, "Response size");
 	assert.equal("Poland - pol", elements.eq(0).find("div").text(), "First element value");
 	assert.equal("Germany - ger", elements.eq(1).find("div").text(), "Second element value");
+	assert.ok(true === $("#inputOne").parent().hasClass("eac-description"), "CSS class");
 
 		
 });
 
 QUnit.test("Template - description - function", function( assert ) {
-	expect(3);
+	expect(4);
 	
 	//given
 	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
@@ -114,13 +115,14 @@ QUnit.test("Template - description - function", function( assert ) {
 	assert.equal(3, elements.length, "Response size");
 	assert.equal("Poland - pol", elements.eq(0).find("div").text(), "First element value");
 	assert.equal("Germany - ger", elements.eq(1).find("div").text(), "Second element value");
+	assert.ok(true === $("#inputOne").parent().hasClass("eac-description"), "CSS class");
 
 		
 });
 
 
 QUnit.test("Template - icon right - iconSrc string", function( assert ) {
-	expect(3);
+	expect(4);
 	
 	//given
 	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
@@ -155,6 +157,7 @@ QUnit.test("Template - icon right - iconSrc string", function( assert ) {
 	assert.equal(3, elements.length, "Response size");
 	assert.equal("Poland<img class=\"eac-icon\" src=\"pol\">", elements.eq(0).find("div").html(), "First element value");
 	assert.equal("Germany<img class=\"eac-icon\" src=\"ger\">", elements.eq(1).find("div").html(), "Second element value");
+	assert.ok(true == $("#inputOne").parent().hasClass("eac-icon-right"), "CSS class");
 
 		
 });
@@ -162,7 +165,7 @@ QUnit.test("Template - icon right - iconSrc string", function( assert ) {
 
 
 QUnit.test("Template - icon right - iconSrc function", function( assert ) {
-	expect(3);
+	expect(4);
 	
 	//given
 	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
@@ -199,13 +202,14 @@ QUnit.test("Template - icon right - iconSrc function", function( assert ) {
 	assert.equal(3, elements.length, "Response size");
 	assert.equal("Poland<img class=\"eac-icon\" src=\"http://iconSource.info/pol.png\">", elements.eq(0).find("div").html(), "First element value");
 	assert.equal("Germany<img class=\"eac-icon\" src=\"http://iconSource.info/ger.png\">", elements.eq(1).find("div").html(), "Second element value");
+	assert.ok(true == $("#inputOne").parent().hasClass("eac-icon-right"), "CSS class");
 
 		
 });
 
 
 QUnit.test("Template - icon left - iconSrc function", function( assert ) {
-	expect(3);
+	expect(4);
 	
 	//given
 	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
@@ -242,6 +246,7 @@ QUnit.test("Template - icon left - iconSrc function", function( assert ) {
 	assert.equal(3, elements.length, "Response size");
 	assert.equal("<img class=\"eac-icon\" src=\"http://iconSource.info/pol.png\">Poland", elements.eq(0).find("div").html(), "First element value");
 	assert.equal("<img class=\"eac-icon\" src=\"http://iconSource.info/ger.png\">Germany", elements.eq(1).find("div").html(), "Second element value");
+	assert.ok(true == $("#inputOne").parent().hasClass("eac-icon-left"), "CSS class");
 	
 });
 
