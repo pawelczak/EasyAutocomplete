@@ -250,6 +250,46 @@ QUnit.test("Template - icon left - iconSrc function", function( assert ) {
 	
 });
 
+QUnit.test("Template - icon left - iconSrc string", function( assert ) {
+	expect(4);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+
+		data: [{country: "Poland", code: "pol"}, {country: "Germany", code: "ger"}, {country: "Italy", code: "ita"}],
+
+		getValue: "country",
+
+		template: {
+			type: "iconLeft",
+			fields: {
+				iconSrc: "code"
+			}
+		}
+
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("z").trigger(e);
+
+	
+	//assert
+
+	var elements = $("#inputOne").next().find("ul li");
+
+	assert.equal(3, elements.length, "Response size");
+	assert.equal("<img class=\"eac-icon\" src=\"pol\">Poland", elements.eq(0).find("div").html(), "First element value");
+	assert.equal("<img class=\"eac-icon\" src=\"ger\">Germany", elements.eq(1).find("div").html(), "Second element value");
+	assert.ok(true == $("#inputOne").parent().hasClass("eac-icon-left"), "CSS class");
+	
+});
+
 QUnit.test("Template - links - link string", function( assert ) {
 	expect(3);
 	

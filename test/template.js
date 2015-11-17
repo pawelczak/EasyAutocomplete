@@ -36,7 +36,7 @@ QUnit.test("Template - default template", function( assert ) {
 });
 
 
-QUnit.test("Template - description template", function( assert ) {
+QUnit.test("Template - description template - field string", function( assert ) {
 	
 
 	//given
@@ -55,7 +55,26 @@ QUnit.test("Template - description template", function( assert ) {
 	expect(3);
 });
 
-QUnit.test("Template - iconLeft template", function( assert ) {
+QUnit.test("Template - description template - field function", function( assert ) {
+	
+
+	//given
+	var	options = {type: "description", fields: {description: function(element) {return element["description"];}}};
+
+
+	//execute
+	var template = new EasyAutocomplete.Template(options);
+		
+
+	//assert
+	assert.ok(typeof template.build == "function", "Build is function");
+	assert.ok(template.build("bruce", {description: "willis"}) === "bruce - <span>willis</span>", "Build returns value");
+	assert.ok(template.getTemplateClass() === 'eac-description', "css class");	
+
+	expect(3);
+});
+
+QUnit.test("Template - iconLeft template - field string", function( assert ) {
 	
 
 	//given
@@ -73,7 +92,25 @@ QUnit.test("Template - iconLeft template", function( assert ) {
 	expect(3);
 });
 
-QUnit.test("Template - iconRight template", function( assert ) {
+QUnit.test("Template - iconLeft template - field function", function( assert ) {
+	
+
+	//given
+	var	options = {type: "iconLeft", fields: {iconSrc: function(element) {return element["iconSrc"];}}};
+
+
+	//execute
+	var template = new EasyAutocomplete.Template(options);
+
+
+	//assert
+	assert.ok(typeof template.build == "function", "Build is function");
+	assert.ok(template.build("Brad Pitt", {iconSrc: "http://easyautocomplete.com/icon/pitt.jpg"}) === "<img class='eac-icon' src='http://easyautocomplete.com/icon/pitt.jpg' />Brad Pitt", "Build returns value");	
+	assert.ok(template.getTemplateClass() === 'eac-icon-left', "css class");
+	expect(3);
+});
+
+QUnit.test("Template - iconRight template - field string", function( assert ) {
 	
 
 	//given
@@ -91,7 +128,25 @@ QUnit.test("Template - iconRight template", function( assert ) {
 	expect(3);
 });
 
-QUnit.test("Template - links template", function( assert ) {
+QUnit.test("Template - iconRight template - field function", function( assert ) {
+	
+
+	//given
+	var	options = {type: "iconRight", fields: {iconSrc: function(element) {return element["iconSrc"];}}};
+
+
+	//execute
+	var template = new EasyAutocomplete.Template(options);
+
+
+	//assert
+	assert.ok(typeof template.build == "function", "Build is function");
+	assert.ok(template.build("Matt", {iconSrc: "http://Damon.com"}) === "Matt<img class='eac-icon' src='http://Damon.com' />", "Build returns value");	
+	assert.ok(template.getTemplateClass() === 'eac-icon-right', "css class");
+	expect(3);
+});
+
+QUnit.test("Template - links template - field string", function( assert ) {
 	
 
 	//given
@@ -109,11 +164,11 @@ QUnit.test("Template - links template", function( assert ) {
 });
 
 
-QUnit.test("Template - links template", function( assert ) {
+QUnit.test("Template - links template - field function", function( assert ) {
 	
 
 	//given
-	var	options = {type: "links", fields: {link: "website_link"}};
+	var	options = {type: "links", fields: {link: function(element) {return element["website_link"];} }};
 
 
 	//execute
