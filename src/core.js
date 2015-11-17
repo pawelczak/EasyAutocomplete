@@ -608,11 +608,12 @@ var EasyAutocomplete = (function(scope) {
 							//enter
 
 							$field.val(config.get("getValue")(elementsList[selectedElement]));
-							selectedElement = -1;
-							hideContainer();
 
 							config.get("list").onKeyEnterEvent();
 							config.get("list").onChooseEvent();
+
+							selectedElement = -1;
+							hideContainer();
 
 							event.preventDefault();
 						}
