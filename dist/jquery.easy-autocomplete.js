@@ -1040,7 +1040,7 @@ var EasyAutocomplete = (function(scope) {
 
 					$elements_container
 						/* List show animation */
-						.on("show", function() {
+						.on("show.eac", function() {
 
 							switch(config.get("list").showAnimation.type) {
 
@@ -1067,7 +1067,7 @@ var EasyAutocomplete = (function(scope) {
 							
 						})
 						/* List hide animation */
-						.on("hide", function() {
+						.on("hide.eac", function() {
 
 							switch(config.get("list").hideAnimation.type) {
 
@@ -1093,13 +1093,13 @@ var EasyAutocomplete = (function(scope) {
 							config.get("list").onHideListEvent();
 
 						})
-						.on("selectElement", function() {
+						.on("selectElement.eac", function() {
 							$elements_container.find("ul li").removeClass("selected");
 							$elements_container.find("ul li").eq(selectedElement).addClass("selected");
 
 							config.get("list").onSelectItemEvent();
 						})
-						.on("loadElements", function(event, listBuilders, phrase) {
+						.on("loadElements.eac", function(event, listBuilders, phrase) {
 			
 
 							var $item = "",
@@ -1487,20 +1487,20 @@ var EasyAutocomplete = (function(scope) {
 		}
 
 		function showContainer() {
-			$container.trigger("show");
+			$container.trigger("show.eac");
 		}
 
 		function hideContainer() {
-			$container.trigger("hide");
+			$container.trigger("hide.eac");
 		}
 
 		function selectElement(index) {
 			
-			$container.trigger("selectElement", index);
+			$container.trigger("selectElement.eac", index);
 		}
 
 		function loadElements(list, phrase) {
-			$container.trigger("loadElements", [list, phrase]);
+			$container.trigger("loadElements.eac", [list, phrase]);
 		}
 
 		function loseFieldFocus() {

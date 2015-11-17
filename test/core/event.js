@@ -515,6 +515,236 @@ QUnit.test("Event onKeyEnterEvent and selectedItemData - keydown enter", functio
 });
 
 
+QUnit.test("Plugin should not emit event 'show' ", function( assert ) {
+	expect(1);
+	
+	//given
+	var $input = $("#inputOne"),
+		eventReceived = false;
+
+
+	$("body")
+	.on("show", function() {
+		eventReceived = true;
+	})
+	.on("show.eac", function() {
+
+		//assert
+		assertList();
+
+		QUnit.start();	
+
+		afterTests();
+	});
+
+	
+
+	$input.easyAutocomplete({
+		url: "resources/colors_string.json",			
+	});
+	
+
+
+	//execute
+	
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$input.val("c").trigger(e); //trigger show list
+
+	QUnit.stop();
+
+	//assert
+
+	function assertList() {
+
+		assert.ok(eventReceived === false, "Event received");
+	}
+
+	function afterTests() {
+
+		$("body").off("show").off("show.eac");
+	}
+
+});
+
+QUnit.test("Plugin should not emit event 'hide' ", function( assert ) {
+	expect(1);
+	
+	//given
+	var $input = $("#inputOne"),
+		eventReceived = false;
+
+
+	$("body")
+	.on("hide", function() {
+		eventReceived = true;
+	})
+	.on("hide.eac", function() {
+
+		//assert
+		assertList();
+
+		QUnit.start();	
+		
+		afterTests();
+	});
+
+	
+
+	$input.easyAutocomplete({
+		url: "resources/colors_string.json",	
+
+		list: {
+			onLoadEvent: function() {
+
+				//trigger hide list
+				var key = $.Event('keyup');
+				key.keyCode = 27; 
+				$input.trigger(key);
+			}	
+		}		
+	});
+	
+
+
+	//execute
+	
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$input.val("c").trigger(e); //trigger show list
+
+	QUnit.stop();
+
+	//assert
+
+	function assertList() {
+
+		assert.ok(eventReceived === false, "Event received");
+	}
+
+	function afterTests() {
+
+		$("body").off("hide").off("hide.eac");
+	}
+
+});
+
+
+QUnit.test("Plugin should not emit event 'selectElement' ", function( assert ) {
+	expect(1);
+	
+	//given
+	var $input = $("#inputOne"),
+		eventReceived = false;
+
+
+	$("body")
+	.on("selectElement", function() {
+		eventReceived = true;
+	})
+	.on("selectElement.eac", function() {
+
+		//assert
+		assertList();
+
+		QUnit.start();	
+		
+		afterTests();
+	});
+
+	
+
+	$input.easyAutocomplete({
+		url: "resources/colors_string.json",	
+
+		list: {
+			onLoadEvent: function() {
+
+				//trigger select event
+				var key = $.Event('keyup');
+				key.keyCode = 40; 
+				$input.trigger(key);
+			}	
+		}		
+	});
+	
+
+
+	//execute
+	
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$input.val("c").trigger(e); //trigger show list
+
+	QUnit.stop();
+
+	//assert
+
+	function assertList() {
+
+		assert.ok(eventReceived === false, "Event received");
+	}
+
+	function afterTests() {
+
+		$("body").off("selectElement").off("selectElement.eac");
+	}
+
+});
+
+
+QUnit.test("Plugin should not emit event 'loadElements' ", function( assert ) {
+	expect(1);
+	
+	//given
+	var $input = $("#inputOne"),
+		eventReceived = false;
+
+
+	$("body")
+	.on("loadElements", function() {
+		eventReceived = true;
+	})
+	.on("loadElements.eac", function() {
+
+		//assert
+		assertList();
+
+		QUnit.start();	
+		
+		afterTests();
+	});
+
+	
+
+	$input.easyAutocomplete({
+		url: "resources/colors_string.json",	
+	});
+	
+
+
+	//execute
+	
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$input.val("c").trigger(e); //trigger show list
+
+	QUnit.stop();
+
+	//assert
+
+	function assertList() {
+
+		assert.ok(eventReceived === false, "Event received");
+	}
+
+	function afterTests() {
+
+		$("body").off("loadElements").off("loadElements.eac");
+	}
+
+});
+
 
 QUnit.test("Event onChooseEvent - key enter", function( assert ) {
 	expect(1);
