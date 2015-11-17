@@ -406,6 +406,115 @@ QUnit.test("Event onKeyEnterEvent ", function( assert ) {
 });
 
 
+QUnit.test("Event onClickEvent and selectedItemData - click", function( assert ) {
+	expect(2);
+	
+	//given
+	var $input = $("#inputOne");
+
+	$input.easyAutocomplete({
+
+			url: "resources/colors_string.json",
+
+			list: {
+				onClickEvent: function() {
+
+					//assert
+					assertList();
+				},
+				onLoadEvent: function() {
+
+
+					//trigger click event
+					$("#inputOne").next().find("ul li").eq(0).find(" > div").trigger("click");
+				}	
+			}
+			
+	});
+	
+
+
+	//execute
+	
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$input.val("c").trigger(e);
+
+	QUnit.stop();
+
+	//assert
+
+	function assertList() {
+
+		var elements = $input.next().find("ul li"),
+			data = $input.getSelectedItemData();
+
+		assert.equal(3, elements.length, "Response size");
+		assert.equal("red", data, "selectedItemData matches");
+
+		QUnit.start();	
+	}
+});
+
+QUnit.test("Event onKeyEnterEvent and selectedItemData - keydown enter", function( assert ) {
+	expect(2);
+	
+	//given
+	var $input = $("#inputOne");
+
+	$input.easyAutocomplete({
+
+			url: "resources/colors_string.json",
+
+			list: {
+				onKeyEnterEvent: function() {
+
+					//assert
+					assertList();
+				},
+				onLoadEvent: function() {
+
+					//trigger select event
+					var key = $.Event('keyup');
+					key.keyCode = 40; 
+					$input.trigger(key);
+
+
+					//trigger key enter
+					var key = $.Event('keydown');
+					key.keyCode = 13; 
+					$input.trigger(key);
+				}	
+			}
+			
+	});
+	
+
+
+	//execute
+	
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$input.val("c").trigger(e);
+
+	QUnit.stop();
+
+	//assert
+
+	function assertList() {
+
+		var elements = $input.next().find("ul li"),
+			data = $input.getSelectedItemData();
+
+		assert.equal(3, elements.length, "Response size");
+		assert.equal("red", data, "selectedItemData matches");
+
+
+		QUnit.start();	
+	}
+});
+
+
 
 QUnit.test("Event onChooseEvent - key enter", function( assert ) {
 	expect(1);
@@ -502,3 +611,4 @@ QUnit.test("Event onChooseEvent - click", function( assert ) {
 		QUnit.start();	
 	}
 });
+
