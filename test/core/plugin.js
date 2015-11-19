@@ -43,7 +43,7 @@ QUnit.test("Input field has no id property", function( assert ) {
 	expect(5);
 });
 
-QUnit.test("Invoke plugin function on input htat is dynamically added", function( assert ) {
+QUnit.test("Invoke plugin function on input that is dynamically added", function( assert ) {
 	
 	
 	//given

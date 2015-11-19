@@ -24,6 +24,8 @@ var EasyAutocomplete = (function(scope) {
 			elementsList = [],
 			selectedElement = -1,
 			requestDelayTimeoutId;
+
+		scope.consts = consts;
 			
 
 		//------------------------ GETTERS --------------------------
@@ -343,21 +345,7 @@ var EasyAutocomplete = (function(scope) {
 			
 			var elementId = $field.attr("id");
 
-			if (elementId === undefined || elementId === null) {
-				
-				var fieldId = "";
-
-				do {
-					fieldId = module.shortcut + "-" + Math.floor(Math.random() * 10000);		
-				} while($("#" + fieldId).length !== 0);
-				
-				elementId = consts.getValue("CONTAINER_ID") + fieldId;
-
-				$field.attr("id", fieldId);
-
-			} else {
-				elementId = consts.getValue("CONTAINER_ID") + elementId;
-			}
+			elementId = consts.getValue("CONTAINER_ID") + elementId;
 
 			return elementId;
 		}
@@ -687,18 +675,49 @@ var EasyAutocomplete = (function(scope) {
 
 	};
 
+
+	scope.easyAutocompleteHandles = [];
+
+	scope.inputHasId = function(input) {
+
+		if($(input).attr("id") !== undefined && $(input).attr("id").length > 0) {
+			return true;
+		} else {
+			return false;
+		}
+
+	};
+
+	scope.assignRandomId = function(input) {
+
+		var fieldId = "";
+
+		do {
+			fieldId = "eac-" + Math.floor(Math.random() * 10000);		
+		} while ($("#" + fieldId).length !== 0);
+		
+		elementId = scope.consts.getValue("CONTAINER_ID") + fieldId;
+
+		$(input).attr("id", fieldId);
+ 
+	};
+
 	return scope;
 
 })(EasyAutocomplete || {});
 
-$.fn.easyAutocompleteHandles = [];
 
 $.fn.easyAutocomplete = function(options) {
+
 	var eacHandle = new EasyAutocomplete.main(this, options);
+
+	if (!EasyAutocomplete.inputHasId(this)) {
+		EasyAutocomplete.assignRandomId(this);
+	}
 
 	eacHandle.init();
 
-	$.fn.easyAutocompleteHandles[$(this).attr("id")] = eacHandle;
+	EasyAutocomplete.easyAutocompleteHandles[$(this).attr("id")] = eacHandle;
 };
 
 $.fn.getSelectedItemIndex = function() {
@@ -706,9 +725,7 @@ $.fn.getSelectedItemIndex = function() {
 	var inputId = $(this).attr("id");
 
 	if (inputId !== undefined) {
-		if ($.fn.easyAutocompleteHandles[inputId] !== undefined) {
-			return $.fn.easyAutocompleteHandles[inputId].getSelectedItemIndex();
-		}
+		return EasyAutocomplete.easyAutocompleteHandles[inputId].getSelectedItemIndex();
 	}
 
 	return -1;
@@ -719,9 +736,7 @@ $.fn.getItemData = function(index) {
 	var inputId = $(this).attr("id");
 
 	if (inputId !== undefined && index > -1) {
-		if ($.fn.easyAutocompleteHandles[inputId] !== undefined) {
-			return $.fn.easyAutocompleteHandles[inputId].getItemData(index);
-		}
+		return EasyAutocomplete.easyAutocompleteHandles[inputId].getItemData(index);
 	}
 
 	return -1;
@@ -732,9 +747,7 @@ $.fn.getSelectedItemData = function() {
 	var inputId = $(this).attr("id");
 
 	if (inputId !== undefined) {
-		if ($.fn.easyAutocompleteHandles[inputId] !== undefined) {
-			return $.fn.easyAutocompleteHandles[inputId].getSelectedItemData();
-		}
+		return EasyAutocomplete.easyAutocompleteHandles[inputId].getSelectedItemData();
 	}
 
 	return -1;
