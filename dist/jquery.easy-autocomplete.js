@@ -1532,15 +1532,19 @@ var EasyAutocomplete = (function(scope) {
 
 $.fn.easyAutocomplete = function(options) {
 
-	var eacHandle = new EasyAutocomplete.main(this, options);
+	return this.each(function() {
+		var $this = $(this),
+			eacHandle = new EasyAutocomplete.main($this, options);
 
-	if (!EasyAutocomplete.inputHasId(this)) {
-		EasyAutocomplete.assignRandomId(this);
-	}
+		if (!EasyAutocomplete.inputHasId($this)) {
+			EasyAutocomplete.assignRandomId($this);
+		}
 
-	eacHandle.init();
+		eacHandle.init();
 
-	EasyAutocomplete.easyAutocompleteHandles[$(this).attr("id")] = eacHandle;
+		EasyAutocomplete.easyAutocompleteHandles[$this.attr("id")] = eacHandle;
+
+	});	
 };
 
 $.fn.getSelectedItemIndex = function() {

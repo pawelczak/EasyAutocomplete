@@ -81,5 +81,40 @@ QUnit.test("Invoke plugin function on input that is dynamically added", function
 	expect(5);
 });
 
+QUnit.test(".easyAutocomplete function should return jQuery object", function( assert ) {
+	
+	
+	//given
+	$("#inputThree").attr("justice", "");
 
+
+	//execute
+	var completerOne = $("#inputThree").easyAutocomplete({
+
+		data: ["black", "white", "magenta", "yellow"],
+
+		list: {
+
+			match: {
+				enabled: true
+			}
+		}
+		
+	})
+	.attr("justice", "beaver");
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputThree").val("a").trigger(e);
+
+	//assert
+	var elements = $("#inputThree").next().find("ul li");
+
+	assert.equal("beaver", $("#inputThree").attr("justice"), "Setted attribute.");
+	assert.equal(2, elements.length, "Response size");
+	assert.equal("black", elements.eq(0).text(), "First element is 'black'");
+	assert.equal("magenta", elements.eq(1).text(), "Second element is 'magenta'");
+
+	expect(4);
+});
 
