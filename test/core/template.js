@@ -376,3 +376,51 @@ QUnit.test("Template - links - link function", function( assert ) {
 	assert.equal("<a href=\"http://site.de\">Germany</a>", elements.eq(1).find("div").html(), "Second element value");
 	
 });
+
+QUnit.test("Template - custom", function( assert ) {
+	expect(4);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+
+		data: [{country: "Poland", site: "pl"}, {country: "Germany", site: "de"}, {country: "Italy", site: "it"}],
+
+		getValue: "country",
+
+		template: {
+			type: "custom",
+			method: function(value, item) {
+				return "<p>" + value + "</p><b>" + item.site + "</b>";
+			}
+		},
+
+		list: {
+			match: {
+				enabled: false
+			}
+		}
+
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("z").trigger(e);
+
+	
+	//assert
+
+	var elements = $("#inputOne").next().find("ul li");
+
+	assert.ok($("#inputOne").parent().hasClass("undefined") === false, "There is no class undefined");
+
+	assert.equal(3, elements.length, "Response size");
+	assert.equal("<p>Poland</p><b>pl</b>", elements.eq(0).find("div").html(), "First element value");
+	assert.equal("<p>Germany</p><b>de</b>", elements.eq(1).find("div").html(), "Second element value");
+	
+});
+
