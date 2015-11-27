@@ -19,6 +19,8 @@ QUnit.test("Input field has no id property", function( assert ) {
 	
 	
 	//given
+	$(".inputOne").attr("id", "");
+
 	var completerOne = $(".inputOne").easyAutocomplete({
 
 		data: ["black", "white", "magenta", "yellow"],
@@ -29,7 +31,7 @@ QUnit.test("Input field has no id property", function( assert ) {
 	//execute
 	var e = $.Event('keyup');
 	e.keyCode = 50; 
-	$(".inputOne").val("more").trigger(e);
+	$(".inputOne").val("a").trigger(e);
 
 	//assert
 	var elements = $(".inputOne").next().find("ul li");
@@ -40,7 +42,9 @@ QUnit.test("Input field has no id property", function( assert ) {
 	assert.equal("magenta", elements.eq(2).text(), "Third element is 'magenta'");
 	assert.equal("yellow", elements.eq(3).text(), "Fourth element is 'yellow'");
 
-	expect(5);
+	assert.ok($(".inputOne").attr("id").length > 0, "id is defined");	
+
+	expect(6);
 });
 
 QUnit.test("Invoke plugin function on input that is dynamically added", function( assert ) {

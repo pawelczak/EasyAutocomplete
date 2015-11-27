@@ -1511,13 +1511,8 @@ var EasyAutocomplete = (function(scope) {
 
 	};
 
-	scope.inputGetId = function(input) {
-		return $(input).attr("id");
-	};
-
 	scope.assignRandomId = function(input) {
 
-	
 		var fieldId = "";
 
 		do {
