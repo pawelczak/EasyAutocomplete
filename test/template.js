@@ -15,6 +15,7 @@ QUnit.test("Template - module", function( assert ) {
 	assert.ok(Template, "Constructor");
 	assert.ok(typeof Template === "object", "created object");
 	assert.ok(typeof Template.build === "function", "Template has method build");
+	assert.ok(Template.getTemplateClass() === '', "css class");
 });
 
 
@@ -160,7 +161,8 @@ QUnit.test("Template - links template - field string", function( assert ) {
 	//assert
 	assert.ok(typeof template.build == "function", "Build is function");
 	assert.ok(template.build("EasyAutocomplete website", {website_link: "http://easyautocomplete.com"}) === "<a href='http://easyautocomplete.com' >EasyAutocomplete website</a>", "Build returns value");	
-	expect(2);
+	assert.ok(template.getTemplateClass() === '', "css class");
+	expect(3);
 });
 
 
@@ -178,7 +180,8 @@ QUnit.test("Template - links template - field function", function( assert ) {
 	//assert
 	assert.ok(typeof template.build == "function", "Build is function");
 	assert.ok(template.build("EasyAutocomplete website", {website_link: "http://easyautocomplete.com"}) === "<a href='http://easyautocomplete.com' >EasyAutocomplete website</a>", "Build returns value");	
-	expect(2);
+	assert.ok(template.getTemplateClass() === '', "css class");
+	expect(3);
 });
 
 
@@ -196,7 +199,8 @@ QUnit.test("Template - custom template", function( assert ) {
 	//assert
 	assert.ok(typeof template.build === "function", "Build is function");
 	assert.ok(template.build.toString() === 'function () {}', "Build equals def value");
-	expect(2);
+	assert.ok(template.getTemplateClass() === '', "css class");
+	expect(3);
 });
 
 

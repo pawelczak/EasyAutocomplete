@@ -704,7 +704,8 @@ var EasyAutocomplete = (function(scope){
 		var genericTemplates = {
 			basic: {
 				type: "basic",
-				method: function(element) { return element; }
+				method: function(element) { return element; },
+				cssClass: ""
 			},
 			description: {
 				type: "description",
@@ -741,11 +742,13 @@ var EasyAutocomplete = (function(scope){
 				},
 				method: function(element) {
 					return element;
-				}
+				},
+				cssClass: ""
 			},
 			custom: {
 				type: "custom",
-				method: function() {}
+				method: function() {},
+				cssClass: ""
 			}
 		},
 

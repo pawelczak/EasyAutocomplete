@@ -4,7 +4,7 @@
  * @author Łukasz Pawełczak
  */
 QUnit.test("Template - basic", function( assert ) {
-	expect(3);
+	expect(4);
 	
 	//given
 	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
@@ -28,6 +28,8 @@ QUnit.test("Template - basic", function( assert ) {
 	//assert
 
 	var elements = $("#inputOne").next().find("ul li");
+
+	assert.ok($("#inputOne").parent().hasClass("undefined") === false, "There is no class undefined");
 
 	assert.equal(4, elements.length, "Response size");
 	assert.equal("red", elements.eq(0).find("div").text(), "First element value");
@@ -291,7 +293,7 @@ QUnit.test("Template - icon left - iconSrc string", function( assert ) {
 });
 
 QUnit.test("Template - links - link string", function( assert ) {
-	expect(3);
+	expect(4);
 	
 	//given
 	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
@@ -323,6 +325,8 @@ QUnit.test("Template - links - link string", function( assert ) {
 
 	var elements = $("#inputOne").next().find("ul li");
 
+	assert.ok($("#inputOne").parent().hasClass("undefined") === false, "There is no class undefined");
+
 	assert.equal(3, elements.length, "Response size");
 	assert.equal("<a href=\"http://site.pl\">Poland</a>", elements.eq(0).find("div").html(), "First element value");
 	assert.equal("<a href=\"http://site.de\">Germany</a>", elements.eq(1).find("div").html(), "Second element value");
@@ -331,7 +335,7 @@ QUnit.test("Template - links - link string", function( assert ) {
 
 
 QUnit.test("Template - links - link function", function( assert ) {
-	expect(3);
+	expect(4);
 	
 	//given
 	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
@@ -364,6 +368,8 @@ QUnit.test("Template - links - link function", function( assert ) {
 	//assert
 
 	var elements = $("#inputOne").next().find("ul li");
+
+	assert.ok($("#inputOne").parent().hasClass("undefined") === false, "There is no class undefined");
 
 	assert.equal(3, elements.length, "Response size");
 	assert.equal("<a href=\"http://site.pl\">Poland</a>", elements.eq(0).find("div").html(), "First element value");
