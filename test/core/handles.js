@@ -84,3 +84,47 @@ QUnit.test("It should be possible to invoke plugin on element found whith class 
 
 	expect(3);
 });
+
+QUnit.test("It should be possible to invoke plugin on couple of element found whith class selector and use its id to with functions", function( assert ) {
+
+	//given
+	//invoked on two elements #inputOne and #inputTwo
+	var completerOne = $(".input").easyAutocomplete({
+
+		data: ["black", "white", "magenta", "yellow"],
+
+		list: {
+
+			match: {
+				enabled: true
+			}
+		}
+		
+	});
+
+
+	//execute
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$(".input").val("a").trigger(e);
+	
+	//trigger select event
+	var key = $.Event('keyup');
+	key.keyCode = 40; 
+	$(".input").trigger(key);
+
+	//assert
+	var $inputOne = $("#inputOne"),
+		$inputTwo = $("#inputTwo");
+	
+	assert.equal($inputOne.getSelectedItemIndex(), 0, "getSelectedItemIndex passed");
+	assert.equal($inputOne.getSelectedItemData(), "black", "getSelectedItemData passed");
+	assert.equal($inputOne.getItemData(1), "magenta", "getItemData passed");
+
+	assert.equal($inputTwo.getSelectedItemIndex(), 0, "getSelectedItemIndex passed");
+	assert.equal($inputTwo.getSelectedItemData(), "black", "getSelectedItemData passed");
+	assert.equal($inputTwo.getItemData(1), "magenta", "getItemData passed");
+
+	expect(6);
+});
+
