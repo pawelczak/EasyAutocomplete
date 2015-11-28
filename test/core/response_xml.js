@@ -7,7 +7,9 @@ QUnit.test("XML - Simple response", function( assert ) {
 	expect(5);
 	
 	//given
-	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "resources/colors.xml",
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+
+		url: "resources/colors.xml",
 
 
 		dataType: "xml",

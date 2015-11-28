@@ -292,6 +292,72 @@ QUnit.test("Template - icon left - iconSrc string", function( assert ) {
 	
 });
 
+QUnit.test("Template - icon left - xml provider - complex data", function( assert ) {
+	expect(4);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+
+		url: "resources/colors_object.xml",
+
+		dataType: "xml",
+		xmlElementName: "color",
+
+		getValue: function(element) {
+			return $(element).find("name").text();
+		},
+
+		template: {
+			type: "iconLeft",
+			fields: {
+				iconSrc: function(element) {
+					return $(element).find("name").text();
+				}
+			}
+		},
+
+		list: {
+			match: {
+				enabled: false
+			}
+		},
+
+		ajaxCallback: function() {
+
+			//assert
+			
+			assertList();
+		}
+
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("z").trigger(e);
+
+	
+	QUnit.stop();
+	
+	//assert
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul li");
+
+		assert.ok($("#inputOne").parent().hasClass("undefined") === false, "There is no class undefined");
+
+		assert.equal(4, elements.length, "Response size");
+		assert.equal("<img class=\"eac-icon\" src=\"red\">red", elements.eq(0).find("div").html(), "First element value");
+		assert.equal("<img class=\"eac-icon\" src=\"green\">green", elements.eq(1).find("div").html(), "Second element value");
+
+		QUnit.start();
+	}
+});
+
+
 QUnit.test("Template - links - link string", function( assert ) {
 	expect(4);
 	
@@ -377,6 +443,73 @@ QUnit.test("Template - links - link function", function( assert ) {
 	
 });
 
+
+QUnit.test("Template - links - xml provider - complex data", function( assert ) {
+	expect(4);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+
+		url: "resources/colors_object.xml",
+
+		dataType: "xml",
+		xmlElementName: "color",
+
+		getValue: function(element) {
+			return $(element).find("name").text();
+		},
+
+		template: {
+			type: "links",
+			fields: {
+				link: function(element) {
+					return "http://site." + $(element).find("name").text();
+				}
+			}
+		},
+
+		list: {
+			match: {
+				enabled: false
+			}
+		},
+
+		ajaxCallback: function() {
+
+			//assert
+			
+			assertList();
+		}
+
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("z").trigger(e);
+
+	
+	QUnit.stop();
+	
+	//assert
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul li");
+
+		assert.ok($("#inputOne").parent().hasClass("undefined") === false, "There is no class undefined");
+
+		assert.equal(4, elements.length, "Response size");
+		assert.equal("<a href=\"http://site.red\">red</a>", elements.eq(0).find("div").html(), "First element value");
+		assert.equal("<a href=\"http://site.green\">green</a>", elements.eq(1).find("div").html(), "Second element value");
+
+		QUnit.start();
+	}
+});
+
+
 QUnit.test("Template - custom", function( assert ) {
 	expect(4);
 	
@@ -422,5 +555,128 @@ QUnit.test("Template - custom", function( assert ) {
 	assert.equal("<p>Poland</p><b>pl</b>", elements.eq(0).find("div").html(), "First element value");
 	assert.equal("<p>Germany</p><b>de</b>", elements.eq(1).find("div").html(), "Second element value");
 	
+});
+
+
+QUnit.test("Template - custom - xml provider", function( assert ) {
+	expect(4);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+
+		url: "resources/colors.xml",
+
+		dataType: "xml",
+		xmlElementName: "color",
+
+		template: {
+			type: "custom",
+			method: function(value, item) {
+				return "<p>" + value + "</p>";
+			}
+		},
+
+		list: {
+			match: {
+				enabled: false
+			}
+		},
+
+		ajaxCallback: function() {
+
+			//assert
+			
+			assertList();
+		}
+
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("z").trigger(e);
+
+	QUnit.stop();
+	
+	//assert
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul li");
+
+		assert.ok($("#inputOne").parent().hasClass("undefined") === false, "There is no class undefined");
+
+		assert.equal(4, elements.length, "Response size");
+		assert.equal("<p>red</p>", elements.eq(0).find("div").html(), "First element value");
+		assert.equal("<p>green</p>", elements.eq(1).find("div").html(), "Second element value");
+
+		QUnit.start();
+	}
+});
+
+
+QUnit.test("Template - custom - xml provider - complex data", function( assert ) {
+	expect(4);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+
+		url: "resources/colors_object.xml",
+
+		dataType: "xml",
+		xmlElementName: "color",
+
+		getValue: function(element) {
+			return $(element).find("name").text();
+		},
+
+		template: {
+			type: "custom",
+			method: function(value, item) {
+				return "<p>" + value + "</p>" + "<b>" + $(item).find("name").text() +"</b>";
+			}
+		},
+
+		list: {
+			match: {
+				enabled: false
+			}
+		},
+
+		ajaxCallback: function() {
+
+			//assert
+			
+			assertList();
+		}
+
+	});
+
+
+	//execute
+	
+	completerOne.init();
+
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("z").trigger(e);
+
+	
+	QUnit.stop();
+	
+	//assert
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul li");
+
+		assert.ok($("#inputOne").parent().hasClass("undefined") === false, "There is no class undefined");
+
+		assert.equal(4, elements.length, "Response size");
+		assert.equal("<p>red</p><b>red</b>", elements.eq(0).find("div").html(), "First element value");
+		assert.equal("<p>green</p><b>green</b>", elements.eq(1).find("div").html(), "Second element value");
+
+		QUnit.start();
+	}
 });
 
