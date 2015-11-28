@@ -101,7 +101,7 @@ module.exports = function(grunt) {
       dev: {
         options: {
           style: 'expanded',
-          compass: false
+          sourceMap: false
         },
         files: [{
          expand: true,
@@ -117,7 +117,7 @@ module.exports = function(grunt) {
       dist: {
         options: {
           style: 'compressed',
-          compass: false
+          sourceMap: false
         },
         files: [{
          expand: true,
@@ -147,6 +147,17 @@ module.exports = function(grunt) {
         src: ['<%= project.sass.dist %>' + '/easy-autocomplete.min.css']
       }
     },
+
+    copy: {
+      files: {
+        cwd: '<%= project.sass.dist %>',  // set working folder / root to copy
+        src: '*.map',           // copy all files and subfolders
+        dest: '<%= project.sass.dist %>/maps',    // destination folder
+        expand: true           // required when using cwd
+      }
+    },
+
+    clean: ['<%= project.sass.dist %>/*.map'],
 
 
     //------------------------ MISC --------------------------
@@ -186,7 +197,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('test', ['qunit:unit', 'qunit:integration']);
 
-  grunt.registerTask('build', ['qunit:unit', 'concat', 'comments', 'uglify', 'sass:dev', 'sass:dist', 'usebanner']);
+  grunt.registerTask('build', ['qunit:unit', 'concat', 'comments', 'uglify', 'sass:dev', 'sass:dist', 'usebanner', 'copy', 'clean']);
   
   grunt.registerTask('devel', ['build', 'qunit:integration']);
 
