@@ -68,11 +68,12 @@ var EasyAutocomplete = (function(scope){
 		convertTemplateToMethod = function(template) {
 
 
-			var _fields = template.fields;
+			var _fields = template.fields,
+				buildMethod;
 
 			if (template.type === "description") {
 
-				var buildMethod = genericTemplates.description.method; 
+				buildMethod = genericTemplates.description.method; 
 
 				if (typeof _fields.description === "string") {
 					buildMethod = function(elementValue, element) {
@@ -88,8 +89,6 @@ var EasyAutocomplete = (function(scope){
 			}
 
 			if (template.type === "iconRight") {
-
-				var buildMethod = "";
 
 				if (typeof _fields.iconSrc === "string") {
 					buildMethod = function(elementValue, element) {
@@ -107,8 +106,6 @@ var EasyAutocomplete = (function(scope){
 
 			if (template.type === "iconLeft") {
 
-				var buildMethod = "";
-
 				if (typeof _fields.iconSrc === "string") {
 					buildMethod = function(elementValue, element) {
 						return "<img class='eac-icon' src='" + element[_fields.iconSrc] + "' />" + elementValue;
@@ -123,8 +120,6 @@ var EasyAutocomplete = (function(scope){
 			}
 
 			if(template.type === "links") {
-
-				var buildMethod = "";
 
 				if (typeof _fields.link === "string") {
 					buildMethod = function(elementValue, element) {
