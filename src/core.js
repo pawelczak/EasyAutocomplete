@@ -676,7 +676,12 @@ var EasyAutocomplete = (function(scope) {
 	};
 
 
-	scope.easyAutocompleteHandles = [];
+	//EasyAutocompleteHandles
+	scope.eacHandles = [];
+
+	scope.getHandle = function(id) {
+		return scope.eacHandles[id];
+	};
 
 	scope.inputHasId = function(input) {
 
@@ -702,6 +707,11 @@ var EasyAutocomplete = (function(scope) {
  
 	};
 
+	scope.setHandle = function(handle, id) {
+		scope.eacHandles[id] = handle;
+	};
+
+
 	return scope;
 
 })(EasyAutocomplete || {});
@@ -719,7 +729,7 @@ $.fn.easyAutocomplete = function(options) {
 
 		eacHandle.init();
 
-		EasyAutocomplete.easyAutocompleteHandles[$this.attr("id")] = eacHandle;
+		EasyAutocomplete.setHandle(eacHandle, $this.attr("id"));
 
 	});	
 };
@@ -729,7 +739,7 @@ $.fn.getSelectedItemIndex = function() {
 	var inputId = $(this).attr("id");
 
 	if (inputId !== undefined) {
-		return EasyAutocomplete.easyAutocompleteHandles[inputId].getSelectedItemIndex();
+		return EasyAutocomplete.getHandle(inputId).getSelectedItemIndex();
 	}
 
 	return -1;
@@ -740,7 +750,7 @@ $.fn.getItemData = function(index) {
 	var inputId = $(this).attr("id");
 
 	if (inputId !== undefined && index > -1) {
-		return EasyAutocomplete.easyAutocompleteHandles[inputId].getItemData(index);
+		return EasyAutocomplete.getHandle(inputId).getItemData(index);
 	}
 
 	return -1;
@@ -751,7 +761,7 @@ $.fn.getSelectedItemData = function() {
 	var inputId = $(this).attr("id");
 
 	if (inputId !== undefined) {
-		return EasyAutocomplete.easyAutocompleteHandles[inputId].getSelectedItemData();
+		return EasyAutocomplete.getHandle(inputId).getSelectedItemData();
 	}
 
 	return -1;

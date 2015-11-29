@@ -3,7 +3,7 @@
  * jQuery plugin for autocompletion
  * 
  * @author Łukasz Pawełczak (http://github.com/pawelczak)
- * @version 1.3.3
+ * @version 1.3.4
  * Copyright MIT License: https://github.com/pawelczak/easy-autocomplete/blob/master/LICENSE.txt
  */
 
@@ -1494,9 +1494,11 @@ var EasyAutocomplete = (function(scope) {
 
 
 	};
+	scope.eacHandles = [];
 
-
-	scope.easyAutocompleteHandles = [];
+	scope.getHandle = function(id) {
+		return scope.eacHandles[id];
+	};
 
 	scope.inputHasId = function(input) {
 
@@ -1522,6 +1524,11 @@ var EasyAutocomplete = (function(scope) {
  
 	};
 
+	scope.setHandle = function(handle, id) {
+		scope.eacHandles[id] = handle;
+	};
+
+
 	return scope;
 
 })(EasyAutocomplete || {});
@@ -1539,7 +1546,7 @@ $.fn.easyAutocomplete = function(options) {
 
 		eacHandle.init();
 
-		EasyAutocomplete.easyAutocompleteHandles[$this.attr("id")] = eacHandle;
+		EasyAutocomplete.setHandle(eacHandle, $this.attr("id"));
 
 	});	
 };
@@ -1549,7 +1556,7 @@ $.fn.getSelectedItemIndex = function() {
 	var inputId = $(this).attr("id");
 
 	if (inputId !== undefined) {
-		return EasyAutocomplete.easyAutocompleteHandles[inputId].getSelectedItemIndex();
+		return EasyAutocomplete.getHandle(inputId).getSelectedItemIndex();
 	}
 
 	return -1;
@@ -1560,7 +1567,7 @@ $.fn.getItemData = function(index) {
 	var inputId = $(this).attr("id");
 
 	if (inputId !== undefined && index > -1) {
-		return EasyAutocomplete.easyAutocompleteHandles[inputId].getItemData(index);
+		return EasyAutocomplete.getHandle(inputId).getItemData(index);
 	}
 
 	return -1;
@@ -1571,7 +1578,7 @@ $.fn.getSelectedItemData = function() {
 	var inputId = $(this).attr("id");
 
 	if (inputId !== undefined) {
-		return EasyAutocomplete.easyAutocompleteHandles[inputId].getSelectedItemData();
+		return EasyAutocomplete.getHandle(inputId).getSelectedItemData();
 	}
 
 	return -1;
