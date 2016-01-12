@@ -46,6 +46,10 @@ var EasyAutocomplete = (function(scope) {
 			return selectedElement;
 		};
 
+		this.getItems = function () {
+			return elementsList;
+		}
+
 		this.getItemData = function(index) {
 
 			if (elementsList.length < index || elementsList[index] === undefined) {
@@ -744,6 +748,16 @@ $.fn.getSelectedItemIndex = function() {
 
 	return -1;
 };
+
+$.fn.getItems = function () {
+	var inputId = $(this).attr("id");
+
+	if (inputId !== undefined) {
+		return EasyAutocomplete.getHandle(inputId).getItems();
+	}
+
+	return [];
+}
 
 $.fn.getItemData = function(index) {
 
