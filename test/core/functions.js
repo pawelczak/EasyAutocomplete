@@ -481,6 +481,28 @@ QUnit.test("getSelectedItemIndex should work with categories", function( assert 
 	expect(1);
 });
 
+QUnit.test("getItems - simple data", function( assert ) {
+
+
+	//given
+	var data = ["black", "star"],
+		completerOne = $("#inputOne").easyAutocomplete({
+
+			data: data
+
+		});
+
+	//execute
+	var e = $.Event('keyup');
+	e.keyCode = 50;
+	$("#inputOne").val("more").trigger(e);
+
+
+	//assert
+	assert.equal(data, $("#inputOne").getItems(), "should return the items");
+
+	expect(1);
+});
 
 QUnit.test("getItemData - simple data", function( assert ) {
 	
