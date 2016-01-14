@@ -1574,7 +1574,7 @@ $.fn.getItems = function () {
 		return EasyAutocomplete.getHandle(inputId).getItems();
 	}
 
-	return [];
+	return -1;
 };
 
 $.fn.getItemData = function(index) {

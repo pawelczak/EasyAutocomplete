@@ -499,9 +499,10 @@ QUnit.test("getItems - simple data", function( assert ) {
 
 
 	//assert
-	assert.equal(data, $("#inputOne").getItems(), "should return the items");
+	assert.equal(data.length, $("#inputOne").getItems().length, "should return the items length");
+	assert.deepEqual(data, $("#inputOne").getItems(), "should return the items");
 
-	expect(1);
+	expect(2);
 });
 
 QUnit.test("getItemData - simple data", function( assert ) {
