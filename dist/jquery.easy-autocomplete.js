@@ -1219,12 +1219,25 @@ var EasyAutocomplete = (function(scope) {
 					removeAutocomplete();
 				}
 
+				bindChange();
 				bindKeyup();
 				bindKeydown();
 				bindKeypress();
 				bindFocus();
 				bindBlur();
 			}
+
+			function bindChange() {  
+				$field.change(function (event) { 
+					for (var i in elementsList) { 
+						if ($field.val() == config.get("getValue")(elementsList[i])) { 
+							selectedElement = i;
+							selectElement(selectedElement); 
+							return; 
+						}
+					} 
+				});
+			  }
 
 			function bindKeyup() {
 				$field
@@ -1293,7 +1306,7 @@ var EasyAutocomplete = (function(scope) {
 								}
 								
 							}
-							
+
 
 						break;
 					}
@@ -1574,7 +1587,7 @@ $.fn.getItems = function () {
 		return EasyAutocomplete.getHandle(inputId).getItems();
 	}
 
-	return [];
+	return -1;
 };
 
 $.fn.getItemData = function(index) {
