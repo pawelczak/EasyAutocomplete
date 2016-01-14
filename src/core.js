@@ -372,6 +372,7 @@ var EasyAutocomplete = (function(scope) {
 					removeAutocomplete();
 				}
 
+				bindChange();
 				bindKeyup();
 				bindKeydown();
 				bindKeypress();
@@ -382,6 +383,18 @@ var EasyAutocomplete = (function(scope) {
 			//---------------------------------------------------------------------------
 			//------------------------ SPECIFIC EVENTS BINDIND --------------------------
 			//---------------------------------------------------------------------------
+
+			function bindChange() {  
+				$field.change(function (event) { 
+					for (var i in elementsList) { 
+						if ($field.val() == config.get("getValue")(elementsList[i])) { 
+							selectedElement = i;
+							selectElement(selectedElement); 
+							return; 
+						}
+					} 
+				});
+			  }
 
 			function bindKeyup() {
 				$field
@@ -458,7 +471,7 @@ var EasyAutocomplete = (function(scope) {
 								}
 								
 							}
-							
+
 
 						break;
 					}
