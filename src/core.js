@@ -384,17 +384,17 @@ var EasyAutocomplete = (function(scope) {
 			//------------------------ SPECIFIC EVENTS BINDIND --------------------------
 			//---------------------------------------------------------------------------
 
-			function bindChange() {  
-				$field.change(function (event) { 
-					for (var i in elementsList) { 
-						if ($field.val() == config.get("getValue")(elementsList[i])) { 
+			function bindChange() {
+				$field.focusout(function () {
+					for (var i = 0, length = elementsList.length; i < length; i += 1) {
+						if ($field.val() === config.get("getValue")(elementsList[i])) {
 							selectedElement = i;
-							selectElement(selectedElement); 
-							return; 
+							selectElement(selectedElement);
+							return;
 						}
-					} 
+					}
 				});
-			  }
+			}
 
 			function bindKeyup() {
 				$field

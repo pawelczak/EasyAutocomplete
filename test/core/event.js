@@ -270,6 +270,49 @@ QUnit.test("Event onSelectItemEvent ", function( assert ) {
 	}
 });
 
+QUnit.test("Event onSelectItemEvent should trigger when user writes phrase that matches phrase from suggestion list and then focus out of the input field", function( assert ) {
+	expect(1);
+	
+	//given
+	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "resources/colors_string.json",
+
+			list: {
+				onSelectItemEvent: function() {
+
+					//assert
+					assertList();
+				},
+				onLoadEvent: function() {
+
+					$input.trigger("focusout");				
+				}	
+			}
+			
+	}),
+	$input = $("#inputOne");
+
+
+	//execute
+	completerOne.init();
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$input.val("red").trigger(e);
+	
+
+	QUnit.stop();
+
+	//assert
+
+	function assertList() {
+
+		var elements = $("#inputOne").next().find("ul li");
+
+		assert.equal(3, elements.length, "Response size");
+
+		QUnit.start();	
+	}
+});
+
 QUnit.test("Event onShowListEvent ", function( assert ) {
 	expect(1);
 	
