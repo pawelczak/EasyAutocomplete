@@ -505,6 +505,83 @@ QUnit.test("getItems - simple data", function( assert ) {
 	expect(2);
 });
 
+QUnit.test("getItems - json data", function( assert ) {
+	
+	
+	//given
+	
+	var	completerOne = $("#inputOne").easyAutocomplete({
+
+		url: "resources/colors_object.json",
+
+		getValue: function(element) {
+			return element.name;
+		},
+		
+		list: {
+			onLoadEvent: function() {
+
+				//assert
+				var colors = $("#inputOne").getItems();
+
+				assert.deepEqual(expectedColors, colors, "should return the items");
+
+				QUnit.start();
+			}
+		}
+	}),
+	expectedColors = [{name: "red"}, {name: "yellow"}, {name: "brown"}];
+
+	//execute
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("more").trigger(e);
+
+	QUnit.stop();
+
+	expect(1);
+});
+
+QUnit.test("getItems should work with categories", function( assert ) {
+	
+	
+	//given
+	$("#inputOne").easyAutocomplete({
+			
+			categories: [{
+				listLocation: "fruits"
+			}, {
+				listLocation: "vegetables"
+			}],
+
+			url: "resources/categories.json",
+
+			list: {
+
+				onLoadEvent: function() {
+					
+					//assert
+					var categories = $("#inputOne").getItems();
+
+					assert.deepEqual(expectedCategories, categories, "should return the items");
+
+					QUnit.start();
+				}
+		}
+	}),
+	expectedCategories = ["Apple", "Cherry", "Clementine", "Honeydew melon", "Pepper", "Jerusalem artichoke"];
+
+
+	//execute
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("more").trigger(e);
+
+	QUnit.stop();
+	
+	expect(1);
+});
+
 QUnit.test("getItemData - simple data", function( assert ) {
 	
 	
@@ -533,7 +610,6 @@ QUnit.test("getItemData - simple data", function( assert ) {
 
 	expect(7);
 });
-
 
 QUnit.test("getItemData - json data", function( assert ) {
 	
