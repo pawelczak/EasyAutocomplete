@@ -387,7 +387,7 @@ var EasyAutocomplete = (function(scope) {
 			function bindFocusOut() {
 				$field.focusout(function () {
 					for (var i = 0, length = elementsList.length; i < length; i += 1) {
-						if ($field.val() === config.get("getValue")(elementsList[i])) {
+						if (scope.proccess.match(config.get("getValue")(elementsList[i]), $field.val())) {
 							selectedElement = i;
 							selectElement(selectedElement);
 							return;

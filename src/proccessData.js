@@ -11,6 +11,8 @@ var EasyAutocomplete = (function(scope) {
 
 	scope.proccess = function proccessData(config, listBuilder, phrase) {
 
+		scope.proccess.match = match;
+
 		var list = listBuilder.data,
 			inputPhrase = phrase;//TODO REFACTOR
 
@@ -31,19 +33,8 @@ var EasyAutocomplete = (function(scope) {
 
 					value = config.get("getValue")(list[i]);
 					
-					if (!config.get("list").match.caseSensitive) {
-
-						if (typeof value === "string") {
-							value = value.toLowerCase();	
-						}
-						
-						phrase = phrase.toLowerCase();
-					}
-
-
-					//TODO Regex
-					if (config.get("list").match.method(value, phrase)) {
-						preparedList.push(list[i]);
+					if (match(value, phrase)) {
+						preparedList.push(list[i]);	
 					}
 					
 				}
@@ -53,6 +44,25 @@ var EasyAutocomplete = (function(scope) {
 			}
 
 			return preparedList;
+		}
+
+		function match(value, phrase) {
+
+			if (!config.get("list").match.caseSensitive) {
+
+				if (typeof value === "string") {
+					value = value.toLowerCase();	
+				}
+				
+				phrase = phrase.toLowerCase();
+			}
+
+			//TODO Regex
+			if (config.get("list").match.method(value, phrase)) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 
 		function reduceElementsInList(list) {
@@ -77,8 +87,8 @@ var EasyAutocomplete = (function(scope) {
 		
 	};
 
-	return scope;
 
+	return scope;
 
 
 })(EasyAutocomplete || {});
