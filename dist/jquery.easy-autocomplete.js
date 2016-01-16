@@ -59,14 +59,13 @@ var EasyAutocomplete = (function(scope){
 				match: {
 					enabled: false,
 					caseSensitive: false,
-					method: function(a, b) {
-						a = defaults.getValue(a);
-						b = defaults.getValue(b);
+					method: function(element, phrase) {
 
-						if (a === b){
+						if (element.search(phrase) > -1) {
 							return true;
-						}  
-						return false;
+						} else {
+							return false;
+						}
 					}
 				},
 
@@ -207,14 +206,13 @@ var EasyAutocomplete = (function(scope){
 					options.list.match = {};
 				}
 
-				options.list.match.method = function(a, b) {
-					a = options.getValue(a);
-					b = options.getValue(b);
+				options.list.match.method = function(element, phrase) {
 
-					if (a === b){
+					if (element.search(phrase) > -1) {
 						return true;
-					}  
-					return false;
+					} else {
+						return false;
+					}
 				};
 
 			}
@@ -651,7 +649,7 @@ var EasyAutocomplete = (function(scope) {
 						
 						phrase = phrase.toLowerCase();
 					}
-					if (value.search(phrase) > -1) {
+					if (config.get("list").match.method(value, phrase)) {
 						preparedList.push(list[i]);
 					}
 					

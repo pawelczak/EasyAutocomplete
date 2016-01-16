@@ -306,3 +306,110 @@ QUnit.test("Set default value", function( assert ) {
 	expect(1);
 });
 
+QUnit.test("Sort - Reverse sorted list", function( assert ) {
+	expect(4);
+	
+	//given
+	$("#inputOne").easyAutocomplete({
+
+		url: "resources/colors_string.json",
+
+		list: {
+	 		sort: {
+	 			enabled: true,
+	 			method:  function(a, b) {
+						//Reverse alphabeticall sort
+						if (a < b) {
+							return 1;
+						}
+						if (a > b) {
+							return -1;
+						}
+						return 0;
+					}
+				}
+	 	},
+
+		ajaxCallback: function() {
+
+			//assert
+			
+			assertList();
+		}
+	});
+
+
+	//execute
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("c").trigger(e);
+
+
+	QUnit.stop();
+
+
+	//assert
+
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul li");
+
+			assert.equal(3, elements.length, "Response size");
+			assert.equal("yellow", elements.eq(0).find("div").text(), "First element value");
+			assert.equal("red", elements.eq(1).find("div").text(), "Second element value");
+			assert.equal("brown", elements.eq(2).find("div").text(), "Third element value");
+			
+			QUnit.start();	
+	}
+});
+
+
+QUnit.test("Match - suggestions match start of phrase", function( assert ) {
+	expect(2);
+	
+	//given
+	$("#inputOne").easyAutocomplete({
+
+		url: "resources/colors_string.json",
+
+		list: {
+	 		match: {
+	 			enabled: true,
+	 			method:  function(element, phrase) {
+					if(element.indexOf(phrase) === 0) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			}
+	 	},
+
+		ajaxCallback: function() {
+
+			//assert
+			
+			assertList();
+		}
+	});
+
+
+	//execute
+	var e = $.Event('keyup');
+	e.keyCode = 50; 
+	$("#inputOne").val("r").trigger(e);
+
+
+	QUnit.stop();
+
+
+	//assert
+
+	function assertList() {
+		var elements = $("#inputOne").next().find("ul li");
+
+			assert.equal(1, elements.length, "Response size");
+			assert.equal("red", elements.eq(0).find("div").text(), "First element value");
+			
+			QUnit.start();	
+	}
+});

@@ -237,6 +237,45 @@ QUnit.test("match - simple list", function( assert ) {
 
 });
 
+QUnit.test("match - simple list - suggestions should start with phrase", function( assert ) {
+	expect(3);
+	
+	//given
+	var options = {
+			list: {
+				match: {
+					enabled: true,
+					method: function(element, phrase) {
+						if(element.indexOf(phrase) === 0) {
+							return true;
+						} else {
+							return false;
+						}
+					}
+				}
+			}
+		},
+		unsortedList = ["lion", "wolf", "dolphin", "leopard"],
+		expectedList = ["lion", "leopard"],
+
+		config = new EasyAutocomplete.Configuration(options),
+
+		listBuilder = {};
+
+	listBuilder.data = unsortedList;
+
+
+	//execute
+	var actuaList = EasyAutocomplete.proccess(config, listBuilder, "l");
+
+
+	//assert
+	assert.equal(2, actuaList.length, "Passed - list size");
+	assert.equal(expectedList[0], actuaList[0], "Passed - equal first");
+	assert.equal(expectedList[1], actuaList[1], "Passed - equal second");
+
+});
+
 QUnit.test("Sort - Object", function( assert ) {
 	expect(5);
 	
@@ -391,19 +430,7 @@ QUnit.test("match - Json", function( assert ) {
 			},
 			list: {
 				match: {
-					enabled: true,
-					method: function(a, b) {
-						var a = options.getValue(a),
-							b = options.getValue(b);
-
-						if (a < b) {
-							return -1;
-						}
-						if (a > b) {
-							return 1;
-						}
-						return 0;
-					}
+					enabled: true
 				}
 			}
 		},
@@ -436,19 +463,7 @@ QUnit.test("match & Sorting- Json", function( assert ) {
 			},
 			list: {
 				match: {
-					enabled: true,
-					method: function(a, b) {
-						var a = options.getValue(a),
-							b = options.getValue(b);
-
-						if (a < b) {
-							return -1;
-						}
-						if (a > b) {
-							return 1;
-						}
-						return 0;
-					}
+					enabled: true
 				},
 				sort: {
 					enabled: true,

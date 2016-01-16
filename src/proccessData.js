@@ -40,8 +40,9 @@ var EasyAutocomplete = (function(scope) {
 						phrase = phrase.toLowerCase();
 					}
 
+
 					//TODO Regex
-					if (value.search(phrase) > -1) {
+					if (config.get("list").match.method(value, phrase)) {
 						preparedList.push(list[i]);
 					}
 					
