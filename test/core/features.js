@@ -413,3 +413,4 @@ QUnit.test("Match - suggestions match start of phrase", function( assert ) {
 			QUnit.start();	
 	}
 });
+
