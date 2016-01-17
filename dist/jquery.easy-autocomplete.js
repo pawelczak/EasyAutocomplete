@@ -1238,8 +1238,21 @@ var EasyAutocomplete = (function(scope) {
 
 			function bindFocusOut() {
 				$field.focusout(function () {
+
+					var fieldValue = $field.val(),
+						phrase;
+
+					if (!config.get("list").match.caseSensitive) {
+						fieldValue = fieldValue.toLowerCase();
+					}
+
 					for (var i = 0, length = elementsList.length; i < length; i += 1) {
-						if (scope.proccess.match(config.get("getValue")(elementsList[i]), $field.val())) {
+
+						if (!config.get("list").match.caseSensitive) {
+							phrase = config.get("getValue")(elementsList[i]);
+						}
+
+						if (phrase === fieldValue) {
 							selectedElement = i;
 							selectElement(selectedElement);
 							return;
