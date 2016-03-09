@@ -314,46 +314,135 @@ QUnit.test("Event onSelectItemEvent should trigger when user writes phrase that 
 });
 
 QUnit.test("Event onSelectItemEvent should trigger when user writes phrase that matches phrase from suggestion list and then focus out of the input field - include case sensitivity", function( assert ) {
-	expect(1);
-	
-	//given
-	var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "resources/colors_string.json",
+    expect(1);
 
-			list: {
-				onSelectItemEvent: function() {
+    //given
+    var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "resources/colors_string.json",
 
-					//assert
-					assertList();
-				},
-				onLoadEvent: function() {
+            list: {
+                onSelectItemEvent: function() {
 
-					$input.trigger("focusout");				
-				}	
-			}
-			
-	}),
-	$input = $("#inputOne");
+                    //assert
+                    assertList();
+                },
+                onLoadEvent: function() {
+
+                    $input.trigger("focusout");
+                }
+            }
+
+        }),
+        $input = $("#inputOne");
 
 
-	//execute
-	completerOne.init();
-	var e = $.Event('keyup');
-	e.keyCode = 50; 
-	$input.val("ReD").trigger(e);
-	
+    //execute
+    completerOne.init();
+    var e = $.Event('keyup');
+    e.keyCode = 50;
+    $input.val("ReD").trigger(e);
 
-	QUnit.stop();
 
-	//assert
+    QUnit.stop();
 
-	function assertList() {
+    //assert
 
-		var elements = $("#inputOne").next().find("ul li");
+    function assertList() {
 
-		assert.equal(3, elements.length, "Response size");
+        var elements = $("#inputOne").next().find("ul li");
 
-		QUnit.start();	
-	}
+        assert.equal(3, elements.length, "Response size");
+
+        QUnit.start();
+    }
+});
+
+QUnit.test("Event onSelectItemEvent should trigger when user writes phrase that matches phrase from suggestion list and then focus out of the input field - include case sensitivity false", function( assert ) {
+    expect(1);
+
+    //given
+    var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "resources/colors_caps_string.json",
+
+            list: {
+                onSelectItemEvent: function() {
+
+                    //assert
+                    assertList();
+                },
+                onLoadEvent: function() {
+
+                    $input.trigger("focusout");
+                },
+                match: {
+                    caseSensitive: false,
+                    enabled: true
+                }
+            }
+
+        }),
+        $input = $("#inputOne");
+
+
+    //execute
+    completerOne.init();
+    var e = $.Event('keyup');
+    e.keyCode = 50;
+    $input.val("red").trigger(e);
+
+
+    QUnit.stop();
+
+    //assert
+
+    function assertList() {
+
+        var elements = $("#inputOne").next().find("ul li");
+
+        assert.equal(1, elements.length, "Response size");
+
+        QUnit.start();
+    }
+});
+
+QUnit.test("Event onSelectItemEvent should trigger when user writes phrase that matches phrase from suggestion list and then focus out of the input field - include case sensitivity true", function( assert ) {
+    expect(1);
+
+    //given
+    var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "resources/colors_caps_string.json",
+
+            list: {
+                onSelectItemEvent: function() {
+
+                },
+                onLoadEvent: function() {
+
+                    $input.trigger("focusout");
+
+                    QUnit.start();
+                },
+                match: {
+                    caseSensitive: true,
+                    enabled: true
+                }
+            }
+
+        }),
+        $input = $("#inputOne");
+
+
+    //execute
+    completerOne.init();
+    var e = $.Event('keyup');
+    e.keyCode = 50;
+    $input.val("red").trigger(e);
+
+
+    QUnit.stop();
+
+    //assert
+    var elements = $("#inputOne").next().find("ul li");
+
+    assert.equal(0, elements.length, "Response size");
+
 });
 
 QUnit.test("Event onShowListEvent ", function( assert ) {

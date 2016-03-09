@@ -40,7 +40,7 @@ QUnit.test("ListBuilder - init", function( assert ) {
 				case "listLocation":
 					return function(arg) {
 						return data;
-					}
+					};
 				break;
 
 				case "getValue": 
@@ -53,7 +53,7 @@ QUnit.test("ListBuilder - init", function( assert ) {
 
 				default:
 				break;
-			};
+			}
 		}
 		
 	};

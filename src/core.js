@@ -396,8 +396,9 @@ var EasyAutocomplete = (function(scope) {
 
 					for (var i = 0, length = elementsList.length; i < length; i += 1) {
 
+						phrase = config.get("getValue")(elementsList[i]);
 						if (!config.get("list").match.caseSensitive) {
-							phrase = config.get("getValue")(elementsList[i]);
+							phrase = phrase.toLowerCase();
 						}
 
 						if (phrase === fieldValue) {
