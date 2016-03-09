@@ -115,6 +115,7 @@ var EasyAutocomplete = (function(scope){
 
 		};
 		
+		var externalObjects = ["ajaxSettings", "template"];
 
 		this.get = function(propertyName) {
 			return defaults[propertyName];
@@ -341,7 +342,6 @@ var EasyAutocomplete = (function(scope){
 		//Normally invoke this function with console as consol
 		function printPropertiesThatDoesntExist(consol, optionsToCheck) {
 			
-
 			checkPropertiesIfExist(defaults, optionsToCheck);
 
 			function checkPropertiesIfExist(source, target) {
@@ -350,26 +350,10 @@ var EasyAutocomplete = (function(scope){
 						consol.log("Property '" + property + "' does not exist in EasyAutocomplete options API.");		
 					}
 
-					if (typeof source[property] === "object" && !externalObject(property)) {
+					if (typeof source[property] === "object" && $.inArray(property, externalObjects) === -1) {
 						checkPropertiesIfExist(source[property], target[property]);
 					}
 				}	
-			}
-
-			function externalObject(property) {
-				var notTestedObjects = ["ajaxSettings", "template"];
-
-				Array.prototype.contains = function(obj) {
-					var i = this.length;
-				    while (i--) {
-				        if (this[i] === obj) {
-				            return true;
-				        }
-				    }
-				    return false;
-				};
-
-				return notTestedObjects.contains(property);
 			}
 		}
 	};
