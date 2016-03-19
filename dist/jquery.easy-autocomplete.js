@@ -55,6 +55,7 @@ var EasyAutocomplete = (function(scope){
 				maxNumberOfElements: 6,
 
 				hideOnEmptyPhrase: true,
+				displayOnFocus: false,
 
 				match: {
 					enabled: false,
@@ -1469,11 +1470,13 @@ var EasyAutocomplete = (function(scope) {
 
 			function bindFocus() {
 				$field.focus(function() {
-
-					if ($field.val() !== "" && elementsList.length > 0) {
+					if (config.get("list").displayOnFocus) {
+						$field.trigger($.Event("keyup", {keyCode: 42}))
+					}
+					else if ($field.val() !== "" && elementsList.length > 0) {
 						
 						selectedElement = -1;
-						showContainer();	
+						showContainer();
 					}
 									
 				});
