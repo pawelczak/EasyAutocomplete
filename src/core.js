@@ -462,7 +462,7 @@ var EasyAutocomplete = (function(scope) {
 
 						default:
 
-							if (event.keyCode > 40 || event.keyCode === 8) {
+							if (event.keyCode > 40 || event.keyCode === 8 || event.keyCode === 32) {
 
 								var inputPhrase = $field.val();
 
