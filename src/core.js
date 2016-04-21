@@ -191,18 +191,18 @@ var EasyAutocomplete = (function(scope) {
 									var animationTime = config.get("list").showAnimation.time,
 										callback = config.get("list").showAnimation.callback;
 
-									$elements_container.find("ul").slideDown(animationTime, callback);
+									$elements_container.slideDown(animationTime, callback);
 								break;
 
 								case "fade":
 									var animationTime = config.get("list").showAnimation.time,
 										callback = config.get("list").showAnimation.callback;
 
-									$elements_container.find("ul").fadeIn(animationTime), callback;
+									$elements_container.fadeIn(animationTime), callback;
 								break;
 
 								default:
-									$elements_container.find("ul").show();
+									$elements_container.show();
 								break;
 							}
 
@@ -218,18 +218,18 @@ var EasyAutocomplete = (function(scope) {
 									var animationTime = config.get("list").hideAnimation.time,
 										callback = config.get("list").hideAnimation.callback;
 
-									$elements_container.find("ul").slideUp(animationTime, callback);
+									$elements_container.slideUp(animationTime, callback);
 								break;
 
 								case "fade":
 									var animationTime = config.get("list").hideAnimation.time,
 										callback = config.get("list").hideAnimation.callback;
 
-									$elements_container.find("ul").fadeOut(animationTime, callback);
+									$elements_container.fadeOut(animationTime, callback);
 								break;
 
 								default:
-									$elements_container.find("ul").hide();
+									$elements_container.hide();
 								break;
 							}
 
