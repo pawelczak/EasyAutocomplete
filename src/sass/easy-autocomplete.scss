@@ -409,6 +409,14 @@ $purple: #c7c0de;
                     font-weight: normal;
                 }
             }
+            &.hover{
+                background: none repeat scroll 0 0 rgba(158, 158, 158, 0.48);
+                cursor: pointer;
+
+                div {
+                    font-weight: normal;
+                }
+            }
 
             div {
                 display: block;

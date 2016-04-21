@@ -242,6 +242,11 @@ var EasyAutocomplete = (function(scope) {
 
 							config.get("list").onSelectItemEvent();
 						})
+						.on("hoverElement.eac", function() {
+							$elements_container.find("ul li").removeClass("hover");
+							$elements_container.find("ul li").eq(hoveredElement).addClass("hover");
+							//config.get("list").onSelectItemEvent();
+						})
 						.on("loadElements.eac", function(event, listBuilders, phrase) {
 			
 
@@ -363,7 +368,9 @@ var EasyAutocomplete = (function(scope) {
 		function bindEvents() {
 
 			bindAllEvents();
-
+			//To load at first time
+			loadData("");
+			hideContainer();
 			//------------------------ FUNCTIONS --------------------------					
 			
 
@@ -378,6 +385,7 @@ var EasyAutocomplete = (function(scope) {
 				bindKeypress();
 				bindFocus();
 				bindBlur();
+				bindMouseDown();
 			}
 
 			//---------------------------------------------------------------------------
@@ -462,7 +470,8 @@ var EasyAutocomplete = (function(scope) {
 
 						default:
 
-							if (event.keyCode > 40 || event.keyCode === 8) {
+							// code 32 for support when ending typing chinese with space key
+							if (event.keyCode > 40 || event.keyCode === 8  || event.keyCode === 32) {
 
 								var inputPhrase = $field.val();
 
@@ -664,6 +673,15 @@ var EasyAutocomplete = (function(scope) {
 						
 						selectedElement = -1;
 						hideContainer();
+					}, 250);
+				});
+			}
+
+			function bindMouseDown() {
+				$field.mousedown(function() {
+					setTimeout(function() {
+						selectedElement = -1;
+						showContainer();
 					}, 250);
 				});
 			}
