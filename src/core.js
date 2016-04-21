@@ -294,9 +294,8 @@ var EasyAutocomplete = (function(scope) {
 												config.get("list").onChooseEvent();
 											})
 											.mouseover(function() {
-
-												selectedElement = itemCounter;
-												selectElement(itemCounter);	
+												hoveredElement = itemCounter;
+												hoverElement(itemCounter);
 
 												config.get("list").onMouseOverEvent();
 											})
@@ -711,6 +710,11 @@ var EasyAutocomplete = (function(scope) {
 		function selectElement(index) {
 			
 			$container.trigger("selectElement.eac", index);
+		}
+
+		function hoverElement(index) {
+
+			$container.trigger("hoverElement.eac", index);
 		}
 
 		function loadElements(list, phrase) {
