@@ -28,7 +28,10 @@
     "url": "https://github.com/pawelczak/easy-autocomplete/blob/master/LICENSE.txt"
   },
   "scripts": {
-    "test": "grunt test"
+    "grunt": "grunt",
+    "build": "npm run grunt build",
+    "devel": "npm run grunt devel",
+    "test": "npm run grunt test"
   },
   "dependencies": {
     "jquery": "*"
