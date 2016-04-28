@@ -55,7 +55,6 @@ var EasyAutocomplete = (function(scope){
 				maxNumberOfElements: 6,
 
 				hideOnEmptyPhrase: true,
-				displayOnFocus: false,
 
 				match: {
 					enabled: false,
@@ -1470,13 +1469,11 @@ var EasyAutocomplete = (function(scope) {
 
 			function bindFocus() {
 				$field.focus(function() {
-					if (config.get("list").displayOnFocus) {
-						$field.trigger($.Event("keyup", {keyCode: 42}))
-					}
-					else if ($field.val() !== "" && elementsList.length > 0) {
+
+					if ($field.val() !== "" && elementsList.length > 0) {
 						
 						selectedElement = -1;
-						showContainer();
+						showContainer();	
 					}
 									
 				});
@@ -1560,64 +1557,67 @@ var EasyAutocomplete = (function(scope) {
 
 })(EasyAutocomplete || {});
 
+(function($) {
 
-$.fn.easyAutocomplete = function(options) {
+	$.fn.easyAutocomplete = function(options) {
 
-	return this.each(function() {
-		var $this = $(this),
-			eacHandle = new EasyAutocomplete.main($this, options);
+		return this.each(function() {
+			var $this = $(this),
+				eacHandle = new EasyAutocomplete.main($this, options);
 
-		if (!EasyAutocomplete.inputHasId($this)) {
-			EasyAutocomplete.assignRandomId($this);
+			if (!EasyAutocomplete.inputHasId($this)) {
+				EasyAutocomplete.assignRandomId($this);
+			}
+
+			eacHandle.init();
+
+			EasyAutocomplete.setHandle(eacHandle, $this.attr("id"));
+
+		});
+	};
+
+	$.fn.getSelectedItemIndex = function() {
+
+		var inputId = $(this).attr("id");
+
+		if (inputId !== undefined) {
+			return EasyAutocomplete.getHandle(inputId).getSelectedItemIndex();
 		}
 
-		eacHandle.init();
+		return -1;
+	};
 
-		EasyAutocomplete.setHandle(eacHandle, $this.attr("id"));
+	$.fn.getItems = function () {
 
-	});	
-};
+		var inputId = $(this).attr("id");
 
-$.fn.getSelectedItemIndex = function() {
+		if (inputId !== undefined) {
+			return EasyAutocomplete.getHandle(inputId).getItems();
+		}
 
-	var inputId = $(this).attr("id");
+		return -1;
+	};
 
-	if (inputId !== undefined) {
-		return EasyAutocomplete.getHandle(inputId).getSelectedItemIndex();
-	}
+	$.fn.getItemData = function(index) {
 
-	return -1;
-};
+		var inputId = $(this).attr("id");
 
-$.fn.getItems = function () {
+		if (inputId !== undefined && index > -1) {
+			return EasyAutocomplete.getHandle(inputId).getItemData(index);
+		}
 
-	var inputId = $(this).attr("id");
+		return -1;
+	};
 
-	if (inputId !== undefined) {
-		return EasyAutocomplete.getHandle(inputId).getItems();
-	}
+	$.fn.getSelectedItemData = function() {
 
-	return -1;
-};
+		var inputId = $(this).attr("id");
 
-$.fn.getItemData = function(index) {
+		if (inputId !== undefined) {
+			return EasyAutocomplete.getHandle(inputId).getSelectedItemData();
+		}
 
-	var inputId = $(this).attr("id");
+		return -1;
+	};
 
-	if (inputId !== undefined && index > -1) {
-		return EasyAutocomplete.getHandle(inputId).getItemData(index);
-	}
-
-	return -1;
-};
-
-$.fn.getSelectedItemData = function() {
-
-	var inputId = $(this).attr("id");
-
-	if (inputId !== undefined) {
-		return EasyAutocomplete.getHandle(inputId).getSelectedItemData();
-	}
-
-	return -1;
-};
+})(jQuery);
