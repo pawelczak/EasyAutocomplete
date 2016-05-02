@@ -23,10 +23,7 @@
   "bugs": {
     "url": "https://github.com/pawelczak/EasyAutocomplete/issues"
   },
-  "license": {
-    "type": "MIT",
-    "url": "https://github.com/pawelczak/easy-autocomplete/blob/master/LICENSE.txt"
-  },
+  "license": "MIT",
   "scripts": {
     "grunt": "grunt",
     "build": "npm run grunt build",
