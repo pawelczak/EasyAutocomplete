@@ -29,7 +29,6 @@
     "build": "npm run grunt build",
     "devel": "npm run grunt devel",
     "test": "npm run grunt test",
-
     "preversion": "npm run test",
     "version": "npm run build && git add -A .",
     "postversion": "git push && git push --follow-tags"
