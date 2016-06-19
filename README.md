@@ -19,6 +19,7 @@ If you are interested in using this jQuery autocomplete plugin on your site, you
 
 ## Quick example
 
+Javascript:
 ```Javascript
 var options = {
 
@@ -30,17 +31,18 @@ var options = {
 $("#countries").easyAutocomplete(options);
 ```
 
+JSON:
 ```JSON
 [
   {"name": "Afghanistan", "code": "AF"},
   {"name": "Aland Islands", "code": "AX"},
   {"name": "Albania", "code": "AL"},
   {"name": "Algeria", "code": "DZ"},
-  {"name": "American Samoa", "code": "AS"},
-  ...
+  {"name": "American Samoa", "code": "AS"}
  ]
 ```
 
+HTML:
 ```HTML
 <input id="countries"/>
 ```
