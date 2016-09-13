@@ -622,19 +622,24 @@ var EasyAutocomplete = (function(scope) {
 		        	})
 					.keydown(function(event) {
 
-						if (event.keyCode === 13 && selectedElement > -1) {
+						if ((event.keyCode === 13 || event.keyCode === 9) && selectedElement > -1) {
 
-							//enter
+							//enter or tab
 
 							$field.val(config.get("getValue")(elementsList[selectedElement]));
 
-							config.get("list").onKeyEnterEvent();
+							if (event.keyCode === 13) {
+								config.get("list").onKeyEnterEvent();
+							}
 							config.get("list").onChooseEvent();
 
 							selectedElement = -1;
 							hideContainer();
 
-							event.preventDefault();
+							// Prevent form submission on enter. Allow focus change on tab
+							if (event.keyCode === 13) {
+								event.preventDefault();
+							}
 						}
 					});
 			}
