@@ -286,7 +286,7 @@ var EasyAutocomplete = (function(scope) {
 												selectElement(itemCounter);
 
 												config.get("list").onClickEvent();
-												config.get("list").onChooseEvent();
+												config.get("list").onChooseEvent($field);
 											})
 											.mouseover(function() {
 
@@ -629,7 +629,7 @@ var EasyAutocomplete = (function(scope) {
 							$field.val(config.get("getValue")(elementsList[selectedElement]));
 
 							config.get("list").onKeyEnterEvent();
-							config.get("list").onChooseEvent();
+							config.get("list").onChooseEvent($field);
 
 							selectedElement = -1;
 							hideContainer();
