@@ -32,8 +32,9 @@ var EasyAutocomplete = (function(scope) {
 				for(var i = 0; i < configuration.get("categories").length; i += 1) {
 
 					var builder = convertToListBuilder(configuration.get("categories")[i], data);
-
-					listBuilder.push(builder);
+					if (builder.data){
+						listBuilder.push(builder);
+					}
 				}
 
 			} 
