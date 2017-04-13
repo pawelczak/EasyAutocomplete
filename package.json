@@ -14,7 +14,8 @@
   ],
   "main": "dist/jquery.easy-autocomplete.js",
   "contributors": [
-    "Łukasz Pawełczak <lukaspawelczak@gmail.com> (http://github.com/pawelczak)"
+    "Łukasz Pawełczak <lukaspawelczak@gmail.com> (http://github.com/pawelczak)",
+    "Daniel Morgenstern (init) <daniel.morgenstern@init.de> (https://github.com/dmorgenstern-init)"
   ],
   "repository": {
     "type": "git",
