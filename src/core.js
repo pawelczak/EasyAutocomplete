@@ -23,6 +23,7 @@ var EasyAutocomplete = (function(scope) {
 			$container = "",
 			elementsList = [],
 			selectedElement = -1,
+			remoteRequestCount = 0,
 			requestDelayTimeoutId;
 
 		scope.consts = consts;
@@ -493,11 +494,12 @@ var EasyAutocomplete = (function(scope) {
 
 					function loadData(inputPhrase) {
 
-
 						if (inputPhrase.length < config.get("minCharNumber")) {
 							return;
 						}
-
+						
+						remoteRequestCount += 1;
+						var capturedRequestCount = remoteRequestCount;
 
 						if (config.get("data") !== "list-required") {
 
@@ -529,7 +531,6 @@ var EasyAutocomplete = (function(scope) {
 							settings.dataType = config.get("dataType");
 						}
 
-
 						if (settings.url !== undefined && settings.url !== "list-required") {
 
 							settings.url = settings.url(inputPhrase);
@@ -545,9 +546,7 @@ var EasyAutocomplete = (function(scope) {
 									
 									listBuilders = listBuilderService.convertXml(listBuilders);
 
-
-									//TODO
-									if (checkInputPhraseMatchResponse(inputPhrase, data)) {
+									if (capturedRequestCount === remoteRequestCount) {
 
 										listBuilders = listBuilderService.processData(listBuilders, inputPhrase);
 
@@ -585,28 +584,7 @@ var EasyAutocomplete = (function(scope) {
 
 							return settings;
 						}
-
-						function checkInputPhraseMatchResponse(inputPhrase, data) {
-
-							if (config.get("matchResponseProperty") !== false) {
-								if (typeof config.get("matchResponseProperty") === "string") {
-									return (data[config.get("matchResponseProperty")] === inputPhrase);
-								}
-
-								if (typeof config.get("matchResponseProperty") === "function") {
-									return (config.get("matchResponseProperty")(data) === inputPhrase);
-								}
-
-								return true;
-							} else {
-								return true;
-							}
-
-						}
-
 					}
-
-
 				});
 			}
 

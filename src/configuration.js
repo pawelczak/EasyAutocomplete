@@ -25,8 +25,6 @@ var EasyAutocomplete = (function(scope){
 
 			ajaxCallback: function() {},
 
-			matchResponseProperty: false,
-
 			list: {
 				sort: {
 					enabled: false,
