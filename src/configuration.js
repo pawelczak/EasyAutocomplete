@@ -53,12 +53,24 @@ var EasyAutocomplete = (function(scope){
 					enabled: false,
 					caseSensitive: false,
 					method: function(element, phrase) {
+						let phraseSplitted = phrase.split( ' ' )
+						,	matchFlagAcc = [];
 
-						if (element.search(phrase) > -1) {
-							return true;
-						} else {
-							return false;
+						for( var i = 0; i < phraseSplitted.length; ++i ) {
+							if ( ~element.indexOf( phraseSplitted[ i ] ) ) {
+								matchFlagAcc.push( true );
+							} else {
+								matchFlagAcc.push( false );
+							}
 						}
+
+						for( var i = 0; i < matchFlagAcc.length; ++i ) {
+							if ( !matchFlagAcc[ i ] ) {
+								return false;
+							}
+						}
+
+						return true;
 					}
 				},
 
