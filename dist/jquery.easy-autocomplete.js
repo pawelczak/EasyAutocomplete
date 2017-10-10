@@ -1033,6 +1033,7 @@ var EasyAutocomplete = (function(scope) {
 				$elements_container
 						.attr("id", getContainerId())
             .attr("role", "listbox")
+            .attr("aria-live", "assertive")
 						.prepend($("<ul>"));
 
 
