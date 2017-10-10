@@ -977,6 +977,9 @@ var EasyAutocomplete = (function(scope) {
 			
 			createWrapper();
 			createContainer();	
+      
+      $field.attr("aria-autocomplete", "list");
+      $field.attr("aria-owns", getContainerId());
 
 			$container = $("#" + getContainerId());
 			if (config.get("placeholder")) {
@@ -1029,6 +1032,8 @@ var EasyAutocomplete = (function(scope) {
 
 				$elements_container
 						.attr("id", getContainerId())
+            .attr("role", "listbox")
+            .attr("aria-live", "assertive")
 						.prepend($("<ul>"));
 
 
@@ -1090,8 +1095,13 @@ var EasyAutocomplete = (function(scope) {
 
 						})
 						.on("selectElement.eac", function() {
-							$elements_container.find("ul li").removeClass("selected");
-							$elements_container.find("ul li").eq(selectedElement).addClass("selected");
+							$elements_container.find("ul li")
+                .removeClass("selected")
+                .attr("aria-selected", "false");
+                
+              $elements_container.find("ul li").eq(selectedElement)
+                .addClass("selected")
+                .attr("aria-selected", "true");
 
 							config.get("list").onSelectItemEvent();
 						})
@@ -1120,7 +1130,7 @@ var EasyAutocomplete = (function(scope) {
 								}
 
 								for(var i = 0, listDataLength = listData.length; i < listDataLength && counter < listBuilders[builderIndex].maxListSize; i += 1) {
-									$item = $("<li><div class='eac-item'></div></li>");
+									$item = $("<li role='option' aria-selected='false'><div class='eac-item'></div></li>");
 									
 
 									(function() {
