@@ -308,7 +308,7 @@ var EasyAutocomplete = (function(scope) {
 							}
 
 							if (config.get("noResults") && counter == 0) {
-								$listContainer.append("<li><div class='eac-item'>" + config.get("noResults + </div></li>"));
+								$listContainer.append("<li><div class='eac-item'>" + config.get("noResults") + "</div></li>");
 							}
 
 							$elements_container.append($listContainer);
