@@ -2,7 +2,7 @@
   "name": "easy-autocomplete",
   "title": "jQuery plugin for autocompletion",
   "author": "Łukasz Pawełczak (http://github.com/pawelczak)",
-  "version": "1.3.5",
+  "version": "1.3.6",
   "keywords": [
     "jquery",
     "jquery-plugin",

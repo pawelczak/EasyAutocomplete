@@ -1,7 +1,7 @@
 {
   "name": "EasyAutocomplete",
   "description": "EasyAutocomplete is a jQuery autocomplete plugin. Easy to create autocomplete dropdown list for text input fields",
-  "version": "1.3.5",
+  "version": "1.3.6",
   "authors": [
     "Łukasz Pawełczak <lukaspawelczak@gmail.com>"
   ],
