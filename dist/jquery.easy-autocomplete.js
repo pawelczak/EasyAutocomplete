@@ -426,14 +426,16 @@ var EasyAutocomplete = (function(scope) {
 			var listBuilder = [],
 				builder = {};
 
-        builder.data = configuration.get("listLocation")(data);
-				builder.getValue = configuration.get("getValue");
-				builder.maxListSize = configuration.get("list").maxNumberOfElements;
+      var loaded_results_num;
 
-	      num_records = builder.data.length;
-	      //console.log('Builder data');
-	      //printObject(builder.data);
-				listBuilder.push(builder);
+      builder.data = configuration.get("listLocation")(data);
+			builder.getValue = configuration.get("getValue");
+			builder.maxListSize = configuration.get("list").maxNumberOfElements;
+
+      num_records = builder.data.length;
+      //console.log('Builder data');
+      //printObject(builder.data);
+			listBuilder.push(builder);
 
 			return listBuilder;
 		};
@@ -1073,6 +1075,7 @@ var EasyAutocomplete = (function(scope) {
 								break;
 
 								default:
+                  scroll_enabled = true;
 									$elements_container.find("ul").show();
 								break;
 							}
@@ -1143,7 +1146,7 @@ var EasyAutocomplete = (function(scope) {
 
 									(function() {
 										var j = i,
-											itemCounter = counter,
+											itemCounter = counter + loaded_results_num,
 											elementsValue = listBuilders[builderIndex].getValue(listData[j]);
 
 										$item.find(" > div")
@@ -1175,6 +1178,7 @@ var EasyAutocomplete = (function(scope) {
 								}
 							}
 
+              loaded_results_num += listBuilders[0].data.length;
               console.log('Number of to-be loaded records: ' + listBuilders[0].data.length);
 							if(listBuilders[0].data.length>0){
                 console.log('Number of records: ' + num_records);
@@ -1294,6 +1298,7 @@ var EasyAutocomplete = (function(scope) {
 
 						case 27:
 
+              scroll_enabled = false;
 							hideContainer();
 							loseFieldFocus();
 						break;
