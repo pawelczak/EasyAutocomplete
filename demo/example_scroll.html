@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>EasyAutocomplete categories</title>
+		<link href="../dist/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
+		<link href="../dist/easy-autocomplete.themes.min.css" rel="stylesheet" type="text/css">
+		<link href='//fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,600,600italic&amp;subset=latin,cyrillic-ext,greek-ext,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+		<script src="../lib/jquery-1.11.2.min.js"></script>
+    <script>
+    //ESC
+    //Infinite scroll
+    //Global variables
+    var to_append = false; //Appending content
+    var global_list = []; //List elements to append
+    var delta_counter = 0; //Defining the offset for further queries
+    var scroll_enabled = true; //Managing the scrolling behaviour
+    var ajax_url = ''; //URL to fetch via AJAX
+    var delta = 25; //Amount of records to retrieve
+    var num_records = 0; //Amount of recrords retrieved
+    var offset_rows; //To make it global
+
+    function initVars(){
+      delta_counter = 0; //Reseting for new string search
+      offset_rows = 0; //
+    }
+
+                   jQuery(function($) {
+                        $('#eac-container-buscador').on('scroll', function() {
+                          //console.log('jQuery scroll_enable: ', scroll_enabled);
+                          //console.log('jQuery to_append: ', to_append);
+                          if(scroll_enabled === true){
+                            console.log('Scroll detected!');
+                            if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+                              to_append = true; //Appending to the existing list
+                              //Call query to fetch data and parse it as <li>
+                              console.log('Inside scrolling, the offset is' + offset_rows);
+                              offset_rows = delta*delta_counter + delta;
+                              console.log('Inside scrolling, the offset is' + offset_rows);
+
+                              delta_counter++;
+
+                              ajax_url = $SCRIPT_ROOT + '_get_autocomplete?word=' + $('#buscador').val() + '&offset=' + offset_rows;
+
+                                $("#buscador").easyAutocomplete(options);
+                                console.log("Launching from scroll");
+                                $('#buscador').keyup();
+    }}
+                          })
+                        });
+
+    </script>
+		<script src="../dist/jquery.easy-autocomplete.js" type="text/javascript" ></script>
+	</head>
+	<body>
+
+		<h1>EasyAutocomplete - categories infinite scroll</h1>
+
+    <input id="buscador" class="form-control" name="search_words" placeholder="¿Qué quieres buscar?" type="text">
+    </div>
+		<script>
+		$("#buscador").easyAutocomplete(options);
+
+		</script>
+
+	</body>
+
+</html>
