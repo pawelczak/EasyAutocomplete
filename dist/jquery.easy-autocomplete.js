@@ -1085,6 +1085,7 @@ var EasyAutocomplete = (function(scope) {
 						})
 						/* List hide animation */
 						.on("hide.eac", function() {
+              scroll_enabled = false;
 
 							switch(config.get("list").hideAnimation.type) {
 
@@ -1298,7 +1299,6 @@ var EasyAutocomplete = (function(scope) {
 
 						case 27:
 
-              scroll_enabled = false;
 							hideContainer();
 							loseFieldFocus();
 						break;
