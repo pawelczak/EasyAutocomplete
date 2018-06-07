@@ -14,16 +14,6 @@
  * EasyAutocomplete - Configuration
  */
 
- function printObject(o) {
-   var out = '';
-   for (var p in o) {
-
-
-     out += p + ': ' + JSON.stringify(o[p],null,4) + '\n';
-   }
-	 console.log(out);
- }
-
 var EasyAutocomplete = (function(scope){
 
 	scope.Configuration = function Configuration(options) {
@@ -1075,7 +1065,12 @@ var EasyAutocomplete = (function(scope) {
 								break;
 
 								default:
-                  scroll_enabled = true;
+                  if(num_records<delta) {
+                             console.log('Disabling the scroll as no more records are expected');
+                             scroll_enabled = false;
+                           }else{
+                             scroll_enabled = true;
+                           }
 									$elements_container.find("ul").show();
 								break;
 							}
@@ -1299,6 +1294,7 @@ var EasyAutocomplete = (function(scope) {
 
 						case 27:
 
+              scroll_enabled=false;
 							hideContainer();
 							loseFieldFocus();
 						break;

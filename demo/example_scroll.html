@@ -18,10 +18,22 @@
     var delta = 25; //Amount of records to retrieve
     var num_records = 0; //Amount of recrords retrieved
     var offset_rows; //To make it global
+		var loaded_results_num;
+
+		function printObject(o) {
+			var out = '';
+			for (var p in o) {
+
+
+				out += p + ': ' + JSON.stringify(o[p],null,4) + '\n';
+			}
+			console.log(out);
+		}
 
     function initVars(){
       delta_counter = 0; //Reseting for new string search
-      offset_rows = 0; //
+      offset_rows = 0;
+			loaded_results_num = 0;
     }
 
                    jQuery(function($) {
