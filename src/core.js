@@ -268,9 +268,17 @@ var EasyAutocomplete = (function(scope) {
 									$listContainer.append("<div class='eac-category' >" + listBuilders[builderIndex].header + "</div>");
 								}
 
-								for(var i = 0, listDataLength = listData.length; i < listDataLength && counter < listBuilders[builderIndex].maxListSize; i += 1) {
-									$item = $("<li><div class='eac-item'></div></li>");
+								for (var i = 0, listDataLength = listData.length; i < listDataLength && counter < listBuilders[builderIndex].maxListSize; i += 1) {
+
+							 		// adding a css class to li to let the front-end show it differently
+									// example: .eac-item-forced .eac-item { color: #888; }
 									
+								    if ((listData[i].force != undefined) && (listData[i].force == true)) {
+								        $item = $("<li class='eac-item-forced'><div class='eac-item'></div></li>");
+								    }
+								    else {
+								        $item = $("<li><div class='eac-item'></div></li>");
+								    }
 
 									(function() {
 										var j = i,
