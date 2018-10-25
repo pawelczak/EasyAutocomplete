@@ -30,7 +30,15 @@ var EasyAutocomplete = (function(scope){
 			list: {
 				sort: {
 					enabled: false,
-					method: function(a, b) {
+					method: function (a, b) {
+						
+					    fa = a.force;
+					    fb = b.force;
+
+					    // if one of them is forced, promote the other (real matches go first)
+					    if (fa && !fb) return 1;
+					    if (fb && !fa) return -1;
+
 						a = defaults.getValue(a);
 						b = defaults.getValue(b);
 
@@ -361,4 +369,3 @@ var EasyAutocomplete = (function(scope){
 	return scope;
 
 })(EasyAutocomplete || {});
-
