@@ -306,6 +306,7 @@ var EasyAutocomplete = (function(scope) {
 											.mouseout(function() {
 												config.get("list").onMouseOutEvent();
 											})
+											.attr("title", elementsValue)
 											.html(template.build(highlight(elementsValue, phrase), listData[j]));
 									})();
 
