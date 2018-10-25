@@ -24,20 +24,23 @@ var EasyAutocomplete = (function(scope) {
 
 
 		function findMatch(list, phrase) {
-			var preparedList = [],
-				value = "";
+		    var preparedList = [],
+				value = "",
+				force = false;
 
 			if (config.get("list").match.enabled) {
 
-				for(var i = 0, length = list.length; i < length; i += 1) {
+			        for (var i = 0, length = list.length; i < length; i += 1) {
 
-					value = config.get("getValue")(list[i]);
-					
-					if (match(value, phrase)) {
-						preparedList.push(list[i]);	
-					}
-					
-				}
+			            value = config.get("getValue")(list[i]);
+			            force = list[i].force;
+ 
+			            if (match(value, phrase)) {
+			                preparedList.push(list[i]);
+			            } else if ((force != undefined) && (force == true)) {
+			                preparedList.push(list[i]);
+			            }		            
+			        }
 
 			} else {
 				preparedList = list;
@@ -92,4 +95,3 @@ var EasyAutocomplete = (function(scope) {
 
 
 })(EasyAutocomplete || {});
-
