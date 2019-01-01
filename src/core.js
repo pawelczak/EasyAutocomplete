@@ -298,7 +298,7 @@ var EasyAutocomplete = (function(scope) {
 											.mouseout(function() {
 												config.get("list").onMouseOutEvent();
 											})
-											.html(template.build(highlight(elementsValue, phrase), listData[j]));
+											.html(template.build(highlight(htmlEntities(elementsValue), phrase), listData[j]));
 									})();
 
 									$listContainer.append($item);
@@ -315,6 +315,10 @@ var EasyAutocomplete = (function(scope) {
 				})();
 
 				$field.after($elements_container);
+			}
+			
+			function htmlEntities(str) {
+  				return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 			}
 
 			function removeContainer() {
