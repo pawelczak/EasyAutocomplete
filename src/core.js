@@ -184,6 +184,9 @@ var EasyAutocomplete = (function(scope) {
 						/* List show animation */
 						.on("show.eac", function() {
 
+						  	// if input has lost focus, don't show container
+  							if (!$field.is(":focus")) {return}
+						
 							switch(config.get("list").showAnimation.type) {
 
 								case "slide":
