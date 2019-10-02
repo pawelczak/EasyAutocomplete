@@ -1,105 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>EasyAutocomplete json example</title>
-		<link href="../dist/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
-		<link href="../dist/easy-autocomplete.themes.min.css" rel="stylesheet" type="text/css">
-		<link href='//fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
-		<script src="../lib/jquery-1.11.2.min.js"></script>
-		<script src="../dist/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
-	</head>
-	<body>
+<head>
+	<title>EasyAutocomplete json example</title>
+	<link href="../dist/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
+	<link href="../dist/easy-autocomplete.themes.min.css" rel="stylesheet" type="text/css">
+	<link href='//fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+	<script src="../lib/jquery-1.11.2.min.js"></script>
+	<script src="../dist/jquery.easy-autocomplete.min.js" type="text/javascript"></script>
+</head>
+<body>
 
-		<h1>EasyAutocomplete - css themes</h1>
+<h1>EasyAutocomplete - css themes</h1>
 
-		<input id="funky" />
+<input id="funky"/>
 
-		<script>
+<script>
 
-		/*
-		var options = {
-			url: "resources/countries.json",
+	/*
+	var options = {
+		url: "resources/countries.json",
 
-			getValue: "name",
+		getValue: "name",
 
-			list: {
-				match: {
-					enabled: true
-				},
-				maxNumberOfElements: 5,
-
-				showAnimation: {
-					type: "fade"
-				},
-				hideAnimation: {
-					type: "fade"
-				}
+		list: {
+			match: {
+				enabled: true
 			},
+			maxNumberOfElements: 5,
 
-			theme: "funky"
-
-		};
-		*/
-
-		var options = {
-			data: [
-					{
-					"product_title": "Insightly",
-					"icon": "", 
-					"page_link": "http://www.site.com/page.html"
-					},
-					{
-					"product_title": "CiviCRM",
-					"icon": "",
-					"page_link": "http://www.site.com/page.html"
-					},
-					{
-					"product_title": "Highrise",
-					"icon": "",
-					"page_link": "http://www.site.com/page.html"
-					},
-					{
-					"product_title": "Goldmine",
-					"icon": "",
-					"page_link": "http://www.site.com/page.html"
-					},
-					{
-					"product_title": "Vtiger",
-					"icon": "",
-					"page_link": "http://www.site.com/page.html"
-					},
-					{
-					"product_title": "Relenta CRM",
-					"icon": "",
-					"page_link": "http://www.site.com/page.html"
-					}
-					    
-					    
-					],
-            
-
-			getValue: "product_title",
-
-			list: {
-                maxNumberOfElements: 8,
-				match: {
-					enabled: true
-				}
+			showAnimation: {
+				type: "fade"
 			},
-            
-       		template: {
-				type: "custom",
-				method: function(value, item) {
-					return "<a href='" + item.page_link + "' >" + value + "</a>";
-				}
+			hideAnimation: {
+				type: "fade"
 			}
-		};
+		},
 
-		$("#funky").easyAutocomplete(options);
+		theme: "funky"
 
-		</script>
+	};
+	*/
 
-	</body>
+	var options = {
+		data: [
+			{
+				'product_title': 'Insightly',
+				'icon': '',
+				'page_link': 'http://www.site.com/page.html'
+			},
+			{
+				'product_title': 'CiviCRM',
+				'icon': '',
+				'page_link': 'http://www.site.com/page.html'
+			},
+			{
+				'product_title': 'Highrise',
+				'icon': '',
+				'page_link': 'http://www.site.com/page.html'
+			},
+			{
+				'product_title': 'Goldmine',
+				'icon': '',
+				'page_link': 'http://www.site.com/page.html'
+			},
+			{
+				'product_title': 'Vtiger',
+				'icon': '',
+				'page_link': 'http://www.site.com/page.html'
+			},
+			{
+				'product_title': 'Relenta CRM',
+				'icon': '',
+				'page_link': 'http://www.site.com/page.html'
+			}
+
+
+		],
+
+
+		getValue: 'product_title',
+
+		list: {
+			maxNumberOfElements: 8,
+			match: {
+				enabled: true
+			}
+		},
+
+		template: {
+			type: 'custom',
+			method: function (value, item) {
+				return '<a href=\'' + item.page_link + '\' >' + value + '</a>';
+			}
+		}
+	};
+
+	$('#funky').easyAutocomplete(options);
+
+</script>
+
+</body>
 
 </html>
 

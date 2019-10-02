@@ -3,9 +3,7 @@
  *
  * @author Łukasz Pawełczak
  */
-QUnit.test("ListBuilder", function( assert ) {
-
-
+QUnit.test('ListBuilder', function (assert) {
 
 
 	//execute
@@ -13,49 +11,54 @@ QUnit.test("ListBuilder", function( assert ) {
 
 
 	//assert
-	assert.ok(typeof EasyAutocomplete.ListBuilderService === "function", "Constructor found");
-	assert.ok(ListBuilderService, "Constructor");
-	assert.ok(typeof ListBuilderService === "object", "created object");
-	assert.ok(typeof ListBuilderService.init === "function", "ListBuilderService has method init");
-	assert.ok(typeof ListBuilderService.updateCategories === "function", "ListBuilderService has method updateCategories");
-	assert.ok(typeof ListBuilderService.convertXml === "function", "ListBuilderService has method convertXml");
-	assert.ok(typeof ListBuilderService.processData === "function", "ListBuilderService has method processData");
-	assert.ok(typeof ListBuilderService.checkIfDataExists === "function", "ListBuilderService has method checkIfDataExists");
+	assert.ok(typeof EasyAutocomplete.ListBuilderService === 'function', 'Constructor found');
+	assert.ok(ListBuilderService, 'Constructor');
+	assert.ok(typeof ListBuilderService === 'object', 'created object');
+	assert.ok(typeof ListBuilderService.init === 'function', 'ListBuilderService has method init');
+	assert.ok(typeof ListBuilderService.updateCategories === 'function', 'ListBuilderService has method updateCategories');
+	assert.ok(typeof ListBuilderService.convertXml === 'function', 'ListBuilderService has method convertXml');
+	assert.ok(typeof ListBuilderService.processData === 'function', 'ListBuilderService has method processData');
+	assert.ok(typeof ListBuilderService.checkIfDataExists === 'function', 'ListBuilderService has method checkIfDataExists');
 	expect(8);
 });
 
 
-
-QUnit.test("ListBuilder - init", function( assert ) {
+QUnit.test('ListBuilder - init', function (assert) {
 
 	//given
 	var data = {};
 
 	var configuration = {
 
-		get: function(property) {
+		get: function (property) {
 
-			switch(property) {
+			switch (property) {
 
-				case "listLocation":
-					return function(arg) {
+				case 'listLocation':
+					return function (arg) {
 						return data;
 					};
-				break;
+					break;
 
-				case "getValue": 
-					return function(foo) {return "bar"};
-				break;
+				case 'getValue':
+					return function (foo) {
+						return 'bar'
+					};
+					break;
 
-				case "list": 
-					return {maxNumberOfElements: function() {return 3}};
-				break;
+				case 'list':
+					return {
+						maxNumberOfElements: function () {
+							return 3
+						}
+					};
+					break;
 
 				default:
-				break;
+					break;
 			}
 		}
-		
+
 	};
 
 
@@ -65,14 +68,14 @@ QUnit.test("ListBuilder - init", function( assert ) {
 	var listBuilders = ListBuilderService.init(data);
 
 	//assert
-	assert.ok(listBuilders.length === 1, "ListBuilder - size");
-	assert.ok(listBuilders[0].data === data, "ListBuilder - data match");
-	assert.ok(listBuilders[0].getValue.toString() == configuration.get("getValue").toString(), "ListBuilder - getValue function match");
+	assert.ok(listBuilders.length === 1, 'ListBuilder - size');
+	assert.ok(listBuilders[0].data === data, 'ListBuilder - data match');
+	assert.ok(listBuilders[0].getValue.toString() == configuration.get('getValue').toString(), 'ListBuilder - getValue function match');
 	expect(3);
 });
 
 
-QUnit.test("ListBuilder - checkIfDataExists - empty listBuilders", function( assert ) {
+QUnit.test('ListBuilder - checkIfDataExists - empty listBuilders', function (assert) {
 
 	//given
 	var configuration = {},
@@ -85,11 +88,11 @@ QUnit.test("ListBuilder - checkIfDataExists - empty listBuilders", function( ass
 	var flag = ListBuilderService.checkIfDataExists(listBuilders);
 
 	//assert
-	assert.ok(flag === false, "checkIfDataExists");
+	assert.ok(flag === false, 'checkIfDataExists');
 	expect(1);
 });
 
-QUnit.test("ListBuilder - checkIfDataExists - listBuilders.data not array", function( assert ) {
+QUnit.test('ListBuilder - checkIfDataExists - listBuilders.data not array', function (assert) {
 
 	//given
 	var configuration = {},
@@ -104,11 +107,11 @@ QUnit.test("ListBuilder - checkIfDataExists - listBuilders.data not array", func
 	var flag = ListBuilderService.checkIfDataExists(listBuilders);
 
 	//assert
-	assert.ok(flag === false, "checkIfDataExists");
+	assert.ok(flag === false, 'checkIfDataExists');
 	expect(1);
 });
 
-QUnit.test("ListBuilder - checkIfDataExists - listBuilders.data array", function( assert ) {
+QUnit.test('ListBuilder - checkIfDataExists - listBuilders.data array', function (assert) {
 
 	//given
 	var configuration = {},
@@ -123,7 +126,7 @@ QUnit.test("ListBuilder - checkIfDataExists - listBuilders.data array", function
 	var flag = ListBuilderService.checkIfDataExists(listBuilders);
 
 	//assert
-	assert.ok(flag === true, "checkIfDataExists");
+	assert.ok(flag === true, 'checkIfDataExists');
 	expect(1);
 });
 

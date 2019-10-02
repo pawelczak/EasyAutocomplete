@@ -1,21 +1,22 @@
-[{
-	"text": "Home",
-	"site": "http://easyautocomplete.com"
+[
+	{
+		"text": "Home",
+		"site": "http://easyautocomplete.com"
 	},
 	{
-	"text": "Guide",
-	"site": "http://easyautocomplete.com/guide"
+		"text": "Guide",
+		"site": "http://easyautocomplete.com/guide"
 	},
 	{
-	"text": "Examples",
-	"site": "http://easyautocomplete.com/examples"
+		"text": "Examples",
+		"site": "http://easyautocomplete.com/examples"
 	},
 	{
-	"text": "Themes",
-	"site": "http://easyautocomplete.com/themes"
+		"text": "Themes",
+		"site": "http://easyautocomplete.com/themes"
 	},
 	{
-	"text": "Download",
-	"site": "http://easyautocomplete.com/download"
+		"text": "Download",
+		"site": "http://easyautocomplete.com/download"
 	}
 ]

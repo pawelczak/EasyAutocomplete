@@ -7,7 +7,7 @@
  * - show only matching list
  *
  */
-var EasyAutocomplete = (function(scope) {
+var EasyAutocomplete = (function (scope) {
 
 	scope.proccess = function proccessData(config, listBuilder, phrase) {
 
@@ -25,18 +25,18 @@ var EasyAutocomplete = (function(scope) {
 
 		function findMatch(list, phrase) {
 			var preparedList = [],
-				value = "";
+				value = '';
 
-			if (config.get("list").match.enabled) {
+			if (config.get('list').match.enabled) {
 
-				for(var i = 0, length = list.length; i < length; i += 1) {
+				for (var i = 0, length = list.length; i < length; i += 1) {
 
-					value = config.get("getValue")(list[i]);
-					
+					value = config.get('getValue')(list[i]);
+
 					if (match(value, phrase)) {
-						preparedList.push(list[i]);	
+						preparedList.push(list[i]);
 					}
-					
+
 				}
 
 			} else {
@@ -48,17 +48,17 @@ var EasyAutocomplete = (function(scope) {
 
 		function match(value, phrase) {
 
-			if (!config.get("list").match.caseSensitive) {
+			if (!config.get('list').match.caseSensitive) {
 
-				if (typeof value === "string") {
-					value = value.toLowerCase();	
+				if (typeof value === 'string') {
+					value = value.toLowerCase();
 				}
-				
+
 				phrase = phrase.toLowerCase();
 			}
 
 			//TODO Regex
-			if (config.get("list").match.method(value, phrase)) {
+			if (config.get('list').match.method(value, phrase)) {
 				return true;
 			} else {
 				return false;
@@ -78,13 +78,13 @@ var EasyAutocomplete = (function(scope) {
 		function sort(list) {
 
 			//SORT
-			if (config.get("list").sort.enabled) {
-				list.sort(config.get("list").sort.method);
+			if (config.get('list').sort.enabled) {
+				list.sort(config.get('list').sort.method);
 			}
 
 			return list;
 		}
-		
+
 	};
 
 

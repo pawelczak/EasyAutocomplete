@@ -1,40 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>EasyAutocomplete xml example</title>
-		<link href="../dist/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
-		<script src="../lib/jquery-1.11.2.min.js"></script>
-		<script src="../dist/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
-	</head>
-	<body>
+<head>
+	<title>EasyAutocomplete xml example</title>
+	<link href="../dist/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
+	<script src="../lib/jquery-1.11.2.min.js"></script>
+	<script src="../dist/jquery.easy-autocomplete.min.js" type="text/javascript"></script>
+</head>
+<body>
 
-		<h1>EasyAutocomplete - xml example</h1>
+<h1>EasyAutocomplete - xml example</h1>
 
-		<input id="data-xml" />
+<input id="data-xml"/>
 
-		<script>
+<script>
 
-		var options = {
-			url: "resources/countries.xml",
+	var options = {
+		url: 'resources/countries.xml',
 
-			dataType: "xml",
-			xmlElementName: "country",
+		dataType: 'xml',
+		xmlElementName: 'country',
 
-			getValue: function(element) {
-				return $(element).find("name").text();
-			},
+		getValue: function (element) {
+			return $(element).find('name').text();
+		},
 
-			list: {
-				match: {
-					enabled: true
-				}
+		list: {
+			match: {
+				enabled: true
 			}
-		};
+		}
+	};
 
-		$("#data-xml").easyAutocomplete(options);
+	$('#data-xml').easyAutocomplete(options);
 
-		</script>
+</script>
 
-	</body>
+</body>
 
 </html>
