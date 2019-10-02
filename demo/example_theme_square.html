@@ -1,55 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>EasyAutocomplete json example</title>
-		<link href="../dist/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
-		<link href="../dist/easy-autocomplete.themes.min.css" rel="stylesheet" type="text/css">
-		<link href='//fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,600,600italic&amp;subset=latin,cyrillic-ext,greek-ext,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
-		<script src="../lib/jquery-1.11.2.min.js"></script>
-		<script src="../dist/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
-		<style>
+<head>
+	<title>EasyAutocomplete json example</title>
+	<link href="../dist/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
+	<link href="../dist/easy-autocomplete.themes.min.css" rel="stylesheet" type="text/css">
+	<link href='//fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,600,600italic&amp;subset=latin,cyrillic-ext,greek-ext,latin-ext,cyrillic'
+		  rel='stylesheet' type='text/css'>
+	<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="../dist/jquery.easy-autocomplete.min.js" type="text/javascript"></script>
+	<style>
 
-			.eac-square input {
-				background-image: url("resources/icon_search.png");
-				background-repeat: no-repeat;
-				background-position: right 10px center;
-			}
-		</style>
-	</head>
-	<body>
+		.eac-square input {
+			background-image: url("resources/icon_search.png");
+			background-repeat: no-repeat;
+			background-position: right 10px center;
+		}
+	</style>
+</head>
+<body>
 
-		<h1>EasyAutocomplete - css themes</h1>
+<h1>EasyAutocomplete - css themes</h1>
 
-		<input id="square" />
+<input id="square"/>
 
-		<script>
+<script>
 
-		var options = {
-			url: "resources/countries.json",
+	var options = {
+		url: 'resources/countries.json',
 
-			getValue: "name",
+		getValue: 'name',
 
-			minCharNumber: 0,
+		minCharNumber: 0,
 
-			list: {
-				match: {
-					enabled: true
-				},
-				maxNumberOfElements: 8,
-
-				hideOnEmptyPhrase: true
+		list: {
+			match: {
+				enabled: true
 			},
+			maxNumberOfElements: 8,
 
-			requestDelay: 500,
+			hideOnEmptyPhrase: true
+		},
 
-			theme: "square"
+		requestDelay: 500,
 
-		};
+		theme: 'square'
 
-		$("#square").easyAutocomplete(options);
+	};
 
-		</script>
+	$('#square').easyAutocomplete(options);
 
-	</body>
+</script>
+
+</body>
 
 </html>

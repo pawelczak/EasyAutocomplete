@@ -1,4 +1,42 @@
 {
-	"fruits": [{"name": "Apple"}, {"name": "Cherry"}, {"name": "Clementine"}, {"name": "Honeydew melon"}, {"name": "Watermelon"}, {"name": "Satsuma"}],
-	"vegetables": [{"text": "Pepper"}, {"text": "Jerusalem artichoke"}, {"text": "Green bean"}, {"text": "Fennel"}, {"text": "Courgette"}, {"text": "Yam"}]
+	"fruits": [
+		{
+			"name": "Apple"
+		},
+		{
+			"name": "Cherry"
+		},
+		{
+			"name": "Clementine"
+		},
+		{
+			"name": "Honeydew melon"
+		},
+		{
+			"name": "Watermelon"
+		},
+		{
+			"name": "Satsuma"
+		}
+	],
+	"vegetables": [
+		{
+			"text": "Pepper"
+		},
+		{
+			"text": "Jerusalem artichoke"
+		},
+		{
+			"text": "Green bean"
+		},
+		{
+			"text": "Fennel"
+		},
+		{
+			"text": "Courgette"
+		},
+		{
+			"text": "Yam"
+		}
+	]
 }

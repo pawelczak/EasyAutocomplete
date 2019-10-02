@@ -3,178 +3,168 @@
  *
  * @author Łukasz Pawełczak
  */
- QUnit.test("Local data - empty array", function( assert ) {
-	expect(1);
-	
-	//given
-	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+QUnit.test('Local data - empty array', function (assert) {
+	// given
+	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
-		data: [],
+		data: []
 
 	});
 
 
-	//execute
-	
+	// when
+
 	completerOne.init();
 
 	var e = $.Event('keyup');
-	e.keyCode = 50; 
-	$("#inputOne").val("a").trigger(e);
+	e.keyCode = 50;
+	$('#inputOne').val('a').trigger(e);
 
-	
-	//assert
-	var elements = $("#inputOne").next().find("ul li");
 
-	assert.equal(0, elements.length, "Response size");
-			
+	// then
+	var elements = $('#inputOne').next().find('ul li');
+
+	assert.equal(0, elements.length, 'Response size');
+
 });
 
-QUnit.test("Local data - string array", function( assert ) {
-	expect(5);
-	
-	//given
-	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+QUnit.test('Local data - string array', function (assert) {
+	// given
+	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
-		data: ["red", "green", "blue", "pink"],
+		data: ['red', 'green', 'blue', 'pink']
 
 	});
 
 
-	//execute
-	
+	// when
+
 	completerOne.init();
 
 	var e = $.Event('keyup');
-	e.keyCode = 50; 
-	$("#inputOne").val("a").trigger(e);
-	$("#inputOne").val("a").trigger(e);
+	e.keyCode = 50;
+	$('#inputOne').val('a').trigger(e);
+	$('#inputOne').val('a').trigger(e);
 
-	
-	//assert
 
-	var elements = $("#inputOne").next().find("ul li");
+	// then
 
-	assert.equal(4, elements.length, "Response size");
-	assert.equal("red", elements.eq(0).find("div").text(), "First element value");
-	assert.equal("green", elements.eq(1).find("div").text(), "Second element value");
-	assert.equal("blue", elements.eq(2).find("div").text(), "Third element value");
-	assert.equal("pink", elements.eq(3).find("div").text(), "Fourth element value");
-		
+	var elements = $('#inputOne').next().find('ul li');
+
+	assert.equal(4, elements.length, 'Response size');
+	assert.equal('red', elements.eq(0).find('div').text(), 'First element value');
+	assert.equal('green', elements.eq(1).find('div').text(), 'Second element value');
+	assert.equal('blue', elements.eq(2).find('div').text(), 'Third element value');
+	assert.equal('pink', elements.eq(3).find('div').text(), 'Fourth element value');
+
 });
 
-QUnit.test("Local data - object array", function( assert ) {
-	expect(5);
-	
-	//given
-	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+QUnit.test('Local data - object array', function (assert) {
+	// given
+	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
-		data: [{"name": "red"}, {"name": "green"}, {"name": "blue"}, {"name": "pink"}],
+		data: [{'name': 'red'}, {'name': 'green'}, {'name': 'blue'}, {'name': 'pink'}],
 
-		getValue: function(element) {
+		getValue: function (element) {
 			return element.name;
-		},
+		}
 	});
 
 
-	//execute
-	
+	// when
+
 	completerOne.init();
 
 	var e = $.Event('keyup');
-	e.keyCode = 50; 
-	$("#inputOne").val("").trigger(e);
+	e.keyCode = 50;
+	$('#inputOne').val('').trigger(e);
 
 
-	//assert
+	// then
 
 
-	var elements = $("#inputOne").next().find("ul li");
+	var elements = $('#inputOne').next().find('ul li');
 
-	assert.equal(4, elements.length, "Response size");
-	assert.equal("red", elements.eq(0).find("div").text(), "First element value");
-	assert.equal("green", elements.eq(1).find("div").text(), "Second element value");
-	assert.equal("blue", elements.eq(2).find("div").text(), "Third element value");
-	assert.equal("pink", elements.eq(3).find("div").text(), "Fourth element value");
-		
-	
+	assert.equal(4, elements.length, 'Response size');
+	assert.equal('red', elements.eq(0).find('div').text(), 'First element value');
+	assert.equal('green', elements.eq(1).find('div').text(), 'Second element value');
+	assert.equal('blue', elements.eq(2).find('div').text(), 'Third element value');
+	assert.equal('pink', elements.eq(3).find('div').text(), 'Fourth element value');
+
+
 });
 
-QUnit.test("Local data + listLocation- string array", function( assert ) {
-	expect(5);
-	
-	//given
-	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+QUnit.test('Local data + listLocation- string array', function (assert) {
+	// given
+	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: {
-			colors: ["black", "white", "magenta", "yellow"]
+			colors: ['black', 'white', 'magenta', 'yellow']
 		},
 
-		listLocation: "colors"
+		listLocation: 'colors'
 
 	});
 
 
-	//execute
-	
+	// when
+
 	completerOne.init();
 
 	var e = $.Event('keyup');
-	e.keyCode = 50; 
-	$("#inputOne").val("a").trigger(e);
-	$("#inputOne").val("a").trigger(e);
+	e.keyCode = 50;
+	$('#inputOne').val('a').trigger(e);
+	$('#inputOne').val('a').trigger(e);
 
-	
-	//assert
 
-	var elements = $("#inputOne").next().find("ul li");
+	// then
 
-	assert.equal(4, elements.length, "Response size");
-	assert.equal("black", elements.eq(0).find("div").text(), "First element value");
-	assert.equal("white", elements.eq(1).find("div").text(), "Second element value");
-	assert.equal("magenta", elements.eq(2).find("div").text(), "Third element value");
-	assert.equal("yellow", elements.eq(3).find("div").text(), "Fourth element value");
-		
+	var elements = $('#inputOne').next().find('ul li');
+
+	assert.equal(4, elements.length, 'Response size');
+	assert.equal('black', elements.eq(0).find('div').text(), 'First element value');
+	assert.equal('white', elements.eq(1).find('div').text(), 'Second element value');
+	assert.equal('magenta', elements.eq(2).find('div').text(), 'Third element value');
+	assert.equal('yellow', elements.eq(3).find('div').text(), 'Fourth element value');
+
 });
 
-QUnit.test("Local data + listLocation - object array", function( assert ) {
-	expect(5);
-	
-	//given
-	var completerOne = new EasyAutocomplete.main($("#inputOne"), {
+QUnit.test('Local data + listLocation - object array', function (assert) {
+	// given
+	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: {
-			colors: [{"name": "red"}, {"name": "green"}, {"name": "blue"}, {"name": "pink"}],
-			otherStaff: "foo bar"
+			colors: [{'name': 'red'}, {'name': 'green'}, {'name': 'blue'}, {'name': 'pink'}],
+			otherStaff: 'foo bar'
 		},
 
-		getValue: function(element) {
+		getValue: function (element) {
 			return element.name;
 		},
 
-		listLocation: "colors"
+		listLocation: 'colors'
 	});
 
 
-	//execute
-	
+	// when
+
 	completerOne.init();
 
 	var e = $.Event('keyup');
-	e.keyCode = 50; 
-	$("#inputOne").val("").trigger(e);
+	e.keyCode = 50;
+	$('#inputOne').val('').trigger(e);
 
 
-	//assert
+	// then
 
 
-	var elements = $("#inputOne").next().find("ul li");
+	var elements = $('#inputOne').next().find('ul li');
 
-	assert.equal(4, elements.length, "Response size");
-	assert.equal("red", elements.eq(0).find("div").text(), "First element value");
-	assert.equal("green", elements.eq(1).find("div").text(), "Second element value");
-	assert.equal("blue", elements.eq(2).find("div").text(), "Third element value");
-	assert.equal("pink", elements.eq(3).find("div").text(), "Fourth element value");
-		
-	
+	assert.equal(4, elements.length, 'Response size');
+	assert.equal('red', elements.eq(0).find('div').text(), 'First element value');
+	assert.equal('green', elements.eq(1).find('div').text(), 'Second element value');
+	assert.equal('blue', elements.eq(2).find('div').text(), 'Third element value');
+	assert.equal('pink', elements.eq(3).find('div').text(), 'Fourth element value');
+
+
 });

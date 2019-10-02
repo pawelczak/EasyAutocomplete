@@ -6,17 +6,17 @@ $countries = getCountries();
 
 $phrase = "";
 
-if(isset($_GET['phrase'])) {
+if (isset($_GET['phrase'])) {
 	$phrase = $_GET['phrase'];
-} else if(isset($_POST['phrase'])) {
+} else if (isset($_POST['phrase'])) {
 	$phrase = $_POST['phrase'];
 }
 
 $dataType = "json";
 
-if(isset($_GET['dataType'])) {
+if (isset($_GET['dataType'])) {
 	$dataType = $_GET['dataType'];
-} else if(isset($_POST['dataType'])) {
+} else if (isset($_POST['dataType'])) {
 	$dataType = $_POST['dataType'];
 }
 
@@ -25,22 +25,22 @@ $found_countries = array();
 foreach ($countries as $key => $country) {
 
 	if ($phrase == "" || stristr($country, $phrase) != false) {
-		array_push($found_countries	, $country);
+		array_push($found_countries, $country);
 	}
 }
 
 
-switch($dataType) {
+switch ($dataType) {
 
 	case "json":
 
 		$json = '[';
 
-		foreach($found_countries as $key => $country) {
+		foreach ($found_countries as $key => $country) {
 			$json .= '{"name": "' . $country . '"}';
 
 			if ($country !== end($found_countries)) {
-				$json .= ',';	
+				$json .= ',';
 			}
 		}
 
@@ -50,13 +50,13 @@ switch($dataType) {
 		header('Content-Type: application/json');
 		echo $json;
 
-	break;
+		break;
 
 	case "xml":
- 	    $xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n";
+		$xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n";
 		$xml .= '<data>';
 
-		foreach($found_countries as $key => $country) {
+		foreach ($found_countries as $key => $country) {
 			$xml .= '<country>' . $country . '</country>';
 		}
 
@@ -65,10 +65,10 @@ switch($dataType) {
 
 		header('Content-Type: text/xml');
 		echo $xml;
-	break;
+		break;
 
 	default:
-	break;
+		break;
 
 }
 
