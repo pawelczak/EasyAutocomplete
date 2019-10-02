@@ -14,14 +14,13 @@ var EasyAutocomplete = (function (scope) {
 		scope.proccess.match = match;
 
 		var list = listBuilder.data,
-			inputPhrase = phrase;//TODO REFACTOR
+			inputPhrase = phrase; // TODO REFACTOR
 
 		list = findMatch(list, inputPhrase);
 		list = reduceElementsInList(list);
 		list = sort(list);
 
 		return list;
-
 
 		function findMatch(list, phrase) {
 			var preparedList = [],

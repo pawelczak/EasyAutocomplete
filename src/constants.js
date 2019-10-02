@@ -1,5 +1,5 @@
 /*
- * EasyAutocomplete - Constans
+ * EasyAutocomplete - Constants
  */
 var EasyAutocomplete = (function (scope) {
 

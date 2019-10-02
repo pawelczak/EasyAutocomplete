@@ -12,7 +12,7 @@ var EasyAutocomplete = (function (scope) {
 			shortcut: 'eac'
 		};
 
-		var consts = new scope.Constans(),
+		var consts = new scope.Constants(),
 			config = new scope.Configuration(options),
 			logger = new scope.Logger(),
 			template = new scope.Template(options.template),

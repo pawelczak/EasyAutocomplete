@@ -3,7 +3,7 @@
  * jQuery plugin for autocompletion
  * 
  * @author Łukasz Pawełczak (http://github.com/pawelczak)
- * @version 1.3.5
+ * @version 1.4.0
  * Copyright  License: 
  */
 
@@ -62,11 +62,7 @@ var EasyAutocomplete = (function (scope) {
 					caseSensitive: false,
 					method: function (element, phrase) {
 
-						if (element.search(phrase) > -1) {
-							return true;
-						} else {
-							return false;
-						}
+						return element.search(phrase) > -1;
 					}
 				},
 
@@ -152,10 +148,8 @@ var EasyAutocomplete = (function (scope) {
 		};
 
 		this.checkDataUrlProperties = function () {
-			if (defaults.url === 'list-required' && defaults.data === 'list-required') {
-				return false;
-			}
-			return true;
+			return !(defaults.url === 'list-required' && defaults.data === 'list-required');
+
 		};
 		this.checkRequiredProperties = function () {
 			for (var propertyName in defaults) {
@@ -183,7 +177,6 @@ var EasyAutocomplete = (function (scope) {
 		addAjaxSettings();
 
 		processAfterMerge();
-
 		function prepareDefaults() {
 
 			if (options.dataType === 'xml') {
@@ -343,7 +336,6 @@ var EasyAutocomplete = (function (scope) {
 				return false;
 			}
 		}
-
 		function printPropertiesThatDoesntExist(consol, optionsToCheck) {
 
 			checkPropertiesIfExist(defaults, optionsToCheck);
@@ -366,7 +358,6 @@ var EasyAutocomplete = (function (scope) {
 
 })(EasyAutocomplete || {});
 
-
 /*
  * EasyAutocomplete - Logger 
  */
@@ -386,18 +377,18 @@ var EasyAutocomplete = (function (scope) {
 	return scope;
 
 })(EasyAutocomplete || {});
-
+	
 
 /*
- * EasyAutocomplete - Constans
+ * EasyAutocomplete - Constants
  */
 var EasyAutocomplete = (function (scope) {
 
-	scope.Constants = function Constans() {
+	scope.Constants = function Constants() {
+
 		var constants = {
 			CONTAINER_CLASS: 'easy-autocomplete-container',
 			CONTAINER_ID: 'eac-container-',
-
 			WRAPPER_CSS_CLASS: 'easy-autocomplete'
 		};
 
@@ -708,7 +699,6 @@ var EasyAutocomplete = (function (scope) {
 
 	scope.Template = function Template(options) {
 
-
 		var genericTemplates = {
 				basic: {
 					type: 'basic',
@@ -914,7 +904,7 @@ var EasyAutocomplete = (function (scope) {
 			shortcut: 'eac'
 		};
 
-		var consts = new scope.Constans(),
+		var consts = new scope.Constants(),
 			config = new scope.Configuration(options),
 			logger = new scope.Logger(),
 			template = new scope.Template(options.template),
@@ -969,7 +959,6 @@ var EasyAutocomplete = (function (scope) {
 		this.init = function () {
 			init();
 		};
-
 		function init() {
 
 			if ($field.length === 0) {
@@ -992,7 +981,6 @@ var EasyAutocomplete = (function (scope) {
 			bindEvents();
 
 		}
-
 		function prepareField() {
 
 
@@ -1219,7 +1207,6 @@ var EasyAutocomplete = (function (scope) {
 
 
 		}
-
 		function getContainerId() {
 
 			var elementId = $field.attr('id');
@@ -1228,7 +1215,6 @@ var EasyAutocomplete = (function (scope) {
 
 			return elementId;
 		}
-
 		function bindEvents() {
 
 			bindAllEvents();
