@@ -221,11 +221,7 @@ var EasyAutocomplete = (function (scope) {
 
 				options.list.match.method = function (element, phrase) {
 
-					if (element.search(phrase) > -1) {
-						return true;
-					} else {
-						return false;
-					}
+					return element.search(phrase) > -1;
 				};
 
 			}
@@ -252,7 +248,6 @@ var EasyAutocomplete = (function (scope) {
 				options.categories = categories;
 			}
 		}
-
 
 		//------------------------ LOAD config --------------------------
 
@@ -283,7 +278,6 @@ var EasyAutocomplete = (function (scope) {
 				return mergedObject;
 			}
 		}
-
 
 		function processAfterMerge() {
 
@@ -339,11 +333,7 @@ var EasyAutocomplete = (function (scope) {
 		}
 
 		function isAssigned(name) {
-			if (defaults[name] !== undefined && defaults[name] !== null) {
-				return true;
-			} else {
-				return false;
-			}
+			return defaults[name] !== undefined && defaults[name] !== null;
 		}
 
 		// Consol is object that should have method log that prints string

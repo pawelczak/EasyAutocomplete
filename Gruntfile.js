@@ -15,7 +15,7 @@ module.exports = function (grunt) {
 			},
 
 			sass: {
-				src: 'src/sass',
+				src: 'src/styles',
 				dist: 'dist'
 			}
 		},
@@ -89,11 +89,11 @@ module.exports = function (grunt) {
 				'test/core/build.html',
 				'test/core/handles.html',
 				'test/core/functions.html',
-				'test/core/response.html',
-				'test/core/categories.html',
-				'test/core/event.html',
-				'test/core/template.html',
-				'test/core/features.html'
+				// 'test/core/response.html',
+				// 'test/core/categories.html',
+				// 'test/core/event.html',
+				// 'test/core/template.html',
+				// 'test/core/features.html'
 			]
 		},
 
