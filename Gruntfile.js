@@ -198,7 +198,7 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('test', ['qunit:unit', 'qunit:integration']);
 
-	grunt.registerTask('build', ['concat', 'comments', 'uglify', 'sass:dev', 'sass:dist', 'usebanner', 'copy', 'clean']);
+	grunt.registerTask('build', ['qunit:unit', 'concat', 'comments', 'uglify', 'sass:dev', 'sass:dist', 'usebanner', 'copy', 'clean']);
 
 	grunt.registerTask('devel', ['build', 'qunit:integration']);
 

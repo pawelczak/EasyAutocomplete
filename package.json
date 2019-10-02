@@ -28,17 +28,17 @@
 		"grunt": "grunt",
 		"build": "npm run grunt build",
 		"devel": "npm run grunt devel",
-		"test": "npm run grunt test",
+		"test": "npm run grunt test:unit",
 		"preversion": "npm run test",
 		"version": "npm run build && git add -A .",
-		"postversion": "git push && git push --follow-tags"
+		"postversion": "git push && git push --follow-tags",
+		"precommit": "npm run test"
 	},
 	"dependencies": {
 		"jquery": "*"
 	},
 	"devDependencies": {
 		"cli": ">=1.0.0",
-		"js-yaml": ">=3.13.1",
 		"grunt": "^0.4.5",
 		"grunt-banner": "^0.2.3",
 		"grunt-contrib-clean": "^0.7.0",
@@ -53,9 +53,11 @@
 		"grunt-contrib-watch": "^0.5.3",
 		"grunt-jscs": "^1.6.0",
 		"grunt-stripcomments": "^0.3.1",
+		"husky": "^3.0.8",
+		"js-yaml": ">=3.13.1",
+		"lodash": ">=4.17.13",
 		"matchdep": "^0.3.0",
 		"minimatch": ">=3.0.2",
-		"lodash": ">=4.17.13",
 		"qunit": "^2.9.2",
 		"underscore.string": ">=3.3.5"
 	},

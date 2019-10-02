@@ -1037,8 +1037,9 @@ var EasyAutocomplete = (function (scope) {
 					$elements_container
 					/* List show animation */
 						.on('show.eac', function () {
-
-							switch (config.get('list').showAnimation.type) {
+  							if (!$field.is(':focus')) {return}
+						
+							switch(config.get('list').showAnimation.type) {
 
 								case 'slide':
 									var animationTime = config.get('list').showAnimation.time,

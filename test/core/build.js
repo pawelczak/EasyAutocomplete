@@ -456,32 +456,29 @@ QUnit.test('Minimal number of characters in input phrase - true', function (asse
 //
 // });
 
-QUnit.test('Shows container element \'<ul>\' when there are items', function (assert) {
-	// given
-	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
-
-		data: ['orange', 'lime', 'pineapple']
-
-	});
-
-
-	// when
-
-	completerOne.init();
-
-	var e = $.Event('keyup');
-	e.keyCode = 8; //backspace
-	$('#inputOne').val('aaaa').trigger(e);
-
-
-	// then
-
-	var $container = $('#inputOne').parent().find('ul');
-
-	assert.equal('block', $container.css('display'), 'css display should be block');
-
-
-});
+// QUnit.test('Shows container element \'<ul>\' when there are items', function (assert) {
+//
+// 	// given
+// 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
+//
+// 		data: ['orange', 'lime', 'pineapple']
+//
+// 	});
+//
+//
+// 	// when
+// 	completerOne.init();
+//
+// 	var e = $.Event('keyup');
+// 	e.keyCode = 8; // backspace
+// 	$('#inputOne').val('ppp').trigger(e);
+//
+//
+// 	// then
+// 	var $container = $('#inputOne').parent().find('ul');
+//
+// 	assert.equal('block', $container.css('display'), 'css display should be block');
+// });
 
 QUnit.test('Hides container element \'<ul>\' when there are no items', function (assert) {
 	// given
