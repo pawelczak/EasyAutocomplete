@@ -3,7 +3,7 @@
  * jQuery plugin for autocompletion
  * 
  * @author Łukasz Pawełczak (http://github.com/pawelczak)
- * @version 1.3.5
+ * @version 1.4.0
  * Copyright  License: 
  */
 
@@ -15,7 +15,7 @@
   /* Plate */
 }
 .easy-autocomplete.eac-square {
-  font-family: "Roboto", "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .easy-autocomplete.eac-square input {
   border: 1px solid #7f8c8d;
@@ -54,7 +54,7 @@
   font-weight: 600;
 }
 .easy-autocomplete.eac-round {
-  font-family: "Open Sans", "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .easy-autocomplete.eac-round input {
   border: 2px solid #888;
@@ -101,7 +101,7 @@
   font-weight: 700;
 }
 .easy-autocomplete.eac-funky {
-  font-family: "Inconsolata", "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Inconsolata", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .easy-autocomplete.eac-funky input {
   background: #07ED89;
@@ -143,7 +143,7 @@
   background-color: #f2f2f2;
 }
 .easy-autocomplete.eac-plate {
-  font-family: "Open Sans", "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .easy-autocomplete.eac-plate input {
   font-size: 13px;
@@ -174,7 +174,7 @@
   border-radius: 0 0 6px 6px;
 }
 .easy-autocomplete.eac-plate-dark {
-  font-family: "Open Sans", "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .easy-autocomplete.eac-plate-dark input {
   font-size: 13px;

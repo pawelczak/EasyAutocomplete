@@ -1,4 +1,18 @@
 {
-	"fruits": ["Apple", "Cherry", "Clementine", "Honeydew melon", "Watermelon", "Satsuma"],
-	"vegetables": ["Pepper", "Jerusalem artichoke", "Green bean", "Fennel", "Courgette", "Yam"]
+	"fruits": [
+		"Apple",
+		"Cherry",
+		"Clementine",
+		"Honeydew melon",
+		"Watermelon",
+		"Satsuma"
+	],
+	"vegetables": [
+		"Pepper",
+		"Jerusalem artichoke",
+		"Green bean",
+		"Fennel",
+		"Courgette",
+		"Yam"
+	]
 }

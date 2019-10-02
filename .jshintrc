@@ -6,14 +6,13 @@
 	"expr": true,
 	"immed": true,
 	"noarg": true,
-	"quotmark": "double",
+	"quotmark": "single",
 	"smarttabs": true,
 	"trailing": true,
 	"undef": true,
 	"unused": true,
 	"browser": true,
 	"es3": true,
-	
 	"globals": {
 		"QUnit": false,
 		"exports": false,
