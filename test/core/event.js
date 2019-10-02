@@ -6,9 +6,9 @@
 
 /*
 QUnit.test("Event keypress - Esc keyCode", function( assert ) {
-   expect(1);
+   ;
 
-   //given
+   // given
    var completerOne = new EasyAutocomplete.main($("#inputOne"), {url: "resources/colors_string.json", ajaxCallback: function() {
 
 
@@ -16,13 +16,13 @@ QUnit.test("Event keypress - Esc keyCode", function( assert ) {
 		   $("inputOne").trigger(e);
 
 
-		   //assert
+		   // then
 		   assertList();
 	   }
    });
 
 
-   //execute
+   // when
 
    completerOne.init();
 
@@ -34,26 +34,25 @@ QUnit.test("Event keypress - Esc keyCode", function( assert ) {
 
 
 
-   QUnit.stop();
+   var done = assert.async();
 
 
-   //assert
+   // then
 
    function assertList() {
 	   var elements = $("#inputOne").next().find("ul li");
 
 	   assert.equal(3, elements.length, "Response size");
-	   //assert.equal("none", $("#eac-container-inputOne").find("ul").css("display"), "List should be hidden");
+	   // then.equal("none", $("#eac-container-inputOne").find("ul").css("display"), "List should be hidden");
 
-	   QUnit.start();
+	   done();
    }
 });
 */
 
 QUnit.test('Event onLoadEvent ', function (assert) {
-	expect(1);
 
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 		url: 'resources/colors_string.json',
 
@@ -61,7 +60,7 @@ QUnit.test('Event onLoadEvent ', function (assert) {
 		list: {
 			onLoadEvent: function () {
 
-				//assert
+				// then
 				assertList();
 			}
 		}
@@ -69,7 +68,7 @@ QUnit.test('Event onLoadEvent ', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -77,25 +76,23 @@ QUnit.test('Event onLoadEvent ', function (assert) {
 	e.keyCode = 50;
 	$('#inputOne').val('c').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
 
 		assert.equal(3, elements.length, 'Response size');
 
-		QUnit.start();
+		done();
 	}
 });
 
 
 QUnit.test('Event onClickEvent ', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 		url: 'resources/colors_string.json',
 
@@ -103,7 +100,7 @@ QUnit.test('Event onClickEvent ', function (assert) {
 		list: {
 			onClickEvent: function () {
 
-				//assert
+				// then
 				assertList();
 			},
 			onLoadEvent: function () {
@@ -117,7 +114,7 @@ QUnit.test('Event onClickEvent ', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -125,30 +122,28 @@ QUnit.test('Event onClickEvent ', function (assert) {
 	e.keyCode = 50;
 	$('#inputOne').val('c').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
 
 		assert.equal(3, elements.length, 'Response size');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Event onMouseOverEvent ', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 		url: 'resources/colors_string.json',
 
 		list: {
 			onMouseOverEvent: function () {
 
-				//assert
+				// then
 				assertList();
 			},
 			onLoadEvent: function () {
@@ -161,7 +156,7 @@ QUnit.test('Event onMouseOverEvent ', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -169,31 +164,29 @@ QUnit.test('Event onMouseOverEvent ', function (assert) {
 	e.keyCode = 50;
 	$('#inputOne').val('c').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
 
 		assert.equal(3, elements.length, 'Response size');
 
-		QUnit.start();
+		done();
 	}
 });
 
 
 QUnit.test('Event onMouseOutEvent ', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 		url: 'resources/colors_string.json',
 
 		list: {
 			onMouseOutEvent: function () {
 
-				//assert
+				// then
 				assertList();
 			},
 			onLoadEvent: function () {
@@ -206,7 +199,7 @@ QUnit.test('Event onMouseOutEvent ', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -214,30 +207,28 @@ QUnit.test('Event onMouseOutEvent ', function (assert) {
 	e.keyCode = 50;
 	$('#inputOne').val('c').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
 
 		assert.equal(3, elements.length, 'Response size');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Event onSelectItemEvent ', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 			url: 'resources/colors_string.json',
 
 			list: {
 				onSelectItemEvent: function () {
 
-					//assert
+					// then
 					assertList();
 				},
 				onLoadEvent: function () {
@@ -253,15 +244,15 @@ QUnit.test('Event onSelectItemEvent ', function (assert) {
 		$input = $('#inputOne');
 
 
-	//execute
+	// when
 	completerOne.init();
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$input.val('c').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 
@@ -269,22 +260,20 @@ QUnit.test('Event onSelectItemEvent ', function (assert) {
 
 		assert.equal(3, elements.length, 'Response size');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Event onSelectItemEvent should trigger when user writes phrase that matches phrase from suggestion list and then focus out of the input field',
 	function (assert) {
-		expect(1);
-
-		//given
+		// given
 		var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 				url: 'resources/colors_string.json',
 
 				list: {
 					onSelectItemEvent: function () {
 
-						//assert
+						// then
 						assertList();
 					},
 					onLoadEvent: function () {
@@ -297,16 +286,16 @@ QUnit.test('Event onSelectItemEvent should trigger when user writes phrase that 
 			$input = $('#inputOne');
 
 
-		//execute
+		// when
 		completerOne.init();
 		var e = $.Event('keyup');
 		e.keyCode = 50;
 		$input.val('red').trigger(e);
 
 
-		QUnit.stop();
+		var done = assert.async();
 
-		//assert
+		// then
 
 		function assertList() {
 
@@ -314,23 +303,21 @@ QUnit.test('Event onSelectItemEvent should trigger when user writes phrase that 
 
 			assert.equal(3, elements.length, 'Response size');
 
-			QUnit.start();
+			done();
 		}
 	});
 
 QUnit.test(
 	'Event onSelectItemEvent should trigger when user writes phrase that matches phrase from suggestion list and then focus out of the input field - include case sensitivity',
 	function (assert) {
-		expect(1);
-
-		//given
+		// given
 		var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 				url: 'resources/colors_string.json',
 
 				list: {
 					onSelectItemEvent: function () {
 
-						//assert
+						// then
 						assertList();
 					},
 					onLoadEvent: function () {
@@ -343,16 +330,16 @@ QUnit.test(
 			$input = $('#inputOne');
 
 
-		//execute
+		// when
 		completerOne.init();
 		var e = $.Event('keyup');
 		e.keyCode = 50;
 		$input.val('ReD').trigger(e);
 
 
-		QUnit.stop();
+		var done = assert.async();
 
-		//assert
+		// then
 
 		function assertList() {
 
@@ -360,23 +347,21 @@ QUnit.test(
 
 			assert.equal(3, elements.length, 'Response size');
 
-			QUnit.start();
+			done();
 		}
 	});
 
 QUnit.test(
 	'Event onSelectItemEvent should trigger when user writes phrase that matches phrase from suggestion list and then focus out of the input field - include case sensitivity false',
 	function (assert) {
-		expect(1);
-
-		//given
+		// given
 		var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 				url: 'resources/colors_caps_string.json',
 
 				list: {
 					onSelectItemEvent: function () {
 
-						//assert
+						// then
 						assertList();
 					},
 					onLoadEvent: function () {
@@ -393,16 +378,16 @@ QUnit.test(
 			$input = $('#inputOne');
 
 
-		//execute
+		// when
 		completerOne.init();
 		var e = $.Event('keyup');
 		e.keyCode = 50;
 		$input.val('red').trigger(e);
 
 
-		QUnit.stop();
+		var done = assert.async();
 
-		//assert
+		// then
 
 		function assertList() {
 
@@ -410,16 +395,14 @@ QUnit.test(
 
 			assert.equal(1, elements.length, 'Response size');
 
-			QUnit.start();
+			done();
 		}
 	});
 
 QUnit.test(
 	'Event onSelectItemEvent should trigger when user writes phrase that matches phrase from suggestion list and then focus out of the input field - include case sensitivity true',
 	function (assert) {
-		expect(1);
-
-		//given
+		// given
 		var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 				url: 'resources/colors_caps_string.json',
 
@@ -431,7 +414,7 @@ QUnit.test(
 
 						$input.trigger('focusout');
 
-						QUnit.start();
+						done();
 					},
 					match: {
 						caseSensitive: true,
@@ -443,16 +426,16 @@ QUnit.test(
 			$input = $('#inputOne');
 
 
-		//execute
+		// when
 		completerOne.init();
 		var e = $.Event('keyup');
 		e.keyCode = 50;
 		$input.val('red').trigger(e);
 
 
-		QUnit.stop();
+		var done = assert.async();
 
-		//assert
+		// then
 		var elements = $('#inputOne').next().find('ul li');
 
 		assert.equal(0, elements.length, 'Response size');
@@ -460,16 +443,14 @@ QUnit.test(
 	});
 
 QUnit.test('Event onShowListEvent ', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 			url: 'resources/colors_string.json',
 
 			list: {
 				onShowListEvent: function () {
 
-					//assert
+					// then
 					assertList();
 				}
 			}
@@ -478,15 +459,15 @@ QUnit.test('Event onShowListEvent ', function (assert) {
 		$input = $('#inputOne');
 
 
-	//execute
+	// when
 	completerOne.init();
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$input.val('c').trigger(e); //trigger show list
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 
@@ -494,21 +475,19 @@ QUnit.test('Event onShowListEvent ', function (assert) {
 
 		assert.equal(3, elements.length, 'Response size');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Event onHideListEvent ', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 			url: 'resources/colors_string.json',
 
 			list: {
 				onHideListEvent: function () {
 
-					//assert
+					// then
 					assertList();
 				},
 				onLoadEvent: function () {
@@ -524,15 +503,15 @@ QUnit.test('Event onHideListEvent ', function (assert) {
 		$input = $('#inputOne');
 
 
-	//execute
+	// when
 	completerOne.init();
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$input.val('c').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 
@@ -540,21 +519,19 @@ QUnit.test('Event onHideListEvent ', function (assert) {
 
 		assert.equal(3, elements.length, 'Response size');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Event onKeyEnterEvent ', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 			url: 'resources/colors_string.json',
 
 			list: {
 				onKeyEnterEvent: function () {
 
-					//assert
+					// then
 					assertList();
 				},
 				onLoadEvent: function () {
@@ -577,15 +554,15 @@ QUnit.test('Event onKeyEnterEvent ', function (assert) {
 		$input = $('#inputOne');
 
 
-	//execute
+	// when
 	completerOne.init();
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$input.val('c').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 
@@ -593,15 +570,13 @@ QUnit.test('Event onKeyEnterEvent ', function (assert) {
 
 		assert.equal(3, elements.length, 'Response size');
 
-		QUnit.start();
+		done();
 	}
 });
 
 
 QUnit.test('Event onClickEvent and selectedItemData - click', function (assert) {
-	expect(2);
-
-	//given
+	// given
 	var $input = $('#inputOne');
 
 	$input.easyAutocomplete({
@@ -611,7 +586,7 @@ QUnit.test('Event onClickEvent and selectedItemData - click', function (assert) 
 		list: {
 			onClickEvent: function () {
 
-				//assert
+				// then
 				assertList();
 			},
 			onLoadEvent: function () {
@@ -625,15 +600,15 @@ QUnit.test('Event onClickEvent and selectedItemData - click', function (assert) 
 	});
 
 
-	//execute
+	// when
 
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$input.val('c').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 
@@ -643,14 +618,12 @@ QUnit.test('Event onClickEvent and selectedItemData - click', function (assert) 
 		assert.equal(3, elements.length, 'Response size');
 		assert.equal('red', data, 'selectedItemData matches');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Event onKeyEnterEvent and selectedItemData - keydown enter', function (assert) {
-	expect(2);
-
-	//given
+	// given
 	var $input = $('#inputOne');
 
 	$input.easyAutocomplete({
@@ -660,7 +633,7 @@ QUnit.test('Event onKeyEnterEvent and selectedItemData - keydown enter', functio
 		list: {
 			onKeyEnterEvent: function () {
 
-				//assert
+				// then
 				assertList();
 			},
 			onLoadEvent: function () {
@@ -681,15 +654,15 @@ QUnit.test('Event onKeyEnterEvent and selectedItemData - keydown enter', functio
 	});
 
 
-	//execute
+	// when
 
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$input.val('c').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 
@@ -700,15 +673,13 @@ QUnit.test('Event onKeyEnterEvent and selectedItemData - keydown enter', functio
 		assert.equal('red', data, 'selectedItemData matches');
 
 
-		QUnit.start();
+		done();
 	}
 });
 
 
 QUnit.test('Plugin should not emit event \'show\' ', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var $input = $('#inputOne'),
 		eventReceived = false;
 
@@ -719,10 +690,10 @@ QUnit.test('Plugin should not emit event \'show\' ', function (assert) {
 		})
 		.on('show.eac', function () {
 
-			//assert
+			// then
 			assertList();
 
-			QUnit.start();
+			done();
 
 			afterTests();
 		});
@@ -733,15 +704,15 @@ QUnit.test('Plugin should not emit event \'show\' ', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$input.val('c').trigger(e); //trigger show list
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 
@@ -756,9 +727,7 @@ QUnit.test('Plugin should not emit event \'show\' ', function (assert) {
 });
 
 QUnit.test('Plugin should not emit event \'hide\' ', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var $input = $('#inputOne'),
 		eventReceived = false;
 
@@ -769,10 +738,10 @@ QUnit.test('Plugin should not emit event \'hide\' ', function (assert) {
 		})
 		.on('hide.eac', function () {
 
-			//assert
+			// then
 			assertList();
 
-			QUnit.start();
+			done();
 
 			afterTests();
 		});
@@ -793,15 +762,15 @@ QUnit.test('Plugin should not emit event \'hide\' ', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$input.val('c').trigger(e); //trigger show list
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 
@@ -817,9 +786,7 @@ QUnit.test('Plugin should not emit event \'hide\' ', function (assert) {
 
 
 QUnit.test('Plugin should not emit event \'selectElement\' ', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var $input = $('#inputOne'),
 		eventReceived = false;
 
@@ -830,10 +797,10 @@ QUnit.test('Plugin should not emit event \'selectElement\' ', function (assert) 
 		})
 		.on('selectElement.eac', function () {
 
-			//assert
+			// then
 			assertList();
 
-			QUnit.start();
+			done();
 
 			afterTests();
 		});
@@ -854,15 +821,15 @@ QUnit.test('Plugin should not emit event \'selectElement\' ', function (assert) 
 	});
 
 
-	//execute
+	// when
 
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$input.val('c').trigger(e); //trigger show list
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 
@@ -878,9 +845,7 @@ QUnit.test('Plugin should not emit event \'selectElement\' ', function (assert) 
 
 
 QUnit.test('Plugin should not emit event \'loadElements\' ', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var $input = $('#inputOne'),
 		eventReceived = false;
 
@@ -891,10 +856,10 @@ QUnit.test('Plugin should not emit event \'loadElements\' ', function (assert) {
 		})
 		.on('loadElements.eac', function () {
 
-			//assert
+			// then
 			assertList();
 
-			QUnit.start();
+			done();
 
 			afterTests();
 		});
@@ -905,15 +870,15 @@ QUnit.test('Plugin should not emit event \'loadElements\' ', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$input.val('c').trigger(e); //trigger show list
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 
@@ -929,16 +894,14 @@ QUnit.test('Plugin should not emit event \'loadElements\' ', function (assert) {
 
 
 QUnit.test('Event onChooseEvent - key enter', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 			url: 'resources/colors_string.json',
 
 			list: {
 				onChooseEvent: function () {
 
-					//assert
+					// then
 					assertList();
 				},
 				onLoadEvent: function () {
@@ -961,15 +924,15 @@ QUnit.test('Event onChooseEvent - key enter', function (assert) {
 		$input = $('#inputOne');
 
 
-	//execute
+	// when
 	completerOne.init();
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$input.val('c').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 
@@ -977,21 +940,19 @@ QUnit.test('Event onChooseEvent - key enter', function (assert) {
 
 		assert.equal(3, elements.length, 'Response size');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Event onChooseEvent - click', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 			url: 'resources/colors_string.json',
 
 			list: {
 				onChooseEvent: function () {
 
-					//assert
+					// then
 					assertList();
 				},
 				onLoadEvent: function () {
@@ -1006,15 +967,15 @@ QUnit.test('Event onChooseEvent - click', function (assert) {
 		$input = $('#inputOne');
 
 
-	//execute
+	// when
 	completerOne.init();
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$input.val('c').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 
@@ -1022,7 +983,7 @@ QUnit.test('Event onChooseEvent - click', function (assert) {
 
 		assert.equal(3, elements.length, 'Response size');
 
-		QUnit.start();
+		done();
 	}
 });
 

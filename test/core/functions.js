@@ -6,32 +6,31 @@
 QUnit.test('getSelectedItemIndex - no selected item', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('#inputOne').easyAutocomplete({
 
 		data: ['black', 'white', 'magenta', 'yellow']
 
 	});
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
 
-	//assert
+	// then
 	var elements = $('#inputOne').next().find('ul li');
 	var afterSelectedItem = $('#inputOne').getSelectedItemIndex();
 
 	assert.equal(4, elements.length, 'Response size');
 	assert.equal(-1, afterSelectedItem, 'getSelectedItemIndex returns actual item after mouseover');
 
-	expect(2);
 });
 
 QUnit.test('getSelectedItemIndex - input with id', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('#inputOne').easyAutocomplete({
 
 		data: ['black', 'white', 'magenta', 'yellow']
@@ -39,7 +38,7 @@ QUnit.test('getSelectedItemIndex - input with id', function (assert) {
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
@@ -52,7 +51,7 @@ QUnit.test('getSelectedItemIndex - input with id', function (assert) {
 
 	var afterSelectedItem = $('#inputOne').getSelectedItemIndex();
 
-	//assert
+	// then
 	var elements = $('#inputOne').next().find('ul li');
 
 	assert.equal(4, elements.length, 'Response size');
@@ -64,14 +63,13 @@ QUnit.test('getSelectedItemIndex - input with id', function (assert) {
 	assert.equal(-1, beforeSelectedItem, 'getSelectedItemIndex returns actual item before mouseover');
 	assert.equal(1, afterSelectedItem, 'getSelectedItemIndex returns actual item after mouseover');
 
-	expect(7);
 });
 
 
 QUnit.test('getSelectedItemIndex - input with no id', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('.inputOne').easyAutocomplete({
 
 		data: ['black', 'white', 'magenta', 'yellow']
@@ -79,7 +77,7 @@ QUnit.test('getSelectedItemIndex - input with no id', function (assert) {
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('.inputOne').val('more').trigger(e);
@@ -92,7 +90,7 @@ QUnit.test('getSelectedItemIndex - input with no id', function (assert) {
 
 	var afterSelectedItem = $('.inputOne').getSelectedItemIndex();
 
-	//assert
+	// then
 	var elements = $('.inputOne').next().find('ul li');
 
 	assert.equal(4, elements.length, 'Response size');
@@ -104,14 +102,13 @@ QUnit.test('getSelectedItemIndex - input with no id', function (assert) {
 	assert.equal(-1, beforeSelectedItem, 'getSelectedItemIndex returns actual item before mouseover');
 	assert.equal(1, afterSelectedItem, 'getSelectedItemIndex returns actual item after mouseover');
 
-	expect(7);
 });
 
 
 QUnit.test('getSelectedItemIndex - input with id - click trigger', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('#inputOne').easyAutocomplete({
 
 		data: ['black', 'white', 'magenta', 'yellow']
@@ -119,7 +116,7 @@ QUnit.test('getSelectedItemIndex - input with id - click trigger', function (ass
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
@@ -132,7 +129,7 @@ QUnit.test('getSelectedItemIndex - input with id - click trigger', function (ass
 
 	var afterSelectedItem = $('#inputOne').getSelectedItemIndex();
 
-	//assert
+	// then
 	var elements = $('#inputOne').next().find('ul li');
 
 	assert.equal(4, elements.length, 'Response size');
@@ -144,13 +141,12 @@ QUnit.test('getSelectedItemIndex - input with id - click trigger', function (ass
 	assert.equal(-1, beforeSelectedItem, 'getSelectedItemIndex returns actual item before click');
 	assert.equal(1, afterSelectedItem, 'getSelectedItemIndex returns actual item after click');
 
-	expect(7);
 });
 
 QUnit.test('getSelectedItemIndex - input with id - arrowDown trigger', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('#inputOne').easyAutocomplete({
 
 		data: ['black', 'white', 'magenta', 'yellow']
@@ -158,7 +154,7 @@ QUnit.test('getSelectedItemIndex - input with id - arrowDown trigger', function 
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
@@ -174,7 +170,7 @@ QUnit.test('getSelectedItemIndex - input with id - arrowDown trigger', function 
 
 	var afterSelectedItem = $('#inputOne').getSelectedItemIndex();
 
-	//assert
+	// then
 	var elements = $('#inputOne').next().find('ul li');
 
 	assert.equal(4, elements.length, 'Response size');
@@ -186,13 +182,12 @@ QUnit.test('getSelectedItemIndex - input with id - arrowDown trigger', function 
 	assert.equal(-1, beforeSelectedItem, 'getSelectedItemIndex returns actual item before click');
 	assert.equal(2, afterSelectedItem, 'getSelectedItemIndex returns actual item after click');
 
-	expect(7);
 });
 
 QUnit.test('getSelectedItemIndex - input with id - arrowDown/arrowUp mixin', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('#inputOne').easyAutocomplete({
 
 		data: ['black', 'white', 'magenta', 'yellow']
@@ -200,7 +195,7 @@ QUnit.test('getSelectedItemIndex - input with id - arrowDown/arrowUp mixin', fun
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
@@ -221,7 +216,7 @@ QUnit.test('getSelectedItemIndex - input with id - arrowDown/arrowUp mixin', fun
 
 	var afterSelectedItem = $('#inputOne').getSelectedItemIndex();
 
-	//assert
+	// then
 	var elements = $('#inputOne').next().find('ul li');
 
 	assert.equal(4, elements.length, 'Response size');
@@ -233,13 +228,12 @@ QUnit.test('getSelectedItemIndex - input with id - arrowDown/arrowUp mixin', fun
 	assert.equal(-1, beforeSelectedItem, 'getSelectedItemIndex returns actual item before click');
 	assert.equal(2, afterSelectedItem, 'getSelectedItemIndex returns actual item after click');
 
-	expect(7);
 });
 
 QUnit.test('getSelectedItemIndex - response - on onLoadEvent', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('#inputOne').easyAutocomplete({
 
 		url: 'resources/colors_string.json',
@@ -261,7 +255,7 @@ QUnit.test('getSelectedItemIndex - response - on onLoadEvent', function (assert)
 
 				var afterSelectedItem = $('#inputOne').getSelectedItemIndex();
 
-				//assert
+				// then
 				var elements = $('#inputOne').next().find('ul li');
 
 				assert.equal(3, elements.length, 'Response size');
@@ -272,29 +266,28 @@ QUnit.test('getSelectedItemIndex - response - on onLoadEvent', function (assert)
 				assert.equal(-1, beforeSelectedItem, 'getSelectedItemIndex returns actual item before click');
 				assert.equal(1, afterSelectedItem, 'getSelectedItemIndex returns actual item after click');
 
-				QUnit.start();
+				done();
 			}
 		}
 
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
-	expect(6);
 });
 
 
 QUnit.test('getSelectedItemIndex - response - on onSelectItemEvent', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('#inputOne').easyAutocomplete({
 
 		url: 'resources/colors_string.json',
@@ -308,7 +301,7 @@ QUnit.test('getSelectedItemIndex - response - on onSelectItemEvent', function (a
 
 				var afterSelectedItem = $('#inputOne').getSelectedItemIndex();
 
-				//assert
+				// then
 				var elements = $('#inputOne').next().find('ul li');
 
 				assert.equal(3, elements.length, 'Response size');
@@ -318,27 +311,26 @@ QUnit.test('getSelectedItemIndex - response - on onSelectItemEvent', function (a
 
 				assert.equal(1, afterSelectedItem, 'getSelectedItemIndex returns actual item after click');
 
-				QUnit.start();
+				done();
 			}
 		}
 
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
-	expect(5);
 });
 
 QUnit.test('getSelectedItemIndex - XML', function (assert) {
 
-	//given
+	// given
 	var getValue = function (element) {
 		return $(element).find('name').text();
 	};
@@ -359,10 +351,10 @@ QUnit.test('getSelectedItemIndex - XML', function (assert) {
 			},
 			onSelectItemEvent: function () {
 
-				//assert
+				// then
 				var afterSelectedItem = $('#inputOne').getSelectedItemIndex();
 
-				//assert
+				// then
 				var elements = $('#inputOne').next().find('ul li');
 
 				assert.equal(4, elements.length, 'Response size');
@@ -373,27 +365,26 @@ QUnit.test('getSelectedItemIndex - XML', function (assert) {
 
 				assert.equal(1, afterSelectedItem, 'getSelectedItemIndex returns actual item after click');
 
-				QUnit.start();
+				done();
 			}
 		}
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('re').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
-	expect(6);
 });
 
 QUnit.test('getSelectedItemIndex - response - two different easyAutocomplete instances', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('#inputOne').easyAutocomplete({
 
 		url: 'resources/colors_string.json',
@@ -421,29 +412,28 @@ QUnit.test('getSelectedItemIndex - response - two different easyAutocomplete ins
 				assert.equal(1, $('#inputOne').getSelectedItemIndex(), 'getSelectedItemIndex from #inputOne');
 				assert.equal(2, $('.inputOne').getSelectedItemIndex(), 'getSelectedItemIndex .inputOne');
 
-				QUnit.start();
+				done();
 			}
 		}
 
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
 	$('.inputOne').val('more').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	expect(2);
 });
 
 
 QUnit.test('getSelectedItemIndex should work with categories', function (assert) {
 
 
-	//given
+	// given
 	$('#inputOne').easyAutocomplete({
 
 		categories: [{
@@ -465,26 +455,25 @@ QUnit.test('getSelectedItemIndex should work with categories', function (assert)
 
 				assert.equal(4, $('#inputOne').getSelectedItemIndex(), 'second fruit selected');
 
-				QUnit.start();
+				done();
 			}
 		}
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	expect(1);
 });
 
 QUnit.test('getItems - simple data', function (assert) {
 
 
-	//given
+	// given
 	var data = ['black', 'star'],
 		completerOne = $('#inputOne').easyAutocomplete({
 
@@ -492,23 +481,22 @@ QUnit.test('getItems - simple data', function (assert) {
 
 		});
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
 
 
-	//assert
+	// then
 	assert.equal(data.length, $('#inputOne').getItems().length, 'should return the items length');
 	assert.deepEqual(data, $('#inputOne').getItems(), 'should return the items');
 
-	expect(2);
 });
 
 QUnit.test('getItems - json data', function (assert) {
 
 
-	//given
+	// given
 
 	var completerOne = $('#inputOne').easyAutocomplete({
 
@@ -521,31 +509,30 @@ QUnit.test('getItems - json data', function (assert) {
 			list: {
 				onLoadEvent: function () {
 
-					//assert
+					// then
 					var colors = $('#inputOne').getItems();
 
 					assert.deepEqual(expectedColors, colors, 'should return the items');
 
-					QUnit.start();
+					done();
 				}
 			}
 		}),
 		expectedColors = [{name: 'red'}, {name: 'yellow'}, {name: 'brown'}];
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	expect(1);
 });
 
 QUnit.test('getItems should work with categories', function (assert) {
 
 
-	//given
+	// given
 	$('#inputOne').easyAutocomplete({
 
 		categories: [{
@@ -560,32 +547,31 @@ QUnit.test('getItems should work with categories', function (assert) {
 
 			onLoadEvent: function () {
 
-				//assert
+				// then
 				var categories = $('#inputOne').getItems();
 
 				assert.deepEqual(expectedCategories, categories, 'should return the items');
 
-				QUnit.start();
+				done();
 			}
 		}
 	}),
 		expectedCategories = ['Apple', 'Cherry', 'Clementine', 'Honeydew melon', 'Pepper', 'Jerusalem artichoke'];
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	expect(1);
 });
 
 QUnit.test('getItemData - simple data', function (assert) {
 
 
-	//given
+	// given
 	var data = ['black', 'white', 'magenta', 'yellow'],
 		completerOne = $('#inputOne').easyAutocomplete({
 
@@ -593,13 +579,13 @@ QUnit.test('getItemData - simple data', function (assert) {
 
 		});
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
 
 
-	//assert
+	// then
 	assert.equal(data[0], $('#inputOne').getItemData(0), 'first element');
 	assert.equal(data[1], $('#inputOne').getItemData(1), 'second element');
 	assert.equal(data[2], $('#inputOne').getItemData(2), 'third element');
@@ -608,13 +594,12 @@ QUnit.test('getItemData - simple data', function (assert) {
 	assert.equal(-1, $('#inputOne').getItemData(-1), 'not exist');
 	assert.equal(-1, $('#inputOne').getItemData('not exist'), 'fnot exist');
 
-	expect(7);
 });
 
 QUnit.test('getItemData - json data', function (assert) {
 
 
-	//given
+	// given
 
 	var completerOne = $('#inputOne').easyAutocomplete({
 
@@ -627,7 +612,7 @@ QUnit.test('getItemData - json data', function (assert) {
 		list: {
 			onLoadEvent: function () {
 
-				//assert
+				// then
 				assert.equal('red', $('#inputOne').getItemData(0)['name'], 'first element');
 				assert.equal('yellow', $('#inputOne').getItemData(1).name, 'second element');
 				assert.equal('brown', $('#inputOne').getItemData(2).name, 'third element');
@@ -635,25 +620,24 @@ QUnit.test('getItemData - json data', function (assert) {
 				assert.equal(-1, $('#inputOne').getItemData(-1), 'not exist');
 				assert.equal(-1, $('#inputOne').getItemData('not exist'), 'fnot exist');
 
-				QUnit.start();
+				done();
 			}
 		}
 	});
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	expect(6);
 });
 
 QUnit.test('getItemData should work with categories', function (assert) {
 
 
-	//given
+	// given
 	$('#inputOne').easyAutocomplete({
 
 		categories: [{
@@ -668,7 +652,7 @@ QUnit.test('getItemData should work with categories', function (assert) {
 
 			onLoadEvent: function () {
 
-				//assert
+				// then
 				assert.equal('Apple', $('#inputOne').getItemData(0), 'first element');
 				assert.equal('Cherry', $('#inputOne').getItemData(1), 'second element');
 				assert.equal('Clementine', $('#inputOne').getItemData(2), 'third element');
@@ -678,25 +662,24 @@ QUnit.test('getItemData should work with categories', function (assert) {
 				assert.equal(-1, $('#inputOne').getItemData(-1), 'not exist');
 				assert.equal(-1, $('#inputOne').getItemData('not exist'), 'fnot exist');
 
-				QUnit.start();
+				done();
 			}
 		}
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	expect(8);
 });
 
 QUnit.test('getItemData - XML', function (assert) {
 
-	//given
+	// given
 	var getValue = function (element) {
 		return $(element).find('name').text();
 	};
@@ -713,7 +696,7 @@ QUnit.test('getItemData - XML', function (assert) {
 		list: {
 			onLoadEvent: function () {
 
-				//assert
+				// then
 				assert.equal('red', getValue($('#inputOne').getItemData(0)), 'first element');
 				assert.equal('green', getValue($('#inputOne').getItemData(1)), 'second element');
 				assert.equal('blue', getValue($('#inputOne').getItemData(2)), 'third element');
@@ -722,27 +705,26 @@ QUnit.test('getItemData - XML', function (assert) {
 				assert.equal(-1, $('#inputOne').getItemData(-1), 'not exist');
 				assert.equal(-1, $('#inputOne').getItemData('not exist'), 'fnot exist');
 
-				QUnit.start();
+				done();
 			}
 		}
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('re').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
-	expect(7);
 });
 
 QUnit.test('getItemData - two different easyAutocomplete instances', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('#inputOne').easyAutocomplete({
 
 		url: 'resources/colors.json',
@@ -761,22 +743,21 @@ QUnit.test('getItemData - two different easyAutocomplete instances', function (a
 				assert.equal('blue', $('#inputOne').getItemData(0).name, 'first element - first instance');
 				assert.equal('red', $('.inputOne').getItemData(0), 'first element - Second instance');
 
-				QUnit.start();
+				done();
 			}
 		}
 
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
 	$('.inputOne').val('more').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	expect(2);
 });
 
 
@@ -787,32 +768,31 @@ QUnit.test('getItemData - two different easyAutocomplete instances', function (a
 QUnit.test('getSelectedItemData - no selected item', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('#inputOne').easyAutocomplete({
 
 		data: ['black', 'white', 'magenta', 'yellow']
 
 	});
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
 
-	//assert
+	// then
 	var elements = $('#inputOne').next().find('ul li');
 	var selectedItemData = $('#inputOne').getSelectedItemData();
 
 	assert.equal(4, elements.length, 'Response size');
 	assert.equal(-1, selectedItemData, 'getSelectedItemData returns actual item data');
 
-	expect(2);
 });
 
 QUnit.test('getSelectedItemData - local data', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('#inputOne').easyAutocomplete({
 
 		data: ['black', 'white', 'magenta', 'yellow']
@@ -820,7 +800,7 @@ QUnit.test('getSelectedItemData - local data', function (assert) {
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
@@ -830,20 +810,19 @@ QUnit.test('getSelectedItemData - local data', function (assert) {
 
 	var selectedItemData = $('#inputOne').getSelectedItemData();
 
-	//assert
+	// then
 	var elements = $('#inputOne').next().find('ul li');
 
 	assert.equal(4, elements.length, 'Response size');
 	assert.equal('white', selectedItemData, 'getSelectedItemData returns actual item data');
 
-	expect(2);
 });
 
 
 QUnit.test('getSelectedItemData - response json', function (assert) {
 
 
-	//given
+	// given
 	var selectedData = {name: 'yellow'};
 
 	var completerOne = $('#inputOne').easyAutocomplete({
@@ -861,35 +840,34 @@ QUnit.test('getSelectedItemData - response json', function (assert) {
 
 				var selectedItemData = $('#inputOne').getSelectedItemData();
 
-				//assert
+				// then
 				var elements = $('#inputOne').next().find('ul li');
 
 				assert.equal(3, elements.length, 'Response size');
 				assert.ok(selectedData.name === selectedItemData.name, 'getSelectedItemIndex returns actual item data');
 
-				QUnit.start();
+				done();
 			}
 		}
 
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
-	expect(2);
 });
 
 
 QUnit.test('getSelectedItemData should work with categories', function (assert) {
 
 
-	//given
+	// given
 	$('#inputOne').easyAutocomplete({
 
 		categories: [{
@@ -911,26 +889,25 @@ QUnit.test('getSelectedItemData should work with categories', function (assert) 
 
 				assert.equal('Jerusalem artichoke', $('#inputOne').getSelectedItemData(), 'second fruit selected');
 
-				QUnit.start();
+				done();
 			}
 		}
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	expect(1);
 });
 
 
 QUnit.test('getSelectedItemData - XML', function (assert) {
 
-	//given
+	// given
 	var getValue = function (element) {
 		return $(element).find('name').text();
 	};
@@ -951,36 +928,35 @@ QUnit.test('getSelectedItemData - XML', function (assert) {
 			},
 			onSelectItemEvent: function () {
 
-				//assert
+				// then
 				var selectedItemData = $('#inputOne').getSelectedItemData();
 
-				//assert
+				// then
 				var elements = $('#inputOne').next().find('ul li');
 
 				assert.equal(4, elements.length, 'Response size');
 				assert.equal('green', getValue(selectedItemData), 'getSelectedItemData returns actual item after click');
 
-				QUnit.start();
+				done();
 			}
 		}
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('re').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
-	expect(2);
 });
 
 QUnit.test('getSelectedItemData - response - two different easyAutocomplete instances', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('#inputOne').easyAutocomplete({
 
 		url: 'resources/colors_string.json',
@@ -1008,20 +984,19 @@ QUnit.test('getSelectedItemData - response - two different easyAutocomplete inst
 				assert.equal('yellow', $('#inputOne').getSelectedItemData(), 'getSelectedItemData from #inputOne');
 				assert.equal('brown', $('.inputOne').getSelectedItemData(), 'getSelectedItemData .inputOne');
 
-				QUnit.start();
+				done();
 			}
 		}
 
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('more').trigger(e);
 	$('.inputOne').val('more').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	expect(2);
 });

@@ -5,19 +5,19 @@
  */
 QUnit.test('Build tests', function (assert) {
 
-	//given
+	// given
 	var completer = new EasyAutocomplete.main($('#inputOne'), {url: 'test.json'});
 
 	var Consts = completer.getConstants();
 
 
-	//execute
+	// when
 	completer.init();
 	var field = document.getElementById('inputOne'),
 		parent = field.parentNode,
 		container = field.nextSibling;
 
-	//assert
+	// then
 	assert.equal('off', field.getAttribute('autocomplete'), 'Field autocomplete off');
 
 	assert.equal('DIV', parent.nodeName, 'Parent tag type');
@@ -30,19 +30,19 @@ QUnit.test('Build tests', function (assert) {
 
 QUnit.test('Build completer twice on same element', function (assert) {
 
-	//given
+	// given
 	var completer = new EasyAutocomplete.main($('#inputOne'), {url: 'test.json'});
 	var completer = new EasyAutocomplete.main($('#inputOne'), {url: 'test2.json'});
 
 	var Consts = completer.getConstants();
 
-	//execute
+	// when
 	completer.init();
 	var field = document.getElementById('inputOne'),
 		parent = field.parentNode,
 		container = field.nextSibling;
 
-	//assert
+	// then
 	assert.equal('off', field.getAttribute('autocomplete'), 'Field autocomplete off');
 
 	assert.equal('DIV', parent.nodeName, 'Parent tag type');
@@ -58,13 +58,13 @@ QUnit.test('Build completer twice on same element', function (assert) {
 QUnit.test('Build completer twice on different element', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {url: 'test.json'});
 	var completerTwo = new EasyAutocomplete.main($('#inputTwo'), {url: 'test2.json', autocompleteOff: false});
 
 	var Consts = completerOne.getConstants();
 
-	//execute
+	// when
 	completerOne.init();
 	completerTwo.init();
 
@@ -83,7 +83,7 @@ QUnit.test('Build completer twice on different element', function (assert) {
 	containers.push(fields[1].nextSibling);
 
 
-	//assert
+	// then
 	assert.equal('off', fields[0].getAttribute('autocomplete'), 'Field autocomplete off');
 
 	assert.equal('DIV', parents[0].nodeName, 'Parent tag type');
@@ -107,44 +107,42 @@ QUnit.test('Build completer twice on different element', function (assert) {
 
 QUnit.test('Build tests - no placeholder', function (assert) {
 
-	//given
+	// given
 	var completer = new EasyAutocomplete.main($('#inputOne'), {url: 'test.json'});
 
 
-	//execute
+	// when
 	completer.init();
 
 	var $field = $('#inputOne');
 
-	//assert
+	// then
 	assert.equal(undefined, $field.attr('placeholder'), 'No placeholder');
 
-	expect(1);
 });
 
 
 QUnit.test('Build tests - placeholder', function (assert) {
 
-	//given
+	// given
 	var phrase = 'search phrase',
 		completer = new EasyAutocomplete.main($('#inputTwo'), {url: 'test.json', placeholder: phrase});
 
 
-	//execute
+	// when
 	completer.init();
 
 	var $field = $('#inputTwo');
 
-	//assert
+	// then
 	assert.equal(phrase, $field.attr('placeholder'), 'Placeholder Ok');
 
-	expect(1);
 });
 
 
 QUnit.test('Build tests - color theme', function (assert) {
 
-	//given
+	// given
 	var cssClass = 'blue-light',
 		completer = new EasyAutocomplete.main($('#inputOne'), {url: 'test.json', theme: cssClass});
 
@@ -159,23 +157,22 @@ QUnit.test('Build tests - color theme', function (assert) {
 		return false;
 	};
 
-	//execute
+	// when
 	completer.init();
 
 	var $field = $('#inputOne');
 
 	var classes = $field.parent().attr('class').split(' ');
 
-	//assert
+	// then
 	assert.ok(classes.contains('eac-' + cssClass), 'Color theme');
 
-	expect(1);
 });
 
 
 QUnit.test('Build tests - custom classes', function (assert) {
 
-	//given
+	// given
 	var cssClass = 'my custom classes',
 		completer = new EasyAutocomplete.main($('#inputTwo'), {url: 'test.json', cssClasses: cssClass});
 
@@ -190,25 +187,25 @@ QUnit.test('Build tests - custom classes', function (assert) {
 		return false;
 	};
 
-	//execute
+	// when
 	completer.init();
 
 	var $field = $('#inputTwo');
 
 	var classes = $field.parent().attr('class').split(' ');
 
-	//assert
+	// then
 	assert.ok(classes.contains('my'), 'first class');
 	assert.ok(classes.contains('custom'), 'second css class');
 	assert.ok(classes.contains('classes'), 'third css class');
 
-	expect(3);
+
 });
 
 QUnit.test('Build tests - themes & custom classes', function (assert) {
 
-	//given
-	var theme = 'blue-light'
+	// given
+	var theme = 'blue-light';
 	cssClass = 'my custom classes',
 		completer = new EasyAutocomplete.main($('#inputTwo'), {url: 'test.json', theme: theme, cssClasses: cssClass});
 
@@ -223,54 +220,49 @@ QUnit.test('Build tests - themes & custom classes', function (assert) {
 		return false;
 	};
 
-	//execute
+	// when
 	completer.init();
 
 	var $field = $('#inputTwo');
 
 	var classes = $field.parent().attr('class').split(' ');
 
-	//assert
+	// then
 	assert.ok(classes.contains('eac-' + theme), 'theme class');
 	assert.ok(classes.contains('my'), 'first class');
 	assert.ok(classes.contains('custom'), 'second css class');
 	assert.ok(classes.contains('classes'), 'third css class');
 
-	expect(4);
 });
 
 QUnit.test('Build tests - wrapper width', function (assert) {
 
-	//given
+	// given
 	var completer = new EasyAutocomplete.main($('#inputTwo'), {url: 'test.json'});
 
-	//execute
+	// when
 	completer.init();
 
-	//assert
+	// then
 	assert.ok($('#inputTwo').parent().attr('style') !== undefined, 'Passes - wrapper width');
 
-	expect(1);
 });
 
 QUnit.test('Build tests - wrapper width- adjusting turned off', function (assert) {
 
-	//given
+	// given
 	var completer = new EasyAutocomplete.main($('#inputTwo'), {url: 'test.json', adjustWidth: false});
 
-	//execute
+	// when
 	completer.init();
 
-	//assert
+	// then
 	assert.ok($('#inputTwo').parent().attr('style') === undefined, 'Passes - wrapper width');
 
-	expect(1);
 });
 
 QUnit.test('Minimal number of characters in input phrase - false', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: ['black', 'white', 'magenta', 'yellow'],
@@ -279,7 +271,7 @@ QUnit.test('Minimal number of characters in input phrase - false', function (ass
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -289,7 +281,7 @@ QUnit.test('Minimal number of characters in input phrase - false', function (ass
 	$('#inputOne').val('a').trigger(e);
 
 
-	//assert
+	// then
 
 	var elements = $('#inputOne').next().find('ul li');
 
@@ -298,9 +290,7 @@ QUnit.test('Minimal number of characters in input phrase - false', function (ass
 });
 
 QUnit.test('Minimal number of characters in input phrase - true', function (assert) {
-	expect(5);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: ['black', 'white', 'magenta', 'yellow'],
@@ -309,7 +299,7 @@ QUnit.test('Minimal number of characters in input phrase - true', function (asse
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -318,7 +308,7 @@ QUnit.test('Minimal number of characters in input phrase - true', function (asse
 	$('#inputOne').val('more').trigger(e);
 
 
-	//assert
+	// then
 
 	var elements = $('#inputOne').next().find('ul li');
 
@@ -332,9 +322,7 @@ QUnit.test('Minimal number of characters in input phrase - true', function (asse
 
 
 QUnit.test('List, hideOnEmptyPhrase - false ', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 		url: 'resources/colors_string.json',
 
@@ -349,7 +337,7 @@ QUnit.test('List, hideOnEmptyPhrase - false ', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -357,23 +345,21 @@ QUnit.test('List, hideOnEmptyPhrase - false ', function (assert) {
 	e.keyCode = 8; //backspace
 	$('#inputOne').val('').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
 
 		assert.equal(3, elements.length, 'Response size');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('List, hideOnEmptyPhrase - true - empty input', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 		url: 'resources/colors_string.json',
 
@@ -385,7 +371,7 @@ QUnit.test('List, hideOnEmptyPhrase - true - empty input', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -394,7 +380,7 @@ QUnit.test('List, hideOnEmptyPhrase - true - empty input', function (assert) {
 	$('#inputOne').val('').trigger(e);
 
 
-	//assert
+	// then
 	var elements = $('#inputOne').next().find('ul li');
 
 	assert.equal(0, elements.length, 'Response size');
@@ -404,9 +390,7 @@ QUnit.test('List, hideOnEmptyPhrase - true - empty input', function (assert) {
 
 
 QUnit.test('List, hideOnEmptyPhrase - true - not empty input', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 		url: 'resources/colors_string.json',
 
@@ -421,7 +405,7 @@ QUnit.test('List, hideOnEmptyPhrase - true - not empty input', function (assert)
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -429,25 +413,23 @@ QUnit.test('List, hideOnEmptyPhrase - true - not empty input', function (assert)
 	e.keyCode = 8; //backspace
 	$('#inputOne').val('aaaa').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
 
 		assert.equal(3, elements.length, 'Response size');
 
-		QUnit.start();
+		done();
 	}
 
 
 });
 
 QUnit.test('Build cssClasses - undefined', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 		url: 'resources/colors_string.json',
 
@@ -456,7 +438,7 @@ QUnit.test('Build cssClasses - undefined', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -465,7 +447,7 @@ QUnit.test('Build cssClasses - undefined', function (assert) {
 	$('#inputOne').val('aaaa').trigger(e);
 
 
-	//assert
+	// then
 
 	var classes = $('#inputOne').parent().attr('class');
 
@@ -475,9 +457,7 @@ QUnit.test('Build cssClasses - undefined', function (assert) {
 });
 
 QUnit.test('Shows container element \'<ul>\' when there are items', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: ['orange', 'lime', 'pineapple']
@@ -485,7 +465,7 @@ QUnit.test('Shows container element \'<ul>\' when there are items', function (as
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -494,7 +474,7 @@ QUnit.test('Shows container element \'<ul>\' when there are items', function (as
 	$('#inputOne').val('aaaa').trigger(e);
 
 
-	//assert
+	// then
 
 	var $container = $('#inputOne').parent().find('ul');
 
@@ -504,9 +484,7 @@ QUnit.test('Shows container element \'<ul>\' when there are items', function (as
 });
 
 QUnit.test('Hides container element \'<ul>\' when there are no items', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: []
@@ -514,7 +492,7 @@ QUnit.test('Hides container element \'<ul>\' when there are no items', function 
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -523,7 +501,7 @@ QUnit.test('Hides container element \'<ul>\' when there are no items', function 
 	$('#inputOne').val('aaaa').trigger(e);
 
 
-	//assert
+	// then
 
 	var $container = $('#inputOne').parent().find('ul');
 
@@ -533,9 +511,7 @@ QUnit.test('Hides container element \'<ul>\' when there are no items', function 
 });
 
 QUnit.test('Hides container element \'<ul>\' when there are no items that matches', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: ['orange', 'apple'],
@@ -549,7 +525,7 @@ QUnit.test('Hides container element \'<ul>\' when there are no items that matche
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -558,7 +534,7 @@ QUnit.test('Hides container element \'<ul>\' when there are no items that matche
 	$('#inputOne').val('aaaa').trigger(e);
 
 
-	//assert
+	// then
 
 	var $container = $('#inputOne').parent().find('ul');
 

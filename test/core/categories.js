@@ -4,9 +4,7 @@
  * @author Łukasz Pawełczak
  */
 QUnit.test('Simple category', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			categories: [{
@@ -15,13 +13,13 @@ QUnit.test('Simple category', function (assert) {
 			url: 'resources/categories.json',
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			}
 		});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -30,10 +28,10 @@ QUnit.test('Simple category', function (assert) {
 	$('#inputOne').val('c').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -43,14 +41,12 @@ QUnit.test('Simple category', function (assert) {
 		assert.equal('Cherry', elements.eq(1).find('div').text(), 'Second element value');
 		assert.equal('Honeydew melon', elements.eq(3).find('div').text(), 'Last element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Simple categories - two list', function (assert) {
-	expect(7);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			categories: [{
@@ -61,7 +57,7 @@ QUnit.test('Simple categories - two list', function (assert) {
 			url: 'resources/categories.json',
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			},
 
@@ -71,7 +67,7 @@ QUnit.test('Simple categories - two list', function (assert) {
 		});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -80,10 +76,10 @@ QUnit.test('Simple categories - two list', function (assert) {
 	$('#inputOne').val('c').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -98,14 +94,12 @@ QUnit.test('Simple categories - two list', function (assert) {
 		assert.equal('Fennel', elements.eq(7).find('div').text(), 'Fourth element value - second category');
 
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Simple categories - two list - local data', function (assert) {
-	expect(7);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			categories: [{
@@ -125,7 +119,7 @@ QUnit.test('Simple categories - two list - local data', function (assert) {
 		});
 
 
-	//execute
+	// when
 	completerOne.init();
 
 	var e = $.Event('keyup');
@@ -133,7 +127,7 @@ QUnit.test('Simple categories - two list - local data', function (assert) {
 	$('#inputOne').val('c').trigger(e);
 
 
-	//assert
+	// then
 	var elements = $('#inputOne').next().find('ul li');
 
 	assert.equal(8, elements.length, 'Response size');
@@ -148,9 +142,7 @@ QUnit.test('Simple categories - two list - local data', function (assert) {
 });
 
 QUnit.test('Simple category - no list location', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			categories: [{
@@ -159,7 +151,7 @@ QUnit.test('Simple category - no list location', function (assert) {
 			url: 'resources/colors.json',
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			},
 
@@ -169,7 +161,7 @@ QUnit.test('Simple category - no list location', function (assert) {
 		});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -178,10 +170,10 @@ QUnit.test('Simple category - no list location', function (assert) {
 	$('#inputOne').val('c').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -191,14 +183,12 @@ QUnit.test('Simple category - no list location', function (assert) {
 		assert.equal('yellow', elements.eq(1).find('div').text(), 'Second element value');
 		assert.equal('brown', elements.eq(2).find('div').text(), 'Last element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Simple category - with header', function (assert) {
-	expect(6);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			categories: [{
@@ -208,7 +198,7 @@ QUnit.test('Simple category - with header', function (assert) {
 			url: 'resources/categories.json',
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			},
 
@@ -218,7 +208,7 @@ QUnit.test('Simple category - with header', function (assert) {
 		});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -227,10 +217,10 @@ QUnit.test('Simple category - with header', function (assert) {
 	$('#inputOne').val('c').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul').find(' > div, > li');
@@ -242,14 +232,12 @@ QUnit.test('Simple category - with header', function (assert) {
 		assert.equal('Cherry', elements.eq(2).find('div').text(), 'Second element value');
 		assert.equal('Honeydew melon', elements.eq(4).find('div').text(), 'Last element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Simple category - two categories, with header', function (assert) {
-	expect(7);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			categories: [{
@@ -262,7 +250,7 @@ QUnit.test('Simple category - two categories, with header', function (assert) {
 			url: 'resources/categories.json',
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			},
 
@@ -272,7 +260,7 @@ QUnit.test('Simple category - two categories, with header', function (assert) {
 		});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -281,10 +269,10 @@ QUnit.test('Simple category - two categories, with header', function (assert) {
 	$('#inputOne').val('c').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul').find(' > div, > li');
@@ -297,15 +285,13 @@ QUnit.test('Simple category - two categories, with header', function (assert) {
 		assert.equal(true, elements.eq(5).hasClass('eac-category'), 'Header - second category');
 		assert.equal('Pepper', elements.eq(6).find('div').text(), 'First element value - second category');
 
-		QUnit.start();
+		done();
 	}
 });
 
 
 QUnit.test('Category - data as objects list', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			categories: [{
@@ -315,7 +301,7 @@ QUnit.test('Category - data as objects list', function (assert) {
 			url: 'resources/categories/fruits.json',
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			},
 
@@ -325,7 +311,7 @@ QUnit.test('Category - data as objects list', function (assert) {
 		});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -334,10 +320,10 @@ QUnit.test('Category - data as objects list', function (assert) {
 	$('#inputOne').val('c').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -347,14 +333,12 @@ QUnit.test('Category - data as objects list', function (assert) {
 		assert.equal('Cherry', elements.eq(1).find('div').text(), 'Second element value');
 		assert.equal('Honeydew melon', elements.eq(3).find('div').text(), 'Last element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Category - data as objects list - two different list', function (assert) {
-	expect(7);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			categories: [{
@@ -370,7 +354,7 @@ QUnit.test('Category - data as objects list - two different list', function (ass
 			url: 'resources/categories/fruits.json',
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			},
 
@@ -380,7 +364,7 @@ QUnit.test('Category - data as objects list - two different list', function (ass
 		});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -389,10 +373,10 @@ QUnit.test('Category - data as objects list - two different list', function (ass
 	$('#inputOne').val('c').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -404,17 +388,15 @@ QUnit.test('Category - data as objects list - two different list', function (ass
 
 		assert.equal('Jerusalem artichoke', elements.eq(5).find('div').text(), 'First element value - second category');
 		assert.equal('Green bean', elements.eq(6).find('div').text(), 'Second element value - second category');
-		assert.equal('Fennel', elements.eq(7).find('div').text(), 'Last element value - second category')
+		assert.equal('Fennel', elements.eq(7).find('div').text(), 'Last element value - second category');
 
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Category - xml - simple', function (assert) {
-	expect(6);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 
@@ -428,13 +410,13 @@ QUnit.test('Category - xml - simple', function (assert) {
 			url: 'resources/colors.xml',
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			}
 		});
 
 
-	//execute
+	// when
 	completerOne.init();
 
 	var e = $.Event('keyup');
@@ -442,10 +424,10 @@ QUnit.test('Category - xml - simple', function (assert) {
 	$('#inputOne').val('c').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul').find(' > div, > li');
 
@@ -457,14 +439,12 @@ QUnit.test('Category - xml - simple', function (assert) {
 		assert.equal('pink', elements.eq(4).find('div').text(), 'Last element value');
 
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Category - xml - one list', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			categories: [{
@@ -482,13 +462,13 @@ QUnit.test('Category - xml - one list', function (assert) {
 			url: 'resources/categories/fruits.xml',
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			}
 		});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -497,10 +477,10 @@ QUnit.test('Category - xml - one list', function (assert) {
 	$('#inputOne').val('c').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -511,14 +491,12 @@ QUnit.test('Category - xml - one list', function (assert) {
 		assert.equal('Honeydew melon', elements.eq(3).find('div').text(), 'Last element value');
 
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Category - xml - two list', function (assert) {
-	expect(7);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			categories: [{
@@ -541,7 +519,7 @@ QUnit.test('Category - xml - two list', function (assert) {
 			url: 'resources/categories/fruits.xml',
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			},
 
@@ -551,7 +529,7 @@ QUnit.test('Category - xml - two list', function (assert) {
 		});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -560,10 +538,10 @@ QUnit.test('Category - xml - two list', function (assert) {
 	$('#inputOne').val('c').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -578,14 +556,14 @@ QUnit.test('Category - xml - two list', function (assert) {
 		assert.equal('Cucamber', elements.eq(7).find('div').text(), 'Last element value');
 
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Category and processData - sort', function (assert) {
-	expect(9);
 
-	//given
+
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			categories: [{
@@ -606,13 +584,13 @@ QUnit.test('Category and processData - sort', function (assert) {
 
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			}
 		});
 
 
-	//execute
+	// when
 	completerOne.init();
 
 	var e = $.Event('keyup');
@@ -620,10 +598,10 @@ QUnit.test('Category and processData - sort', function (assert) {
 	$('#inputOne').val('c').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul').find(' > div, > li');
 
@@ -637,15 +615,15 @@ QUnit.test('Category and processData - sort', function (assert) {
 		assert.equal('Fennel', elements.eq(6).find('div').text(), 'Courgette element value - second category');
 		assert.equal('Green bean', elements.eq(7).find('div').text(), 'Fennel element value - second category');
 
-		QUnit.start();
+		done();
 	}
 });
 
 
 QUnit.test('Category and processData - match', function (assert) {
-	expect(9);
 
-	//given
+
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			categories: [{
@@ -665,13 +643,13 @@ QUnit.test('Category and processData - match', function (assert) {
 
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			}
 		});
 
 
-	//execute
+	// when
 	completerOne.init();
 
 	var e = $.Event('keyup');
@@ -679,10 +657,10 @@ QUnit.test('Category and processData - match', function (assert) {
 	$('#inputOne').val('a').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul').find(' > div, > li');
 
@@ -696,14 +674,14 @@ QUnit.test('Category and processData - match', function (assert) {
 		assert.equal('Green bean', elements.eq(6).find('div').text(), 'Green bean element value - second category');
 		assert.equal('Yam', elements.eq(7).find('div').text(), 'Yam element value - second category');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Category and processData - maxNumberOfElements - default', function (assert) {
-	expect(9);
 
-	//given
+
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			categories: [{
@@ -721,13 +699,13 @@ QUnit.test('Category and processData - maxNumberOfElements - default', function 
 
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			}
 		});
 
 
-	//execute
+	// when
 	completerOne.init();
 
 	var e = $.Event('keyup');
@@ -735,10 +713,10 @@ QUnit.test('Category and processData - maxNumberOfElements - default', function 
 	$('#inputOne').val('a').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul').find(' > div, > li');
 
@@ -752,14 +730,12 @@ QUnit.test('Category and processData - maxNumberOfElements - default', function 
 		assert.equal('Pepper', elements.eq(6).find('div').text(), 'Pepper element value - second category');
 		assert.equal('Jerusalem artichoke', elements.eq(7).find('div').text(), 'Jerusalem artichoke element value - second category');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Category and processData - maxNumberOfElements - specified - list size default', function (assert) {
-	expect(8);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			categories: [{
@@ -775,13 +751,13 @@ QUnit.test('Category and processData - maxNumberOfElements - specified - list si
 
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			}
 		});
 
 
-	//execute
+	// when
 	completerOne.init();
 
 	var e = $.Event('keyup');
@@ -789,10 +765,10 @@ QUnit.test('Category and processData - maxNumberOfElements - specified - list si
 	$('#inputOne').val('a').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul').find(' > div, > li');
 
@@ -805,15 +781,13 @@ QUnit.test('Category and processData - maxNumberOfElements - specified - list si
 		assert.equal('Jerusalem artichoke', elements.eq(5).find('div').text(), 'Jerusalem artichoke element value - second category');
 		assert.equal('Green bean', elements.eq(6).find('div').text(), 'Green bean element value - second category');
 
-		QUnit.start();
+		done();
 	}
 });
 
 
 QUnit.test('Category and processData - maxNumberOfElements - specified - list size specified', function (assert) {
-	expect(7);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			categories: [{
@@ -834,13 +808,13 @@ QUnit.test('Category and processData - maxNumberOfElements - specified - list si
 
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			}
 		});
 
 
-	//execute
+	// when
 	completerOne.init();
 
 	var e = $.Event('keyup');
@@ -848,10 +822,10 @@ QUnit.test('Category and processData - maxNumberOfElements - specified - list si
 	$('#inputOne').val('a').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul').find(' > div, > li');
 
@@ -863,15 +837,13 @@ QUnit.test('Category and processData - maxNumberOfElements - specified - list si
 		assert.equal('Pepper', elements.eq(4).find('div').text(), 'Pepper element value - second category');
 		assert.equal('Jerusalem artichoke', elements.eq(5).find('div').text(), 'Jerusalem artichoke element value - second category');
 
-		QUnit.start();
+		done();
 	}
 });
 
 
 QUnit.test('Categories - when list ist empty, header should be hidden', function (assert) {
-	expect(5);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			categories: [{
@@ -888,7 +860,7 @@ QUnit.test('Categories - when list ist empty, header should be hidden', function
 		});
 
 
-	//execute
+	// when
 	completerOne.init();
 
 	var e = $.Event('keyup');
@@ -896,7 +868,7 @@ QUnit.test('Categories - when list ist empty, header should be hidden', function
 	$('#inputOne').val('c').trigger(e);
 
 
-	//assert
+	// then
 	var elements = $('#inputOne').next().find('ul').find(' > div, > li');
 
 	assert.equal(5, elements.length, 'Response size');

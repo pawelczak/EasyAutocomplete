@@ -48,7 +48,7 @@ function assertValue(value, objectOne, objectTwo) {
 
 QUnit.test('Configuration Default values', function (assert) {
 
-	//given
+	// given
 	var options = {};
 	var expectedOptions = {
 		data: 'list-required',
@@ -143,11 +143,11 @@ QUnit.test('Configuration Default values', function (assert) {
 	};
 
 
-	//execute
+	// when
 	var actualOptions = new EasyAutocomplete.Configuration(options);
 
 
-	//assert
+	// then
 	assertValue._assertMethod = assert;
 	assertValue._expected = expectedOptions;
 	assertValue._actual = actualOptions;
@@ -166,28 +166,26 @@ QUnit.test('Configuration Default values', function (assert) {
 	assertValue('minCharNumber');
 
 
-	//assertValue("getValue");
+	// thenValue("getValue");
 
 	assertValue('maxNumberOfElements', 'list');
 
 	assertValue('enabled', 'sort', 'list');
-	//assertValue("method", "sort", "list");
+	// thenValue("method", "sort", "list");
 
 	assertValue('enabled', 'match', 'list');
-	//assertValue("method", "match", "list");
+	// thenValue("method", "match", "list");
 
 	assertValue('type', 'showAnimation', 'list');
 	assertValue('time', 'showAnimation', 'list');
 
 	assertValue('type', 'hideAnimation', 'list');
 	assertValue('time', 'hideAnimation', 'list');
-
-	expect(18);
 });
 
 QUnit.test('Configuration simple', function (assert) {
 
-	//given
+	// given
 
 	var options = {
 
@@ -227,10 +225,10 @@ QUnit.test('Configuration simple', function (assert) {
 	};
 
 
-	//execute
+	// when
 	var actualOptions = new EasyAutocomplete.Configuration(options);
 
-	//assert
+	// then
 	assertValue._assertMethod = assert;
 	assertValue._expected = options;
 	assertValue._actual = actualOptions;
@@ -248,13 +246,11 @@ QUnit.test('Configuration simple', function (assert) {
 
 	assertValue('enabled', 'match', 'list');
 	assertValue('method', 'match', 'list');
-
-	expect(10);
 });
 
 QUnit.test('Configuration mixed', function (assert) {
 
-	//given
+	// given
 	var defaultOptions = {
 
 		autocompleteOff: true,
@@ -334,10 +330,10 @@ QUnit.test('Configuration mixed', function (assert) {
 	};
 
 
-	//execute
+	// when
 	var actualOptions = new EasyAutocomplete.Configuration(options);
 
-	//assert
+	// then
 	assertValue._assertMethod = assert;
 	assertValue._expected = options;
 	assertValue._actual = actualOptions;
@@ -356,68 +352,68 @@ QUnit.test('Configuration mixed', function (assert) {
 	assertValue('placeholder');
 	assertValue('highlightPhrase');
 	assertValue('maxNumberOfElements', 'list');
-	//assertDefaultValue("method", "sort", "list");
+	// thenDefaultValue("method", "sort", "list");
 	assertValue('enabled', 'match', 'list');
 
-	expect(11);
+
 });
 
 QUnit.test('Parameter not in configuration', function (assert) {
 
-	//given
+	// given
 	var options = {
 		foo: 'bar',
 		loggerEnabled: false
 	};
 
-	//execute
+	// when
 	var actualOptions = new EasyAutocomplete.Configuration(options);
 
 
-	//assert
+	// then
 	assert.equal(undefined, actualOptions.get('foo'), 'Passed - configuration parameter not defined');
 
-	expect(1);
+
 });
 
 QUnit.test('Configuration required fields', function (assert) {
 
-	//given
+	// given
 	var options = {};
 
-	//execute
+	// when
 	var actualOptions = new EasyAutocomplete.Configuration(options);
 
-	//assert
+	// then
 	assert.ok('list-required' == actualOptions.get('url'), 'Passed - url equals list-required');
 	assert.ok('list-required' == actualOptions.get('data'), 'Passed - data equals list-required');
 
-	expect(2);
+
 });
 
 QUnit.test('Data field', function (assert) {
 
-	//given
+	// given
 	var options = {
 		data: ['red', 'gree', 'pink']
 	};
 
-	//execute
+	// when
 	var actualOptions = new EasyAutocomplete.Configuration(options);
 
-	//assert
+	// then
 	assertValue._assertMethod = assert;
 	assertValue._expected = options;
 	assertValue._actual = actualOptions;
 
 	assertValue('data');
 
-	expect(1);
+
 });
 
 QUnit.test('String getValue', function (assert) {
 
-	//given
+	// given
 	var options = {
 			data: ['red', 'gree', 'pink'],
 			getValue: 'name'
@@ -427,20 +423,20 @@ QUnit.test('String getValue', function (assert) {
 		},
 		testObject = {name: 'foo', test: 'bar'};
 
-	//execute
+	// when
 	var actualOptions = new EasyAutocomplete.Configuration(options);
 
 
-	//assert
+	// then
 	assert.ok(expectedGetValue(testObject) === actualOptions.get('getValue')(testObject), 'Passed - getValue');
 
-	expect(1);
+
 });
 
 
 QUnit.test('Ajax Settings - string', function (assert) {
 
-	//given
+	// given
 	var options = {
 		ajaxSettings: {
 			dataType: 'xml',
@@ -448,20 +444,20 @@ QUnit.test('Ajax Settings - string', function (assert) {
 		}
 	};
 
-	//execute
+	// when
 	var actualOptions = new EasyAutocomplete.Configuration(options);
 
 
-	//assert
+	// then
 	assert.ok(options.ajaxSettings === actualOptions.get('ajaxSettings'), 'Passed - ajaxSettings');
 
-	expect(1);
+
 });
 
 QUnit.test('Ajax Settings - function', function (assert) {
 
 
-	//given
+	// given
 	var getUrl = function (phrase) {
 		return 'www' + phrase;
 	};
@@ -475,22 +471,22 @@ QUnit.test('Ajax Settings - function', function (assert) {
 		}
 	};
 
-	//execute
+	// when
 	var actualOptions = new EasyAutocomplete.Configuration(options);
 
 
-	//assert
+	// then
 	assert.ok(options.ajaxSettings === actualOptions.get('ajaxSettings'), 'Passed - ajaxSettings');
 	assert.ok(options.ajaxSettings.url.toString() === actualOptions.get('ajaxSettings').url.toString(), 'Passed - ajaxSettings url');
 
-	expect(2);
+
 });
 
 
 QUnit.test('Print wrong configuration property', function (assert) {
 
 
-	//given
+	// given
 	var consol = {
 		phrases: [],
 
@@ -524,42 +520,42 @@ QUnit.test('Print wrong configuration property', function (assert) {
 
 	};
 
-	//execute
+	// when
 	var actualOptions = new EasyAutocomplete.Configuration(options);
 
 	actualOptions.printPropertiesThatDoesntExist(consol, options);
 
-	//assert
+	// then
 	assert.ok(3 === consol.getPhrases().length, 'Passes');
 
-	expect(1);
+
 });
 
 
 QUnit.test('Categories assigned', function (assert) {
 
 
-	//given
+	// given
 	var options = {
 		categories: [{
 			listLocation: 'test'
 		}]
 	};
 
-	//execute
+	// when
 	var actualOptions = new EasyAutocomplete.Configuration(options);
 
 
-	//assert
+	// then
 	assert.ok(true === actualOptions.get('categoriesAssigned'), 'Passed - categoriesAssigned');
 
-	expect(1);
+
 });
 
 QUnit.test('Categories parameters', function (assert) {
 
 
-	//given
+	// given
 	var options = {
 		categories: [{
 			listLocation: 'test',
@@ -571,11 +567,11 @@ QUnit.test('Categories parameters', function (assert) {
 		}]
 	};
 
-	//execute
+	// when
 	var actualOptions = new EasyAutocomplete.Configuration(options);
 
 
-	//assert
+	// then
 	assert.equal('test', actualOptions.get('categories')[0].listLocation, 'Passed - listLocation');
 	assert.equal(5, actualOptions.get('categories')[0].maxNumberOfElements, 'Passed - maxNumberOfElements');
 
@@ -583,27 +579,23 @@ QUnit.test('Categories parameters', function (assert) {
 
 	assert.equal('url', actualOptions.get('categories')[2].listLocation, 'Passed - listLocation');
 	assert.equal(4, actualOptions.get('categories')[2].maxNumberOfElements, 'Passed - maxNumberOfElements - default');
-
-	expect(5);
 });
 
 
 QUnit.test('Categories not assigned', function (assert) {
 
 
-	//given
+	// given
 	var options = {
 		url: 'test'
 	};
 
-	//execute
+	// when
 	var actualOptions = new EasyAutocomplete.Configuration(options);
 
 
-	//assert
+	// then
 	assert.ok(false === actualOptions.get('categoriesAssigned'), 'Passed - categoriesAssigned');
-
-	expect(1);
 });
 
 

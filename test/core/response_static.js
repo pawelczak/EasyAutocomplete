@@ -4,9 +4,7 @@
  * @author Łukasz Pawełczak
  */
 QUnit.test('Local data - empty array', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: []
@@ -14,7 +12,7 @@ QUnit.test('Local data - empty array', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -23,7 +21,7 @@ QUnit.test('Local data - empty array', function (assert) {
 	$('#inputOne').val('a').trigger(e);
 
 
-	//assert
+	// then
 	var elements = $('#inputOne').next().find('ul li');
 
 	assert.equal(0, elements.length, 'Response size');
@@ -31,9 +29,7 @@ QUnit.test('Local data - empty array', function (assert) {
 });
 
 QUnit.test('Local data - string array', function (assert) {
-	expect(5);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: ['red', 'green', 'blue', 'pink']
@@ -41,7 +37,7 @@ QUnit.test('Local data - string array', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -51,7 +47,7 @@ QUnit.test('Local data - string array', function (assert) {
 	$('#inputOne').val('a').trigger(e);
 
 
-	//assert
+	// then
 
 	var elements = $('#inputOne').next().find('ul li');
 
@@ -64,9 +60,7 @@ QUnit.test('Local data - string array', function (assert) {
 });
 
 QUnit.test('Local data - object array', function (assert) {
-	expect(5);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: [{'name': 'red'}, {'name': 'green'}, {'name': 'blue'}, {'name': 'pink'}],
@@ -77,7 +71,7 @@ QUnit.test('Local data - object array', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -86,7 +80,7 @@ QUnit.test('Local data - object array', function (assert) {
 	$('#inputOne').val('').trigger(e);
 
 
-	//assert
+	// then
 
 
 	var elements = $('#inputOne').next().find('ul li');
@@ -101,9 +95,7 @@ QUnit.test('Local data - object array', function (assert) {
 });
 
 QUnit.test('Local data + listLocation- string array', function (assert) {
-	expect(5);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: {
@@ -115,7 +107,7 @@ QUnit.test('Local data + listLocation- string array', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -125,7 +117,7 @@ QUnit.test('Local data + listLocation- string array', function (assert) {
 	$('#inputOne').val('a').trigger(e);
 
 
-	//assert
+	// then
 
 	var elements = $('#inputOne').next().find('ul li');
 
@@ -138,9 +130,7 @@ QUnit.test('Local data + listLocation- string array', function (assert) {
 });
 
 QUnit.test('Local data + listLocation - object array', function (assert) {
-	expect(5);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: {
@@ -156,7 +146,7 @@ QUnit.test('Local data + listLocation - object array', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -165,7 +155,7 @@ QUnit.test('Local data + listLocation - object array', function (assert) {
 	$('#inputOne').val('').trigger(e);
 
 
-	//assert
+	// then
 
 
 	var elements = $('#inputOne').next().find('ul li');

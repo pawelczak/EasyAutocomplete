@@ -5,9 +5,9 @@
 *
 */
 QUnit.test('Sort - sorting simple list', function (assert) {
-	expect(5);
+	
 
-	//given
+	// given
 	var options = {
 			list: {
 				sort: {
@@ -25,11 +25,11 @@ QUnit.test('Sort - sorting simple list', function (assert) {
 	listBuilder.data = unsortedList;
 
 
-	//execute
+	// when
 	var actuaList = EasyAutocomplete.proccess(config, listBuilder);
 
 
-	//assert
+	// then
 	assert.equal(4, actuaList.length, 'Passed - list size');
 	assert.equal(expectedList[0], actuaList[0], 'Passed - equal first');
 	assert.equal(expectedList[1], actuaList[1], 'Passed - equal second');
@@ -38,9 +38,9 @@ QUnit.test('Sort - sorting simple list', function (assert) {
 });
 
 QUnit.test('Sort - sorting - data with numbers', function (assert) {
-	expect(5);
+	
 
-	//given
+	// given
 	var options = {
 			list: {
 				sort: {
@@ -57,11 +57,11 @@ QUnit.test('Sort - sorting - data with numbers', function (assert) {
 
 	listBuilder.data = unsortedList;
 
-	//execute
+	// when
 	var actuaList = EasyAutocomplete.proccess(config, listBuilder);
 
 
-	//assert
+	// then
 	assert.equal(4, actuaList.length, 'Passed - list size');
 	assert.equal(expectedList[0], actuaList[0], 'Passed - equal first');
 	assert.equal(expectedList[1], actuaList[1], 'Passed - equal second');
@@ -70,9 +70,9 @@ QUnit.test('Sort - sorting - data with numbers', function (assert) {
 });
 
 QUnit.test('Sort - reverse simple list', function (assert) {
-	expect(5);
+	
 
-	//given
+	// given
 	var options = {
 			list: {
 				sort: {
@@ -100,11 +100,11 @@ QUnit.test('Sort - reverse simple list', function (assert) {
 	listBuilder.data = unsortedList;
 
 
-	//execute
+	// when
 	var actuaList = EasyAutocomplete.proccess(config, listBuilder);
 
 
-	//assert
+	// then
 	assert.equal(4, actuaList.length, 'Passed - list size');
 	assert.equal(expectedList[0], actuaList[0], 'Passed - equal first');
 	assert.equal(expectedList[1], actuaList[1], 'Passed - equal second');
@@ -113,9 +113,9 @@ QUnit.test('Sort - reverse simple list', function (assert) {
 });
 
 QUnit.test('MaxSize - simple list', function (assert) {
-	expect(3);
+	
 
-	//given
+	// given
 	var options = {
 			list: {
 				maxNumberOfElements: 2
@@ -132,20 +132,20 @@ QUnit.test('MaxSize - simple list', function (assert) {
 	listBuilder.maxNumberOfElements = options.list.maxNumberOfElements;
 
 
-	//execute
+	// when
 	var actuaList = EasyAutocomplete.proccess(config, listBuilder);
 
 
-	//assert
+	// then
 	assert.equal(2, actuaList.length, 'Passed - list size');
 	assert.equal(expectedList[0], actuaList[0], 'Passed - equal first');
 	assert.equal(expectedList[1], actuaList[1], 'Passed - equal second');
 });
 
 QUnit.test('MaxSize & Sort - simple list', function (assert) {
-	expect(3);
+	
 
-	//given
+	// given
 	var options = {
 			list: {
 				sort: {
@@ -165,20 +165,20 @@ QUnit.test('MaxSize & Sort - simple list', function (assert) {
 	listBuilder.maxNumberOfElements = options.list.maxNumberOfElements;
 
 
-	//execute
+	// when
 	var actuaList = EasyAutocomplete.proccess(config, listBuilder);
 
 
-	//assert
+	// then
 	assert.equal(2, actuaList.length, 'Passed - list size');
 	assert.equal(expectedList[0], actuaList[0], 'Passed - equal first');
 	assert.equal(expectedList[1], actuaList[1], 'Passed - equal second');
 });
 
 QUnit.test('match - simple list', function (assert) {
-	expect(3);
+	
 
-	//given
+	// given
 	var options = {
 			list: {
 				match: {
@@ -196,20 +196,20 @@ QUnit.test('match - simple list', function (assert) {
 	listBuilder.data = unsortedList;
 
 
-	//execute
+	// when
 	var actuaList = EasyAutocomplete.proccess(config, listBuilder, 'man');
 
 
-	//assert
+	// then
 	assert.equal(2, actuaList.length, 'Passed - list size');
 	assert.equal(expectedList[0], actuaList[0], 'Passed - equal first');
 	assert.equal(expectedList[1], actuaList[1], 'Passed - equal second');
 });
 
 QUnit.test('match - simple list', function (assert) {
-	expect(2);
+	
 
-	//given
+	// given
 	var options = {
 			list: {
 				match: {
@@ -227,20 +227,20 @@ QUnit.test('match - simple list', function (assert) {
 	listBuilder.data = unsortedList;
 
 
-	//execute
+	// when
 	var actuaList = EasyAutocomplete.proccess(config, listBuilder, 'man');
 
 
-	//assert
+	// then
 	assert.equal(1, actuaList.length, 'Passed - list size');
 	assert.equal(expectedList[0], actuaList[0], 'Passed - equal first');
 
 });
 
 QUnit.test('match - simple list - suggestions should start with phrase', function (assert) {
-	expect(3);
+	
 
-	//given
+	// given
 	var options = {
 			list: {
 				match: {
@@ -265,11 +265,11 @@ QUnit.test('match - simple list - suggestions should start with phrase', functio
 	listBuilder.data = unsortedList;
 
 
-	//execute
+	// when
 	var actuaList = EasyAutocomplete.proccess(config, listBuilder, 'l');
 
 
-	//assert
+	// then
 	assert.equal(2, actuaList.length, 'Passed - list size');
 	assert.equal(expectedList[0], actuaList[0], 'Passed - equal first');
 	assert.equal(expectedList[1], actuaList[1], 'Passed - equal second');
@@ -277,9 +277,9 @@ QUnit.test('match - simple list - suggestions should start with phrase', functio
 });
 
 QUnit.test('Sort - Object', function (assert) {
-	expect(5);
+	
 
-	//given
+	// given
 	var options = {
 			getValue: function (element) {
 				return element.name;
@@ -312,10 +312,10 @@ QUnit.test('Sort - Object', function (assert) {
 	listBuilder.data = unsortedList;
 
 
-	//execute
+	// when
 	var actuaList = EasyAutocomplete.proccess(config, listBuilder);
 
-	//assert
+	// then
 	assert.equal(4, actuaList.length, 'Passed - list size');
 	assert.equal(expectedList[0].name, actuaList[0].name, 'Passed - equal first');
 	assert.equal(expectedList[1].name, actuaList[1].name, 'Passed - equal second');
@@ -325,9 +325,9 @@ QUnit.test('Sort - Object', function (assert) {
 
 
 QUnit.test('Sort - Json', function (assert) {
-	expect(5);
+	
 
-	//given
+	// given
 	var options = {
 			getValue: function (element) {
 				return element.name;
@@ -360,10 +360,10 @@ QUnit.test('Sort - Json', function (assert) {
 	listBuilder.data = unsortedList;
 
 
-	//execute
+	// when
 	var actuaList = EasyAutocomplete.proccess(config, listBuilder);
 
-	//assert
+	// then
 	assert.equal(4, actuaList.length, 'Passed - list size');
 	assert.equal(expectedList[0].name, actuaList[0].name, 'Passed - equal first');
 	assert.equal(expectedList[1].name, actuaList[1].name, 'Passed - equal second');
@@ -372,9 +372,9 @@ QUnit.test('Sort - Json', function (assert) {
 });
 
 QUnit.test('Sort & Max size - Json', function (assert) {
-	expect(4);
+	
 
-	//given
+	// given
 	var options = {
 			getValue: function (element) {
 				return element.car;
@@ -409,10 +409,10 @@ QUnit.test('Sort & Max size - Json', function (assert) {
 	listBuilder.maxNumberOfElements = options.list.maxNumberOfElements;
 
 
-	//execute
+	// when
 	var actuaList = EasyAutocomplete.proccess(config, listBuilder);
 
-	//assert
+	// then
 	assert.equal(3, actuaList.length, 'Passed - list size');
 	assert.equal(expectedList[0].name, actuaList[0].name, 'Passed - equal first');
 	assert.equal(expectedList[1].name, actuaList[1].name, 'Passed - equal second');
@@ -421,9 +421,9 @@ QUnit.test('Sort & Max size - Json', function (assert) {
 
 
 QUnit.test('match - Json', function (assert) {
-	expect(3);
+	
 
-	//given
+	// given
 	var options = {
 			getValue: function (element) {
 				return element.name;
@@ -444,19 +444,19 @@ QUnit.test('match - Json', function (assert) {
 	listBuilder.data = unsortedList;
 
 
-	//execute
+	// when
 	var actuaList = EasyAutocomplete.proccess(config, listBuilder, 'man');
 
-	//assert
+	// then
 	assert.equal(2, actuaList.length, 'Passed - list size');
 	assert.equal(expectedList[0].name, actuaList[0].name, 'Passed - equal first');
 	assert.equal(expectedList[1].name, actuaList[1].name, 'Passed - equal second');
 });
 
 QUnit.test('match & Sorting- Json', function (assert) {
-	expect(5);
+	
 
-	//given
+	// given
 	var options = {
 			getValue: function (element) {
 				return element.name;
@@ -495,11 +495,11 @@ QUnit.test('match & Sorting- Json', function (assert) {
 	listBuilder.data = unsortedList;
 
 
-	//execute
+	// when
 	var actuaList = EasyAutocomplete.proccess(config, listBuilder, 'man');
 
 
-	//assert
+	// then
 	assert.equal(2, actuaList.length, 'Passed - list size');
 	assert.equal(expectedList[0].name, actuaList[0].name, 'Passed - first name equal');
 	assert.equal(expectedList[0].power, actuaList[0].power, 'Passed - first power equal');

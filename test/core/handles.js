@@ -6,7 +6,7 @@
 QUnit.test('Handles should generate id and it should be possible to use it with functions', function (assert) {
 
 
-	//given
+	// given
 	$('.input-no-id').attr('id', '');
 
 	var completerOne = $('.input-no-id').easyAutocomplete({
@@ -23,7 +23,7 @@ QUnit.test('Handles should generate id and it should be possible to use it with 
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('.input-no-id').val('a').trigger(e);
@@ -33,7 +33,7 @@ QUnit.test('Handles should generate id and it should be possible to use it with 
 	key.keyCode = 40;
 	$('.input-no-id').trigger(key);
 
-	//assert
+	// then
 	var id = $('.input-no-id').attr('id');
 
 	var $inputNoId = $('#' + id);
@@ -43,13 +43,12 @@ QUnit.test('Handles should generate id and it should be possible to use it with 
 	assert.equal($inputNoId.getSelectedItemData(), 'black', 'getSelectedItemData passed');
 	assert.equal($inputNoId.getItemData(1), 'magenta', 'getItemData passed');
 
-	expect(4);
 });
 
 
 QUnit.test('It should be possible to invoke plugin on element found whith class selector and use its id to with functions', function (assert) {
 
-	//given
+	// given
 	var completerOne = $('.input-with-id').easyAutocomplete({
 
 		data: ['black', 'white', 'magenta', 'yellow'],
@@ -64,7 +63,7 @@ QUnit.test('It should be possible to invoke plugin on element found whith class 
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#input-with-id').val('a').trigger(e);
@@ -74,19 +73,19 @@ QUnit.test('It should be possible to invoke plugin on element found whith class 
 	key.keyCode = 40;
 	$('#input-with-id').trigger(key);
 
-	//assert
+	// then
 	var $inputWithId = $('#input-with-id');
 
 	assert.equal($inputWithId.getSelectedItemIndex(), 0, 'getSelectedItemIndex passed');
 	assert.equal($inputWithId.getSelectedItemData(), 'black', 'getSelectedItemData passed');
 	assert.equal($inputWithId.getItemData(1), 'magenta', 'getItemData passed');
 
-	expect(3);
+
 });
 
 QUnit.test('It should be possible to invoke plugin on couple of element found whith class selector and use its id to with functions', function (assert) {
 
-	//given
+	// given
 	//invoked on two elements #inputOne and #inputTwo
 	var completerOne = $('.input').easyAutocomplete({
 
@@ -102,7 +101,7 @@ QUnit.test('It should be possible to invoke plugin on couple of element found wh
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('.input').val('a').trigger(e);
@@ -112,7 +111,7 @@ QUnit.test('It should be possible to invoke plugin on couple of element found wh
 	key.keyCode = 40;
 	$('.input').trigger(key);
 
-	//assert
+	// then
 	var $inputOne = $('#inputOne'),
 		$inputTwo = $('#inputTwo');
 
@@ -124,6 +123,5 @@ QUnit.test('It should be possible to invoke plugin on couple of element found wh
 	assert.equal($inputTwo.getSelectedItemData(), 'black', 'getSelectedItemData passed');
 	assert.equal($inputTwo.getItemData(1), 'magenta', 'getItemData passed');
 
-	expect(6);
 });
 

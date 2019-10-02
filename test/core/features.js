@@ -6,19 +6,19 @@
 QUnit.test('Highlight ', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('#inputOne').easyAutocomplete({
 
 		data: ['black', 'white', 'magenta', 'yellow']
 
 	});
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('la').trigger(e);
 
-	//assert
+	// then
 	var elements = $('#inputOne').next().find('ul li');
 
 	assert.equal(4, elements.length, 'Response size');
@@ -27,25 +27,24 @@ QUnit.test('Highlight ', function (assert) {
 	assert.equal('magenta', elements.eq(2).find('div').html(), 'Third element');
 	assert.equal('yellow', elements.eq(3).find('div').html(), 'Last element');
 
-	expect(5);
 });
 
 QUnit.test('Highlight - special char \'[\' ', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('#inputOne').easyAutocomplete({
 
 		data: ['black[]', 'white{}', 'magenta?', 'yellow@']
 
 	});
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('[').trigger(e);
 
-	//assert
+	// then
 	var elements = $('#inputOne').next().find('ul li');
 
 	assert.equal(4, elements.length, 'Response size');
@@ -54,25 +53,24 @@ QUnit.test('Highlight - special char \'[\' ', function (assert) {
 	assert.equal('magenta?', elements.eq(2).find('div').html(), 'Third element');
 	assert.equal('yellow@', elements.eq(3).find('div').html(), 'Last element');
 
-	expect(5);
 });
 
 QUnit.test('Highlight - special char \'(\' ', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('#inputOne').easyAutocomplete({
 
 		data: ['black()', 'white{}', 'magenta?', 'yellow@']
 
 	});
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('(').trigger(e);
 
-	//assert
+	// then
 	var elements = $('#inputOne').next().find('ul li');
 
 	assert.equal(4, elements.length, 'Response size');
@@ -81,25 +79,24 @@ QUnit.test('Highlight - special char \'(\' ', function (assert) {
 	assert.equal('magenta?', elements.eq(2).find('div').html(), 'Third element');
 	assert.equal('yellow@', elements.eq(3).find('div').html(), 'Last element');
 
-	expect(5);
 });
 
 QUnit.test('Highlight - special char \'?\' ', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('#inputOne').easyAutocomplete({
 
 		data: ['black[]', 'white{}', 'magenta?', 'yellow@']
 
 	});
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('?').trigger(e);
 
-	//assert
+	// then
 	var elements = $('#inputOne').next().find('ul li');
 
 	assert.equal(4, elements.length, 'Response size');
@@ -108,26 +105,25 @@ QUnit.test('Highlight - special char \'?\' ', function (assert) {
 	assert.equal('magenta<b>?</b>', elements.eq(2).find('div').html(), 'Third element');
 	assert.equal('yellow@', elements.eq(3).find('div').html(), 'Last element');
 
-	expect(5);
 });
 
 
 QUnit.test('Highlight - special chars \'[](){}?<>,-+*&^%$#@!\' ', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('#inputOne').easyAutocomplete({
 
 		data: ['black[]', 'white{}', 'magenta[](){}?<>,-+*&^%$#@!', 'yellow@']
 
 	});
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('[](){}?<>,-+*&^%$#@!').trigger(e);
 
-	//assert
+	// then
 	var elements = $('#inputOne').next().find('ul li');
 
 	assert.equal(4, elements.length, 'Response size');
@@ -136,14 +132,13 @@ QUnit.test('Highlight - special chars \'[](){}?<>,-+*&^%$#@!\' ', function (asse
 	assert.equal('magenta<b>[](){}?&lt;&gt;,-+*&amp;^%$#@!</b>', elements.eq(2).find('div').html(), 'Third element');
 	assert.equal('yellow@', elements.eq(3).find('div').html(), 'Last element');
 
-	expect(5);
 });
 
 
 QUnit.test('requestDelay - local data ', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('#inputOne').easyAutocomplete({
 
 		data: ['black', 'white', 'magenta', 'yellow'],
@@ -152,12 +147,12 @@ QUnit.test('requestDelay - local data ', function (assert) {
 
 	});
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('b').trigger(e);
 
-	//assert
+	// then
 
 	//#FIRST
 	var elements = $('#inputOne').next().find('ul li');
@@ -180,7 +175,7 @@ QUnit.test('requestDelay - local data ', function (assert) {
 		assert.equal(4, elements.length, 'Response size');
 		assert.equal('<b>bla</b>ck', elements.eq(0).find('div').html(), 'Third request - First element');
 
-		QUnit.start();
+		done();
 
 		//#FOURTH
 		$('#inputOne').val('bl').trigger(e);
@@ -199,25 +194,24 @@ QUnit.test('requestDelay - local data ', function (assert) {
 			assert.equal(4, elements.length, 'Response size');
 			assert.equal('<b>b</b>lack', elements.eq(0).find('div').html(), 'Fifth request - First element');
 
-			QUnit.start();
+			done();
 
 		}, 500);
 
-		QUnit.stop();
+		var done = assert.async();
 
 	}, 500);
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	expect(8);
 });
 
 
 QUnit.test('requestDelay - remote data ', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('#inputOne').easyAutocomplete({
 
 		url: 'resources/colors_string.json',
@@ -226,12 +220,12 @@ QUnit.test('requestDelay - remote data ', function (assert) {
 
 	});
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('r').trigger(e);
 
-	//assert
+	// then
 
 	//#FIRST
 	var elements = $('#inputOne').next().find('ul li');
@@ -254,7 +248,7 @@ QUnit.test('requestDelay - remote data ', function (assert) {
 		assert.equal(3, elements.length, 'Response size');
 		assert.equal('<b>red</b>', elements.eq(0).find('div').html(), 'Third request - First element');
 
-		QUnit.start();
+		done();
 
 		//#FOURTH
 		$('#inputOne').val('re').trigger(e);
@@ -273,43 +267,39 @@ QUnit.test('requestDelay - remote data ', function (assert) {
 			assert.equal(3, elements.length, 'Response size');
 			assert.equal('<b>r</b>ed', elements.eq(0).find('div').html(), 'Fifth request - First element');
 
-			QUnit.start();
+			done();
 
 		}, 500);
 
-		QUnit.stop();
+		var done = assert.async();
 
 	}, 500);
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	expect(8);
 });
 
 
 QUnit.test('Set default value', function (assert) {
 
 
-	//given
+	// given
 	var completerOne = $('#inputThree').easyAutocomplete({
 
 		data: ['simple data']
 
 	});
 
-	//execute
+	// when
 
-	//assert
+	// then
 	assert.equal('default value', $('#inputThree').val());
 
-	expect(1);
 });
 
 QUnit.test('Sort - Reverse sorted list', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	$('#inputOne').easyAutocomplete({
 
 		url: 'resources/colors_string.json',
@@ -332,23 +322,23 @@ QUnit.test('Sort - Reverse sorted list', function (assert) {
 
 		ajaxCallback: function () {
 
-			//assert
+			// then
 
 			assertList();
 		}
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('c').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -358,15 +348,13 @@ QUnit.test('Sort - Reverse sorted list', function (assert) {
 		assert.equal('red', elements.eq(1).find('div').text(), 'Second element value');
 		assert.equal('brown', elements.eq(2).find('div').text(), 'Third element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 
 QUnit.test('Match - suggestions match start of phrase', function (assert) {
-	expect(2);
-
-	//given
+	// given
 	$('#inputOne').easyAutocomplete({
 
 		url: 'resources/colors_string.json',
@@ -386,23 +374,23 @@ QUnit.test('Match - suggestions match start of phrase', function (assert) {
 
 		ajaxCallback: function () {
 
-			//assert
+			// then
 
 			assertList();
 		}
 	});
 
 
-	//execute
+	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
 	$('#inputOne').val('r').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -410,7 +398,7 @@ QUnit.test('Match - suggestions match start of phrase', function (assert) {
 		assert.equal(1, elements.length, 'Response size');
 		assert.equal('red', elements.eq(0).find('div').text(), 'First element value');
 
-		QUnit.start();
+		done();
 	}
 });
 

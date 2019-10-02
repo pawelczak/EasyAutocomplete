@@ -4,9 +4,7 @@
  * @author Łukasz Pawełczak
  */
 QUnit.test('XML - Simple response', function (assert) {
-	expect(5);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		url: 'resources/colors.xml',
@@ -17,7 +15,7 @@ QUnit.test('XML - Simple response', function (assert) {
 
 		ajaxCallback: function () {
 
-			//assert
+			// then
 
 			assertList();
 		}
@@ -25,7 +23,7 @@ QUnit.test('XML - Simple response', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -34,10 +32,10 @@ QUnit.test('XML - Simple response', function (assert) {
 	$('#inputOne').val('').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -48,14 +46,12 @@ QUnit.test('XML - Simple response', function (assert) {
 		assert.equal('blue', elements.eq(2).find('div').text(), 'Third element value');
 		assert.equal('pink', elements.eq(3).find('div').text(), 'Fourth element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('XML - Sorted list', function (assert) {
-	expect(5);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			url: 'resources/colors.xml',
@@ -67,14 +63,14 @@ QUnit.test('XML - Sorted list', function (assert) {
 
 			ajaxCallback: function () {
 
-				//assert
+				// then
 
 				assertList();
 			}
 		});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -83,10 +79,10 @@ QUnit.test('XML - Sorted list', function (assert) {
 	$('#inputOne').val('c').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -97,15 +93,13 @@ QUnit.test('XML - Sorted list', function (assert) {
 		assert.equal('pink', elements.eq(2).find('div').text(), 'Third element value');
 		assert.equal('red', elements.eq(3).find('div').text(), 'Fourth element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 
 QUnit.test('XML - Max elements number list', function (assert) {
-	expect(2);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 		url: 'resources/colors.xml',
 
@@ -118,14 +112,14 @@ QUnit.test('XML - Max elements number list', function (assert) {
 
 		ajaxCallback: function () {
 
-			//assert
+			// then
 
 			assertList();
 		}
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -134,10 +128,10 @@ QUnit.test('XML - Max elements number list', function (assert) {
 	$('#inputOne').val('c').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -145,14 +139,12 @@ QUnit.test('XML - Max elements number list', function (assert) {
 		assert.equal(1, elements.length, 'Response size');
 		assert.equal('red', elements.eq(0).find('div').text(), 'First element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('XML - Simple object', function (assert) {
-	expect(5);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 		url: 'resources/colors_object.xml',
 
@@ -165,14 +157,14 @@ QUnit.test('XML - Simple object', function (assert) {
 
 		ajaxCallback: function () {
 
-			//assert
+			// then
 
 			assertList();
 		}
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -181,10 +173,10 @@ QUnit.test('XML - Simple object', function (assert) {
 	$('#inputOne').val('a').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -195,14 +187,14 @@ QUnit.test('XML - Simple object', function (assert) {
 		assert.equal('blue', elements.eq(2).find('div').text(), 'Third element value');
 		assert.equal('pink', elements.eq(3).find('div').text(), 'Fourth element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('XML - match simple list - phrase \'re\'', function (assert) {
-	expect(3);
 
-	//given
+
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 		url: 'resources/colors.xml',
 
@@ -217,14 +209,14 @@ QUnit.test('XML - match simple list - phrase \'re\'', function (assert) {
 
 		ajaxCallback: function () {
 
-			//assert
+			// then
 
 			assertList();
 		}
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -233,10 +225,10 @@ QUnit.test('XML - match simple list - phrase \'re\'', function (assert) {
 	$('#inputOne').val('re').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -245,14 +237,14 @@ QUnit.test('XML - match simple list - phrase \'re\'', function (assert) {
 		assert.equal('red', elements.eq(0).find('div').text(), 'Red element value');
 		assert.equal('green', elements.eq(1).find('div').text(), 'Green element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('XML - match advance object phrase \'re\'', function (assert) {
-	expect(3);
 
-	//given
+
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 		url: 'resources/colors_object.xml',
 
@@ -271,14 +263,14 @@ QUnit.test('XML - match advance object phrase \'re\'', function (assert) {
 
 		ajaxCallback: function () {
 
-			//assert
+			// then
 
 			assertList();
 		}
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -287,10 +279,10 @@ QUnit.test('XML - match advance object phrase \'re\'', function (assert) {
 	$('#inputOne').val('re').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -299,14 +291,12 @@ QUnit.test('XML - match advance object phrase \'re\'', function (assert) {
 		assert.equal('red', elements.eq(0).find('div').text(), 'Red element value');
 		assert.equal('green', elements.eq(1).find('div').text(), 'Green element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('XML - Highlight phrase', function (assert) {
-	expect(5);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 		url: 'resources/colors.xml',
 
@@ -317,14 +307,14 @@ QUnit.test('XML - Highlight phrase', function (assert) {
 
 		ajaxCallback: function () {
 
-			//assert
+			// then
 
 			assertList();
 		}
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -333,10 +323,10 @@ QUnit.test('XML - Highlight phrase', function (assert) {
 	$('#inputOne').val('e').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -347,14 +337,12 @@ QUnit.test('XML - Highlight phrase', function (assert) {
 		assert.equal('blu<b>e</b>', elements.eq(2).find('div').html(), 'Third element value');
 		assert.equal('pink', elements.eq(3).find('div').html(), 'Fourth element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('XML - Dont highlight phrase', function (assert) {
-	expect(5);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 		url: 'resources/colors.xml',
 
@@ -365,7 +353,7 @@ QUnit.test('XML - Dont highlight phrase', function (assert) {
 
 		ajaxCallback: function () {
 
-			//assert
+			// then
 
 			assertList();
 		}
@@ -373,7 +361,7 @@ QUnit.test('XML - Dont highlight phrase', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -382,10 +370,10 @@ QUnit.test('XML - Dont highlight phrase', function (assert) {
 	$('#inputOne').val('e').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -396,15 +384,13 @@ QUnit.test('XML - Dont highlight phrase', function (assert) {
 		assert.equal('blue', elements.eq(2).find('div').html(), 'Third element value');
 		assert.equal('pink', elements.eq(3).find('div').html(), 'Fourth element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 
 QUnit.test('XML - string listLocation - file with two fruit lists', function (assert) {
-	expect(5);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 		url: 'resources/categories/otherFruits.xml',
 
@@ -421,7 +407,7 @@ QUnit.test('XML - string listLocation - file with two fruit lists', function (as
 
 		ajaxCallback: function () {
 
-			//assert
+			// then
 
 			assertList();
 		}
@@ -429,7 +415,7 @@ QUnit.test('XML - string listLocation - file with two fruit lists', function (as
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -438,10 +424,10 @@ QUnit.test('XML - string listLocation - file with two fruit lists', function (as
 	$('#inputOne').val('e').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -452,14 +438,12 @@ QUnit.test('XML - string listLocation - file with two fruit lists', function (as
 		assert.equal('Melon', elements.eq(2).find('div').html(), 'Third element value');
 		assert.equal('Lemon', elements.eq(3).find('div').html(), 'Fourth element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('XML - function listLocation - file with two fruit lists', function (assert) {
-	expect(5);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 		url: 'resources/categories/otherFruits.xml',
 
@@ -478,7 +462,7 @@ QUnit.test('XML - function listLocation - file with two fruit lists', function (
 
 		ajaxCallback: function () {
 
-			//assert
+			// then
 
 			assertList();
 		}
@@ -486,7 +470,7 @@ QUnit.test('XML - function listLocation - file with two fruit lists', function (
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -495,10 +479,10 @@ QUnit.test('XML - function listLocation - file with two fruit lists', function (
 	$('#inputOne').val('e').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -509,6 +493,6 @@ QUnit.test('XML - function listLocation - file with two fruit lists', function (
 		assert.equal('Melon', elements.eq(2).find('div').html(), 'Third element value');
 		assert.equal('Lemon', elements.eq(3).find('div').html(), 'Fourth element value');
 
-		QUnit.start();
+		done();
 	}
 });

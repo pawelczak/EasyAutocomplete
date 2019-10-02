@@ -4,9 +4,7 @@
  * @author Łukasz Pawełczak
  */
 QUnit.test('Template - basic', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: ['red', 'green', 'blue', 'pink'],
@@ -16,7 +14,7 @@ QUnit.test('Template - basic', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -25,7 +23,7 @@ QUnit.test('Template - basic', function (assert) {
 	$('#inputOne').val('a').trigger(e);
 
 
-	//assert
+	// then
 
 	var elements = $('#inputOne').next().find('ul li');
 
@@ -40,9 +38,7 @@ QUnit.test('Template - basic', function (assert) {
 
 
 QUnit.test('Template - description', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: [{country: 'Poland', code: 'pol'}, {country: 'Germany', code: 'ger'}, {country: 'Italy', code: 'ita'}],
@@ -59,7 +55,7 @@ QUnit.test('Template - description', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -68,7 +64,7 @@ QUnit.test('Template - description', function (assert) {
 	$('#inputOne').val('a').trigger(e);
 
 
-	//assert
+	// then
 
 	var elements = $('#inputOne').next().find('ul li');
 
@@ -81,9 +77,7 @@ QUnit.test('Template - description', function (assert) {
 });
 
 QUnit.test('Template - description - function', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: [{country: 'Poland', code: 'pol'}, {country: 'Germany', code: 'ger'}, {country: 'Italy', code: 'ita'}],
@@ -102,7 +96,7 @@ QUnit.test('Template - description - function', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -111,7 +105,7 @@ QUnit.test('Template - description - function', function (assert) {
 	$('#inputOne').val('a').trigger(e);
 
 
-	//assert
+	// then
 
 	var elements = $('#inputOne').next().find('ul li');
 
@@ -125,9 +119,7 @@ QUnit.test('Template - description - function', function (assert) {
 
 
 QUnit.test('Template - icon right - iconSrc string', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: [{country: 'Poland', code: 'pol'}, {country: 'Germany', code: 'ger'}, {country: 'Italy', code: 'ita'}],
@@ -144,7 +136,7 @@ QUnit.test('Template - icon right - iconSrc string', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -153,7 +145,7 @@ QUnit.test('Template - icon right - iconSrc string', function (assert) {
 	$('#inputOne').val('z').trigger(e);
 
 
-	//assert
+	// then
 
 	var elements = $('#inputOne').next().find('ul li');
 
@@ -167,9 +159,7 @@ QUnit.test('Template - icon right - iconSrc string', function (assert) {
 
 
 QUnit.test('Template - icon right - iconSrc function', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: [{country: 'Poland', code: 'pol'}, {country: 'Germany', code: 'ger'}, {country: 'Italy', code: 'ita'}],
@@ -188,7 +178,7 @@ QUnit.test('Template - icon right - iconSrc function', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -197,7 +187,7 @@ QUnit.test('Template - icon right - iconSrc function', function (assert) {
 	$('#inputOne').val('z').trigger(e);
 
 
-	//assert
+	// then
 
 	var elements = $('#inputOne').next().find('ul li');
 
@@ -211,9 +201,7 @@ QUnit.test('Template - icon right - iconSrc function', function (assert) {
 
 
 QUnit.test('Template - icon left - iconSrc function', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: [{country: 'Poland', code: 'pol'}, {country: 'Germany', code: 'ger'}, {country: 'Italy', code: 'ita'}],
@@ -232,7 +220,7 @@ QUnit.test('Template - icon left - iconSrc function', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -241,7 +229,7 @@ QUnit.test('Template - icon left - iconSrc function', function (assert) {
 	$('#inputOne').val('z').trigger(e);
 
 
-	//assert
+	// then
 
 	var elements = $('#inputOne').next().find('ul li');
 
@@ -253,9 +241,7 @@ QUnit.test('Template - icon left - iconSrc function', function (assert) {
 });
 
 QUnit.test('Template - icon left - iconSrc string', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: [{country: 'Poland', code: 'pol'}, {country: 'Germany', code: 'ger'}, {country: 'Italy', code: 'ita'}],
@@ -272,7 +258,7 @@ QUnit.test('Template - icon left - iconSrc string', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -281,7 +267,7 @@ QUnit.test('Template - icon left - iconSrc string', function (assert) {
 	$('#inputOne').val('z').trigger(e);
 
 
-	//assert
+	// then
 
 	var elements = $('#inputOne').next().find('ul li');
 
@@ -293,9 +279,7 @@ QUnit.test('Template - icon left - iconSrc string', function (assert) {
 });
 
 QUnit.test('Template - icon left - xml provider - complex data', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		url: 'resources/colors_object.xml',
@@ -324,7 +308,7 @@ QUnit.test('Template - icon left - xml provider - complex data', function (asser
 
 		ajaxCallback: function () {
 
-			//assert
+			// then
 
 			assertList();
 		}
@@ -332,7 +316,7 @@ QUnit.test('Template - icon left - xml provider - complex data', function (asser
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -341,9 +325,9 @@ QUnit.test('Template - icon left - xml provider - complex data', function (asser
 	$('#inputOne').val('z').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
 
@@ -353,15 +337,13 @@ QUnit.test('Template - icon left - xml provider - complex data', function (asser
 		assert.equal('<img class="eac-icon" src="red">red', elements.eq(0).find('div').html(), 'First element value');
 		assert.equal('<img class="eac-icon" src="green">green', elements.eq(1).find('div').html(), 'Second element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 
 QUnit.test('Template - links - link string', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: [{country: 'Poland', site: 'http://site.pl'}, {country: 'Germany', site: 'http://site.de'}, {country: 'Italy', site: 'http://site.it'}],
@@ -378,7 +360,7 @@ QUnit.test('Template - links - link string', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -387,7 +369,7 @@ QUnit.test('Template - links - link string', function (assert) {
 	$('#inputOne').val('z').trigger(e);
 
 
-	//assert
+	// then
 
 	var elements = $('#inputOne').next().find('ul li');
 
@@ -401,9 +383,7 @@ QUnit.test('Template - links - link string', function (assert) {
 
 
 QUnit.test('Template - links - link function', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: [{country: 'Poland', site: 'pl'}, {country: 'Germany', site: 'de'}, {country: 'Italy', site: 'it'}],
@@ -422,7 +402,7 @@ QUnit.test('Template - links - link function', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -431,7 +411,7 @@ QUnit.test('Template - links - link function', function (assert) {
 	$('#inputOne').val('z').trigger(e);
 
 
-	//assert
+	// then
 
 	var elements = $('#inputOne').next().find('ul li');
 
@@ -445,9 +425,7 @@ QUnit.test('Template - links - link function', function (assert) {
 
 
 QUnit.test('Template - links - xml provider - complex data', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		url: 'resources/colors_object.xml',
@@ -476,7 +454,7 @@ QUnit.test('Template - links - xml provider - complex data', function (assert) {
 
 		ajaxCallback: function () {
 
-			//assert
+			// then
 
 			assertList();
 		}
@@ -484,7 +462,7 @@ QUnit.test('Template - links - xml provider - complex data', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -493,9 +471,9 @@ QUnit.test('Template - links - xml provider - complex data', function (assert) {
 	$('#inputOne').val('z').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
 
@@ -505,15 +483,13 @@ QUnit.test('Template - links - xml provider - complex data', function (assert) {
 		assert.equal('<a href="http://site.red">red</a>', elements.eq(0).find('div').html(), 'First element value');
 		assert.equal('<a href="http://site.green">green</a>', elements.eq(1).find('div').html(), 'Second element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 
 QUnit.test('Template - custom', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		data: [{country: 'Poland', site: 'pl'}, {country: 'Germany', site: 'de'}, {country: 'Italy', site: 'it'}],
@@ -536,7 +512,7 @@ QUnit.test('Template - custom', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -545,7 +521,7 @@ QUnit.test('Template - custom', function (assert) {
 	$('#inputOne').val('z').trigger(e);
 
 
-	//assert
+	// then
 
 	var elements = $('#inputOne').next().find('ul li');
 
@@ -559,9 +535,7 @@ QUnit.test('Template - custom', function (assert) {
 
 
 QUnit.test('Template - custom - xml provider', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		url: 'resources/colors.xml',
@@ -584,7 +558,7 @@ QUnit.test('Template - custom - xml provider', function (assert) {
 
 		ajaxCallback: function () {
 
-			//assert
+			// then
 
 			assertList();
 		}
@@ -592,7 +566,7 @@ QUnit.test('Template - custom - xml provider', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -600,9 +574,9 @@ QUnit.test('Template - custom - xml provider', function (assert) {
 	e.keyCode = 50;
 	$('#inputOne').val('z').trigger(e);
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
 
@@ -612,15 +586,13 @@ QUnit.test('Template - custom - xml provider', function (assert) {
 		assert.equal('<p>red</p>', elements.eq(0).find('div').html(), 'First element value');
 		assert.equal('<p>green</p>', elements.eq(1).find('div').html(), 'Second element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 
 QUnit.test('Template - custom - xml provider - complex data', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		url: 'resources/colors_object.xml',
@@ -647,7 +619,7 @@ QUnit.test('Template - custom - xml provider - complex data', function (assert) 
 
 		ajaxCallback: function () {
 
-			//assert
+			// then
 
 			assertList();
 		}
@@ -655,7 +627,7 @@ QUnit.test('Template - custom - xml provider - complex data', function (assert) 
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -664,9 +636,9 @@ QUnit.test('Template - custom - xml provider - complex data', function (assert) 
 	$('#inputOne').val('z').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
 
@@ -676,7 +648,7 @@ QUnit.test('Template - custom - xml provider - complex data', function (assert) 
 		assert.equal('<p>red</p><b>red</b>', elements.eq(0).find('div').html(), 'First element value');
 		assert.equal('<p>green</p><b>green</b>', elements.eq(1).find('div').html(), 'Second element value');
 
-		QUnit.start();
+		done();
 	}
 });
 

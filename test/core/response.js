@@ -4,9 +4,7 @@
  * @author Łukasz Pawełczak
  */
 QUnit.test('Ajax settings - no url', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			url: '',
@@ -15,13 +13,13 @@ QUnit.test('Ajax settings - no url', function (assert) {
 			},
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			}
 		});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -30,10 +28,10 @@ QUnit.test('Ajax settings - no url', function (assert) {
 	$('#inputOne').val('c').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -43,14 +41,12 @@ QUnit.test('Ajax settings - no url', function (assert) {
 		assert.equal('yellow', elements.eq(1).find('div').text(), 'Second element value');
 		assert.equal('brown', elements.eq(2).find('div').text(), 'Third element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Ajax settings - two urls', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			url: 'resources/countries.json',
@@ -59,13 +55,13 @@ QUnit.test('Ajax settings - two urls', function (assert) {
 			},
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			}
 		});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -74,10 +70,10 @@ QUnit.test('Ajax settings - two urls', function (assert) {
 	$('#inputOne').val('c').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -87,16 +83,13 @@ QUnit.test('Ajax settings - two urls', function (assert) {
 		assert.equal('yellow', elements.eq(1).find('div').text(), 'Second element value');
 		assert.equal('brown', elements.eq(2).find('div').text(), 'Third element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 
 QUnit.test('Ajax settings - settings url is function', function (assert) {
-	expect(8);
-
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			url: 'resources/countries.json',
@@ -107,13 +100,13 @@ QUnit.test('Ajax settings - settings url is function', function (assert) {
 			},
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			}
 		});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -122,16 +115,16 @@ QUnit.test('Ajax settings - settings url is function', function (assert) {
 	$('#inputOne').val('c').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
 	$('#inputOne').val('c').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -141,15 +134,13 @@ QUnit.test('Ajax settings - settings url is function', function (assert) {
 		assert.equal('yellow', elements.eq(1).find('div').text(), 'Second element value');
 		assert.equal('brown', elements.eq(2).find('div').text(), 'Third element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 
 QUnit.test('Do not match response', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			url: 'resources/response.json',
@@ -160,13 +151,13 @@ QUnit.test('Do not match response', function (assert) {
 
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			}
 		});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -175,24 +166,22 @@ QUnit.test('Do not match response', function (assert) {
 	$('#inputOne').val('r').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
 
 		assert.equal(0, elements.length, 'Response size');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Match response', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			url: 'resources/response.json',
@@ -203,13 +192,13 @@ QUnit.test('Match response', function (assert) {
 
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			}
 		});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -218,10 +207,10 @@ QUnit.test('Match response', function (assert) {
 	$('#inputOne').val('rr').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -231,14 +220,12 @@ QUnit.test('Match response', function (assert) {
 		assert.equal('yellow', elements.eq(1).find('div').text(), 'Second element value');
 		assert.equal('brown', elements.eq(2).find('div').text(), 'Third element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Match response - property function', function (assert) {
-	expect(4);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			url: 'resources/response.json',
@@ -251,13 +238,13 @@ QUnit.test('Match response - property function', function (assert) {
 
 			ajaxCallback: function () {
 
-				//assert
+				// then
 				assertList();
 			}
 		});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -266,10 +253,10 @@ QUnit.test('Match response - property function', function (assert) {
 	$('#inputOne').val('rr').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -279,14 +266,12 @@ QUnit.test('Match response - property function', function (assert) {
 		assert.equal('yellow', elements.eq(1).find('div').text(), 'Second element value');
 		assert.equal('brown', elements.eq(2).find('div').text(), 'Third element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Input field should have value changed when user clicks on one element from suggestions list', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			url: 'resources/colors.json',
@@ -299,15 +284,15 @@ QUnit.test('Input field should have value changed when user clicks on one elemen
 				//selects first element
 				elements.eq(0).find('div').click();
 
-				//assert
+				// then
 				assert.equal('blue', $input.val());
 
-				QUnit.start();
+				done();
 			}
 		});
 
 
-	//execute
+	// when
 	completerOne.init();
 
 	var e = $.Event('keyup');
@@ -315,15 +300,13 @@ QUnit.test('Input field should have value changed when user clicks on one elemen
 	var $input = $('#inputOne').val('rr').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 });
 
 
 QUnit.test('Input field should trigger change event when user clicks on one element from suggestions list', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'),
 		{
 			url: 'resources/colors.json',
@@ -337,10 +320,10 @@ QUnit.test('Input field should trigger change event when user clicks on one elem
 				elements.eq(0).find('div').click();
 
 
-				//assert
+				// then
 				assert.equal(true, flag);
 
-				QUnit.start();
+				done();
 			}
 		}),
 		flag = false,
@@ -352,7 +335,7 @@ QUnit.test('Input field should trigger change event when user clicks on one elem
 	});
 
 
-	//execute
+	// when
 	completerOne.init();
 
 	var e = $.Event('keyup');
@@ -360,7 +343,7 @@ QUnit.test('Input field should trigger change event when user clicks on one elem
 	$input.val('rr').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
 });
 

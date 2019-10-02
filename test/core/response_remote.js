@@ -4,9 +4,7 @@
  * @author Łukasz Pawełczak
  */
 QUnit.test('Remote service - Json countries', function (assert) {
-	expect(5);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		url: function (phrase) {
@@ -19,7 +17,7 @@ QUnit.test('Remote service - Json countries', function (assert) {
 
 		ajaxCallback: function () {
 
-			//assert
+			// then
 
 			assertList();
 		}
@@ -27,7 +25,7 @@ QUnit.test('Remote service - Json countries', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -36,9 +34,9 @@ QUnit.test('Remote service - Json countries', function (assert) {
 	$('#inputOne').val('po').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -49,14 +47,12 @@ QUnit.test('Remote service - Json countries', function (assert) {
 		assert.equal('PORTUGAL', elements.eq(2).find('div').text(), 'Third element value');
 		assert.equal('SINGAPORE', elements.eq(3).find('div').text(), 'Fourth element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Remote service - Json countries - no match', function (assert) {
-	expect(1);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		url: function (phrase) {
@@ -69,7 +65,7 @@ QUnit.test('Remote service - Json countries - no match', function (assert) {
 
 		ajaxCallback: function () {
 
-			//assert
+			// then
 
 			assertList();
 		},
@@ -82,7 +78,7 @@ QUnit.test('Remote service - Json countries - no match', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -91,23 +87,21 @@ QUnit.test('Remote service - Json countries - no match', function (assert) {
 	$('#inputOne').val('poli').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
 
 		assert.equal(0, elements.length, 'Response size');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Remote service - XML countries', function (assert) {
-	expect(5);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		url: function (phrase) {
@@ -123,7 +117,7 @@ QUnit.test('Remote service - XML countries', function (assert) {
 
 		ajaxCallback: function () {
 
-			//assert
+			// then
 
 			assertList();
 		}
@@ -131,7 +125,7 @@ QUnit.test('Remote service - XML countries', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -140,9 +134,9 @@ QUnit.test('Remote service - XML countries', function (assert) {
 	$('#inputOne').val('po').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -153,14 +147,12 @@ QUnit.test('Remote service - XML countries', function (assert) {
 		assert.equal('PORTUGAL', elements.eq(2).find('div').text(), 'Third element value');
 		assert.equal('SINGAPORE', elements.eq(3).find('div').text(), 'Fourth element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
 QUnit.test('Remote service - Json countries - post data', function (assert) {
-	expect(5);
-
-	//given
+	// given
 	var completerOne = new EasyAutocomplete.main($('#inputOne'), {
 
 		url: function (phrase) {
@@ -173,7 +165,7 @@ QUnit.test('Remote service - Json countries - post data', function (assert) {
 
 		ajaxCallback: function () {
 
-			//assert
+			// then
 
 			assertList();
 		},
@@ -198,7 +190,7 @@ QUnit.test('Remote service - Json countries - post data', function (assert) {
 	});
 
 
-	//execute
+	// when
 
 	completerOne.init();
 
@@ -208,9 +200,9 @@ QUnit.test('Remote service - Json countries - post data', function (assert) {
 	$('#inputOne').val('o').trigger(e);
 
 
-	QUnit.stop();
+	var done = assert.async();
 
-	//assert
+	// then
 
 	function assertList() {
 		var elements = $('#inputOne').next().find('ul li');
@@ -221,7 +213,7 @@ QUnit.test('Remote service - Json countries - post data', function (assert) {
 		assert.equal('PORTUGAL', elements.eq(2).find('div').text(), 'Third element value');
 		assert.equal('SINGAPORE', elements.eq(3).find('div').text(), 'Fourth element value');
 
-		QUnit.start();
+		done();
 	}
 });
 
