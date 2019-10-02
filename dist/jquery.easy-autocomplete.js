@@ -978,9 +978,11 @@ var EasyAutocomplete = (function (scope) {
 			createWrapper();
 			createContainer();
 
-			$container = $('#' + getContainerId());
-			if (config.get('placeholder')) {
-				$field.attr('placeholder', config.get('placeholder'));
+
+			$container = $(document.getElementById(getContainerId()));
+			if (config.get("placeholder")) {
+				$field.attr("placeholder", config.get("placeholder"));
+
 			}
 
 
