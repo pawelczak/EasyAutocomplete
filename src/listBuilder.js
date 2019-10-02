@@ -1,7 +1,7 @@
 /*
- * EasyAutocomplete - ListBuilderService 
+ * EasyAutocomplete - ListBuilderService
  *
- * @author Łukasz Pawełczak 
+ * @author Łukasz Pawełczak
  *
  */
 var EasyAutocomplete = (function(scope) {
@@ -17,14 +17,14 @@ var EasyAutocomplete = (function(scope) {
 			builder.getValue = configuration.get("getValue");
 			builder.maxListSize = configuration.get("list").maxNumberOfElements;
 
-				
+
 			listBuilder.push(builder);
 
 			return listBuilder;
 		};
 
 		this.updateCategories = function(listBuilder, data) {
-			
+
 			if (configuration.get("categoriesAssigned")) {
 
 				listBuilder = [];
@@ -36,7 +36,7 @@ var EasyAutocomplete = (function(scope) {
 					listBuilder.push(builder);
 				}
 
-			} 
+			}
 
 			return listBuilder;
 		};
@@ -69,7 +69,7 @@ var EasyAutocomplete = (function(scope) {
 					if (listBuilders[i].data.length > 0) {
 						return true;
 					}
-				} 
+				}
 			}
 
 			return false;
@@ -87,7 +87,7 @@ var EasyAutocomplete = (function(scope) {
 
 				builder = convertDataToListBuilder();
 			}
-			
+
 
 			if (category.header !== undefined) {
 				builder.header = category.header;
@@ -114,9 +114,9 @@ var EasyAutocomplete = (function(scope) {
 				}
 
 			} else {
-				builder.getValue = configuration.get("getValue");	
+				builder.getValue = configuration.get("getValue");
 			}
-			
+
 
 			return builder;
 
@@ -140,7 +140,7 @@ var EasyAutocomplete = (function(scope) {
 
 				if (listLocation !== undefined) {
 					if (typeof listLocation === "string") {
-						builder.data = $(data).find(listLocation);
+						builder.data = jQuery(data).find(listLocation);
 					} else if (typeof listLocation === "function") {
 
 						builder.data = listLocation(data);
@@ -181,7 +181,7 @@ var EasyAutocomplete = (function(scope) {
 			}
 
 
-			$(builder.data).find(builder.xmlElementName).each(function() {
+			jQuery(builder.data).find(builder.xmlElementName).each(function() {
 				simpleList.push(this);
 			});
 
@@ -193,4 +193,3 @@ var EasyAutocomplete = (function(scope) {
 	return scope;
 
 })(EasyAutocomplete || {});
-
