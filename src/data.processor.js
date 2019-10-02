@@ -9,7 +9,7 @@
  */
 var EasyAutocomplete = (function (scope) {
 
-	scope.proccess = function proccessData(config, listBuilder, phrase) {
+	scope.proccess = function DataProcessor(config, listBuilder, phrase) {
 
 		scope.proccess.match = match;
 

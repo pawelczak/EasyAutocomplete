@@ -195,15 +195,12 @@ var EasyAutocomplete = (function (scope) {
 				}
 			};
 
-
 		this.getTemplateClass = templateClass(options);
 
 		this.build = prepareBuildMethod(options);
-
 
 	};
 
 	return scope;
 
 })(EasyAutocomplete || {});
-

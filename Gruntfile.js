@@ -36,7 +36,7 @@ module.exports = function (grunt) {
 
 		concat: {
 			'src-js': {
-				src: ['src/configuration.js', 'src/logger.js', 'src/constants.js', 'src/listBuilder.js', 'src/proccessData.js', 'src/template.js', 'src/core.js'],
+				src: ['src/configuration.js', 'src/logger.js', 'src/constants.js', 'src/list.builder.js', 'src/data.processor.js', 'src/template.js', 'src/core.js'],
 				dest: '<%= project.js.dest %>'
 			}
 		},

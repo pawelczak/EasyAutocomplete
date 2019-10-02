@@ -1,5 +1,5 @@
 /*
-* ProccessData unit tests
+* DataProcessor unit tests
 *
 * @author Łukasz Pawełczak
 *

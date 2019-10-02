@@ -377,7 +377,7 @@ var EasyAutocomplete = (function (scope) {
 	return scope;
 
 })(EasyAutocomplete || {});
-	
+
 
 /*
  * EasyAutocomplete - Constants
@@ -610,19 +610,18 @@ var EasyAutocomplete = (function (scope) {
  */
 var EasyAutocomplete = (function (scope) {
 
-	scope.proccess = function proccessData(config, listBuilder, phrase) {
+	scope.proccess = function DataProcessor(config, listBuilder, phrase) {
 
 		scope.proccess.match = match;
 
 		var list = listBuilder.data,
-			inputPhrase = phrase;//TODO REFACTOR
+			inputPhrase = phrase; // TODO REFACTOR
 
 		list = findMatch(list, inputPhrase);
 		list = reduceElementsInList(list);
 		list = sort(list);
 
 		return list;
-
 
 		function findMatch(list, phrase) {
 			var preparedList = [],
@@ -877,11 +876,9 @@ var EasyAutocomplete = (function (scope) {
 				}
 			};
 
-
 		this.getTemplateClass = templateClass(options);
 
 		this.build = prepareBuildMethod(options);
-
 
 	};
 
@@ -889,13 +886,11 @@ var EasyAutocomplete = (function (scope) {
 
 })(EasyAutocomplete || {});
 
-
 /*
  * EasyAutocomplete - jQuery plugin for autocompletion
  *
  */
 var EasyAutocomplete = (function (scope) {
-
 
 	scope.main = function Core($input, options) {
 

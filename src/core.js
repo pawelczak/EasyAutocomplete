@@ -4,7 +4,6 @@
  */
 var EasyAutocomplete = (function (scope) {
 
-
 	scope.main = function Core($input, options) {
 
 		var module = {

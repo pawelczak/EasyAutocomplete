@@ -17,4 +17,4 @@ var EasyAutocomplete = (function (scope) {
 	return scope;
 
 })(EasyAutocomplete || {});
-	
+
