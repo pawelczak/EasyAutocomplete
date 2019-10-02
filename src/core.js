@@ -191,18 +191,18 @@ var EasyAutocomplete = (function(scope) {
 									var animationTime = config.get("list").showAnimation.time,
 										callback = config.get("list").showAnimation.callback;
 
-									$elements_container.find("ul").slideDown(animationTime, callback);
+									$elements_container.slideDown(animationTime, callback);
 								break;
 
 								case "fade":
 									var animationTime = config.get("list").showAnimation.time,
 										callback = config.get("list").showAnimation.callback;
 
-									$elements_container.find("ul").fadeIn(animationTime), callback;
+									$elements_container.fadeIn(animationTime), callback;
 								break;
 
 								default:
-									$elements_container.find("ul").show();
+									$elements_container.show();
 								break;
 							}
 
@@ -218,18 +218,18 @@ var EasyAutocomplete = (function(scope) {
 									var animationTime = config.get("list").hideAnimation.time,
 										callback = config.get("list").hideAnimation.callback;
 
-									$elements_container.find("ul").slideUp(animationTime, callback);
+									$elements_container.slideUp(animationTime, callback);
 								break;
 
 								case "fade":
 									var animationTime = config.get("list").hideAnimation.time,
 										callback = config.get("list").hideAnimation.callback;
 
-									$elements_container.find("ul").fadeOut(animationTime, callback);
+									$elements_container.fadeOut(animationTime, callback);
 								break;
 
 								default:
-									$elements_container.find("ul").hide();
+									$elements_container.hide();
 								break;
 							}
 
@@ -241,6 +241,11 @@ var EasyAutocomplete = (function(scope) {
 							$elements_container.find("ul li").eq(selectedElement).addClass("selected");
 
 							config.get("list").onSelectItemEvent();
+						})
+						.on("hoverElement.eac", function() {
+							$elements_container.find("ul li").removeClass("hover");
+							$elements_container.find("ul li").eq(hoveredElement).addClass("hover");
+							//config.get("list").onSelectItemEvent();
 						})
 						.on("loadElements.eac", function(event, listBuilders, phrase) {
 			
@@ -289,9 +294,8 @@ var EasyAutocomplete = (function(scope) {
 												config.get("list").onChooseEvent();
 											})
 											.mouseover(function() {
-
-												selectedElement = itemCounter;
-												selectElement(itemCounter);	
+												hoveredElement = itemCounter;
+												hoverElement(itemCounter);
 
 												config.get("list").onMouseOverEvent();
 											})
@@ -363,7 +367,9 @@ var EasyAutocomplete = (function(scope) {
 		function bindEvents() {
 
 			bindAllEvents();
-
+			//To load at first time
+			loadData("");
+			hideContainer();
 			//------------------------ FUNCTIONS --------------------------					
 			
 
@@ -378,6 +384,7 @@ var EasyAutocomplete = (function(scope) {
 				bindKeypress();
 				bindFocus();
 				bindBlur();
+				bindMouseDown();
 			}
 
 			//---------------------------------------------------------------------------
@@ -462,7 +469,8 @@ var EasyAutocomplete = (function(scope) {
 
 						default:
 
-							if (event.keyCode > 40 || event.keyCode === 8) {
+							// code 32 for support when ending typing chinese with space key
+							if (event.keyCode > 40 || event.keyCode === 8  || event.keyCode === 32) {
 
 								var inputPhrase = $field.val();
 
@@ -668,6 +676,15 @@ var EasyAutocomplete = (function(scope) {
 				});
 			}
 
+			function bindMouseDown() {
+				$field.mousedown(function() {
+					setTimeout(function() {
+						selectedElement = -1;
+						showContainer();
+					}, 250);
+				});
+			}
+
 			function removeAutocomplete() {
 				$field.attr("autocomplete","off");
 			}
@@ -693,6 +710,11 @@ var EasyAutocomplete = (function(scope) {
 		function selectElement(index) {
 			
 			$container.trigger("selectElement.eac", index);
+		}
+
+		function hoverElement(index) {
+
+			$container.trigger("hoverElement.eac", index);
 		}
 
 		function loadElements(list, phrase) {
