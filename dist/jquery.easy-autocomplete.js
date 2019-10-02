@@ -3,7 +3,8 @@
  * jQuery plugin for autocompletion
  * 
  * @author Łukasz Pawełczak (http://github.com/pawelczak)
- * @version 1.3.4
+ * @version 1.3.5
+ * @contributors Łukasz Pawełczak <lukaspawelczak@gmail.com> (http://github.com/pawelczak),Daniel Morgenstern (init) <daniel.morgenstern@init.de> (https://github.com/dmorgenstern-init)
  * Copyright  License: 
  */
 
@@ -1292,7 +1293,7 @@ var EasyAutocomplete = (function(scope) {
 
 						default:
 
-							if (event.keyCode > 40 || event.keyCode === 8) {
+							if (event.keyCode > 40 || event.keyCode === 8 || event.keyCode === 0) {
 
 								var inputPhrase = $field.val();
 
