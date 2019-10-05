@@ -647,11 +647,8 @@ var EasyAutocomplete = (function (scope) {
 
 				phrase = phrase.toLowerCase();
 			}
-			if (config.get('list').match.method(value, phrase)) {
-				return true;
-			} else {
-				return false;
-			}
+
+			return (config.get('list').match.method(value, phrase));
 		}
 
 		function reduceElementsInList(list) {
@@ -978,11 +975,9 @@ var EasyAutocomplete = (function (scope) {
 			createWrapper();
 			createContainer();
 
-
-			$container = $(document.getElementById(getContainerId()));
-			if (config.get("placeholder")) {
-				$field.attr("placeholder", config.get("placeholder"));
-
+			$container = $('#' + getContainerId());
+			if (config.get('placeholder')) {
+				$field.attr('placeholder', config.get('placeholder'));
 			}
 
 
@@ -1294,7 +1289,8 @@ var EasyAutocomplete = (function (scope) {
 
 							default:
 
-								if (event.keyCode > 40 || event.keyCode === 8) {
+
+							if (event.keyCode > 40 || event.keyCode === 8 || event.keyCode === 0) {
 
 									var inputPhrase = $field.val();
 
