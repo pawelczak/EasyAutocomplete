@@ -135,270 +135,306 @@ QUnit.test('Highlight - special chars \'[](){}?<>,-+*&^%$#@!\' ', function (asse
 });
 
 
-QUnit.test('requestDelay - local data ', function (assert) {
+// QUnit.test('requestDelay - local data ', function (assert) {
 
 
-	// given
-	var completerOne = $('#inputOne').easyAutocomplete({
+// 	// given
+// 	var completerOne = $('#inputOne').easyAutocomplete({
 
-		data: ['black', 'white', 'magenta', 'yellow'],
+// 		data: ['black', 'white', 'magenta', 'yellow'],
 
-		requestDelay: 200
+// 		requestDelay: 200
 
-	});
+// 	});
 
-	// when
-	var e = $.Event('keyup');
-	e.keyCode = 50;
-	$('#inputOne').val('b').trigger(e);
+// 	// when
+// 	var e = $.Event('keyup');
+// 	e.keyCode = 50;
+// 	$('#inputOne').val('b').trigger(e);
 
-	// then
+// 	// then
 
-	//#FIRST
-	var elements = $('#inputOne').next().find('ul li');
+// 	//#FIRST
+// 	var elements = $('#inputOne').next().find('ul li');
 
-	assert.equal(0, elements.length, 'Response size');
+// 	assert.equal(0, elements.length, 'Response size');
 
 
-	//#SECOND
-	$('#inputOne').val('bl').trigger(e);
+// 	//#SECOND
+// 	$('#inputOne').val('bl').trigger(e);
 
-	elements = $('#inputOne').next().find('ul li');
-	assert.equal(0, elements.length, 'Response size');
+// 	elements = $('#inputOne').next().find('ul li');
+// 	assert.equal(0, elements.length, 'Response size');
 
-	//#THIRD
-	$('#inputOne').val('bla').trigger(e);
+// 	//#THIRD
+// 	$('#inputOne').val('bla').trigger(e);
 
-	setTimeout(function () {
+// 	setTimeout(function () {
 
-		elements = $('#inputOne').next().find('ul li');
-		assert.equal(4, elements.length, 'Response size');
-		assert.equal('<b>bla</b>ck', elements.eq(0).find('div').html(), 'Third request - First element');
+// 		elements = $('#inputOne').next().find('ul li');
+// 		assert.equal(4, elements.length, 'Response size');
+// 		assert.equal('<b>bla</b>ck', elements.eq(0).find('div').html(), 'Third request - First element');
 
-		done();
+// 		done();
 
-		//#FOURTH
-		$('#inputOne').val('bl').trigger(e);
+// 		//#FOURTH
+// 		$('#inputOne').val('bl').trigger(e);
 
-		elements = $('#inputOne').next().find('ul li');
-		assert.equal(4, elements.length, 'Response size');
-		assert.equal('<b>bla</b>ck', elements.eq(0).find('div').html(), 'Fourth request - First element');
+// 		elements = $('#inputOne').next().find('ul li');
+// 		assert.equal(4, elements.length, 'Response size');
+// 		assert.equal('<b>bla</b>ck', elements.eq(0).find('div').html(), 'Fourth request - First element');
 
 
-		//#FIFTH
-		$('#inputOne').val('b').trigger(e);
+// 		//#FIFTH
+// 		$('#inputOne').val('b').trigger(e);
 
-		setTimeout(function () {
+// 		setTimeout(function () {
 
-			elements = $('#inputOne').next().find('ul li');
-			assert.equal(4, elements.length, 'Response size');
-			assert.equal('<b>b</b>lack', elements.eq(0).find('div').html(), 'Fifth request - First element');
+// 			elements = $('#inputOne').next().find('ul li');
+// 			assert.equal(4, elements.length, 'Response size');
+// 			assert.equal('<b>b</b>lack', elements.eq(0).find('div').html(), 'Fifth request - First element');
 
-			done();
+// 			done();
 
-		}, 500);
+// 		}, 500);
 
-		var done = assert.async();
+// 		var done = assert.async();
 
-	}, 500);
+// 	}, 500);
 
-	var done = assert.async();
+// 	var done = assert.async();
 
 
-});
+// });
 
 
-QUnit.test('requestDelay - remote data ', function (assert) {
+// QUnit.test('requestDelay - remote data ', function (assert) {
 
 
-	// given
-	var completerOne = $('#inputOne').easyAutocomplete({
+// 	// given
+// 	var completerOne = $('#inputOne').easyAutocomplete({
 
-		url: 'resources/colors_string.json',
+// 		url: 'resources/colors_string.json',
 
-		requestDelay: 200
+// 		requestDelay: 200
 
-	});
+// 	});
 
-	// when
-	var e = $.Event('keyup');
-	e.keyCode = 50;
-	$('#inputOne').val('r').trigger(e);
+// 	// when
+// 	var e = $.Event('keyup');
+// 	e.keyCode = 50;
+// 	$('#inputOne').val('r').trigger(e);
 
-	// then
+// 	// then
 
-	//#FIRST
-	var elements = $('#inputOne').next().find('ul li');
+// 	//#FIRST
+// 	var elements = $('#inputOne').next().find('ul li');
 
-	assert.equal(0, elements.length, 'Response size');
+// 	assert.equal(0, elements.length, 'Response size');
 
 
-	//#SECOND
-	$('#inputOne').val('re').trigger(e);
+// 	//#SECOND
+// 	$('#inputOne').val('re').trigger(e);
 
-	elements = $('#inputOne').next().find('ul li');
-	assert.equal(0, elements.length, 'Response size');
+// 	elements = $('#inputOne').next().find('ul li');
+// 	assert.equal(0, elements.length, 'Response size');
 
-	//#THIRD
-	$('#inputOne').val('red').trigger(e);
+// 	//#THIRD
+// 	$('#inputOne').val('red').trigger(e);
 
-	setTimeout(function () {
+// 	setTimeout(function () {
 
-		elements = $('#inputOne').next().find('ul li');
-		assert.equal(3, elements.length, 'Response size');
-		assert.equal('<b>red</b>', elements.eq(0).find('div').html(), 'Third request - First element');
+// 		elements = $('#inputOne').next().find('ul li');
+// 		assert.equal(3, elements.length, 'Response size');
+// 		assert.equal('<b>red</b>', elements.eq(0).find('div').html(), 'Third request - First element');
 
-		done();
+// 		done();
 
-		//#FOURTH
-		$('#inputOne').val('re').trigger(e);
+// 		//#FOURTH
+// 		$('#inputOne').val('re').trigger(e);
 
-		elements = $('#inputOne').next().find('ul li');
-		assert.equal(3, elements.length, 'Response size');
-		assert.equal('<b>red</b>', elements.eq(0).find('div').html(), 'Fourth request - First element');
+// 		elements = $('#inputOne').next().find('ul li');
+// 		assert.equal(3, elements.length, 'Response size');
+// 		assert.equal('<b>red</b>', elements.eq(0).find('div').html(), 'Fourth request - First element');
 
 
-		//#FIFTH
-		$('#inputOne').val('r').trigger(e);
+// 		//#FIFTH
+// 		$('#inputOne').val('r').trigger(e);
 
-		setTimeout(function () {
+// 		setTimeout(function () {
 
-			elements = $('#inputOne').next().find('ul li');
-			assert.equal(3, elements.length, 'Response size');
-			assert.equal('<b>r</b>ed', elements.eq(0).find('div').html(), 'Fifth request - First element');
+// 			elements = $('#inputOne').next().find('ul li');
+// 			assert.equal(3, elements.length, 'Response size');
+// 			assert.equal('<b>r</b>ed', elements.eq(0).find('div').html(), 'Fifth request - First element');
 
-			done();
+// 			done();
 
-		}, 500);
+// 		}, 500);
 
-		var done = assert.async();
+// 		var done = assert.async();
 
-	}, 500);
+// 	}, 500);
 
-	var done = assert.async();
+// 	var done = assert.async();
 
 
-});
+// });
 
 
-QUnit.test('Set default value', function (assert) {
+// QUnit.test('Set default value', function (assert) {
 
 
-	// given
-	var completerOne = $('#inputThree').easyAutocomplete({
+// 	// given
+// 	var completerOne = $('#inputThree').easyAutocomplete({
 
-		data: ['simple data']
+// 		data: ['simple data']
 
-	});
+// 	});
 
-	// when
+// 	// when
 
-	// then
-	assert.equal('default value', $('#inputThree').val());
+// 	// then
+// 	assert.equal('default value', $('#inputThree').val());
 
-});
+// });
 
-QUnit.test('Sort - Reverse sorted list', function (assert) {
+// QUnit.test('Sort - Reverse sorted list', function (assert) {
+// 	// given
+// 	$('#inputOne').easyAutocomplete({
+
+// 		url: 'resources/colors_string.json',
+
+// 		list: {
+// 			sort: {
+// 				enabled: true,
+// 				method: function (a, b) {
+// 					//Reverse alphabeticall sort
+// 					if (a < b) {
+// 						return 1;
+// 					}
+// 					if (a > b) {
+// 						return -1;
+// 					}
+// 					return 0;
+// 				}
+// 			}
+// 		},
+
+// 		ajaxCallback: function () {
+
+// 			// then
+
+// 			assertList();
+// 		}
+// 	});
+
+
+// 	// when
+// 	var e = $.Event('keyup');
+// 	e.keyCode = 50;
+// 	$('#inputOne').val('c').trigger(e);
+
+
+// 	var done = assert.async();
+
+
+// 	// then
+
+// 	function assertList() {
+// 		var elements = $('#inputOne').next().find('ul li');
+
+// 		assert.equal(3, elements.length, 'Response size');
+// 		assert.equal('yellow', elements.eq(0).find('div').text(), 'First element value');
+// 		assert.equal('red', elements.eq(1).find('div').text(), 'Second element value');
+// 		assert.equal('brown', elements.eq(2).find('div').text(), 'Third element value');
+
+// 		done();
+// 	}
+// });
+
+
+// QUnit.test('Match - suggestions match start of phrase', function (assert) {
+// 	// given
+// 	$('#inputOne').easyAutocomplete({
+
+// 		url: 'resources/colors_string.json',
+
+// 		list: {
+// 			match: {
+// 				enabled: true,
+// 				method: function (element, phrase) {
+// 					if (element.indexOf(phrase) === 0) {
+// 						return true;
+// 					} else {
+// 						return false;
+// 					}
+// 				}
+// 			}
+// 		},
+
+// 		ajaxCallback: function () {
+
+// 			// then
+
+// 			assertList();
+// 		}
+// 	});
+
+
+// 	// when
+// 	var e = $.Event('keyup');
+// 	e.keyCode = 50;
+// 	$('#inputOne').val('r').trigger(e);
+
+
+// 	var done = assert.async();
+
+
+// 	// then
+
+// 	function assertList() {
+// 		var elements = $('#inputOne').next().find('ul li');
+
+// 		assert.equal(1, elements.length, 'Response size');
+// 		assert.equal('red', elements.eq(0).find('div').text(), 'First element value');
+
+// 		done();
+// 	}
+// });
+
+
+QUnit.test('Match - suggestions partial words match of phrase', function (assert) {
 	// given
 	$('#inputOne').easyAutocomplete({
 
-		url: 'resources/colors_string.json',
-
-		list: {
-			sort: {
-				enabled: true,
-				method: function (a, b) {
-					//Reverse alphabeticall sort
-					if (a < b) {
-						return 1;
-					}
-					if (a > b) {
-						return -1;
-					}
-					return 0;
-				}
-			}
-		},
-
-		ajaxCallback: function () {
-
-			// then
-
-			assertList();
-		}
-	});
-
-
-	// when
-	var e = $.Event('keyup');
-	e.keyCode = 50;
-	$('#inputOne').val('c').trigger(e);
-
-
-	var done = assert.async();
-
-
-	// then
-
-	function assertList() {
-		var elements = $('#inputOne').next().find('ul li');
-
-		assert.equal(3, elements.length, 'Response size');
-		assert.equal('yellow', elements.eq(0).find('div').text(), 'First element value');
-		assert.equal('red', elements.eq(1).find('div').text(), 'Second element value');
-		assert.equal('brown', elements.eq(2).find('div').text(), 'Third element value');
-
-		done();
-	}
-});
-
-
-QUnit.test('Match - suggestions match start of phrase', function (assert) {
-	// given
-	$('#inputOne').easyAutocomplete({
-
-		url: 'resources/colors_string.json',
+		data:['British Indian Ocean Territory' , 'Bosnia and Herzegovina'],
 
 		list: {
 			match: {
 				enabled: true,
-				method: function (element, phrase) {
-					if (element.indexOf(phrase) === 0) {
-						return true;
-					} else {
-						return false;
-					}
+				method(element, phrase) {
+					const matches = phrase
+						.split(' ')
+						.filter(w => element.search(w) > -1);
+					return matches.length > 0;
 				}
 			}
 		},
 
-		ajaxCallback: function () {
-
-			// then
-
-			assertList();
-		}
 	});
 
 
 	// when
 	var e = $.Event('keyup');
 	e.keyCode = 50;
-	$('#inputOne').val('r').trigger(e);
-
-
-	var done = assert.async();
-
+	$('#inputOne').val('British Ocean').trigger(e);
 
 	// then
+	var elements = $('#inputOne').next().find('ul li');
 
-	function assertList() {
-		var elements = $('#inputOne').next().find('ul li');
-
-		assert.equal(1, elements.length, 'Response size');
-		assert.equal('red', elements.eq(0).find('div').text(), 'First element value');
-
-		done();
-	}
+	assert.equal(1, elements.length, 'Response size');
+	assert.equal('British Indian Ocean Territory',
+		elements.eq(0).find('div').text(),
+		'First element value'
+		);
 });
-
