@@ -56,12 +56,7 @@ var EasyAutocomplete = (function (scope) {
 				phrase = phrase.toLowerCase();
 			}
 
-			//TODO Regex
-			if (config.get('list').match.method(value, phrase)) {
-				return true;
-			} else {
-				return false;
-			}
+			return (config.get('list').match.method(value, phrase));
 		}
 
 		function reduceElementsInList(list) {
