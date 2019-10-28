@@ -1,7 +1,8 @@
 {
-
 	"items": [
-		"red", "yellow", "brown"
+		"red",
+		"yellow",
+		"brown"
 	],
 	"inputPhrase": "rr"
 }

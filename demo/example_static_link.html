@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>EasyAutocomplete static links</title>
-		<link href="../dist/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
-		<script src="../lib/jquery-1.11.2.min.js"></script>
-		<script src="../dist/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
-	</head>
-	<body>
+<head>
+	<title>EasyAutocomplete static links</title>
+	<link href="../dist/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
+	<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="../dist/jquery.easy-autocomplete.min.js" type="text/javascript"></script>
+</head>
+<body>
 
-		<h1>EasyAutocomplete - static links</h1>
+<h1>EasyAutocomplete - static links</h1>
 
-		<input id="data-links" />
+<input id="data-links"/>
 
-		<script>
+<script>
 
-		var options = {
-			url: "resources/site.json",
+	var options = {
+		url: 'resources/site.json',
 
-		    getValue: "text",
+		getValue: 'text',
 
-		    template: {
-		        type: "links",
-		        fields: {
-		            link: "site"
-		        }
-		    },
+		template: {
+			type: 'links',
+			fields: {
+				link: 'site'
+			}
+		},
 
-		    list: {
-		        match: {
-		            enabled: false
-		        }
-		    },
+		list: {
+			match: {
+				enabled: false
+			}
+		},
 
-		    theme: "plate-dark"
-		};
+		theme: 'plate-dark'
+	};
 
-		$("#data-links").easyAutocomplete(options);
+	$('#data-links').easyAutocomplete(options);
 
-		</script>
+</script>
 
-	</body>
+</body>
 
 </html>
