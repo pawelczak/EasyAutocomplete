@@ -55,7 +55,7 @@ var EasyAutocomplete = (function (scope) {
 					caseSensitive: false,
 					method: function (element, phrase) {
 
-						return element.search(phrase) > -1;
+						return element.toString().search(phrase) > -1;
 					}
 				},
 
