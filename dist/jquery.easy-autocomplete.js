@@ -3,12 +3,12 @@
  * jQuery plugin for autocompletion
  * 
  * @author Łukasz Pawełczak (http://github.com/pawelczak)
- * @version 1.4.1
+ * @version 1.4.2
  * Copyright  License: 
  */
 
 /*
- * EasyAutocomplete - Configuration 
+ * EasyAutocomplete - Configuration
  */
 var EasyAutocomplete = (function (scope) {
 
@@ -132,6 +132,10 @@ var EasyAutocomplete = (function (scope) {
 		};
 
 		var externalObjects = ['ajaxSettings', 'template'];
+
+    this.getOptions = function (propertyName) {
+      return options[propertyName];
+    };
 
 		this.get = function (propertyName) {
 			return defaults[propertyName];
@@ -420,17 +424,27 @@ var EasyAutocomplete = (function (scope) {
 
     this.updateCategories = function(listBuilder, data) {
       if (configuration.get("categoriesAssigned")) {
+
         listBuilder = [];
 
-        $.each(data, function( index, value ) {
-          var builder = convertToListBuilder({
-            listLocation: index,
-            maxNumberOfElements: 10,
-            header: index.replace(/[_\s]+/g, ' ')
-          }, data);
+        if (configuration.getOptions('categories') !== undefined) {
+          for (var i = 0; i < configuration.get("categories").length; i += 1) {
 
-          listBuilder.push(builder);
-        });
+            var builder = convertToListBuilder(configuration.get('categories')[i], data);
+
+            listBuilder.push(builder);
+          }
+        } else {
+          $.each(data, function( index, value ) {
+            var builder = convertToListBuilder({
+              listLocation: index,
+              maxNumberOfElements: 10,
+              header: index.replace(/[_\s]+/g, ' ')
+            }, data);
+
+            listBuilder.push(builder);
+          });
+        }
       }
 
       return listBuilder;

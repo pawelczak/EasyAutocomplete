@@ -1,5 +1,5 @@
 /*
- * EasyAutocomplete - Configuration 
+ * EasyAutocomplete - Configuration
  */
 var EasyAutocomplete = (function (scope) {
 
@@ -126,6 +126,10 @@ var EasyAutocomplete = (function (scope) {
 		};
 
 		var externalObjects = ['ajaxSettings', 'template'];
+
+    this.getOptions = function (propertyName) {
+      return options[propertyName];
+    };
 
 		this.get = function (propertyName) {
 			return defaults[propertyName];

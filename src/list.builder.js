@@ -25,17 +25,27 @@ var EasyAutocomplete = (function (scope) {
 
     this.updateCategories = function(listBuilder, data) {
       if (configuration.get("categoriesAssigned")) {
+
         listBuilder = [];
 
-        $.each(data, function( index, value ) {
-          var builder = convertToListBuilder({
-            listLocation: index,
-            maxNumberOfElements: 10,
-            header: index.replace(/[_\s]+/g, ' ')
-          }, data);
+        if (configuration.getOptions('categories') !== undefined) {
+          for (var i = 0; i < configuration.get("categories").length; i += 1) {
 
-          listBuilder.push(builder);
-        });
+            var builder = convertToListBuilder(configuration.get('categories')[i], data);
+
+            listBuilder.push(builder);
+          }
+        } else {
+          $.each(data, function( index, value ) {
+            var builder = convertToListBuilder({
+              listLocation: index,
+              maxNumberOfElements: 10,
+              header: index.replace(/[_\s]+/g, ' ')
+            }, data);
+
+            listBuilder.push(builder);
+          });
+        }
       }
 
       return listBuilder;
