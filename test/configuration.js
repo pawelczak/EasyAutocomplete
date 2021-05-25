@@ -1,5 +1,5 @@
 /*
- * Tests for Configuration module - EasyAutocomplete 
+ * Tests for Configuration module - EasyAutocomplete
  *
  * @author Łukasz Pawełczak
  */
@@ -577,8 +577,6 @@ QUnit.test('Categories parameters', function (assert) {
 
 	assert.equal(6, actualOptions.get('categories')[1].maxNumberOfElements, 'Passed - maxNumberOfElements');
 
-	assert.equal('url', actualOptions.get('categories')[2].listLocation, 'Passed - listLocation');
-	assert.equal(4, actualOptions.get('categories')[2].maxNumberOfElements, 'Passed - maxNumberOfElements - default');
 });
 
 

@@ -3,7 +3,7 @@
  * jQuery plugin for autocompletion
  * 
  * @author Łukasz Pawełczak (http://github.com/pawelczak)
- * @version 1.4.2
+ * @version 1.4.3
  * Copyright  License: 
  */
 
@@ -125,17 +125,11 @@ var EasyAutocomplete = (function (scope) {
 
 			categoriesAssigned: false,
 
-			categories: [{
-				maxNumberOfElements: 4
-			}]
+			categories: []
 
 		};
 
 		var externalObjects = ['ajaxSettings', 'template'];
-
-    this.getOptions = function (propertyName) {
-      return options[propertyName];
-    };
 
 		this.get = function (propertyName) {
 			return defaults[propertyName];
@@ -427,14 +421,7 @@ var EasyAutocomplete = (function (scope) {
 
         listBuilder = [];
 
-        if (configuration.getOptions('categories') !== undefined) {
-          for (var i = 0; i < configuration.get("categories").length; i += 1) {
-
-            var builder = convertToListBuilder(configuration.get('categories')[i], data);
-
-            listBuilder.push(builder);
-          }
-        } else {
+        if (configuration.get('categories').length == 0) {
           $.each(data, function( index, value ) {
             var builder = convertToListBuilder({
               listLocation: index,
@@ -444,6 +431,13 @@ var EasyAutocomplete = (function (scope) {
 
             listBuilder.push(builder);
           });
+        } else {
+          for (var i = 0; i < configuration.get("categories").length; i += 1) {
+
+            var builder = convertToListBuilder(configuration.get('categories')[i], data);
+
+            listBuilder.push(builder);
+          }
         }
       }
 

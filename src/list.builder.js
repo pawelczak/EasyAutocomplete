@@ -28,14 +28,7 @@ var EasyAutocomplete = (function (scope) {
 
         listBuilder = [];
 
-        if (configuration.getOptions('categories') !== undefined) {
-          for (var i = 0; i < configuration.get("categories").length; i += 1) {
-
-            var builder = convertToListBuilder(configuration.get('categories')[i], data);
-
-            listBuilder.push(builder);
-          }
-        } else {
+        if (configuration.get('categories').length == 0) {
           $.each(data, function( index, value ) {
             var builder = convertToListBuilder({
               listLocation: index,
@@ -45,6 +38,13 @@ var EasyAutocomplete = (function (scope) {
 
             listBuilder.push(builder);
           });
+        } else {
+          for (var i = 0; i < configuration.get("categories").length; i += 1) {
+
+            var builder = convertToListBuilder(configuration.get('categories')[i], data);
+
+            listBuilder.push(builder);
+          }
         }
       }
 
