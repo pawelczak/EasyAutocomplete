@@ -1,7 +1,7 @@
 /*
- * EasyAutocomplete - ListBuilderService 
+ * EasyAutocomplete - ListBuilderService
  *
- * @author Łukasz Pawełczak 
+ * @author Łukasz Pawełczak
  *
  */
 var EasyAutocomplete = (function (scope) {
@@ -23,23 +23,33 @@ var EasyAutocomplete = (function (scope) {
 			return listBuilder;
 		};
 
-		this.updateCategories = function (listBuilder, data) {
+    this.updateCategories = function(listBuilder, data) {
+      if (configuration.get("categoriesAssigned")) {
 
-			if (configuration.get('categoriesAssigned')) {
+        listBuilder = [];
 
-				listBuilder = [];
+        if (configuration.get('categories').length == 0) {
+          $.each(data, function( index, value ) {
+            var builder = convertToListBuilder({
+              listLocation: index,
+              maxNumberOfElements: 10,
+              header: index.replace(/[_\s]+/g, ' ')
+            }, data);
 
-				for (var i = 0; i < configuration.get("categories").length; i += 1) {
+            listBuilder.push(builder);
+          });
+        } else {
+          for (var i = 0; i < configuration.get("categories").length; i += 1) {
 
-					var builder = convertToListBuilder(configuration.get('categories')[i], data);
+            var builder = convertToListBuilder(configuration.get('categories')[i], data);
 
-					listBuilder.push(builder);
-				}
+            listBuilder.push(builder);
+          }
+        }
+      }
 
-			}
-
-			return listBuilder;
-		};
+      return listBuilder;
+    };
 
 		this.convertXml = function (listBuilder) {
 			if (configuration.get('dataType').toUpperCase() === 'XML') {

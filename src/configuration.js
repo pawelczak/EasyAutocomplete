@@ -1,5 +1,5 @@
 /*
- * EasyAutocomplete - Configuration 
+ * EasyAutocomplete - Configuration
  */
 var EasyAutocomplete = (function (scope) {
 
@@ -118,10 +118,7 @@ var EasyAutocomplete = (function (scope) {
 
 			categoriesAssigned: false,
 
-			categories: [{
-				//listLocation: "",
-				maxNumberOfElements: 4
-			}]
+			categories: []
 
 		};
 
