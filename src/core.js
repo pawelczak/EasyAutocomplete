@@ -615,21 +615,23 @@ var EasyAutocomplete = (function (scope) {
 
 			function bindKeydown() {
 				$field
-					.on('keydown', function (evt) {
-						evt = evt || window.event;
-						var keyCode = evt.keyCode;
-						if (keyCode === 38) {
-							suppressKeypress = true;
-							return false;
-						}
-					})
-					.keydown(function (event) {
-
-						if (event.keyCode === 13 && selectedElement > -1) {
-
-							//enter
-
-							$field.val(config.get('getValue')(elementsList[selectedElement]));
+					.on("keydown", function(evt) {
+	        		    evt = evt || window.event;
+	        		    var keyCode = evt.keyCode;
+	        		    if (keyCode === 38) {
+	        		        suppressKeypress = true; 
+	        		        return false;
+	        		    }
+		        	})
+					.keydown(function(event) {
+						// if the enter key is pressed
+						if (event.keyCode === 13) {
+                            if(selectedElement == -1 && elementsList.length > 0){
+                                // nothing is selected, so just autofill the first selection
+                                selectedElement = 0;
+                            }
+                            $field.val(config.get("getValue")(elementsList[selectedElement]));
+							
 
 							config.get('list').onKeyEnterEvent();
 							config.get('list').onChooseEvent();
