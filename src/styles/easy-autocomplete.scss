@@ -419,7 +419,8 @@ $purple: #c7c0de;
 			div {
 				display: block;
 				font-weight: normal;
-				word-break: break-all;
+				white-space: pre-wrap;
+
 			}
 
 			b {
