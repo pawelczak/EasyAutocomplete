@@ -283,7 +283,7 @@
 .easy-autocomplete-container ul li div {
   display: block;
   font-weight: normal;
-  word-break: break-all;
+  white-space: pre-wrap;
 }
 .easy-autocomplete-container ul li b {
   font-weight: bold;
