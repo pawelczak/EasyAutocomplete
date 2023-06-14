@@ -1137,14 +1137,14 @@ var EasyAutocomplete = (function (scope) {
 												config.get('list').onClickEvent();
 												config.get('list').onChooseEvent();
 											})
-											.mouseover(function () {
+											.on('mouseover', function () {
 
 												selectedElement = itemCounter;
 												selectElement(itemCounter);
 
 												config.get('list').onMouseOverEvent();
 											})
-											.mouseout(function () {
+											.on('mouseout', function () {
 												config.get('list').onMouseOutEvent();
 											})
 											.html(template.build(highlight(elementsValue, phrase), listData[j]));
@@ -1218,7 +1218,7 @@ var EasyAutocomplete = (function (scope) {
 			}
 
 			function bindFocusOut() {
-				$field.focusout(function () {
+				$field.on('focusout', function () {
 
 					var fieldValue = $field.val(),
 						phrase;
@@ -1246,7 +1246,7 @@ var EasyAutocomplete = (function (scope) {
 			function bindKeyup() {
 				$field
 					.off('keyup')
-					.keyup(function (event) {
+					.on('keyup', function (event) {
 
 						switch (event.keyCode) {
 
@@ -1444,7 +1444,7 @@ var EasyAutocomplete = (function (scope) {
 							return false;
 						}
 					})
-					.keydown(function (event) {
+					.on('keydown', function (event) {
 
 						if (event.keyCode === 13 && selectedElement > -1) {
 
@@ -1467,7 +1467,7 @@ var EasyAutocomplete = (function (scope) {
 			}
 
 			function bindFocus() {
-				$field.focus(function () {
+				$field.on('focus', function () {
 
 					if ($field.val() !== '' && elementsList.length > 0) {
 
@@ -1479,7 +1479,7 @@ var EasyAutocomplete = (function (scope) {
 			}
 
 			function bindBlur() {
-				$field.blur(function () {
+				$field.on('blur', function () {
 					setTimeout(function () {
 
 						selectedElement = -1;
