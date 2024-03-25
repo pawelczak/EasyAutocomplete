@@ -1,15 +1,17 @@
 /*
  * easy-autocomplete
  * jQuery plugin for autocompletion
- * 
+ *
  * @author Łukasz Pawełczak (http://github.com/pawelczak)
- * @version 1.4.0
- * Copyright  License: 
+ * @version 1.4.3
+ * Copyright  License:
  */
 
 /*
- * EasyAutocomplete - Configuration 
+ * EasyAutocomplete - Configuration
  */
+import jQuery from 'jquery';
+
 var EasyAutocomplete = (function (scope) {
 
 	scope.Configuration = function Configuration(options) {
@@ -125,9 +127,7 @@ var EasyAutocomplete = (function (scope) {
 
 			categoriesAssigned: false,
 
-			categories: [{
-				maxNumberOfElements: 4
-			}]
+			categories: []
 
 		};
 
@@ -350,7 +350,7 @@ var EasyAutocomplete = (function (scope) {
 })(EasyAutocomplete || {});
 
 /*
- * EasyAutocomplete - Logger 
+ * EasyAutocomplete - Logger
  */
 var EasyAutocomplete = (function (scope) {
 
@@ -394,9 +394,9 @@ var EasyAutocomplete = (function (scope) {
 })(EasyAutocomplete || {});
 
 /*
- * EasyAutocomplete - ListBuilderService 
+ * EasyAutocomplete - ListBuilderService
  *
- * @author Łukasz Pawełczak 
+ * @author Łukasz Pawełczak
  *
  */
 var EasyAutocomplete = (function (scope) {
@@ -418,23 +418,33 @@ var EasyAutocomplete = (function (scope) {
 			return listBuilder;
 		};
 
-		this.updateCategories = function (listBuilder, data) {
+    this.updateCategories = function(listBuilder, data) {
+      if (configuration.get("categoriesAssigned")) {
 
-			if (configuration.get('categoriesAssigned')) {
+        listBuilder = [];
 
-				listBuilder = [];
+        if (configuration.get('categories').length == 0) {
+          $.each(data, function( index, value ) {
+            var builder = convertToListBuilder({
+              listLocation: index,
+              maxNumberOfElements: 10,
+              header: index.replace(/[_\s]+/g, ' ')
+            }, data);
 
-				for (var i = 0; i < configuration.get("categories").length; i += 1) {
+            listBuilder.push(builder);
+          });
+        } else {
+          for (var i = 0; i < configuration.get("categories").length; i += 1) {
 
-					var builder = convertToListBuilder(configuration.get('categories')[i], data);
+            var builder = convertToListBuilder(configuration.get('categories')[i], data);
 
-					listBuilder.push(builder);
-				}
+            listBuilder.push(builder);
+          }
+        }
+      }
 
-			}
-
-			return listBuilder;
-		};
+      return listBuilder;
+    };
 
 		this.convertXml = function (listBuilder) {
 			if (configuration.get('dataType').toUpperCase() === 'XML') {
@@ -594,7 +604,7 @@ var EasyAutocomplete = (function (scope) {
  * EasyAutocomplete - Data proccess module
  *
  * Process list to display:
- * - sort 
+ * - sort
  * - decrease number to specific number
  * - show only matching list
  *
@@ -677,9 +687,9 @@ var EasyAutocomplete = (function (scope) {
 
 
 /*
- * EasyAutocomplete - Template 
+ * EasyAutocomplete - Template
  *
- * 
+ *
  *
  */
 var EasyAutocomplete = (function (scope) {
@@ -1035,7 +1045,7 @@ var EasyAutocomplete = (function (scope) {
 					/* List show animation */
 						.on('show.eac', function () {
   							if (!$field.is(':focus')) {return}
-						
+
 							switch(config.get('list').showAnimation.type) {
 
 								case 'slide':
